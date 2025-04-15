@@ -1,0 +1,42 @@
+{
+	"nodes":[
+		{"id":"b5512a9d597c63d2","type":"text","text":"Climb","x":-233,"y":-132,"width":250,"height":112},
+		{"id":"41a9e470dbf2b3a5","type":"text","text":"Lockpick\n- Set GatePicked","x":-520,"y":-132,"width":250,"height":112},
+		{"id":"1a7c270097f7e645","type":"text","text":"Circle Back","x":40,"y":-132,"width":250,"height":112},
+		{"id":"67ed4d208cc640c1","type":"text","text":"Approach","x":-233,"y":-340,"width":250,"height":62},
+		{"id":"9c3f5c7c1544f1e2","type":"text","text":"Break Frontdoor lock\n- Set FrontdoorBroken\n- Trigger SiletAlarm","x":-1020,"y":440,"width":250,"height":125},
+		{"id":"587ea2b899d4dfa2","type":"text","text":"Lockpick Frontdoor\n- Set FrontdoorPicked","x":-762,"y":440,"width":242,"height":125},
+		{"id":"05a1879832d9e201","x":-478,"y":380,"width":306,"height":185,"type":"text","text":"Break Ground Level Window\n- Set WindowBroken\n- Trigger SiletAlarm"},
+		{"id":"7fec92673f542b8e","type":"text","text":"Lockpick Ground level window\n- Set WindowPicked\n- (Idea, give number for which window, affects room)\n\t- Requires windows to be maped to rooms","x":-172,"y":375,"width":372,"height":190},
+		{"id":"9c027faca5d9c7b2","x":-895,"y":720,"width":250,"height":60,"type":"text","text":"Arrive to Entrence"},
+		{"id":"96e706d7bed77be8","x":-236,"y":720,"width":250,"height":60,"type":"text","text":"Arrive to _Room_"},
+		{"id":"986a17d74fc8be26","type":"text","text":"Break Backdoor lock\n- Set BackdoorBroken\n- Trigger SiletAlarm","x":260,"y":440,"width":250,"height":125},
+		{"id":"849c3c3cba9787f7","x":385,"y":720,"width":250,"height":60,"type":"text","text":"Arrive to Kitchen"},
+		{"id":"098ff720246dc63d","type":"text","text":"Lockpick Backdoor\n- Set BackdoorPicked","x":510,"y":440,"width":242,"height":100}
+	],
+	"edges":[
+		{"id":"f9d5fdee2cb20c1c","fromNode":"67ed4d208cc640c1","fromSide":"bottom","toNode":"41a9e470dbf2b3a5","toSide":"top"},
+		{"id":"8d82e7557c485caf","fromNode":"67ed4d208cc640c1","fromSide":"bottom","toNode":"b5512a9d597c63d2","toSide":"top"},
+		{"id":"7c27989addd28267","fromNode":"67ed4d208cc640c1","fromSide":"bottom","toNode":"1a7c270097f7e645","toSide":"top"},
+		{"id":"51fbe28f34f1c21c","fromNode":"1a7c270097f7e645","fromSide":"bottom","toNode":"986a17d74fc8be26","toSide":"top"},
+		{"id":"a0160c32869f4a38","fromNode":"b5512a9d597c63d2","fromSide":"bottom","toNode":"986a17d74fc8be26","toSide":"top"},
+		{"id":"0b251b523a901ce5","fromNode":"1a7c270097f7e645","fromSide":"bottom","toNode":"098ff720246dc63d","toSide":"top"},
+		{"id":"698d71b54e595a7c","fromNode":"b5512a9d597c63d2","fromSide":"bottom","toNode":"098ff720246dc63d","toSide":"top"},
+		{"id":"38868b374cf42340","fromNode":"b5512a9d597c63d2","fromSide":"bottom","toNode":"7fec92673f542b8e","toSide":"top"},
+		{"id":"50b862a1cb105bca","fromNode":"1a7c270097f7e645","fromSide":"bottom","toNode":"7fec92673f542b8e","toSide":"top"},
+		{"id":"710feb1e238de103","fromNode":"41a9e470dbf2b3a5","fromSide":"bottom","toNode":"7fec92673f542b8e","toSide":"top"},
+		{"id":"9b6952c90906497e","fromNode":"41a9e470dbf2b3a5","fromSide":"bottom","toNode":"9c3f5c7c1544f1e2","toSide":"top"},
+		{"id":"da09702af9dca614","fromNode":"41a9e470dbf2b3a5","fromSide":"bottom","toNode":"587ea2b899d4dfa2","toSide":"top"},
+		{"id":"b65556028a626a06","fromNode":"b5512a9d597c63d2","fromSide":"bottom","toNode":"587ea2b899d4dfa2","toSide":"top"},
+		{"id":"b517711a6f1b15b0","fromNode":"b5512a9d597c63d2","fromSide":"bottom","toNode":"9c3f5c7c1544f1e2","toSide":"top"},
+		{"id":"ccd8597b7d5bd7c3","fromNode":"986a17d74fc8be26","fromSide":"bottom","toNode":"849c3c3cba9787f7","toSide":"top"},
+		{"id":"cc68877528e34522","fromNode":"098ff720246dc63d","fromSide":"bottom","toNode":"849c3c3cba9787f7","toSide":"top"},
+		{"id":"bb4811e8e9de95eb","fromNode":"b5512a9d597c63d2","fromSide":"bottom","toNode":"05a1879832d9e201","toSide":"top"},
+		{"id":"6d0597dcd8e0be88","fromNode":"41a9e470dbf2b3a5","fromSide":"bottom","toNode":"05a1879832d9e201","toSide":"top"},
+		{"id":"e90696952c0c8dcd","fromNode":"1a7c270097f7e645","fromSide":"bottom","toNode":"05a1879832d9e201","toSide":"top"},
+		{"id":"79504287f0ffb10c","fromNode":"9c3f5c7c1544f1e2","fromSide":"bottom","toNode":"9c027faca5d9c7b2","toSide":"top"},
+		{"id":"5d7c31fd1e9e1ffd","fromNode":"587ea2b899d4dfa2","fromSide":"bottom","toNode":"9c027faca5d9c7b2","toSide":"top"},
+		{"id":"ec6923d8dc45502f","fromNode":"05a1879832d9e201","fromSide":"bottom","toNode":"96e706d7bed77be8","toSide":"top"},
+		{"id":"2af33253165e3733","fromNode":"7fec92673f542b8e","fromSide":"bottom","toNode":"96e706d7bed77be8","toSide":"top"}
+	]
+}

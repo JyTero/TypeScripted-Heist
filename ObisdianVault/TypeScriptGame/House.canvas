@@ -1,0 +1,25 @@
+{
+	"nodes":[
+		{"id":"6b03c0e4bb3663c1","type":"text","text":"Kitchen","x":156,"y":-120,"width":144,"height":90},
+		{"id":"34bb10d647f7faae","type":"text","text":"Rear Porch","x":180,"y":-180,"width":180,"height":60},
+		{"id":"e0a3edbc2684c2be","type":"text","text":"Fireplace room","x":300,"y":-120,"width":140,"height":90},
+		{"id":"fcd3d1edc7e48697","type":"text","text":"TV-room","x":440,"y":-120,"width":148,"height":90},
+		{"id":"1b86ac0a57e77672","type":"text","text":"Library/Office","x":480,"y":-30,"width":114,"height":130},
+		{"id":"d75b3981e3465175","type":"text","text":"Dining Room","x":100,"y":-30,"width":200,"height":65},
+		{"id":"c3329ea031d0b681","type":"text","text":"Sunroom, Green House","x":156,"y":35,"width":144,"height":103},
+		{"id":"dd84b616e7a33002","type":"text","text":"Toilet","x":370,"y":-30,"width":108,"height":50},
+		{"id":"3bcccdcd02f7992f","type":"text","text":"Entrence\n- Stair UP","x":298,"y":20,"width":180,"height":100},
+		{"id":"c9f43ea5ce18361b","type":"text","text":"Front Porch","x":304,"y":120,"width":290,"height":90},
+		{"id":"28f7e4020482613d","type":"text","text":"MasterBedroom","x":760,"y":-120,"width":180,"height":105},
+		{"id":"ff005d586757313f","type":"text","text":"Bedroom","x":1020,"y":-60,"width":148,"height":90},
+		{"id":"b5f4e5895af6c9d0","type":"text","text":"MasterBath","x":680,"y":-15,"width":160,"height":50},
+		{"id":"10104251273db2bb","type":"text","text":"Bedroom","x":1060,"y":30,"width":114,"height":130},
+		{"id":"2f2c5fe9f463e9fc","type":"text","text":"Bedroom","x":680,"y":35,"width":200,"height":100},
+		{"id":"7b01386bc6929564","type":"text","text":"Upstari landing","x":880,"y":35,"width":180,"height":120},
+		{"id":"f1baf82e655e4223","type":"text","text":"Bathroom","x":840,"y":-15,"width":100,"height":50},
+		{"id":"1a07905f005a5456","type":"text","text":"UpstrLnd","x":940,"y":-60,"width":80,"height":95},
+		{"id":"8e05cd13114f62d5","x":270,"y":-300,"width":250,"height":60,"type":"text","text":"1st Floor"},
+		{"id":"1d6e101e004bc8c6","type":"text","text":"2nd Floor","x":815,"y":-300,"width":250,"height":60}
+	],
+	"edges":[]
+}
