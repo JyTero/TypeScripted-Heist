@@ -19,7 +19,6 @@ function MansionApproachMain() {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("The target is in sight");
             yield DoTheMenu();
-            console.log("GG ez");
         });
     }
     function DoTheMenu() {

@@ -11,7 +11,7 @@ export function MansionApproachMain(){
     {
         console.log("The target is in sight");
         await DoTheMenu();
-        console.log("GG ez"); 
+
     }
 
     async function DoTheMenu() {
@@ -40,6 +40,6 @@ function BuildFenceMenuItems():MenuItem[]
         MenuItemText: "Walk around the properly, looking for a easier way over the fence."
     }
 
-    return    [FenceMenuItem1, FenceMenuItem2, FenceMenuItem3];
+    return [FenceMenuItem1, FenceMenuItem2, FenceMenuItem3];
 
 }

@@ -16,6 +16,8 @@ export class MenuObject{
         //Get Input
         const playerInput = await this.GetAndCheckPlayerInput();
 
+
+
         console.log("The player chose " + playerInput);
 
         //Return Input
@@ -58,6 +60,13 @@ export class MenuObject{
             }
 
 
+    }   
+    ValidatePlayerInput(input : number)
+    {
+        //if input bad
+        //ReRun Menu Display and user input get+validation
+        //else
+        //return user value
     }
 
    async GetConsoleInput():Promise<string>
