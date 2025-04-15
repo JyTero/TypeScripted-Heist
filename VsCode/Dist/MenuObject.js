@@ -18,9 +18,20 @@ class MenuObject {
     }
     HandleMenu() {
         return __awaiter(this, void 0, void 0, function* () {
-            this.DisplayMenu();
-            const playerInput = yield this.GetAndCheckPlayerInput();
+            let playerInputIsValid = false;
+            let playerInput = 0;
+            while (!playerInputIsValid) {
+                this.DisplayMenu();
+                playerInput = yield this.GetAndCheckPlayerInput();
+                if (playerInput === -1)
+                    console.log("Please select a valid option using the number keys.");
+                else if (playerInput > this.menuItems.length || playerInput < 1)
+                    console.log("Please choose one of the given options with the number keys.");
+                else
+                    playerInputIsValid = true;
+            }
             console.log("The player chose " + playerInput);
+            return playerInput;
         });
     }
     DisplayMenu() {
@@ -39,8 +50,6 @@ class MenuObject {
             let input = yield this.GetConsoleInput();
             let response = parseInt(input, 10);
             if (isNaN(response)) {
-                console.log("Please select a valid option using the number keys.");
-                this.GetAndCheckPlayerInput();
                 return -1;
             }
             else {

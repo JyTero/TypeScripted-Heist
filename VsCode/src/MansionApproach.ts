@@ -1,23 +1,21 @@
 import { MenuObject } from "./MenuObject";
 import { MenuItem } from "./MenuObject";
 
-export function MansionApproachMain(){
+export async function MansionApproachMain(){
 
     const GateMenuItems : MenuItem[] = BuildFenceMenuItems();
     const GateMenu:MenuObject = new MenuObject(GateMenuItems);
-    DoTheGame();
 
-    async function DoTheGame() 
-    {
         console.log("The target is in sight");
         await DoTheMenu();
 
-    }
+
 
     async function DoTheMenu() {
         await GateMenu.HandleMenu();
     }
 }
+
 
 function BuildFenceMenuItems():MenuItem[]
 {

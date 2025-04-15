@@ -12,20 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MansionApproachMain = MansionApproachMain;
 const MenuObject_1 = require("./MenuObject");
 function MansionApproachMain() {
-    const GateMenuItems = BuildFenceMenuItems();
-    const GateMenu = new MenuObject_1.MenuObject(GateMenuItems);
-    DoTheGame();
-    function DoTheGame() {
-        return __awaiter(this, void 0, void 0, function* () {
-            console.log("The target is in sight");
-            yield DoTheMenu();
-        });
-    }
-    function DoTheMenu() {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield GateMenu.HandleMenu();
-        });
-    }
+    return __awaiter(this, void 0, void 0, function* () {
+        const GateMenuItems = BuildFenceMenuItems();
+        const GateMenu = new MenuObject_1.MenuObject(GateMenuItems);
+        console.log("The target is in sight");
+        yield DoTheMenu();
+        function DoTheMenu() {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield GateMenu.HandleMenu();
+            });
+        }
+    });
 }
 function BuildFenceMenuItems() {
     const FenceMenuItem1 = {
