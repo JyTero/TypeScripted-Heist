@@ -1,4 +1,6 @@
 import { GetPlayerInput } from "./LineReader"
+import { MenuItem } from "./MenuItem";
+
 export class MenuObject {
 
     /// name : string ;
@@ -66,8 +68,3 @@ export class MenuObject {
 
 }
 
-export type MenuItem = {
-    MenuItemName: string;
-    MenuItemNumber: number;
-    MenuItemText: string;
-}

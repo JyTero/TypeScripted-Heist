@@ -11,10 +11,17 @@
             "id": "397157f6ed015f6c",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "type": "canvas",
+              "state": {
+                "file": "TypeScriptGame/Gameflow.canvas",
+                "viewState": {
+                  "x": -92.4485337842342,
+                  "y": 250.3592011775175,
+                  "zoom": -0.019275476167251338
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Gameflow"
             }
           }
         ]
@@ -162,5 +169,7 @@
     }
   },
   "active": "397157f6ed015f6c",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "TypeScriptGame/House.canvas"
+  ]
 }
