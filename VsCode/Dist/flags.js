@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Flags = void 0;
-exports.Flags = {
+export var Flags = {
     BrokeWindow: false,
 };
 //# sourceMappingURL=flags.js.map

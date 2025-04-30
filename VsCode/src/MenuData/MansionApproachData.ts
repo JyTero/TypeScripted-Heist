@@ -1,5 +1,5 @@
 import { MenuItemDataType } from "../MenuItemDataType";
-import { placeholderScene } from "..";
+import { placeholderScene } from "../index";
 
 
 export const MansionApproachMenuItemData01 : MenuItemDataType=

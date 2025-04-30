@@ -1,4 +1,4 @@
-import { placeholderScene } from "..";
+import { placeholderScene } from "../index";
 import { MenuItemDataType } from "../MenuItemDataType";
 
 export const FrontDoorData01 : MenuItemDataType=
@@ -16,7 +16,7 @@ export const FrontDoorData02 : MenuItemDataType=
     MenuItemName: "Lockpick the lock",
     MenuItemNumber: 2,
     MenuItemText: "Yous your tools, and time, to open the lock on the door",
-    MenuItemSelectionDescription: "After some tinkering in the darknes you hear the familiar and ever welcome sound of a doorlock clicking open",
+    MenuItemSelectionDescription: "After some tinkering in the darknes you hear the familiar and ever welcome sound of a lock clicking open",
     NextMenuObject: placeholderScene,
     MenuItemReadFlags:[],
     MenuItemWriteFlags:[],

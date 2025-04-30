@@ -9,10 +9,21 @@ export abstract class SceneObjectBase {
     sceneMenuItems: MenuItemBase[] = [];
     sceneMenu: MenuObjectBase | null = null;
 
-    abstract SceneOnStartUp(): void;
+   
     abstract BuildMenuItems(): MenuItemBase[];
-    abstract SceneMain(): void;
+    abstract SceneSpesificMain(): void;
+    abstract SceneSpsificStartUp():void;
 
+    SceneOnStartUp(){
+        this.sceneMenuItems = this.BuildMenuItems();
+        this.sceneMenu = new MenuObjectBase(this.sceneMenuItems);
+        this.SceneSpsificStartUp();
+    }
+    async SceneMain()
+    {
+        this.SceneSpesificMain();
+        await this.DoTheMenu();
+    };
     async DoTheMenu() {
 
         let response: number = 0;

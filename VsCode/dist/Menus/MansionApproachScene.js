@@ -49,27 +49,43 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+import { MansionApproachMenuItemData01, MansionApproachMenuItemData02, MansionApproachMenuItemData03 } from "../MenuData/MansionApproachData";
 import { SceneObjectBase } from "../SceneObjectBase";
-var PlaceholderScene = (function (_super) {
-    __extends(PlaceholderScene, _super);
-    function PlaceholderScene() {
+var MansionApproachScene = (function (_super) {
+    __extends(MansionApproachScene, _super);
+    function MansionApproachScene() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    PlaceholderScene.prototype.SceneSpsificStartUp = function () {
-        this.SceneName = "PlaceholderScene";
+    MansionApproachScene.prototype.SceneSpsificStartUp = function () {
+        this.SceneName = "MansionApproachScene";
     };
-    PlaceholderScene.prototype.SceneSpesificMain = function () {
+    MansionApproachScene.prototype.SceneSpesificMain = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                console.log("PLACEHOLDER SCENE, SHOULD NOT BE RUN");
+                console.log("The target is in sight");
+                this.DrawThings();
                 return [2];
             });
         });
     };
-    PlaceholderScene.prototype.BuildMenuItems = function () {
-        return [];
+    MansionApproachScene.prototype.BuildMenuItems = function () {
+        var FenceMenuItem1 = this.BuildMenuItem(MansionApproachMenuItemData01);
+        var FenceMenuItem2 = this.BuildMenuItem(MansionApproachMenuItemData02);
+        var FenceMenuItem3 = this.BuildMenuItem(MansionApproachMenuItemData03);
+        return [FenceMenuItem1, FenceMenuItem2, FenceMenuItem3];
     };
-    return PlaceholderScene;
+    MansionApproachScene.prototype.DrawThings = function () {
+        var canvas = document.getElementById('gameCanvas');
+        var ctx = canvas.getContext('2d');
+        if (ctx) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'red';
+            ctx.fillRect(100, 100, 200, 150);
+        }
+        else
+            console.log("no canvas");
+    };
+    return MansionApproachScene;
 }(SceneObjectBase));
-export { PlaceholderScene };
-//# sourceMappingURL=PlaceholderScene.js.map
+export { MansionApproachScene };
+//# sourceMappingURL=MansionApproachScene.js.map

@@ -1,7 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.MenuDataBase = void 0;
-class MenuDataBase {
-}
-exports.MenuDataBase = MenuDataBase;
+var MenuDataBase = (function () {
+    function MenuDataBase() {
+    }
+    return MenuDataBase;
+}());
+export { MenuDataBase };
 //# sourceMappingURL=MenuDataBase.js.map

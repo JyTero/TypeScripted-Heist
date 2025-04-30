@@ -1,19 +1,14 @@
 import { MenuItemBase } from "../MenuItemBase";
-import { MenuObjectBase } from "../MenuObjectBase";
 import { SceneObjectBase } from "../SceneObjectBase";
 import { FrontDoorData01, FrontDoorData02 } from "../MenuData/FrontDoorData";
 
 export class FrontDoorScene extends SceneObjectBase {
 
-    SceneOnStartUp(): void {
-        this.sceneMenuItems = this.BuildMenuItems();
-        this.sceneMenu = new MenuObjectBase(this.sceneMenuItems);
-        this.SceneName = "MansionApproach";
+    SceneSpsificStartUp(): void {
+        this.SceneName = "FrontDoorScene";
     }
-
-    async SceneMain() {
+    async SceneSpesificMain() {
         console.log("Closing in on the door");
-        await this.DoTheMenu();
     }
 
     BuildMenuItems(): MenuItemBase[] {

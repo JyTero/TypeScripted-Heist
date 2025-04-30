@@ -1,14 +1,20 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.placeholderScene = void 0;
-const MansionApproachScene_1 = require("./Scenes/MansionApproachScene");
-const FrontDoorScene_1 = require("./Scenes/FrontDoorScene");
-const PlaceholderScene_1 = require("./Scenes/PlaceholderScene");
-exports.placeholderScene = new PlaceholderScene_1.PlaceholderScene();
-const mansionApproachScene = new MansionApproachScene_1.MansionApproachScene();
-const frontDoorScene = new FrontDoorScene_1.FrontDoorScene();
+import { MansionApproachScene } from "./Scenes/MansionApproachScene";
+import { FrontDoorScene } from "./Scenes/FrontDoorScene";
+import { PlaceholderScene } from "./Scenes/PlaceholderScene";
+import { GroundLevelWindowScene } from "./Scenes/GroundLevelWindowScene";
+import { MenuObjectBase } from "./MenuObjectBase";
+export var placeholderScene = new PlaceholderScene();
+export var placeholderMenu = new MenuObjectBase();
+var mansionApproachScene = new MansionApproachScene();
+var frontDoorScene = new FrontDoorScene();
+var groundLevelWindowScene = new GroundLevelWindowScene();
 mansionApproachScene.SceneOnStartUp();
 frontDoorScene.SceneOnStartUp();
-mansionApproachScene.TieMenuItemToSceneObject(0, frontDoorScene);
+groundLevelWindowScene.SceneOnStartUp();
+MansionApproachTieUp();
 mansionApproachScene.SceneMain();
+function MansionApproachTieUp() {
+    mansionApproachScene.TieMenuItemToSceneObject(0, frontDoorScene);
+    mansionApproachScene.TieMenuItemToSceneObject(1, groundLevelWindowScene);
+}
 //# sourceMappingURL=index.js.map

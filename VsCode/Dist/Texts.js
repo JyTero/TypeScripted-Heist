@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Texts = void 0;
-exports.Texts = {
+export var Texts = {
     WelcomeMessage: {
         text: "Welcome to the game!",
         tag: "Intro",

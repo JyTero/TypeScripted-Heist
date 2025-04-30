@@ -15,16 +15,34 @@
               "state": {
                 "file": "TypeScriptGame/Gameflow.canvas",
                 "viewState": {
-                  "x": -19,
-                  "y": 481,
+                  "x": -45,
+                  "y": 560,
                   "zoom": 0
                 }
               },
               "icon": "lucide-layout-dashboard",
               "title": "Gameflow"
             }
+          },
+          {
+            "id": "5b303e3fd10368d2",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "TypeScriptGame/Gameflow.canvas",
+                "viewState": {
+                  "x": -0.2775323686214506,
+                  "y": 443.6807311500381,
+                  "zoom": -0.20511707755914602
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Gameflow"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -168,10 +186,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "397157f6ed015f6c",
+  "active": "5b303e3fd10368d2",
   "lastOpenFiles": [
-    "Data.canvas",
+    "IDEAS.md",
+    "TypeScriptGame/Welcome.md",
     "TypeScriptGame/Gameflow.canvas",
+    "Data.canvas",
     "TypeScriptGame/House.canvas"
   ]
 }

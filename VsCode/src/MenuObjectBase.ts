@@ -5,11 +5,11 @@ import { MenuItemBase } from "./MenuItemBase";
 export class MenuObjectBase {
 
     /// name : string ;
-    menuItems: MenuItemBase[] = [];
+    menuItems: MenuItemBase[];
 
 
-    constructor(_menuItems: MenuItemBase[]) {
-        this.menuItems = _menuItems
+    constructor(_menuItems?: MenuItemBase[]) {
+        this.menuItems = _menuItems?? [];
     }
 
     async RunMenu(): Promise<number> {

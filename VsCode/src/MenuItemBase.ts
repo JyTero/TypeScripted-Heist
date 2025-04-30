@@ -1,4 +1,4 @@
-import { placeholderScene } from ".";
+import { placeholderScene } from "./index";
 import { SceneObjectBase } from "./SceneObjectBase";
 
 
