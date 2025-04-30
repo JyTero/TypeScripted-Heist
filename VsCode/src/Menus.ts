@@ -1,0 +1,1 @@
+//All menus to a object, go through each and assign value as index.

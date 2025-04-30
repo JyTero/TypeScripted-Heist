@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MansionApproachScene = void 0;
-const MenuObjectBase_1 = require("./MenuObjectBase");
-const MansionApproachData_1 = require("./MenuData/MansionApproachData");
-const SceneObjectBase_1 = require("./SceneObjectBase");
+const MenuObjectBase_1 = require("../MenuObjectBase");
+const MansionApproachData_1 = require("../MenuData/MansionApproachData");
+const SceneObjectBase_1 = require("../SceneObjectBase");
 class MansionApproachScene extends SceneObjectBase_1.SceneObjectBase {
     SceneOnStartUp() {
         this.sceneMenuItems = this.BuildMenuItems();
@@ -33,4 +33,4 @@ class MansionApproachScene extends SceneObjectBase_1.SceneObjectBase {
     }
 }
 exports.MansionApproachScene = MansionApproachScene;
-//# sourceMappingURL=MansionApproach.js.map
+//# sourceMappingURL=MansionApproachScene.js.map

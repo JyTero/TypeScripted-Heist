@@ -1,17 +1,18 @@
 import { GetPlayerInput } from "./LineReader"
-import { MenuItem } from "./MenuItem";
+import { MenuItemBase } from "./MenuItemBase";
 
-export class MenuObject {
+
+export class MenuObjectBase {
 
     /// name : string ;
-    menuItems: MenuItem[] = [];
+    menuItems: MenuItemBase[] = [];
 
 
-    constructor(_menuItems: MenuItem[]) {
+    constructor(_menuItems: MenuItemBase[]) {
         this.menuItems = _menuItems
     }
 
-    async HandleMenu(): Promise<number> {
+    async RunMenu(): Promise<number> {
         let playerInputIsValid: Boolean = false;
         let playerInput: number = 0;
 
@@ -40,7 +41,7 @@ export class MenuObject {
         });
     }
 
-    WriteMenuItem(_menuItem: MenuItem) {
+    WriteMenuItem(_menuItem: MenuItemBase) {
         console.log(_menuItem.MenuItemNumber + ". " + _menuItem.MenuItemText);
     }
 
@@ -65,6 +66,8 @@ export class MenuObject {
     async GetConsoleInput(): Promise<string> {
         return await GetPlayerInput("Choose: ");
     }
+
+
 
 }
 

@@ -1,5 +1,19 @@
-import { MansionApproachMain } from "./MansionApproach";
+import { MansionApproachScene } from "./Scenes/MansionApproachScene";
+import { FrontDoorScene } from "./Scenes/FrontDoorScene";
+import { PlaceholderScene } from "./Scenes/PlaceholderScene";
 
-MansionApproachMain();
+export const placeholderScene: PlaceholderScene = new PlaceholderScene();
 
-1
+const mansionApproachScene: MansionApproachScene = new MansionApproachScene();
+const frontDoorScene: FrontDoorScene = new FrontDoorScene();
+
+mansionApproachScene.SceneOnStartUp();
+frontDoorScene.SceneOnStartUp();
+//Rest of the scenes, move to proper place once confirmed and grown
+//Tie scenes to each other
+mansionApproachScene.TieMenuItemToSceneObject(0,frontDoorScene);
+
+mansionApproachScene.SceneMain();
+
+
+

@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MansionApproachScene = void 0;
-const MenuObjectBase_1 = require("./MenuObjectBase");
-const MansionApproachData_1 = require("./MenuData/MansionApproachData");
-const SceneObjectBase_1 = require("./SceneObjectBase");
-class MansionApproachScene extends SceneObjectBase_1.SceneObjectBase {
+exports.FrontDoorScene = void 0;
+const MenuObjectBase_1 = require("../MenuObjectBase");
+const SceneObjectBase_1 = require("../SceneObjectBase");
+const FrontDoorData_1 = require("../MenuData/FrontDoorData");
+class FrontDoorScene extends SceneObjectBase_1.SceneObjectBase {
     SceneOnStartUp() {
         this.sceneMenuItems = this.BuildMenuItems();
         this.sceneMenu = new MenuObjectBase_1.MenuObjectBase(this.sceneMenuItems);
@@ -21,16 +21,15 @@ class MansionApproachScene extends SceneObjectBase_1.SceneObjectBase {
     }
     SceneMain() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("The target is in sight");
+            console.log("Closing in on the door");
             yield this.DoTheMenu();
         });
     }
     BuildMenuItems() {
-        const FenceMenuItem1 = this.BuildMenuItem(MansionApproachData_1.MansionApproachMenuItemData01);
-        const FenceMenuItem2 = this.BuildMenuItem(MansionApproachData_1.MansionApproachMenuItemData02);
-        const FenceMenuItem3 = this.BuildMenuItem(MansionApproachData_1.MansionApproachMenuItemData03);
-        return [FenceMenuItem1, FenceMenuItem2, FenceMenuItem3];
+        const menuItem01 = this.BuildMenuItem(FrontDoorData_1.FrontDoorData01);
+        const menuItem02 = this.BuildMenuItem(FrontDoorData_1.FrontDoorData02);
+        return [menuItem01, menuItem02];
     }
 }
-exports.MansionApproachScene = MansionApproachScene;
-//# sourceMappingURL=MansionApproach.js.map
+exports.FrontDoorScene = FrontDoorScene;
+//# sourceMappingURL=FrontDoorScene.js.map

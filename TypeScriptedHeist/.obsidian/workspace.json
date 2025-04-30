@@ -15,9 +15,9 @@
               "state": {
                 "file": "TypeScriptGame/Gameflow.canvas",
                 "viewState": {
-                  "x": -92.4485337842342,
-                  "y": 250.3592011775175,
-                  "zoom": -0.019275476167251338
+                  "x": -19,
+                  "y": 481,
+                  "zoom": 0
                 }
               },
               "icon": "lucide-layout-dashboard",
@@ -170,6 +170,8 @@
   },
   "active": "397157f6ed015f6c",
   "lastOpenFiles": [
+    "Data.canvas",
+    "TypeScriptGame/Gameflow.canvas",
     "TypeScriptGame/House.canvas"
   ]
 }

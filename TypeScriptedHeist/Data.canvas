@@ -1,0 +1,37 @@
+{
+	"nodes":[
+		{"id":"5a398316b5dcc628","type":"text","text":"Basic Data (string, numbers, bool)","x":-660,"y":-480,"width":306,"height":60},
+		{"id":"06b18d2a2b78fc5b","type":"text","text":"Basic Data (string, numbers, bool)","x":-280,"y":-480,"width":306,"height":60},
+		{"id":"14afe15f1c8aad30","type":"text","text":"Basic Data (string, numbers, bool)","x":100,"y":-480,"width":306,"height":60},
+		{"id":"fc26bbab02ec8e87","type":"text","text":"DataObjectMaker\n","x":-252,"y":-200,"width":250,"height":60},
+		{"id":"ef53298274ab6c02","type":"text","text":"DataObject (MenuObjectData, MenuItemData)","x":-327,"y":-40,"width":400,"height":50},
+		{"id":"b1d151529ab92f8c","type":"text","text":"ObjectMaking","x":-252,"y":100,"width":250,"height":60},
+		{"id":"c2a53d1e9264e910","type":"text","text":"Object","x":-252,"y":240,"width":250,"height":60},
+		{"id":"62a8cf1c1ae7f299","type":"text","text":"GamePlay\n","x":-252,"y":398,"width":250,"height":60},
+		{"id":"6ccd8df28e515e41","type":"text","text":"Print\n- Menu Intro text\n- Menu Items\n- Menu item result","x":40,"y":365,"width":263,"height":175},
+		{"id":"bfb07beddbd0cd4d","type":"text","text":"MenuObject","x":659,"y":-260,"width":281,"height":320},
+		{"id":"321c814911808207","type":"text","text":"MenuItem","x":659,"y":-164,"width":250,"height":60},
+		{"id":"d4ef01b6f4da40db","type":"text","text":"MenuItem","x":659,"y":-100,"width":250,"height":60},
+		{"id":"8d0d3001cde25bdd","type":"text","text":"MenuItem","x":659,"y":-40,"width":250,"height":60},
+		{"id":"5a81870c85d745f0","type":"text","text":"MenuObject","x":1180,"y":-540,"width":281,"height":320},
+		{"id":"3f330503303fda31","type":"text","text":"MenuItem","x":1180,"y":-444,"width":250,"height":60},
+		{"id":"0a5c8c91b21c1d7c","type":"text","text":"MenuItem","x":1180,"y":-380,"width":250,"height":60},
+		{"id":"9dde446566111edc","type":"text","text":"MenuItem","x":1180,"y":-320,"width":250,"height":60},
+		{"id":"985a67254fa24898","type":"text","text":"MenuObject","x":1290,"y":-134,"width":281,"height":320},
+		{"id":"8b4750931345f45f","type":"text","text":"MenuItem","x":1290,"y":-38,"width":250,"height":60},
+		{"id":"336bd3f4a4207a31","type":"text","text":"MenuItem","x":1290,"y":26,"width":250,"height":60},
+		{"id":"216eccfcde0a22e0","type":"text","text":"MenuItem","x":1290,"y":86,"width":250,"height":60}
+	],
+	"edges":[
+		{"id":"a60b76df6ca287be","fromNode":"5a398316b5dcc628","fromSide":"bottom","toNode":"fc26bbab02ec8e87","toSide":"top"},
+		{"id":"967ea03ccefcefe9","fromNode":"06b18d2a2b78fc5b","fromSide":"bottom","toNode":"fc26bbab02ec8e87","toSide":"top"},
+		{"id":"15990098b2be1891","fromNode":"14afe15f1c8aad30","fromSide":"bottom","toNode":"fc26bbab02ec8e87","toSide":"top"},
+		{"id":"2bfde9be53ed810c","fromNode":"fc26bbab02ec8e87","fromSide":"bottom","toNode":"ef53298274ab6c02","toSide":"top"},
+		{"id":"7077f174bcf4ea7d","fromNode":"ef53298274ab6c02","fromSide":"bottom","toNode":"b1d151529ab92f8c","toSide":"top"},
+		{"id":"768d6062620de7e5","fromNode":"b1d151529ab92f8c","fromSide":"bottom","toNode":"c2a53d1e9264e910","toSide":"top"},
+		{"id":"4df8e3605151bf79","fromNode":"c2a53d1e9264e910","fromSide":"bottom","toNode":"62a8cf1c1ae7f299","toSide":"top"},
+		{"id":"a54f00a504a31374","fromNode":"8d0d3001cde25bdd","fromSide":"right","toNode":"336bd3f4a4207a31","toSide":"left"},
+		{"id":"e9c3a000cd83c61c","fromNode":"d4ef01b6f4da40db","fromSide":"right","toNode":"0a5c8c91b21c1d7c","toSide":"left"},
+		{"id":"51da244708bfd0f4","fromNode":"ef53298274ab6c02","fromSide":"right","toNode":"fc26bbab02ec8e87","toSide":"right","label":"Requires"}
+	]
+}
