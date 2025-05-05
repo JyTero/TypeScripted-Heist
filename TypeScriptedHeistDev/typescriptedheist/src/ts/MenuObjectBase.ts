@@ -35,7 +35,7 @@ export class MenuObjectBase {
         let s: string = "";
         this.menuItems.forEach(element => {
             element.MenuItemNumber = i;
-            s+= this.WriteMenuItem(element);
+            s+= this.WriteMenuItem(element)+ "<br>";
 
             i++;
         });
@@ -44,7 +44,7 @@ export class MenuObjectBase {
     }
 
     WriteMenuItem(_menuItem: MenuItemBase):string {
-        return _menuItem.MenuItemNumber + ". " + _menuItem.MenuItemText + "\n";
+        return _menuItem.MenuItemNumber + ". " + _menuItem.MenuItemText;
     }
 
     async GetAndCheckPlayerInput(): Promise<number> {

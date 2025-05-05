@@ -11,7 +11,7 @@ let frontDoorScene: FrontDoorScene;
 let groundLevelWindowScene: GroundLevelWindowScene;
 
 export function IndexMain() {
-console.log("Starting index main");
+    console.log("Starting index main");
 
     mansionApproachScene = new MansionApproachScene();
     frontDoorScene = new FrontDoorScene();

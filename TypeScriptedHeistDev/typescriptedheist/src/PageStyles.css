@@ -1,0 +1,15 @@
+#app{
+    display: flex;
+    flex-direction: row;
+}
+#TextSide{
+    display: flex;
+    flex-direction: column;
+}
+#TextHistory{
+    flex-grow: 1;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column-reverse;
+}

@@ -3,23 +3,34 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+  <link rel="styleSheet" href="./src/PageStyles.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pöge</title>
 </head>
 
 <body>
   <div id="app">
-    <p>Gaems</p>
     <script type="module" src="./src/ts/initialisation.ts"></script>
-
-    <canvas id="gameCanvas" width="1024" height="768" style="border:1px solid #000000;">
-      Your browser does not support the HTML canvas tag.
-    </canvas>
-
-    <p id="DescriptionText">Menu item 1</p>
-    <input type="text" id="playerInput" placeholder="Type your response..." />
-    <button id="submitBtn">Submit</button>
+    <div id="GameWindow">
+      <p>Gaems</p>
+      <canvas id="gameCanvas" width="1024" height="768" style="border:1px solid #000000;">
+        Your browser does not support the HTML canvas tag.
+      </canvas>
+    </div>
+    <div id="TextSide">
+      <div id="TextHistory">
+        <p>OldTextHere</p>
+        <p>OldTextHere</p>
+        <p>OldTextHere</p>
+        <p>OldTextHere</p>
+      </div>
+      <div id="IOPanel">
+        <p id="DescriptionText">Menu item 1</p>
+        <input type="text" id="playerInput" placeholder="Type your response..." />
+        <button id="submitBtn">Submit</button>
+      </div>
+    </div>
 
 
   </div>

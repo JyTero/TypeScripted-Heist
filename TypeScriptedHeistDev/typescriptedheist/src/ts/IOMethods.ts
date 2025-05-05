@@ -1,19 +1,4 @@
-// import * as readline from 'readline';
-// export function OGetPlayerInput(question: string): Promise<string> {
-//   const rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout,
-
-//   });
-
-//   return new Promise((resolve) => {
-//     rl.question(question, (input: string) => {
-//       rl.close();
-//       resolve(input);
-//     });
-//   });
-// }
-
+import { AddNewHistoryDiv } from "./PageDisplay";
 
 export function WaitForInput(): Promise<string> {
   return new Promise((resolve) => {
@@ -34,7 +19,12 @@ export function WaitForInput(): Promise<string> {
 export function WriteToGame(text:string)
 {
   const textField = document.getElementById("DescriptionText") as HTMLInputElement;
-  console.log("Tried to write " + text);
+  //console.log("Tried to write " + text);
+
+  const prevText = textField.value;
+  if(prevText)
+    AddNewHistoryDiv(prevText);
+
   if(textField)
-    textField.textContent = text;
+    textField.innerHTML = text;
 }
