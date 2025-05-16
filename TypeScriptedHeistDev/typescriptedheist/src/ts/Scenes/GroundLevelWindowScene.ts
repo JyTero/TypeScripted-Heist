@@ -1,4 +1,4 @@
-import { WriteToGame } from "../IOMethods";
+import { WriteAlert } from "../IOMethods";
 import { GroundLevelWindowData01, GroundLevelWindowData02, GroundLevelWindowData03 } from "../MenuData/GroundLevelWindowData";
 import { MenuItemBase } from "../MenuItemBase";
 import { SceneObjectBase } from "../SceneObjectBase";
@@ -17,7 +17,7 @@ export class GroundLevelWindowScene extends SceneObjectBase {
     }
 
     SceneSpesificMain(): void {
-        WriteToGame("You approach a window");
+        WriteAlert("You approach a window");
 
     }
 

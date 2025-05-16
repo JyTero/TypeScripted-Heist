@@ -1,6 +1,7 @@
 import { SceneObjectBase } from "../SceneObjectBase";
 import { MenuItemBase } from "../MenuItemBase";
-import { WriteToGame } from "../IOMethods";
+import { WriteAlert } from "../IOMethods";
+
 export class PlaceholderScene extends SceneObjectBase {
     
     SceneSpsificStartUp(): void {
@@ -8,7 +9,7 @@ export class PlaceholderScene extends SceneObjectBase {
     }
     
     async SceneSpesificMain() {
-        WriteToGame("PLACEHOLDER SCENE, SHOULD NOT BE RUN");
+        WriteAlert("PLACEHOLDER SCENE, SHOULD NOT BE RUN");
         // await this.DoTheMenu();
         
     }

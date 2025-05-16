@@ -13,7 +13,8 @@
 		{"id":"986a17d74fc8be26","type":"text","text":"Break Backdoor lock\n- Set BackdoorBroken\n- Trigger SiletAlarm","x":260,"y":440,"width":250,"height":125},
 		{"id":"849c3c3cba9787f7","type":"text","text":"Arrive to Kitchen","x":385,"y":720,"width":250,"height":60},
 		{"id":"098ff720246dc63d","type":"text","text":"Lockpick Backdoor\n- Set BackdoorPicked","x":510,"y":440,"width":242,"height":100},
-		{"id":"58787bca42cebcf8","x":-236,"y":976,"width":250,"height":60,"type":"text","text":"In House"}
+		{"id":"58787bca42cebcf8","type":"text","text":"In House","x":-236,"y":976,"width":250,"height":60},
+		{"id":"9a3d7d7dfed21c9a","x":752,"y":443,"width":308,"height":122,"type":"text","text":"Look for key\n- Find key under a flower pot\n- Unlock option: Open door with key"}
 	],
 	"edges":[
 		{"id":"f9d5fdee2cb20c1c","fromNode":"67ed4d208cc640c1","fromSide":"bottom","toNode":"41a9e470dbf2b3a5","toSide":"top"},
@@ -41,6 +42,7 @@
 		{"id":"2af33253165e3733","fromNode":"7fec92673f542b8e","fromSide":"bottom","toNode":"96e706d7bed77be8","toSide":"top"},
 		{"id":"c293c8599b9a2f79","fromNode":"9c027faca5d9c7b2","fromSide":"bottom","toNode":"58787bca42cebcf8","toSide":"top"},
 		{"id":"5e10fd9ca61d7700","fromNode":"96e706d7bed77be8","fromSide":"bottom","toNode":"58787bca42cebcf8","toSide":"top"},
-		{"id":"ea0b2788da34b52e","fromNode":"849c3c3cba9787f7","fromSide":"bottom","toNode":"58787bca42cebcf8","toSide":"top"}
+		{"id":"ea0b2788da34b52e","fromNode":"849c3c3cba9787f7","fromSide":"bottom","toNode":"58787bca42cebcf8","toSide":"top"},
+		{"id":"d30f43986c2951da","fromNode":"1a7c270097f7e645","fromSide":"bottom","toNode":"9a3d7d7dfed21c9a","toSide":"top"}
 	]
 }

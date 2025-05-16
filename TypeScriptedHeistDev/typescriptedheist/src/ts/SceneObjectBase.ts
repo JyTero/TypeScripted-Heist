@@ -1,57 +1,75 @@
 //import { MenuObject } from "./MenuObject";
+import { ChangeFlagValue } from "./flags";
 import { MenuItemBase } from "./MenuItemBase";
 import { MenuItemDataType } from "./MenuItemDataType";
 import { MenuObjectBase } from "./MenuObjectBase";
+import { IsDebug } from "./initialisation";
+import { WriteMenuSelection } from "./IOMethods";
 
 export abstract class SceneObjectBase {
 
-    SceneName: string = "";
-    sceneMenuItems: MenuItemBase[] = [];
-    sceneMenu: MenuObjectBase | null = null;
+    public SceneName: string = "";
+    // sceneMenuItems: MenuItemBase[] = [];
+    public sceneMenu: MenuObjectBase | null = null;
 
-   
-    abstract BuildMenuItems(): MenuItemBase[];
-    abstract SceneSpesificMain(): void;
-    abstract SceneSpsificStartUp():void;
 
-    SceneOnStartUp(){
-        this.sceneMenuItems = this.BuildMenuItems();
-        this.sceneMenu = new MenuObjectBase(this.sceneMenuItems);
+    public abstract BuildMenuItems(): MenuItemBase[];
+    public abstract SceneSpesificMain(): void;
+    public abstract SceneSpsificStartUp(): void;
+
+    public SceneOnStartUp() {
+        this.sceneMenu = new MenuObjectBase([], this);
+        this.sceneMenu.MenuOnStartUp();
+
         this.SceneSpsificStartUp();
     }
-    async SceneMain()
-    {
+    public async SceneMain() {
         this.SceneSpesificMain();
         await this.DoTheMenu();
     };
-    async DoTheMenu() {
+    public async DoTheMenu() {
 
-        let response: number = 0;
-        if (this.sceneMenu)
-            response = await this.sceneMenu.RunMenu();
+        if (this.sceneMenu != null) {
+            let response: number = 0;
+            if (this.sceneMenu)
+                response = await this.sceneMenu.RunMenu();
+            else
+                console.log("NULL MENU: " + this.SceneName + " scene");
+            response--;
+            const chosenMenuItem:MenuItemBase = this.sceneMenu.validMenuItems[response];
+            
+            if (IsDebug)
+                console.log(`The player chose ${chosenMenuItem} (${response+1})`);
+
+
+            this.AdjustFlags(chosenMenuItem);
+            WriteMenuSelection(response+1 + ". " + chosenMenuItem.MenuItemText, chosenMenuItem.MenuItemSelectionDescription)
+            this.LoadNextScene(chosenMenuItem.NextSceneObject);
+        }
         else
-            console.log("NULL MENU: " + this.SceneName + " scene");
+            console.log(`sceneMenu ${this.sceneMenu} of ${this.SceneName} is null`)
 
-       response--;
-
-        this.LoadNextScene(this.sceneMenuItems[response].NextSceneObject);
-        //if Scene menu items [result].next menu === menu, run its main
-        //else exit cuz nothing to go to
     }
 
-    BuildMenuItem(MenuItemData: MenuItemDataType): MenuItemBase {
-        const newMenuItem: MenuItemBase = new MenuItemBase(MenuItemData.MenuItemName, MenuItemData.MenuItemNumber, MenuItemData.MenuItemText, MenuItemData.MenuItemSelectionDescription, MenuItemData.MenuItemReadFlags, MenuItemData.MenuItemWriteFlags);
+    public BuildMenuItem(MenuItemData: MenuItemDataType): MenuItemBase {
+        const newMenuItem: MenuItemBase = new MenuItemBase(MenuItemData);
         return newMenuItem;
 
     }
 
-    TieMenuItemToSceneObject(menuItemIndex: number, targetScene: SceneObjectBase) {
-        this.sceneMenuItems[menuItemIndex].NextSceneObject = targetScene;
-    }
 
-    LoadNextScene(sceneObjectBase: SceneObjectBase){
+    private LoadNextScene(sceneObjectBase: SceneObjectBase) {
         sceneObjectBase.SceneMain();
 
     }
 
+    private AdjustFlags(menuItem: MenuItemBase) {
+        for (const flagToChange of menuItem.MenuItemFlagsToChange) {
+            ChangeFlagValue(flagToChange);
+        }
+    }
+
+    public TieMenuItemToSceneObject(menuItemIndex: number, targetScene: SceneObjectBase) {
+        this.sceneMenu?.TieMenuItemToSceneObject(menuItemIndex, targetScene);
+    }
 }

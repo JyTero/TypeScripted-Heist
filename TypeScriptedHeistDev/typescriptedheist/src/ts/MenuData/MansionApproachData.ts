@@ -9,9 +9,12 @@ export const MansionApproachMenuItemData01 : MenuItemDataType=
         MenuItemNumber: 1,
         MenuItemText: "Lockpick the front gate",
         MenuItemSelectionDescription: "You easily pick the broken lock on the gate and sneak in.",
-        NextMenuObject: placeholderScene, //FrontDoorScene
-        MenuItemReadFlags:[],
-        MenuItemWriteFlags:[],
+        NextSceneObject: placeholderScene, //FrontDoorScene
+        MenuItemRequireAllFlags: [],
+        MenuItemRequireAnyFlags: [],
+        MenuItemForbiddenAllFlags: [],
+        MenuItemForbiddenAnyFlags: [],
+        MenuItemFlagsToChange:[],
 }
 
 export const MansionApproachMenuItemData02 : MenuItemDataType =
@@ -20,9 +23,12 @@ export const MansionApproachMenuItemData02 : MenuItemDataType =
     MenuItemNumber: 2,
     MenuItemText: "Climb over the tall fence",
     MenuItemSelectionDescription: "You manage to climb over the brick fence.",
-    NextMenuObject: placeholderScene,
-    MenuItemReadFlags:[],
-    MenuItemWriteFlags:[],
+    NextSceneObject: placeholderScene,
+    MenuItemRequireAllFlags: [],
+    MenuItemRequireAnyFlags: [],
+    MenuItemForbiddenAllFlags: [],
+    MenuItemForbiddenAnyFlags: [],
+    MenuItemFlagsToChange:[],
 }
 
 export const MansionApproachMenuItemData03 : MenuItemDataType = 
@@ -31,7 +37,10 @@ export const MansionApproachMenuItemData03 : MenuItemDataType =
     MenuItemNumber: 3,
     MenuItemText: "Walk around the property, looking for a easier way over the fence.",
     MenuItemSelectionDescription: "You walk along the fence and find a collapsed section on the far end of the back garden.",
-    NextMenuObject: placeholderScene,
-    MenuItemReadFlags:[],
-    MenuItemWriteFlags:[],
+    NextSceneObject: placeholderScene,
+    MenuItemRequireAllFlags: [],
+    MenuItemRequireAnyFlags: [],
+    MenuItemForbiddenAllFlags: [],
+    MenuItemForbiddenAnyFlags: [],
+    MenuItemFlagsToChange:[],
 }

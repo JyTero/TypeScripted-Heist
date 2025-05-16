@@ -16,15 +16,42 @@ export function WaitForInput(): Promise<string> {
   });
 }
 
-export function WriteToGame(text:string)
+export function oldWriteToGame(text:string)
 {
   const textField = document.getElementById("DescriptionText") as HTMLInputElement;
-  //console.log("Tried to write " + text);
 
-  const prevText = textField.value;
+  const prevText = textField.textContent;
   if(prevText)
     AddNewHistoryDiv(prevText);
 
   if(textField)
     textField.innerHTML = text;
+}
+
+export function WriteAlert(text: string) {
+  const textField = document.getElementById("DescriptionText") as HTMLInputElement;
+  if (textField)
+    textField.innerHTML = text;
+}
+
+export function WriteMenu(text:string)
+{
+  const textField = document.getElementById("DescriptionText") as HTMLInputElement;
+
+  const prevText = textField.textContent;
+  if(prevText)
+    AddNewHistoryDiv(prevText);
+
+  if(textField)
+    textField.innerHTML = text;
+}
+export function WriteMenuSelection(selectedItem:string, itemDescription:string)
+{
+  //const textField = document.getElementById("DescriptionText") as HTMLInputElement;
+  
+  AddNewHistoryDiv(selectedItem);
+  AddNewHistoryDiv(itemDescription);
+  // if(textField)
+  //   textField.innerHTML = itemDescription;
+  
 }

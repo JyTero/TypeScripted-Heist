@@ -1,3 +1,4 @@
+import { FlagName, MenuItemFlagChange } from "./flags";
 import { SceneObjectBase } from "./SceneObjectBase";
 
 export type MenuItemDataType = 
@@ -6,7 +7,10 @@ export type MenuItemDataType =
     MenuItemNumber: number;
     MenuItemText: string;
     MenuItemSelectionDescription: string;
-    MenuItemReadFlags: boolean[];
-    MenuItemWriteFlags: boolean[]; //Flags this many item changes
-    NextMenuObject: SceneObjectBase;
+    NextSceneObject: SceneObjectBase;
+    MenuItemRequireAllFlags: FlagName[];
+    MenuItemRequireAnyFlags: FlagName[];
+    MenuItemForbiddenAllFlags: FlagName[]; 
+    MenuItemForbiddenAnyFlags: FlagName[];
+    MenuItemFlagsToChange: MenuItemFlagChange[];
 }

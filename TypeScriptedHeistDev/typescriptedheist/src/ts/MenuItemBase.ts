@@ -1,32 +1,38 @@
+import { FlagName, MenuItemFlagChange } from "./flags";
+import { MenuItemDataType } from "./MenuItemDataType";
 import { SceneObjectBase } from "./SceneObjectBase";
 import { placeholderScene } from "./Scenes/PlaceholderScene";
 
 
 export class MenuItemBase {
-    MenuItemName: string ="";
-    MenuItemNumber: number =-1;
-    MenuItemText: string ="";
-    MenuItemSelectionDescription: string ="";
-    MenuItemReadFlags: boolean[]=[];
-    MenuItemWriteFlags: boolean[]=[]; //Flags this many item changes
+  MenuItemName: string = "";
+  MenuItemNumber: number = -1;
+  MenuItemText: string = "";
+  MenuItemSelectionDescription: string = "";
+  MenuItemRequireAllFlags: FlagName[] = [];
+  MenuItemRequireAnyFlags: FlagName[] = [];
+  MenuItemForbiddenAllFlags: FlagName[] = [];
+  MenuItemForbiddenAnyFlags: FlagName[] = [];
+  MenuItemFlagsToChange: MenuItemFlagChange[] = [];
 
-    NextSceneObject: SceneObjectBase = placeholderScene;
-    
-    constructor(MenuItemName:string, MenuItemNumber:number, MenuItemText:string, MenuItemSelectionDescription:string, MenuItemReadFlags:boolean[], MenuItemWriteFlags:boolean[] )
-    {
-        this.MenuItemName = MenuItemName;
-        this.MenuItemNumber = MenuItemNumber;
-        this.MenuItemText = MenuItemText;
-        this.MenuItemSelectionDescription = MenuItemSelectionDescription;
-        this.MenuItemReadFlags = MenuItemReadFlags;
-        this.MenuItemWriteFlags = MenuItemWriteFlags;
-    }
 
-  // Get Menu Data from seperate object, gathered beforehand elsewhere, build menu objects with data, give out complete menu item
+  NextSceneObject: SceneObjectBase = placeholderScene;
 
+  constructor(menuItemData: MenuItemDataType) {
+    this.MenuItemName = menuItemData.MenuItemName;
+    //this.MenuItemNumber = menuItemData.MenuItemNumber;
+    this.MenuItemText = menuItemData.MenuItemText;
+    this.MenuItemSelectionDescription = menuItemData.MenuItemSelectionDescription;
+    this.NextSceneObject = menuItemData.NextSceneObject;
+    this.MenuItemRequireAllFlags = menuItemData.MenuItemRequireAllFlags;
+    this.MenuItemRequireAnyFlags = menuItemData.MenuItemRequireAnyFlags;
+    this.MenuItemForbiddenAllFlags = menuItemData.MenuItemForbiddenAllFlags;
+    this.MenuItemForbiddenAnyFlags = menuItemData.MenuItemForbiddenAnyFlags;
+    this.MenuItemFlagsToChange = menuItemData.MenuItemFlagsToChange;
+  }
+
+  NumberMenuItem(i:number)
+  {
+    this.MenuItemNumber = i;
+  }
 }
-// export function BuildMenuItem(MenuItemData: MenuItemDataType): MenuItemBase {
-//     const newMenuItem: MenuItemBase = new MenuItemBase(MenuItemData.MenuItemName, MenuItemData.MenuItemNumber, MenuItemData.MenuItemText, MenuItemData.MenuItemSelectionDescription, MenuItemData.MenuItemReadFlags, MenuItemData.MenuItemWriteFlags); 
-//     return newMenuItem;
-
-// }
