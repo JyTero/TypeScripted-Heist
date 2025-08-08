@@ -1,7 +1,7 @@
 import { FlagName, MenuItemFlagChange } from "./flags";
 import { MenuItemDataType } from "./MenuItemDataType";
 import { SceneObjectBase } from "./SceneObjectBase";
-import { placeholderScene } from "./Scenes/PlaceholderScene";
+import { placeholderScene } from "./Scenes/Placeholders";
 
 
 export class MenuItemBase {

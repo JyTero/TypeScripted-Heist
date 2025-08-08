@@ -1,5 +1,5 @@
 import { MenuItemDataType } from "../MenuItemDataType";
-import { placeholderScene } from "../Scenes/PlaceholderScene";
+import { placeholderScene } from "../Scenes/Placeholders";
 
 
 export const BackdoorData01: MenuItemDataType=

@@ -6,21 +6,15 @@ import { SceneObjectBase } from "./SceneObjectBase";
 export class MenuObjectBase {
 
     /// name : string ;
-    private allMenuItems: MenuItemBase[];
-    private menuScene: SceneObjectBase;
-    public validMenuItems: MenuItemBase[];
+    public allMenuItems: MenuItemBase[];
+    public validMenuItems: MenuItemBase[] = [];
 
-    constructor(_menuItems: MenuItemBase[], _menuScene: SceneObjectBase) {
+    constructor(_menuItems: MenuItemBase[]) {
         this.allMenuItems = _menuItems ?? [];
-        this.validMenuItems = [];
-        this.menuScene = _menuScene;
     }
 
-    public MenuOnStartUp() {
-        this.allMenuItems = this.menuScene.BuildMenuItems();
-    }
-
-    public async RunMenu(): Promise<number> {
+   
+    public async HandleMenu(): Promise<number> {
         let playerInputIsValid: Boolean = false;
         let playerInput: number = 0;
 
@@ -38,11 +32,8 @@ export class MenuObjectBase {
         return playerInput;
     }
     public TieMenuItemToSceneObject(menuItemIndex: number, targetScene: SceneObjectBase) {
-        //if (this.sceneMenu != null) {
-            this.allMenuItems[menuItemIndex].NextSceneObject = targetScene;
-        // }
-        // else
-        //     console.log(`sceneMenu ${this.sceneMenu} of ${this.SceneName} is null`)
+        this.allMenuItems[menuItemIndex].NextSceneObject = targetScene;
+
 
     }
     public DisplayMenu() {

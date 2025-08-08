@@ -1,0 +1,17 @@
+- Storyteller inspired
+- Each stat needs to be usefull and impactful
+- Many stats but no filler
+	- Attributes broad character descriptors
+		- Strength
+		- Dexterity
+		- Perception
+	- Skills: Used for spesific tasks
+		- Weapon skill (will be broken down further: Small arms, large arms, energy weapon, melee, tech weapon)
+		- Dodge
+	- Equipment: Items character has actively on hand
+		- Weapon: Affects Hit Chance, Damage, Attack Distance.
+	- Derived: Stats derived from Attributes, Skills or Equipment
+		- Evasion
+		- WeaponSkillHit
+		- WeaponSkillDmg
+		- Speed

@@ -1,5 +1,5 @@
 import { MenuItemDataType } from "../MenuItemDataType";
-import { placeholderScene } from "../Scenes/PlaceholderScene";
+import { placeholderScene } from "../Scenes/Placeholders";
 
 
 
@@ -37,6 +37,19 @@ export const MansionApproachMenuItemData03 : MenuItemDataType =
     MenuItemNumber: 3,
     MenuItemText: "Walk around the property, looking for a easier way over the fence.",
     MenuItemSelectionDescription: "You walk along the fence and find a collapsed section on the far end of the back garden.",
+    NextSceneObject: placeholderScene,
+    MenuItemRequireAllFlags: [],
+    MenuItemRequireAnyFlags: [],
+    MenuItemForbiddenAllFlags: [],
+    MenuItemForbiddenAnyFlags: [],
+    MenuItemFlagsToChange:[],
+}
+export const MansionApproachMenuItemData04 : MenuItemDataType =
+{
+    MenuItemName: "Violence",
+    MenuItemNumber: 4,
+    MenuItemText: "Attack a random citizen on the other side of the road.",
+    MenuItemSelectionDescription: "You run up to a citizen minding their own business and kick them.",
     NextSceneObject: placeholderScene,
     MenuItemRequireAllFlags: [],
     MenuItemRequireAnyFlags: [],

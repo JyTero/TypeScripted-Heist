@@ -1,14 +1,11 @@
-import { oldWriteToGame } from "./IOMethods";
 import { Main } from "./Main";
+import { SceneManagement } from "./Scenes/SceneManagement";
 
 export const IsDebug:boolean = true;
-
+export const SceneManager: SceneManagement = new SceneManagement();
 
 console.log("Initialised");
 
-for(let i = 0; i <= 10; i++){
-    oldWriteToGame(i.toString());
-}
 
 Main();
 
