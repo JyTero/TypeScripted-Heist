@@ -22,6 +22,7 @@ export function Main() {
     //Tie scenes to each other
     MansionApproachTieUp();
     BackDoorTieUp();
+    BattleTestTieUp();
 
     mansionApproachScene.SceneMain();
 
@@ -37,4 +38,8 @@ function MansionApproachTieUp() {
 
 function BackDoorTieUp(){
     backdoorScene.TieMenuItemToSceneObject(2, backdoorScene);
+}
+
+function BattleTestTieUp(){
+    battleScene.VictoryNextScene = mansionApproachScene;
 }

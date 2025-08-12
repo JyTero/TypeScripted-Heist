@@ -5,6 +5,7 @@ import { placeholderBattleArenaData, placeholderScene } from "./Scenes/Placehold
 
 export abstract class BattleArenaScene extends SceneObjectBase{
  
+    public VictoryNextScene: SceneObjectBase;
     protected battleArenaData:BattleArenaData = placeholderBattleArenaData;
     protected previousScene: SceneObjectBase = placeholderScene;
 

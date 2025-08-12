@@ -3,12 +3,16 @@ import { CharacterStat } from "./CharacterStat";
 import { CharacterDataType } from "../CharacterDataType";
 import { CharacterFaction } from "../Enums";
 import { WeaponItem } from "../Items/BattleItems/WeaponItem";
+import { IsDebug } from "../initialisation";
 
 export class CharacterSheet{
-    public Name:string = "Name Namesson";
+    public CharacterName:string = "Name Namesson";
     private  health:number = 10;
     public AdjustHealth(value:number){
         this.health = this.health-value;
+    }
+    public CurrentHealth():number {
+        return this.health;
     }
     public Faction: CharacterFaction = 0; //Enum
     public Strength: CharacterStat = new CharacterStat("Strength");
@@ -40,7 +44,7 @@ export class CharacterSheet{
 
     constructor(data:CharacterDataType){
         
-        this.Name = data.Name;
+        this.CharacterName = data.Name;
         this.Faction = data.Faction;
         this.Strength.Value = data.Strenght;
         this.Dexterity.Value = data.Dexterity
@@ -102,5 +106,7 @@ export class CharacterSheet{
     //Its own method to adjust damage based on target resistances and vulnerabilities                                                                                    
     public ReceiveDamage(damage:number){
         this.AdjustHealth(damage);
+        if(IsDebug)
+            console.log(`${this.CharacterName} HP left: ${this.CurrentHealth()}`);
     }
 }

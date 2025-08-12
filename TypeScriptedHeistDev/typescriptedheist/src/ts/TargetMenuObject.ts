@@ -24,10 +24,10 @@ export class TargetMenuObject extends MenuObjectBase{
     private MakeTargetMenuItemData(targetCharacter:CharacterBase,targetIndex:number){
         const combatTargetMenuData : MenuItemDataType=
         {
-            MenuItemName: "Combat Target " + targetCharacter.CharacterSheet.Name,
+            MenuItemName: "Combat Target " + targetCharacter.CharacterSheet.CharacterName,
             MenuItemNumber: targetIndex,
-            MenuItemText: targetCharacter.CharacterSheet.Name,
-            MenuItemSelectionDescription: targetCharacter.CharacterSheet.Name,
+            MenuItemText: targetCharacter.CharacterSheet.CharacterName,
+            MenuItemSelectionDescription: targetCharacter.CharacterSheet.CharacterName,
             NextSceneObject: placeholderScene,
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],

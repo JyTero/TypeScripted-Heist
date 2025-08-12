@@ -11,11 +11,11 @@ const PlayerCharacterData: CharacterDataType = {
 
     //Attributes
     Strenght: 3,
-    Dexterity: 3,
+    Dexterity: 20,
     Perception: 4,
 
     //Skills
-    WeaponSkill: 15,
+    WeaponSkill: 95,
     Dodge: 20,
 
     BaseSpeed: 10,

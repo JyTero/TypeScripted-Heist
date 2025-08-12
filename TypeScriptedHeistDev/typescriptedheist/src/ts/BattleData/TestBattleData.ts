@@ -12,17 +12,17 @@ const Enemy01: CharacterDataType = {
 
     //Attributes
     Strenght: 3,
-    Dexterity: 5,
+    Dexterity: 2,
     Perception: 4,
 
     //Skills
     WeaponSkill: 15,
-    Dodge: 20,
+    Dodge: 2,
 
     BaseSpeed: 10,
 
     //Gear
-    ArmourRating: 22,
+    ArmourRating: 1,
     CurrentWeapon: new WeaponItem(DaggerItemData),
     
 }

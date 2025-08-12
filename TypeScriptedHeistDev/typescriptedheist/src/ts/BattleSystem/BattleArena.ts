@@ -55,6 +55,7 @@ class BattleEngine {
             this.enemyCharacters.push(new CharacterBase(new CharacterSheet(enemyCharacter)));
         });
 
+        this.nextScene = this.currentScene.VictoryNextScene;
     }
 
 
@@ -69,16 +70,26 @@ class BattleEngine {
     public async BattleLoop() {
         this.OnRoundStart();
         while (!this.battleOver) {
-            const nextChar = this.GetNextInTurnCharacter();
             this.currentTurnIndex++;
+            const nextChar = this.GetNextInTurnCharacter();
             if (nextChar == this.characterInTurn) {
                 //End round, start new round
-            }
-            else
-              await this.StartTurn(nextChar)
+                this.EndRound();
+                this.OnRoundStart();
 
+            }
+            else {
+                this.characterInTurn = nextChar;
+                await this.StartTurn()
+                this.EndTurn();
+                if (this.IsCombatOver()) {
+                    console.log("End Combat");
+                    this.OnBattleEnd();
+                }
+
+            }
         }
-        this.OnBattleEnd();
+
     }
 
     private OnRoundStart() {
@@ -86,12 +97,12 @@ class BattleEngine {
         if (IsDebug)
             console.log(`Battle round ${this.currentRound} begins`);
     }
-    private async StartTurn(currentCharacter: CharacterBase) {
+    private async StartTurn() {
         //Very placeholdery and proof of concept-y
         if (IsDebug)
-            console.log(`${currentCharacter.CharacterSheet.Name} takes turn`);
-        this.characterInTurn = currentCharacter;
-        if (currentCharacter === this.playerCharacter) {
+            console.log(`${this.characterInTurn.CharacterSheet.CharacterName} takes turn`);
+
+        if (this.characterInTurn === this.playerCharacter) {
             //Give Control to player
             //Create a menu out of potential moves
 
@@ -113,23 +124,26 @@ class BattleEngine {
 
 
             if(IsDebug)
-                console.log(`${this.characterInTurn.CharacterSheet.Name} takes action 
-                ${chosenCombatMove.MoveName} against 
-                ${chosenTarget}`)
-            //After selection, create a menu out of potential targets
-            //deal dmg
+                console.log(`${this.characterInTurn.CharacterSheet.CharacterName} takes action ${chosenCombatMove.MoveName} against ${chosenTarget}`)
+            chosenCombatMove.ExecuteMove(this.characterInTurn, this.turnOrder[targetMenu.allMenuItems[targetIndex-1].MenuItemNumber-1]);
+
         }
         else {
 
-            const i = GetRandomInt(0, currentCharacter.CharacterSheet.BattleMoves.length-1);
-            const chosenMove = currentCharacter.CharacterSheet.BattleMoves[i];
-            chosenMove.ExecuteMove(currentCharacter, this.playerCharacter)
+            const i = GetRandomInt(0, this.characterInTurn.CharacterSheet.BattleMoves.length-1);
+            const chosenMove = this.characterInTurn.CharacterSheet.BattleMoves[i];
+            chosenMove.ExecuteMove(this.characterInTurn, this.playerCharacter)
 
         }
     }
-    private EndTurn(characterBase: CharacterBase) {
+    private EndTurn() {
         if (IsDebug)
-            console.log(`${characterBase.CharacterSheet.Name} ends their turn`);
+            console.log(`${this.characterInTurn.CharacterSheet.CharacterName} ends their turn`);
+
+    }
+
+    private EndRound(){
+        this.currentTurnIndex = 0;
     }
 
     private SetUpTurnOrder() {
@@ -141,7 +155,7 @@ class BattleEngine {
         if (IsDebug) {
             console.log("Turn order for this combat: ");
             this.turnOrder.forEach(character => {
-                console.log(character.CharacterSheet.Name);
+                console.log(character.CharacterSheet.CharacterName);
             });
         }
     }
@@ -151,12 +165,26 @@ class BattleEngine {
 
     private GetNextInTurnCharacter(): CharacterBase {
         if (this.currentTurnIndex > this.turnOrder.length)
-            return this.turnOrder[this.currentTurnIndex - 1];     //If last previous was last turn of the round, reselect lastone again
+            return this.turnOrder[this.turnOrder.length - 1];     //If last previous was last turn of the round, reselect lastone again
         else
-            return this.turnOrder[this.currentTurnIndex];
+            return this.turnOrder[this.currentTurnIndex-1];
     }
 
+    private IsCombatOver(): boolean{
+        if(this.playerCharacter.CharacterSheet.CurrentHealth() <= 0)
+            return true;
+        else if(this.AllEnemiesAreDead())
+            return true;
+        else
+            return false;
+    }
 
+    private AllEnemiesAreDead():boolean{
+
+        return this.enemyCharacters.every(
+            enemy => enemy.CharacterSheet.CurrentHealth() <= 0
+        );
+    }
 
     private OnBattleEnd() {
 

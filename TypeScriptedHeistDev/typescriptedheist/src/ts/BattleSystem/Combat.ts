@@ -10,13 +10,13 @@ export function BeginMeleeAttack(attackerChar: CharacterBase, defenderChar:Chara
     const defenderSheet =defenderChar.CharacterSheet;
 
     if(IsDebug)
-        console.log(`${attackerSheet.Name} tries to melee attack ${defenderSheet.Name}}`); 
+        console.log(`${attackerSheet.CharacterName} tries to melee attack ${defenderSheet.CharacterName}}`); 
     if(AttackerHit(attackerSheet) > DefenderEvasion(defenderSheet)){
         //Hit
         const totalDamage: number = CalculateMeleeDamage(attackerSheet);
         const reducedDamage = ArmorDamageReduction(defenderSheet, totalDamage);
         if(IsDebug)
-            console.log(`${defenderSheet.Name} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`); 
+            console.log(`${defenderSheet.CharacterName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`); 
         defenderSheet.ReceiveDamage(reducedDamage);
 
     }
