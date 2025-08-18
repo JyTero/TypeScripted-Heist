@@ -1,13 +1,14 @@
-import { BattleArenaData } from "../BattleSystem/BattleStageDataType";
-import { CharacterDataType } from "../CharacterDataType";
+import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
+import { CharacterDataType } from "../DataTypes/CharacterData";
+import { CharacterSheetDataType } from "../DataTypes/CharacterSheetDataType";
 import { WeaponItem } from "../Items/BattleItems/WeaponItem";
 import { DaggerItemData } from "../Items/ItemData/BattleItems/DaggerData";
-import { PlaceholderCharacter, placeholderScene } from "../Scenes/Placeholders";
+import { PlaceholderCharacterSheet, placeholderScene } from "../Scenes/Placeholders";
 
 
-const Enemy01: CharacterDataType = {
+const Enemy01Sheet: CharacterSheetDataType = {
 
-    Name: "Enémy",
+    Name: "Amalie",
     Faction: 2,
 
     //Attributes
@@ -26,10 +27,13 @@ const Enemy01: CharacterDataType = {
     CurrentWeapon: new WeaponItem(DaggerItemData),
     
 }
-
-export const TestBattleData: BattleArenaData = {
+const Enemy01:CharacterDataType ={
+    CharacterSheet: Enemy01Sheet,
+    CharacterImageString: "src/Assets/img/character/amalia.png",
+}
+export const TestBattleData: BattleArenaDataType = {
     BattleName: "Computer Combat",
-    PlayerCharacter: PlaceholderCharacter,
+    PlayerCharacter: PlaceholderCharacterSheet,
     EnemyCharacterDatas:[Enemy01],
     NextScene: placeholderScene,
 }

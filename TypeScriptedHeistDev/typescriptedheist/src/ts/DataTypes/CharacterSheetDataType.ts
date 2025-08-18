@@ -1,7 +1,7 @@
-import { CharacterFaction } from "./Enums";
-import { WeaponItem } from "./Items/BattleItems/WeaponItem";
+import { CharacterFaction } from "../Enums";
+import { WeaponItem } from "../Items/BattleItems/WeaponItem";
 
-export type CharacterDataType = {
+export type CharacterSheetDataType = {
 
     Name:string;
     Faction:CharacterFaction;

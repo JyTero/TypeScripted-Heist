@@ -1,4 +1,4 @@
-import { BattleArenaData as BattleArenaData } from "./BattleSystem/BattleStageDataType";
+import { BattleArenaDataType } from "./DataTypes/BattleArenaDataType";
 import { MenuItemBase } from "./MenuItemBase";
 import { SceneObjectBase } from "./SceneObjectBase";
 import { placeholderBattleArenaData, placeholderScene } from "./Scenes/Placeholders";
@@ -6,7 +6,7 @@ import { placeholderBattleArenaData, placeholderScene } from "./Scenes/Placehold
 export abstract class BattleArenaScene extends SceneObjectBase{
  
     public VictoryNextScene: SceneObjectBase;
-    protected battleArenaData:BattleArenaData = placeholderBattleArenaData;
+    protected battleArenaData:BattleArenaDataType = placeholderBattleArenaData;
     protected previousScene: SceneObjectBase = placeholderScene;
 
    

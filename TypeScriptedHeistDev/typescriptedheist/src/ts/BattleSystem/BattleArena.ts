@@ -1,16 +1,16 @@
-import { CharacterSheet } from "../Character/CharacterSheet";
 import { IsDebug } from "../initialisation";
-import { WriteAlert, WriteMenu, WriteMenuSelection } from "../IOMethods";
+import { WriteAlert, WriteMenuSelection } from "../IOMethods";
 import { SceneObjectBase } from "../SceneObjectBase";
 import { BattleArenaScene as BattleArenaSceneBase } from "../BattleArenaSceneBase";
-import { BattleArenaData } from "./BattleStageDataType";
 import { CharacterBase } from "../Character/CharacterBase";
 import { PlayerCharacter } from "../PlayerCharacter";
 import { GetRandomInt } from "../../Tools";
 import { CombatMenuObject } from "../CombatMenuObject";
 import { TargetMenuObject } from "../TargetMenuObject";
+import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
+import { CanvasGraphicsEngine } from "../Canvas/CanvasGraphicEngine";
 
-export async function BeginBattleEngine(battleData: BattleArenaData, currentScene: BattleArenaSceneBase) {
+export async function BeginBattleEngine(battleData: BattleArenaDataType, currentScene: BattleArenaSceneBase) {
     const battleStage: BattleEngine = new BattleEngine(battleData, PlayerCharacter, currentScene);
     battleStage.OnEngineStartUp();
 
@@ -31,7 +31,7 @@ class BattleEngine {
 
     private turnOrder: CharacterBase[] = [];
 
-    private battleData: BattleArenaData;
+    private battleData: BattleArenaDataType;
 
     private characterInTurn: CharacterBase;
     private currentRound: number = -1;
@@ -40,7 +40,7 @@ class BattleEngine {
     private currentScene: BattleArenaSceneBase;
     private nextScene: SceneObjectBase;
 
-    constructor(data: BattleArenaData, playerCharacter: CharacterBase, currentScene: BattleArenaSceneBase) {
+    constructor(data: BattleArenaDataType, playerCharacter: CharacterBase, currentScene: BattleArenaSceneBase) {
         this.playerCharacter = playerCharacter;
         this.battleData = data;
         this.currentScene = currentScene;
@@ -51,42 +51,70 @@ class BattleEngine {
             console.log("On BattleEngine StartUp");
         this.battleData.EnemyCharacterDatas.forEach(enemyCharacter => {
             if (IsDebug)
-                console.log("Battle Enemy Character: " + enemyCharacter.Name);
-            this.enemyCharacters.push(new CharacterBase(new CharacterSheet(enemyCharacter)));
+                console.log("Battle Enemy Character: " + enemyCharacter.CharacterSheet.Name);
+            this.enemyCharacters.push(new CharacterBase(enemyCharacter));
         });
 
         this.nextScene = this.currentScene.VictoryNextScene;
+
+       
     }
 
 
     public OnBattleStartUp() {
         //TurnOrder
+
+
+
         this.SetUpTurnOrder();
         this.currentRound = 0;
         this.currentTurnIndex = 0;
 
+
     }
 
-    public async BattleLoop() {
-        this.OnRoundStart();
-        while (!this.battleOver) {
-            this.currentTurnIndex++;
-            const nextChar = this.GetNextInTurnCharacter();
-            if (nextChar == this.characterInTurn) {
-                //End round, start new round
-                this.EndRound();
-                this.OnRoundStart();
+    private Delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
 
+    public async BattleLoop() {
+       
+        while (!this.battleOver) {
+            if (this.currentRound == 0) {
+                const allCharactersReady = this.enemyCharacters.every(character => character.CharacterLoadingReady === true)
+                if (allCharactersReady) {
+                     this.OnRoundStart();
+                }
+                else{
+                    await this.Delay(1000);
+                    continue;
+                }
             }
             else {
-                this.characterInTurn = nextChar;
-                await this.StartTurn()
-                this.EndTurn();
-                if (this.IsCombatOver()) {
-                    console.log("End Combat");
-                    this.OnBattleEnd();
-                }
+                const canvasGraphisc = new CanvasGraphicsEngine();
+                const enemChar: CharacterBase = this.enemyCharacters[0];
+                canvasGraphisc.ClearCanvas();
+                canvasGraphisc.DrawImage(enemChar.CharacterImage, 25, 75, 10, 10);
+                canvasGraphisc.DrawImage(this.playerCharacter.CharacterImage, 25, 25, 10, 10);
 
+                this.currentTurnIndex++;
+                const nextChar = this.GetNextInTurnCharacter();
+                if (nextChar == this.characterInTurn) {
+                    //End round, start new round
+                    this.EndRound();
+                    this.OnRoundStart();
+
+                }
+                else {
+                    this.characterInTurn = nextChar;
+                    await this.StartTurn()
+                    this.EndTurn();
+                    if (this.IsCombatOver()) {
+                        console.log("End Combat");
+                        this.OnBattleEnd();
+                    }
+
+                }
             }
         }
 

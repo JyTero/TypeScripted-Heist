@@ -1,23 +1,52 @@
+import { CanvasGraphicsEngine } from "./Canvas/CanvasGraphicEngine";
+
 const  history = document.getElementById("TextHistory");
 const canvas = document.getElementById("GameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d");
 
-TestImage();
 export function AddNewHistoryDiv(historyText:string){   
     const newEntry = document.createElement("div");
     newEntry.className = "HistoryEntry";
     newEntry.textContent = historyText;
     history?.insertBefore(newEntry, history.firstChild);
 }
-
+TestImage();
 function TestImage() {
     // Load image
     const image = new Image();
-    image.src = "src/Assets/PictoBun.png"; // Update with your image path
+    image.src = "src/Assets/PictoBun.png"; 
 
     image.onload = () => {
-        if(ctx != null) 
-        ctx.drawImage(image, 50, 50, 100,100); // Draw the image at x:100, y:100
+        if(ctx != null) {
+
+            ctx.moveTo(0, canvas.height/2);
+            ctx.lineTo(canvas.width, canvas.height/2);
+
+            ctx.moveTo(0, canvas.height/4);
+            ctx.lineTo(canvas.width, canvas.height/4);
+            
+            ctx.moveTo(0, (canvas.height/4*3));
+            ctx.lineTo(canvas.width, (canvas.height/4*3));
+
+            ctx.moveTo(canvas.width/2, 0);
+            ctx.lineTo(canvas.width/2, canvas.height);
+
+            ctx.moveTo(canvas.width/4, 0);
+            ctx.lineTo(canvas.width/4, canvas.height);
+
+            
+            ctx.moveTo((canvas.width/4*3), 0);
+            ctx.lineTo((canvas.width/4*3), canvas.height);
+
+            ctx.stroke();
+
+            const canvasGraphisc = new CanvasGraphicsEngine();   
+            canvasGraphisc.DrawImage(image, 0, 0, 10, 10);
+            canvasGraphisc.DrawImage(image, 25, 25, 10, 10);
+            canvasGraphisc.DrawImage(image, 50, 50, 10, 10);
+            canvasGraphisc.DrawImage(image, 75, 75, 10, 10);
+            canvasGraphisc.DrawImage(image, 100, 100, 10, 10);
+        }
     };
 
     image.onerror = () => {

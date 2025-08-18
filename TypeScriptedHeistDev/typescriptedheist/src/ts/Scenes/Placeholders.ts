@@ -2,10 +2,12 @@ import { SceneObjectBase } from "../SceneObjectBase";
 import { MenuItemBase } from "../MenuItemBase";
 import { WriteAlert } from "../IOMethods";
 import { CharacterSheet } from "../Character/CharacterSheet";
-import { CharacterDataType } from "../CharacterDataType";
+import { CharacterSheetDataType } from "../DataTypes/CharacterSheetDataType";
 import { WeaponItem } from "../Items/BattleItems/WeaponItem";
 import { DaggerItemData } from "../Items/ItemData/BattleItems/DaggerData";
-import { BattleArenaData } from "../BattleSystem/BattleStageDataType";
+import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
+import { CharacterDataType } from "../DataTypes/CharacterData";
+import { CharacterBase } from "../Character/CharacterBase";
 
 
 export class PlaceholderScene extends SceneObjectBase {
@@ -28,7 +30,7 @@ export class PlaceholderScene extends SceneObjectBase {
 }
 export const placeholderScene: PlaceholderScene = new PlaceholderScene();
 
-const placeholderCharacterData: CharacterDataType = {
+const placeholderCharacterSheetData: CharacterSheetDataType = {
 
     Name: "Boby Neybean",
     Faction: 0,
@@ -48,11 +50,16 @@ const placeholderCharacterData: CharacterDataType = {
     ArmourRating: 22,
     CurrentWeapon: new WeaponItem(DaggerItemData),
 }
-export const PlaceholderCharacter: CharacterSheet = new CharacterSheet(placeholderCharacterData);
+const placeholderCharacterData:CharacterDataType = {
+    CharacterSheet: placeholderCharacterSheetData,
+    CharacterImageString: "src/Assets/PictoBun.png",
+}
+export const PlaceholderCharacterSheet: CharacterSheet = new CharacterSheet(placeholderCharacterSheetData);
+export const PlaceholderCharacter: CharacterBase = new CharacterBase(placeholderCharacterData);
 
-export const placeholderBattleArenaData:BattleArenaData  = {
+export const placeholderBattleArenaData:BattleArenaDataType  = {
         BattleName: "Computer Combat",
-        PlayerCharacter: PlaceholderCharacter,
-        EnemyCharacterDatas:[placeholderCharacterData],
+        PlayerCharacter: PlaceholderCharacterSheet,
+        EnemyCharacterDatas:[],
         NextScene: placeholderScene,
 }

@@ -5,8 +5,7 @@ export const IsDebug:boolean = true;
 export const SceneManager: SceneManagement = new SceneManagement();
 
 console.log("Initialised");
-
-
+            
 Main();
 
 

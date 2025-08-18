@@ -1,8 +1,8 @@
 import { CharacterSheet } from "../Character/CharacterSheet";
-import { CharacterDataType } from "../CharacterDataType";
 import { SceneObjectBase } from "../SceneObjectBase";
+import { CharacterDataType } from "./CharacterData";
 
-export type BattleArenaData={
+export type BattleArenaDataType={
     BattleName: string;
     //Player related stuff filled on runtime
     PlayerCharacter: CharacterSheet;

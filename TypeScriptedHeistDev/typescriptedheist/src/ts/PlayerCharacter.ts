@@ -1,10 +1,10 @@
 import { CharacterBase } from "./Character/CharacterBase";
-import { CharacterSheet } from "./Character/CharacterSheet";
-import { CharacterDataType } from "./CharacterDataType";
+import { CharacterDataType } from "./DataTypes/CharacterData";
+import { CharacterSheetDataType as CharacterSheetDataType } from "./DataTypes/CharacterSheetDataType";
 import { WeaponItem } from "./Items/BattleItems/WeaponItem";
 import { DaggerItemData } from "./Items/ItemData/BattleItems/DaggerData";
 
-const PlayerCharacterData: CharacterDataType = {
+const PlayerCharacterSheetData: CharacterSheetDataType = {
 
     Name: "Coppenberg",
     Faction: 1,
@@ -24,5 +24,9 @@ const PlayerCharacterData: CharacterDataType = {
     ArmourRating: 22,
     CurrentWeapon: new WeaponItem(DaggerItemData),
 }
+const platyerCharacterData: CharacterDataType ={
+    CharacterSheet: PlayerCharacterSheetData,
+    CharacterImageString:  "src/Assets/img/character/casper.png",
+}
 
-export const PlayerCharacter = new CharacterBase(new CharacterSheet(PlayerCharacterData));
+export const PlayerCharacter = new CharacterBase(platyerCharacterData);

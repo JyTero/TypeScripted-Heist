@@ -8,8 +8,9 @@
 }
 #TextHistory{
     flex-grow: 1;
-    overflow-y: auto;
-
+    height:  600px;
     display: flex;
     flex-direction: column-reverse;
+    
+    overflow-y: auto;
 }

@@ -1,6 +1,6 @@
 import { BattleMove } from "../BattleSystem/BattleMove";
 import { CharacterStat } from "./CharacterStat";
-import { CharacterDataType } from "../CharacterDataType";
+import { CharacterSheetDataType } from "../DataTypes/CharacterSheetDataType";
 import { CharacterFaction } from "../Enums";
 import { WeaponItem } from "../Items/BattleItems/WeaponItem";
 import { IsDebug } from "../initialisation";
@@ -42,7 +42,7 @@ export class CharacterSheet{
     }
 
 
-    constructor(data:CharacterDataType){
+    constructor(data:CharacterSheetDataType){
         
         this.CharacterName = data.Name;
         this.Faction = data.Faction;
