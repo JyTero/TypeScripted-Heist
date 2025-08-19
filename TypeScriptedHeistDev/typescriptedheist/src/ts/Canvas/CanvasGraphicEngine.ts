@@ -1,3 +1,5 @@
+import { Sprite } from "./Sprite";
+
 export class CanvasGraphicsEngine{
     private canvas = document.getElementById("GameCanvas") as HTMLCanvasElement;
     private ctx = this.canvas.getContext("2d");
@@ -7,10 +9,18 @@ export class CanvasGraphicsEngine{
     constructor(){
     }
 
-    public DrawImage(sprite:HTMLImageElement, positionX:number, positionY:number, scaleX:number, scaleY:number){
+    public DrawSprite(sprite:Sprite, positionX:number, positionY:number, scaleX:number, scaleY:number){
 
-        if (this.ctx != null && sprite != undefined)
-            this.ctx.drawImage(sprite, this.GetTrueX(positionX), this.GetTrueY(positionY), this.ScaleXSize(scaleX, sprite), this.ScaleYSize(scaleY, sprite)); // Draw the image at x:100, y:100
+        if (this.ctx != null && sprite != undefined){
+
+            const displayWidth = this.ScaleXSize(scaleX, sprite.GetSpriteImage());
+            const displayHeight = this.ScaleYSize(scaleY, sprite.GetSpriteImage());
+
+            const finalXpos = this.GetTrueX(positionX) + -(displayWidth / 2);
+            const finalYpos = this.GetTrueY(positionY) + (-displayHeight);
+
+            this.ctx.drawImage(sprite.GetSpriteImage(), finalXpos, finalYpos, displayWidth, displayHeight);
+        }
 
     }
 
@@ -27,7 +37,7 @@ export class CanvasGraphicsEngine{
     private GetTrueY(positionY:number):number{
         var y = positionY / 100;
         y = y * this.canvasHeight;
-       //y = this.canvasHeight-y;
+        y = this.canvasHeight-y;
         return y;
     }
 

@@ -1,4 +1,5 @@
 import { CanvasGraphicsEngine } from "./Canvas/CanvasGraphicEngine";
+import { Sprite } from "./Canvas/Sprite";
 
 const  history = document.getElementById("TextHistory");
 const canvas = document.getElementById("GameCanvas") as HTMLCanvasElement;
@@ -15,10 +16,12 @@ function TestImage() {
     // Load image
     const image = new Image();
     image.src = "src/Assets/PictoBun.png"; 
-
+    
     image.onload = () => {
         if(ctx != null) {
 
+            const sprite = new Sprite(image);
+            
             ctx.moveTo(0, canvas.height/2);
             ctx.lineTo(canvas.width, canvas.height/2);
 
@@ -41,11 +44,13 @@ function TestImage() {
             ctx.stroke();
 
             const canvasGraphisc = new CanvasGraphicsEngine();   
-            canvasGraphisc.DrawImage(image, 0, 0, 10, 10);
-            canvasGraphisc.DrawImage(image, 25, 25, 10, 10);
-            canvasGraphisc.DrawImage(image, 50, 50, 10, 10);
-            canvasGraphisc.DrawImage(image, 75, 75, 10, 10);
-            canvasGraphisc.DrawImage(image, 100, 100, 10, 10);
+            canvasGraphisc.DrawSprite(sprite, 0, 0, 10, 10);
+           // canvasGraphisc.DrawSprite(sprite, 1, 1, 10, 10);
+            canvasGraphisc.DrawSprite(sprite, 25, 25, 10, 10);
+            canvasGraphisc.DrawSprite(sprite, 50, 50, 10, 10);
+            canvasGraphisc.DrawSprite(sprite, 75, 75, 10, 10);
+            //canvasGraphisc.DrawSprite(sprite, 99, 99, 10, 10);
+            canvasGraphisc.DrawSprite(sprite, 100, 75, 10, 10);
         }
     };
 

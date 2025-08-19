@@ -94,8 +94,8 @@ class BattleEngine {
                 const canvasGraphisc = new CanvasGraphicsEngine();
                 const enemChar: CharacterBase = this.enemyCharacters[0];
                 canvasGraphisc.ClearCanvas();
-                canvasGraphisc.DrawImage(enemChar.CharacterImage, 25, 75, 10, 10);
-                canvasGraphisc.DrawImage(this.playerCharacter.CharacterImage, 25, 25, 10, 10);
+                canvasGraphisc.DrawSprite(enemChar.CharacterSprite, 25, 75, 10, 10);
+                canvasGraphisc.DrawSprite(this.playerCharacter.CharacterSprite, 25, 25, 10, 10);
 
                 this.currentTurnIndex++;
                 const nextChar = this.GetNextInTurnCharacter();
