@@ -1,7 +1,6 @@
+import { MenuItemDataType } from "./DataTypes/MenuItemDataType";
 import { FlagName, MenuItemFlagChange } from "./flags";
-import { MenuItemDataType } from "./MenuItemDataType";
 import { SceneObjectBase } from "./SceneObjectBase";
-import { placeholderScene } from "./Scenes/Placeholders";
 
 
 export class MenuItemBase {
@@ -16,7 +15,7 @@ export class MenuItemBase {
   MenuItemFlagsToChange: MenuItemFlagChange[] = [];
 
 
-  NextSceneObject: SceneObjectBase = placeholderScene;
+  NextSceneObject: SceneObjectBase;
 
   constructor(menuItemData: MenuItemDataType) {
     this.MenuItemName = menuItemData.MenuItemName;

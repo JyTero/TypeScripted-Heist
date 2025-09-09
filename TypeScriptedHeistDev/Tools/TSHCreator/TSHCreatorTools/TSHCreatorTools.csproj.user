@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="MetadataCreator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="TSHBattleMoveCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TSHCreatorMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TSHWeaponCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="WindowBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

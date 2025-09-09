@@ -12,7 +12,7 @@ const Enemy01Sheet: CharacterSheetDataType = {
     Faction: 2,
 
     //Attributes
-    Strenght: 3,
+    Strength: 3,
     Dexterity: 2,
     Perception: 4,
 
@@ -30,6 +30,10 @@ const Enemy01Sheet: CharacterSheetDataType = {
 const Enemy01:CharacterDataType ={
     CharacterSheet: Enemy01Sheet,
     CharacterImageString: "src/Assets/img/character/amalia.png",
+    SpriteDefaultXpos: 25,
+    SpriteDefaulyYpos: 25,
+    SpriteDefaultXScale: 10,
+    SpriteDefaultYScale: 10,
 }
 export const TestBattleData: BattleArenaDataType = {
     BattleName: "Computer Combat",

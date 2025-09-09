@@ -7,7 +7,7 @@ export type CharacterSheetDataType = {
     Faction:CharacterFaction;
 
     //Attributes
-    Strenght:number;
+    Strength:number;
     Dexterity:number;
     Perception:number;
     

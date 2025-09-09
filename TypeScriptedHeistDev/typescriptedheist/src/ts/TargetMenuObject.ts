@@ -1,6 +1,6 @@
 import { CharacterBase } from "./Character/CharacterBase";
+import { MenuItemDataType } from "./DataTypes/MenuItemDataType";
 import { MenuItemBase } from "./MenuItemBase";
-import { MenuItemDataType } from "./MenuItemDataType";
 import { MenuObjectBase } from "./MenuObjectBase";
 import { placeholderScene } from "./Scenes/Placeholders";
 

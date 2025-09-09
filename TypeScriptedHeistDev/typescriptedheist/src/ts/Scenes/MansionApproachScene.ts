@@ -1,13 +1,15 @@
 import { MenuItemBase } from "../MenuItemBase";
-
-import { MansionApproachMenuItemData01, MansionApproachMenuItemData02, MansionApproachMenuItemData03, MansionApproachMenuItemData04 } from "../MenuData/MansionApproachData";
 import { SceneObjectBase } from "../SceneObjectBase";
 import { WriteAlert } from "../IOMethods";
+import { SceneDataType } from "../DataTypes/SceneDataType";
+import { Color } from "../Tools/Color";
+import { MansionApproachMenuItemData01, MansionApproachMenuItemData02, MansionApproachMenuItemData03, MansionApproachMenuItemData04 } from "../SceneData/MansionApproachData";
 
 export class MansionApproachScene extends SceneObjectBase {
     
    public SceneSpsificStartUp(): void {
-        this.SceneName = "MansionApproachScene";
+        this.SceneName = MansionApproachSceneData.SceneName;
+        this.PrepareGraphics(MansionApproachSceneData)
     }
 
    public async SceneSpesificMain() {
@@ -25,6 +27,11 @@ export class MansionApproachScene extends SceneObjectBase {
         return [FenceMenuItem1, FenceMenuItem2, FenceMenuItem3, FenceMenuItem4];
 
     }
+}
+
+const MansionApproachSceneData:SceneDataType ={
+    SceneName: "Mansion approach",
+    SceneBackgroundColor: new Color(255,0,16,1),
 }
 
 

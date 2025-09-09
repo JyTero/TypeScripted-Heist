@@ -30,26 +30,32 @@ export function oldWriteToGame(text:string)
 
 export function WriteAlert(text: string) {
   const textField = document.getElementById("DescriptionText") as HTMLInputElement;
-  if (textField)
-    textField.innerHTML = text;
+  textField.innerHTML = text;
+}
+
+export async function WriteAlertStorePrevious(text: string) {
+  const textField = document.getElementById("DescriptionText") as HTMLInputElement;
+  if (textField.textContent !== "")
+    await AddNewHistoryDiv(textField.textContent);
+  textField.innerHTML = text;
 }
 
 export function WriteMenu(text:string)
 {
   const textField = document.getElementById("DescriptionText") as HTMLInputElement;
 
-  const prevText = textField.textContent;
-  if(prevText)
-    AddNewHistoryDiv(prevText);
+  // const prevText = textField.textContent;
+  // if(prevText)
+  //   AddNewHistoryDiv(prevText);
 
   if(textField)
     textField.innerHTML = text;
 }
-export function WriteMenuSelection(selectedItem:string, itemDescription:string)
+export function WriteMenuSelection(itemDescription:string)
 {
   //const textField = document.getElementById("DescriptionText") as HTMLInputElement;
   
-  AddNewHistoryDiv(selectedItem);
+  //AddNewHistoryDiv(selectedItem);
   AddNewHistoryDiv(itemDescription);
   // if(textField)
   //   textField.innerHTML = itemDescription;

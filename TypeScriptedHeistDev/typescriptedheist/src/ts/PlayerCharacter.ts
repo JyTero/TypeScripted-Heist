@@ -10,7 +10,7 @@ const PlayerCharacterSheetData: CharacterSheetDataType = {
     Faction: 1,
 
     //Attributes
-    Strenght: 3,
+    Strength: 3,
     Dexterity: 20,
     Perception: 4,
 
@@ -27,6 +27,11 @@ const PlayerCharacterSheetData: CharacterSheetDataType = {
 const platyerCharacterData: CharacterDataType ={
     CharacterSheet: PlayerCharacterSheetData,
     CharacterImageString:  "src/Assets/img/character/casper.png",
+    SpriteDefaultXpos: 25,
+    SpriteDefaulyYpos: 75,
+    SpriteDefaultXScale: 10,
+    SpriteDefaultYScale: 10,
+
 }
 
 export const PlayerCharacter = new CharacterBase(platyerCharacterData);

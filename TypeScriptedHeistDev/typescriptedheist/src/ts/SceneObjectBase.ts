@@ -1,10 +1,13 @@
 //import { MenuObject } from "./MenuObject";
 import { ChangeFlagValue } from "./flags";
 import { MenuItemBase } from "./MenuItemBase";
-import { MenuItemDataType } from "./MenuItemDataType";
 import { MenuObjectBase } from "./MenuObjectBase";
 import { IsDebug, SceneManager } from "./initialisation";
 import { WriteMenuSelection } from "./IOMethods";
+import { Sprite } from "./Canvas/Sprite";
+import { MenuItemDataType } from "./DataTypes/MenuItemDataType";
+import { SceneDataType } from "./DataTypes/SceneDataType";
+import { Color } from "./Tools/Color";
 
 export abstract class SceneObjectBase {
 
@@ -12,6 +15,8 @@ export abstract class SceneObjectBase {
     // sceneMenuItems: MenuItemBase[] = [];
     public MenuObject: MenuObjectBase | null = null;
 
+    public BackgroundColor:Color;
+    public SceneSprites: Sprite[] = [];
 
     public abstract SceneSpsificStartUp(): void;
     public abstract SceneSpesificMain(): void;
@@ -25,33 +30,37 @@ export abstract class SceneObjectBase {
     }
     public async SceneMain() {
         this.SceneSpesificMain();
-        
+
         const menuSelection = await this.GetMenuInput();
         this.HandleMenuSelection(menuSelection);
         //Call spesific, general method within to 
         // await this.DoTheMenu();
     };
 
-
-    private async GetMenuInput():Promise<number>{
-         let response: number = 0;
-            if (this.MenuObject)
-                response = await this.MenuObject.HandleMenu();
-            else
-                console.log("NULL MENU: " + this.SceneName + " scene");
-            return response;
+    protected PrepareGraphics(sceneData: SceneDataType){
+        this.BackgroundColor = sceneData.SceneBackgroundColor;
+        this.PrepareSprites(sceneData);
     }
-    private HandleMenuSelection(selection:number){
-        
+
+    private async GetMenuInput(): Promise<number> {
+        let response: number = 0;
+        if (this.MenuObject)
+            response = await this.MenuObject.HandleMenu();
+        else
+            console.log("NULL MENU: " + this.SceneName + " scene");
+        return response;
+    }
+    private HandleMenuSelection(selection: number) {
+
         if (this.MenuObject != null) {
 
-            const chosenMenuItem:MenuItemBase = this.MenuObject.validMenuItems[selection-1];
-            
+            const chosenMenuItem: MenuItemBase = this.MenuObject.validMenuItems[selection - 1];
+
             if (IsDebug)
                 console.log(`The player chose ${chosenMenuItem.MenuItemName} (${selection})`);
 
             this.AdjustFlags(chosenMenuItem);
-            WriteMenuSelection(selection + ". " + chosenMenuItem.MenuItemText, chosenMenuItem.MenuItemSelectionDescription)
+            WriteMenuSelection(chosenMenuItem.MenuItemSelectionDescription);
             SceneManager.HandleNextScene(this, chosenMenuItem.NextSceneObject); //Move to ScenMain / Move to its own class, guttin base class
         }
         else
@@ -64,11 +73,22 @@ export abstract class SceneObjectBase {
 
     }
 
-    
+
     private AdjustFlags(menuItem: MenuItemBase) {
         for (const flagToChange of menuItem.MenuItemFlagsToChange) {
             ChangeFlagValue(flagToChange);
         }
+    }
+
+    private PrepareSprites(sceneData: SceneDataType) {
+        var i = 0;
+        // if (sceneData) {
+
+        //     sceneData.SceneSprites.forEach(sprite => {
+        //         sprite.SpritePosScaleData = sceneData.SpriteLocationData[i];
+        //         i++;
+        //     });
+        // }
     }
 
     public TieMenuItemToSceneObject(menuItemIndex: number, targetScene: SceneObjectBase) {

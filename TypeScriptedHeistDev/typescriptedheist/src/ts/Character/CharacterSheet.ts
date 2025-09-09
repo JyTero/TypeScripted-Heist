@@ -46,7 +46,7 @@ export class CharacterSheet{
         
         this.CharacterName = data.Name;
         this.Faction = data.Faction;
-        this.Strength.Value = data.Strenght;
+        this.Strength.Value = data.Strength;
         this.Dexterity.Value = data.Dexterity
         this.Perception.Value = data.Perception;
         this.WeaponSkill.Value = data.WeaponSkill;

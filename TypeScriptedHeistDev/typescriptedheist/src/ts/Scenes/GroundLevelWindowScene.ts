@@ -1,6 +1,6 @@
 import { WriteAlert } from "../IOMethods";
-import { GroundLevelWindowData01, GroundLevelWindowData02, GroundLevelWindowData03 } from "../MenuData/GroundLevelWindowData";
 import { MenuItemBase } from "../MenuItemBase";
+import { GroundLevelWindowData01, GroundLevelWindowData02, GroundLevelWindowData03 } from "../SceneData/GroundLevelWindowData";
 import { SceneObjectBase } from "../SceneObjectBase";
 
 

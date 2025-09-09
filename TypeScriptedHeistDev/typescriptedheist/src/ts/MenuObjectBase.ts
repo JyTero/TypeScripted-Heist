@@ -1,7 +1,9 @@
 import { MenuItemBase } from "./MenuItemBase";
-import { WaitForInput, WriteAlert, WriteMenu} from "./IOMethods";
+import { WaitForInput, WriteAlert, WriteAlertStorePrevious, WriteMenu} from "./IOMethods";
 import { Flags } from "./flags";
 import { SceneObjectBase } from "./SceneObjectBase";
+import { Delay } from "../Tools";
+import { FrameTimeMS } from "./initialisation";
 
 export class MenuObjectBase {
 
@@ -22,7 +24,7 @@ export class MenuObjectBase {
             this.DisplayMenu();
             playerInput = await this.GetAndCheckPlayerInput();
             if (playerInput === -1)
-                WriteAlert("Please select a valid option using the number keys.");
+                WriteAlertStorePrevious("Please select a valid option using the number keys.");
             else if (playerInput > this.validMenuItems.length || playerInput < 1)
                 WriteAlert("Please choose one of the given options with the number keys.");
             else
@@ -53,9 +55,9 @@ export class MenuObjectBase {
             this.validMenuItems.push(menuItem);
             i++;
 
-
         };
         WriteMenu(s);
+        Delay(FrameTimeMS);
     }
 
     private HasAnyForbiddenFlags(menuItem: MenuItemBase): boolean {

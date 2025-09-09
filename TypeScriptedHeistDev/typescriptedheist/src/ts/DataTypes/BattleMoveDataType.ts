@@ -1,8 +1,8 @@
 export type BattleMoveData = {
-    MoveName: string;
+    BattleMoveName: string;
     IsRanged: boolean;
-    MoveHitMultiplier: number;
-    MoveDamageMultiplier: number;
+    BattleMoveHitMultiplier: number;
+    BattleMoveDamageMultiplier: number;
     //TargetT
     // BattleMoveSource: WeaponItem;
 }

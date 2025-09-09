@@ -1,7 +1,7 @@
 import { MenuItemBase } from "../MenuItemBase";
 import { SceneObjectBase } from "../SceneObjectBase";
-import { BackdoorData01, BackdoorData02, BackdoorData03, BackdoorData04 } from "../MenuData/BackdoorData";
 import { WriteAlert } from "../IOMethods";
+import { BackdoorData01, BackdoorData02, BackdoorData03, BackdoorData04 } from "../SceneData/BackdoorData";
 
 export class BackdoorScene extends SceneObjectBase{
     

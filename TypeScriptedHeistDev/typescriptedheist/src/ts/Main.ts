@@ -3,6 +3,7 @@ import { FrontDoorScene } from "./Scenes/FrontDoorScene";
 import { GroundLevelWindowScene } from "./Scenes/GroundLevelWindowScene";
 import { BackdoorScene } from "./Scenes/BackdoorScene";
 import { BattleArenaTestScene } from "./Scenes/BattleArenaTestScene";
+import { SceneManager } from "./initialisation";
 
 const mansionApproachScene: MansionApproachScene = new MansionApproachScene();
 const frontDoorScene: FrontDoorScene = new FrontDoorScene();
@@ -24,6 +25,7 @@ export function Main() {
     BackDoorTieUp();
     BattleTestTieUp();
 
+    SceneManager.BeginFirstScene(mansionApproachScene);
     mansionApproachScene.SceneMain();
 
 

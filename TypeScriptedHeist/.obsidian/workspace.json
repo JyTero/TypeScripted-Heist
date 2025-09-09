@@ -124,9 +124,21 @@
               "icon": "lucide-file",
               "title": "Graphics"
             }
+          },
+          {
+            "id": "c995700505d408eb",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.9.10"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.9.10"
+            }
           }
         ],
-        "currentTab": 7
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -262,6 +274,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -270,17 +283,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "62bf442e89f82140",
+  "active": "c995700505d408eb",
   "lastOpenFiles": [
+    "IDEAS.md",
+    "Graphics.md",
     "Pasted image 20250818200819.png",
     "Turn Based Combat System.md",
-    "Graphics.md",
     "Character Sheet.md",
     "Character Sheet Technical.md",
     "Combat.md",
     "Combat.canvas",
     "TypeScriptGame/Gameflow.canvas",
-    "IDEAS.md",
     "ToDo.md",
     "TypeScriptGame/House.canvas",
     "Data.canvas",
