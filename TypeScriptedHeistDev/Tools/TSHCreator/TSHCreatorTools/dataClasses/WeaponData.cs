@@ -6,6 +6,7 @@ namespace TSHCreatorTools
     public class WeaponData : BaseData
     {
         public string WeaponName { get; set; }
+        public  List<string> BattleMoves { get; set; }
         public int WeaponHit { get; set; }
         public int WeaponDamage { get; set; }
     }

@@ -1,6 +1,6 @@
 import { SceneObjectBase } from "../SceneObjectBase";
 import { BattleArenaScene } from "../BattleArenaSceneBase";
-import { CanvasGraphics } from "../initialisation";
+import { CanvasGraphicsInstance } from "../initialisation";
 export class SceneManagement {
 
     public BeginFirstScene(scene:SceneObjectBase){
@@ -25,13 +25,13 @@ export class SceneManagement {
     }
 
     private DrawSceneGraphics(nextScene:SceneObjectBase){
-        CanvasGraphics.ChangeBackgroundColor(nextScene.BackgroundColor);        
+        CanvasGraphicsInstance.ChangeBackgroundColor(nextScene.BackgroundColor);        
         nextScene.SceneSprites.forEach(sprite => {
-            CanvasGraphics.AddSpriteToListPreComp(sprite);
+            CanvasGraphicsInstance.AddSpriteToListPreComp(sprite);
         });
     }
 
     private ClearOldData(){
-        CanvasGraphics.ClearSpriteList();
+        CanvasGraphicsInstance.ClearSpriteList();
     }
 }

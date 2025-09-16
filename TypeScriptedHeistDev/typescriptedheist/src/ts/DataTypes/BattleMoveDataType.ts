@@ -1,4 +1,6 @@
-export type BattleMoveData = {
+import { MetaData } from "./MetaData";
+
+export interface BattleMoveData extends MetaData {
     BattleMoveName: string;
     IsRanged: boolean;
     BattleMoveHitMultiplier: number;

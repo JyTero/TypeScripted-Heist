@@ -1,7 +1,7 @@
 import { Delay } from "../Tools";
 
 import { Sprite } from "./Canvas/Sprite";
-import { CanvasGraphics, FrameTimeMS } from "./initialisation";
+import { CanvasGraphicsInstance, FrameTimeMS } from "./initialisation";
 
 const  history = document.getElementById("TextHistory");
 const canvas = document.getElementById("GameCanvas") as HTMLCanvasElement;

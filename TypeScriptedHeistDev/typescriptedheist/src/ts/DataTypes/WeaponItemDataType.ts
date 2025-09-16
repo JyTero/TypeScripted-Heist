@@ -1,7 +1,8 @@
-import { BattleMove } from "../../../BattleSystem/BattleMove";
+import { BattleMove } from "../BattleSystem/BattleMove";
+import { MetaData } from "./MetaData";
 
-export type WeaponDatatype={
-    Name: string;
+export interface WeaponDatatype extends MetaData {
+    WeaponName: string;
     BattleMoves: BattleMove[];
     WeaponHit:number;
     WeaponDamage: number;

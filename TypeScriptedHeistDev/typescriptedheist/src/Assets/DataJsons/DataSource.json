@@ -1,0 +1,21 @@
+{
+  "BattleMove": [
+    "BattleMove_Crying_Generic.json",
+    "BattleMove_ForcedHit.json",
+    "BattleMove_MoneyMoves.json",
+    "BattleMove_Slash_ShortSword.json",
+    "BattleMove_Stab_Knife.json",
+    "BattleMove_Stab_ShortSword.json"
+  ],
+  "prison": [
+    "DataSource.json",
+    "fast.json"
+  ],
+  "Weapon": [
+    "Weapon_Boots.json",
+    "Weapon_ForcedHitter.json",
+    "Weapon_Hoe.json",
+    "Weapon_Knife.json",
+    "Weapon_ShortSword.json"
+  ]
+}

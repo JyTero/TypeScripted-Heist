@@ -9,14 +9,18 @@ const stabBattleMoveData:BattleMoveData={
     IsRanged: false,
     BattleMoveHitMultiplier: stabMoveHitMultiplier,
     BattleMoveDamageMultiplier: stabMoveDamageMultiplier,
+    DataDevName: "Stab_Knife_BattleMove",
+    DataType: "BattleMove",
 }
 const stabBattleMove:BattleMove = new BattleMove(stabBattleMoveData);
 
 const weaponHit: number = 3;
 const weaponDamage: number = 1;
 export const DaggerItemData:WeaponDatatype={
-    Name: "Cloak Dagger",
-    BattleMoves:[stabBattleMove],
+    WeaponName: "Cloak Dagger",
+    BattleMoves: [stabBattleMove],
     WeaponHit: weaponHit,
     WeaponDamage: weaponDamage,
+    DataDevName: "Dev Daggers",
+    DataType: "WeaponItems"
 }

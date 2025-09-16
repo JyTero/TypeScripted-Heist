@@ -13,7 +13,7 @@
     <Compile Update="TSHWeaponCreator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="WindowBase.cs">
+    <Compile Update="CreatorBase.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

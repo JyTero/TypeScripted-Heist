@@ -1,8 +1,9 @@
 import { CharacterBase } from "./Character/CharacterBase";
 import { CharacterDataType } from "./DataTypes/CharacterData";
 import { CharacterSheetDataType as CharacterSheetDataType } from "./DataTypes/CharacterSheetDataType";
-import { WeaponItem } from "./Items/BattleItems/WeaponItem";
-import { DaggerItemData } from "./Items/ItemData/BattleItems/DaggerData";
+import { DaggerItemData } from "./Items/ItemDatas/WeaponItemData/DaggerData";
+import { WeaponItem } from "./Items/WeaponItem/WeaponItem";
+
 
 const PlayerCharacterSheetData: CharacterSheetDataType = {
 
@@ -11,12 +12,12 @@ const PlayerCharacterSheetData: CharacterSheetDataType = {
 
     //Attributes
     Strength: 3,
-    Dexterity: 20,
+    Dexterity: 2,
     Perception: 4,
 
     //Skills
     WeaponSkill: 95,
-    Dodge: 20,
+    Dodge: 10,
 
     BaseSpeed: 10,
 

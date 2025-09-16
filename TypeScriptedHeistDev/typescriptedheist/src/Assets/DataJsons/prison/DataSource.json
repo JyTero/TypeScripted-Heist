@@ -1,0 +1,8 @@
+{
+  "BattleMoves": [
+    "BattleMove_MoneyMoves.json"
+  ],
+  "Weapons": [
+    "Weapon_Boots.json"
+  ]
+}

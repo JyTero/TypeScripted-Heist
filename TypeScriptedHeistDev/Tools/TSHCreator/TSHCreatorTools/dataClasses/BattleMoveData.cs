@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TSHCreatorTools.dataClasses
 {
-    internal class BattleMoveData : BaseData
+    public class BattleMoveData : BaseData
     {
         public string BattleMoveName { get; set; }
         public bool IsRanged { get; set; }

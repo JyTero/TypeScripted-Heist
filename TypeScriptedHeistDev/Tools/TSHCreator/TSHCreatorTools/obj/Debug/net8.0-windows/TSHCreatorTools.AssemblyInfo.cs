@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TSHCreatorTools")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5045216f6244ee0eed7325947d9f8a9b63dfc1e8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+091292d6314c5e0cdf51bb76d3f1544fb8b9fdee")]
 [assembly: System.Reflection.AssemblyProductAttribute("TSHCreatorTools")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TSHCreatorTools")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

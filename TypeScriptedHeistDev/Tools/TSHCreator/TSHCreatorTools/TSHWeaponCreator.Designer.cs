@@ -40,6 +40,8 @@
             WeaponDamageLabel = new Label();
             CreateWeaponDataButton = new Button();
             Metadata = new MetadataCreator();
+            battleMovesCheckedList = new CheckedListBox();
+            checkBox1 = new CheckBox();
             NameGroup.SuspendLayout();
             WeaponHitGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)WeaponHitInput).BeginInit();
@@ -82,7 +84,7 @@
             // 
             WeaponHitGroup.Controls.Add(WeaponHitInput);
             WeaponHitGroup.Controls.Add(WeaponHitLabel);
-            WeaponHitGroup.Location = new Point(14, 110);
+            WeaponHitGroup.Location = new Point(14, 226);
             WeaponHitGroup.Margin = new Padding(4, 3, 4, 3);
             WeaponHitGroup.Name = "WeaponHitGroup";
             WeaponHitGroup.Padding = new Padding(4, 3, 4, 3);
@@ -112,18 +114,18 @@
             // BatlemovesLabel
             // 
             BatlemovesLabel.AutoSize = true;
-            BatlemovesLabel.Location = new Point(50, 81);
+            BatlemovesLabel.Location = new Point(14, 79);
             BatlemovesLabel.Margin = new Padding(4, 0, 4, 0);
             BatlemovesLabel.Name = "BatlemovesLabel";
-            BatlemovesLabel.Size = new Size(143, 15);
+            BatlemovesLabel.Size = new Size(75, 15);
             BatlemovesLabel.TabIndex = 3;
-            BatlemovesLabel.Text = "Battle Moves, Placeholder";
+            BatlemovesLabel.Text = "Battle Moves";
             // 
             // WeaponDamageGroup
             // 
             WeaponDamageGroup.Controls.Add(WeaponDamageInput);
             WeaponDamageGroup.Controls.Add(WeaponDamageLabel);
-            WeaponDamageGroup.Location = new Point(14, 165);
+            WeaponDamageGroup.Location = new Point(14, 281);
             WeaponDamageGroup.Margin = new Padding(4, 3, 4, 3);
             WeaponDamageGroup.Name = "WeaponDamageGroup";
             WeaponDamageGroup.Padding = new Padding(4, 3, 4, 3);
@@ -165,16 +167,36 @@
             // 
             // Metadata
             // 
-            Metadata.Location = new Point(254, 32);
+            Metadata.Location = new Point(254, 30);
             Metadata.Name = "Metadata";
             Metadata.Size = new Size(263, 225);
             Metadata.TabIndex = 5;
+            // 
+            // battleMovesCheckedList
+            // 
+            battleMovesCheckedList.FormattingEnabled = true;
+            battleMovesCheckedList.Location = new Point(14, 97);
+            battleMovesCheckedList.Name = "battleMovesCheckedList";
+            battleMovesCheckedList.Size = new Size(233, 94);
+            battleMovesCheckedList.TabIndex = 6;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(388, 274);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(82, 19);
+            checkBox1.TabIndex = 7;
+            checkBox1.Text = "checkBox1";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
             // TSHWeaponCreator
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(521, 341);
+            Controls.Add(checkBox1);
+            Controls.Add(battleMovesCheckedList);
             Controls.Add(Metadata);
             Controls.Add(CreateWeaponDataButton);
             Controls.Add(WeaponDamageGroup);
@@ -211,5 +233,7 @@
         private System.Windows.Forms.Label WeaponDamageLabel;
         private System.Windows.Forms.Button CreateWeaponDataButton;
         private MetadataCreator Metadata;
+        private CheckedListBox battleMovesCheckedList;
+        private CheckBox checkBox1;
     }
 }

@@ -1,4 +1,4 @@
-import { MenuItemDataType } from "../MenuItemDataType";
+import { MenuItemDataType } from "../DataTypes/MenuItemDataType";
 import { placeholderScene } from "../Scenes/Placeholders";
 
 export const GroundLevelWindowData01: MenuItemDataType=

@@ -13,7 +13,7 @@ using TSHCreatorTools.dataClasses;
 
 namespace TSHCreatorTools
 {
-    public partial class TSHBattleMoveCreator : WindowBase
+    public partial class TSHBattleMoveCreator : CreatorBase
     {
         public TSHBattleMoveCreator()
         {
@@ -25,11 +25,11 @@ namespace TSHCreatorTools
         {
             Debug.WriteLine("Creating BattleMoveData Json");
 
-            if (metadataCreator != null && !metadataCreator.IsMetadataValid())
-            {
-                MessageBox.Show("Please fill out the the Metadata fields before proceding.");
-            }
+            CreateData();            
+        }
 
+        protected override void OnCreateData()
+        {
             string name = BM_NameInput.Text;
             bool isRanged = BM_IsRangedCheckbox.Checked;
             float hitMultiplier = (float)BM_WeaponHitMultiplierInput.Value;
@@ -48,7 +48,8 @@ namespace TSHCreatorTools
 
             string jsonOutput = JsonSerializer.Serialize(data);
             Debug.WriteLine(jsonOutput);
-            CreateOutputJson(metadataCreator.MetadataTypeField.Text, name, jsonOutput);
+
+            CreateOutputJsonFile(jsonOutput);
         }
     }
     

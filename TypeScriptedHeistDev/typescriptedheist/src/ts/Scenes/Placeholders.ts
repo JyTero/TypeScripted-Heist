@@ -3,8 +3,8 @@ import { MenuItemBase } from "../MenuItemBase";
 import { WriteAlert } from "../IOMethods";
 import { CharacterSheet } from "../Character/CharacterSheet";
 import { CharacterSheetDataType } from "../DataTypes/CharacterSheetDataType";
-import { WeaponItem } from "../Items/BattleItems/WeaponItem";
-import { DaggerItemData } from "../Items/ItemData/BattleItems/DaggerData";
+import { WeaponItem } from "../Items/WeaponItem/WeaponItem";
+import { DaggerItemData } from "../Items/ItemDatas/WeaponItemData/DaggerData";
 import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
 import { CharacterDataType } from "../DataTypes/CharacterData";
 import { CharacterBase } from "../Character/CharacterBase";
@@ -29,12 +29,12 @@ const placeholderCharacterSheetData: CharacterSheetDataType = {
     ArmourRating: 22,
     CurrentWeapon: new WeaponItem(DaggerItemData),
 }
-const placeholderCharacterData:CharacterDataType = {
-    CharacterSheet: placeholderCharacterSheetData,
-    CharacterImageString: "src/Assets/PictoBun.png",
-}
+// const placeholderCharacterData:CharacterDataType = {
+//     CharacterSheet: placeholderCharacterSheetData,
+//     CharacterImageString: "src/Assets/PictoBun.png",
+// }
 export const PlaceholderCharacterSheet: CharacterSheet = new CharacterSheet(placeholderCharacterSheetData);
-export const PlaceholderCharacter: CharacterBase = new CharacterBase(placeholderCharacterData);
+//export const PlaceholderCharacter: CharacterBase = new CharacterBase(placeholderCharacterData);
 export class PlaceholderScene extends SceneObjectBase {
     
     SceneSpsificStartUp(): void {

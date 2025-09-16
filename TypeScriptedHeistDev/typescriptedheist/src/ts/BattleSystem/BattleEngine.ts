@@ -1,4 +1,4 @@
-import { CanvasGraphics, FrameTimeMS, IsDebug } from "../initialisation";
+import { CanvasGraphicsInstance, FrameTimeMS, IsDebug } from "../initialisation";
 import { SceneObjectBase } from "../SceneObjectBase";
 import { BattleArenaScene as BattleArenaSceneBase } from "../BattleArenaSceneBase";
 import { CharacterBase } from "../Character/CharacterBase";
@@ -8,6 +8,7 @@ import { CombatMenuObject } from "../CombatMenuObject";
 import { TargetMenuObject } from "../TargetMenuObject";
 import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
 import { WriteAlert, WriteMenuSelection, WriteAlertStorePrevious } from "../IOMethods";
+import { WeaponEnum } from "../../Assets/DataJsons/WeaponEnum";
 
 export async function BeginBattleEngine(battleData: BattleArenaDataType, currentScene: BattleArenaSceneBase) {
     const battleStage: BattleEngine = new BattleEngine(battleData, PlayerCharacter, currentScene);
@@ -48,10 +49,12 @@ class BattleEngine {
     public async OnEngineStartUp() {
         if (IsDebug)
             console.log("On BattleEngine StartUp");
-        this.battleData.EnemyCharacterDatas.forEach(enemyCharacter => {
+        this.battleData.EnemyCharacterDatas.forEach(enemyCharacterData => {
             if (IsDebug)
-                console.log("Battle Enemy Character: " + enemyCharacter.CharacterSheet.Name);
-            this.enemyCharacters.push(new CharacterBase(enemyCharacter));
+                console.log("Battle Enemy Character: " + enemyCharacterData.CharacterSheet.Name);
+            const enemChar = new CharacterBase(enemyCharacterData);
+            this.enemyCharacters.push(enemChar);
+            enemChar.CharacterSheet.ChangeWeapon(WeaponEnum.Weapon_ForcedHitter);
         });
 
         this.nextScene = this.currentScene.VictoryNextScene;
@@ -164,7 +167,7 @@ class BattleEngine {
         var hpString = "";
         //Show all Hp, placeholder here
         this.turnOrder.forEach(character => {
-            hpString += `${character.CharacterSheet.CharacterName} has ${character.CharacterSheet.CurrentHealth()}hp`;
+            hpString += `${character.CharacterSheet.CharacterName} has ${character.CharacterSheet.CurrentHealth()}hp}\n`;
             hpString += "<br>";
         });
         await WriteAlertStorePrevious(hpString);
@@ -189,13 +192,13 @@ class BattleEngine {
 
     private SetUpSprites(){
         this.playerCharacter.CharacterSprite;
-        CanvasGraphics.AddSpriteToListPreComp(this.playerCharacter.CharacterSprite);
+        CanvasGraphicsInstance.AddSpriteToListPreComp(this.playerCharacter.CharacterSprite);
         
-        CanvasGraphics.AddSpriteToListPreComp(this.enemyCharacters[0].CharacterSprite);  
+        CanvasGraphicsInstance.AddSpriteToListPreComp(this.enemyCharacters[0].CharacterSprite);  
         var xPos = this.enemyCharacters[0].CharacterSprite.SpritePosScaleData.positionX;
         for(var i = 1; i<this.enemyCharacters.length; i++){
             xPos += 10;
-            CanvasGraphics.AddSpriteToListPreComp(this.enemyCharacters[i].CharacterSprite);  
+            CanvasGraphicsInstance.AddSpriteToListPreComp(this.enemyCharacters[i].CharacterSprite);  
         }
     }
 

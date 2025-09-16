@@ -35,7 +35,7 @@ export function WriteAlert(text: string) {
 
 export async function WriteAlertStorePrevious(text: string) {
   const textField = document.getElementById("DescriptionText") as HTMLInputElement;
-  if (textField.textContent !== "")
+  if (textField.textContent !== null)
     await AddNewHistoryDiv(textField.textContent);
   textField.innerHTML = text;
 }

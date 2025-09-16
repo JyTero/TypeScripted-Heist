@@ -1,0 +1,11 @@
+{
+  "WeaponName": "Hoe",
+  "BattleMoves": [
+    "BattleMove_Crying_Generic",
+    "BattleMove_ForcedHit"
+  ],
+  "WeaponHit": 2,
+  "WeaponDamage": 4,
+  "DataDevName": "Weapon_Hoe",
+  "DataType": "Weapon"
+}

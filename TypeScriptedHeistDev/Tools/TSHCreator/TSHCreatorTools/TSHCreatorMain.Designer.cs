@@ -28,56 +28,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            NameInput = new TextBox();
-            NameGroup = new GroupBox();
-            NameLabel = new Label();
+            JsonFolderPathInput = new TextBox();
+            JsonPathGroup = new GroupBox();
+            FindJsonsRootButton = new Button();
+            JsonPathLabel = new Label();
             StrengthGroup = new GroupBox();
             numericUpDown1 = new NumericUpDown();
             StrengthLabel = new Label();
             label1 = new Label();
             OpenWeaponCreatorButton = new Button();
             OpenBattleMoveCreatorButton = new Button();
-            NameGroup.SuspendLayout();
+            openFileDialogFindJsonRoot = new OpenFileDialog();
+            button1 = new Button();
+            JsonPathGroup.SuspendLayout();
             StrengthGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
-            // NameInput
+            // JsonFolderPathInput
             // 
-            NameInput.Location = new Point(125, 15);
-            NameInput.Margin = new Padding(4, 3, 4, 3);
-            NameInput.Name = "NameInput";
-            NameInput.Size = new Size(116, 23);
-            NameInput.TabIndex = 1;
+            JsonFolderPathInput.Location = new Point(125, 15);
+            JsonFolderPathInput.Margin = new Padding(4, 3, 4, 3);
+            JsonFolderPathInput.Name = "JsonFolderPathInput";
+            JsonFolderPathInput.Size = new Size(408, 23);
+            JsonFolderPathInput.TabIndex = 1;
             // 
-            // NameGroup
+            // JsonPathGroup
             // 
-            NameGroup.Controls.Add(NameLabel);
-            NameGroup.Controls.Add(NameInput);
-            NameGroup.Location = new Point(99, 47);
-            NameGroup.Margin = new Padding(4, 3, 4, 3);
-            NameGroup.Name = "NameGroup";
-            NameGroup.Padding = new Padding(4, 3, 4, 3);
-            NameGroup.Size = new Size(251, 48);
-            NameGroup.TabIndex = 2;
-            NameGroup.TabStop = false;
-            NameGroup.Text = "NameGroup";
+            JsonPathGroup.Controls.Add(FindJsonsRootButton);
+            JsonPathGroup.Controls.Add(JsonPathLabel);
+            JsonPathGroup.Controls.Add(JsonFolderPathInput);
+            JsonPathGroup.Location = new Point(13, 47);
+            JsonPathGroup.Margin = new Padding(4, 3, 4, 3);
+            JsonPathGroup.Name = "JsonPathGroup";
+            JsonPathGroup.Padding = new Padding(4, 3, 4, 3);
+            JsonPathGroup.Size = new Size(541, 79);
+            JsonPathGroup.TabIndex = 2;
+            JsonPathGroup.TabStop = false;
+            JsonPathGroup.Text = "Path to Json Root Folder";
             // 
-            // NameLabel
+            // FindJsonsRootButton
             // 
-            NameLabel.AutoSize = true;
-            NameLabel.Location = new Point(20, 18);
-            NameLabel.Margin = new Padding(4, 0, 4, 0);
-            NameLabel.Name = "NameLabel";
-            NameLabel.Size = new Size(93, 15);
-            NameLabel.TabIndex = 2;
-            NameLabel.Text = "Character Name";
+            FindJsonsRootButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            FindJsonsRootButton.AutoSize = true;
+            FindJsonsRootButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            FindJsonsRootButton.Location = new Point(211, 44);
+            FindJsonsRootButton.Name = "FindJsonsRootButton";
+            FindJsonsRootButton.Size = new Size(64, 25);
+            FindJsonsRootButton.TabIndex = 7;
+            FindJsonsRootButton.Text = "Browse...";
+            FindJsonsRootButton.UseVisualStyleBackColor = true;
+            FindJsonsRootButton.Click += FindJsonsRootButton_Click;
+            // 
+            // JsonPathLabel
+            // 
+            JsonPathLabel.AutoSize = true;
+            JsonPathLabel.Location = new Point(8, 19);
+            JsonPathLabel.Margin = new Padding(4, 0, 4, 0);
+            JsonPathLabel.Name = "JsonPathLabel";
+            JsonPathLabel.Size = new Size(107, 15);
+            JsonPathLabel.TabIndex = 2;
+            JsonPathLabel.Text = "Path to Json Folder";
             // 
             // StrengthGroup
             // 
             StrengthGroup.Controls.Add(numericUpDown1);
             StrengthGroup.Controls.Add(StrengthLabel);
-            StrengthGroup.Location = new Point(99, 103);
+            StrengthGroup.Location = new Point(394, 436);
             StrengthGroup.Margin = new Padding(4, 3, 4, 3);
             StrengthGroup.Name = "StrengthGroup";
             StrengthGroup.Padding = new Padding(4, 3, 4, 3);
@@ -107,7 +124,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(92, 193);
+            label1.Location = new Point(388, 487);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(216, 15);
@@ -138,22 +155,35 @@
             OpenBattleMoveCreatorButton.UseVisualStyleBackColor = true;
             OpenBattleMoveCreatorButton.Click += OpenBattleMoveCreatorButton_Click;
             // 
+            // button1
+            // 
+            button1.AutoSize = true;
+            button1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            button1.Location = new Point(284, 252);
+            button1.Name = "button1";
+            button1.Size = new Size(80, 25);
+            button1.TabIndex = 7;
+            button1.Text = "Make Thing";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // TSHCreator
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(617, 552);
+            Controls.Add(button1);
             Controls.Add(OpenBattleMoveCreatorButton);
             Controls.Add(OpenWeaponCreatorButton);
             Controls.Add(label1);
             Controls.Add(StrengthGroup);
-            Controls.Add(NameGroup);
+            Controls.Add(JsonPathGroup);
             Margin = new Padding(4, 3, 4, 3);
             MinimizeBox = false;
             Name = "TSHCreator";
             Text = "TSHCreator";
-            NameGroup.ResumeLayout(false);
-            NameGroup.PerformLayout();
+            JsonPathGroup.ResumeLayout(false);
+            JsonPathGroup.PerformLayout();
             StrengthGroup.ResumeLayout(false);
             StrengthGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
@@ -163,15 +193,18 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox NameInput;
-        private System.Windows.Forms.GroupBox NameGroup;
-        private System.Windows.Forms.Label NameLabel;
+        private System.Windows.Forms.TextBox JsonFolderPathInput;
+        private System.Windows.Forms.GroupBox JsonPathGroup;
+        private System.Windows.Forms.Label JsonPathLabel;
         private System.Windows.Forms.GroupBox StrengthGroup;
         private System.Windows.Forms.Label StrengthLabel;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button OpenWeaponCreatorButton;
         private Button OpenBattleMoveCreatorButton;
+        private OpenFileDialog openFileDialogFindJsonRoot;
+        private Button FindJsonsRootButton;
+        private Button button1;
     }
 }
 

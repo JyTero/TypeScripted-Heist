@@ -1,0 +1,11 @@
+{
+  "WeaponName": "Short Sword",
+  "BattleMoves": [
+    "BattleMove_Slash_ShortSword",
+    "BattleMove_Stab_ShortSword"
+  ],
+  "WeaponHit": 2,
+  "WeaponDamage": 4,
+  "DataDevName": "Weapon_ShortSword",
+  "DataType": "Weapon"
+}

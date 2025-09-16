@@ -1,6 +1,7 @@
 import { CharacterBase } from "../Character/CharacterBase";
 import { CharacterSheet } from "../Character/CharacterSheet";
 import { IsDebug } from "../initialisation";
+import { WriteAlertStorePrevious } from "../IOMethods";
 
 const attackHitDexMultiplier:number = 1.25;
 
@@ -10,7 +11,7 @@ export function BeginMeleeAttack(attackerChar: CharacterBase, defenderChar:Chara
     const defenderSheet =defenderChar.CharacterSheet;
 
     if(IsDebug)
-        console.log(`${attackerSheet.CharacterName} tries to melee attack ${defenderSheet.CharacterName}}`); 
+        console.log(`${attackerSheet.CharacterName} tries to melee attack ${defenderSheet.CharacterName}`); 
     if(AttackerHit(attackerSheet) > DefenderEvasion(defenderSheet)){
         //Hit
         const totalDamage: number = CalculateMeleeDamage(attackerSheet);
@@ -19,6 +20,7 @@ export function BeginMeleeAttack(attackerChar: CharacterBase, defenderChar:Chara
             console.log(`${defenderSheet.CharacterName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`); 
         defenderSheet.ReceiveDamage(reducedDamage);
 
+        WriteAlertStorePrevious(`${defenderSheet.CharacterName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`); 
     }
     else{
         if(IsDebug)

@@ -2,7 +2,7 @@
 import { ChangeFlagValue } from "./flags";
 import { MenuItemBase } from "./MenuItemBase";
 import { MenuObjectBase } from "./MenuObjectBase";
-import { IsDebug, SceneManager } from "./initialisation";
+import { IsDebug, SceneManagerInstance } from "./initialisation";
 import { WriteMenuSelection } from "./IOMethods";
 import { Sprite } from "./Canvas/Sprite";
 import { MenuItemDataType } from "./DataTypes/MenuItemDataType";
@@ -39,7 +39,7 @@ export abstract class SceneObjectBase {
 
     protected PrepareGraphics(sceneData: SceneDataType){
         this.BackgroundColor = sceneData.SceneBackgroundColor;
-        this.PrepareSprites(sceneData);
+        //this.PrepareSprites(sceneData);
     }
 
     private async GetMenuInput(): Promise<number> {
@@ -61,7 +61,7 @@ export abstract class SceneObjectBase {
 
             this.AdjustFlags(chosenMenuItem);
             WriteMenuSelection(chosenMenuItem.MenuItemSelectionDescription);
-            SceneManager.HandleNextScene(this, chosenMenuItem.NextSceneObject); //Move to ScenMain / Move to its own class, guttin base class
+            SceneManagerInstance.HandleNextScene(this, chosenMenuItem.NextSceneObject); //Move to ScenMain / Move to its own class, guttin base class
         }
         else
             console.log(`sceneMenu ${this.MenuObject} of ${this.SceneName} is null`)
@@ -80,16 +80,16 @@ export abstract class SceneObjectBase {
         }
     }
 
-    private PrepareSprites(sceneData: SceneDataType) {
-        var i = 0;
-        // if (sceneData) {
+    // private PrepareSprites(sceneData: SceneDataType) {
+    //     var i = 0;
+    //     // if (sceneData) {
 
-        //     sceneData.SceneSprites.forEach(sprite => {
-        //         sprite.SpritePosScaleData = sceneData.SpriteLocationData[i];
-        //         i++;
-        //     });
-        // }
-    }
+    //     //     sceneData.SceneSprites.forEach(sprite => {
+    //     //         sprite.SpritePosScaleData = sceneData.SpriteLocationData[i];
+    //     //         i++;
+    //     //     });
+    //     // }
+    // }
 
     public TieMenuItemToSceneObject(menuItemIndex: number, targetScene: SceneObjectBase) {
         this.MenuObject?.TieMenuItemToSceneObject(menuItemIndex, targetScene);

@@ -1,0 +1,10 @@
+{
+  "WeaponName": "Forced Hitter",
+  "BattleMoves": [
+    "BattleMove_ForcedHit"
+  ],
+  "WeaponHit": 15,
+  "WeaponDamage": 1,
+  "DataDevName": "Weapon_ForcedHitter",
+  "DataType": "Weapon"
+}

@@ -1,8 +1,9 @@
+import { WeaponEnum } from "../../Assets/DataJsons/WeaponEnum";
 import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
 import { CharacterDataType } from "../DataTypes/CharacterData";
 import { CharacterSheetDataType } from "../DataTypes/CharacterSheetDataType";
-import { WeaponItem } from "../Items/BattleItems/WeaponItem";
-import { DaggerItemData } from "../Items/ItemData/BattleItems/DaggerData";
+import { DaggerItemData } from "../Items/ItemDatas/WeaponItemData/DaggerData";
+import { WeaponItem } from "../Items/WeaponItem/WeaponItem";
 import { PlaceholderCharacterSheet, placeholderScene } from "../Scenes/Placeholders";
 
 
@@ -13,11 +14,11 @@ const Enemy01Sheet: CharacterSheetDataType = {
 
     //Attributes
     Strength: 3,
-    Dexterity: 2,
+    Dexterity: 12,
     Perception: 4,
 
     //Skills
-    WeaponSkill: 15,
+    WeaponSkill: 50,
     Dodge: 2,
 
     BaseSpeed: 10,

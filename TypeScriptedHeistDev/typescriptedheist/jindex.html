@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+  <link rel="styleSheet" href="./src/PageStyles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pöge</title>
+</head>
+
+<body>
+  <div id="app">
+    <div id="GameWindow">
+      <p>Game</p>
+      <canvas id="GameCanvas" width="800" height="600" style="border:1px solid #000000;">
+        Your browser does not support the HTML canvas tag.
+      </canvas>
+    </div>
+    <div id="TextSide">
+      <div id="TextHistory">
+      </div>
+      <div id="IOPanel">
+        <p id="DescriptionText"></p>
+        <input type="text" id="playerInput" placeholder="Type your response..." />
+        <button id="submitBtn">Submit</button>
+      </div>
+    </div>
+    
+    
+  </div>
+  
+  <script type="module" src="./dist/ts/initialisation.js"></script>
+</body>
+

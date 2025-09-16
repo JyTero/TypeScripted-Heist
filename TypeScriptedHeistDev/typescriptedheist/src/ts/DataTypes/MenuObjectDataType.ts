@@ -1,4 +1,5 @@
-import { MenuItemBase } from "./MenuItemBase";
+import { MenuItemBase } from "../MenuItemBase";
+
 export type MenuObjectDataType =
 {
     MenuObjectName: string;
