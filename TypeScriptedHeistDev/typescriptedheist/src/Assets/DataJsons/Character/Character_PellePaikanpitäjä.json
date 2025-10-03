@@ -1,0 +1,15 @@
+{
+  "CharacterName": "Pelle Paikanpit\u00E4j\u00E4",
+  "CharcterFaction": 2,
+  "CharacterStrength": 1,
+  "CharacterDexterity": 1,
+  "CharacterPerception": 1,
+  "CharacterWeaponSkill": 1,
+  "CharacterDodge": 1,
+  "CharacterBaseSpeed": 1,
+  "CharacterArmour": 1,
+  "CharaterEquipedWeapon": "Weapon_Knife",
+  "CharacterImagePath": "Pytty.png",
+  "DataDevName": "Character_PellePaikanpit\u00E4j\u00E4",
+  "DataType": "Character"
+}

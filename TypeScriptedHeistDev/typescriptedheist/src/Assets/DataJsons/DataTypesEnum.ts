@@ -1,6 +1,6 @@
 export enum DataTypesEnum
 {
 BattleMove = "BattleMove",
-prison = "prison",
+Character = "Character",
 Weapon = "Weapon",
 }

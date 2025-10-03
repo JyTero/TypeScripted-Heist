@@ -1,0 +1,15 @@
+{
+  "CharacterName": "Casper",
+  "CharcterFaction": 0,
+  "CharacterStrength": 10,
+  "CharacterDexterity": 20,
+  "CharacterPerception": 20,
+  "CharacterWeaponSkill": 50,
+  "CharacterDodge": 5,
+  "CharacterBaseSpeed": 5,
+  "CharacterArmour": 20,
+  "CharaterEquipedWeapon": "Weapon_Knife",
+  "CharacterImagePath": "casper.png",
+  "DataDevName": "Character_Player",
+  "DataType": "Character"
+}

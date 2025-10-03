@@ -9,31 +9,31 @@ import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
 import { CharacterDataType } from "../DataTypes/CharacterData";
 import { CharacterBase } from "../Character/CharacterBase";
 
-const placeholderCharacterSheetData: CharacterSheetDataType = {
+// const placeholderCharacterSheetData: CharacterSheetDataType = {
     
-    Name: "Boby Neybean",
-    Faction: 0,
+//     Name: "Boby Neybean",
+//     Faction: 0,
 
-    //Attributes
-    Strength: 3,
-    Dexterity: 3,
-    Perception: 4,
+//     //Attributes
+//     Strength: 3,
+//     Dexterity: 3,
+//     Perception: 4,
     
-    //Skills
-    WeaponSkill: 15,
-    Dodge: 20,
+//     //Skills
+//     WeaponSkill: 15,
+//     Dodge: 20,
     
-    BaseSpeed: 10,
+//     BaseSpeed: 10,
     
-    //Gear
-    ArmourRating: 22,
-    CurrentWeapon: new WeaponItem(DaggerItemData),
-}
+//     //Gear
+//     ArmourRating: 22,
+//     CurrentWeapon: new WeaponItem(DaggerItemData),
+// }
 // const placeholderCharacterData:CharacterDataType = {
 //     CharacterSheet: placeholderCharacterSheetData,
 //     CharacterImageString: "src/Assets/PictoBun.png",
 // }
-export const PlaceholderCharacterSheet: CharacterSheet = new CharacterSheet(placeholderCharacterSheetData);
+//export const PlaceholderCharacterSheet: CharacterSheet = new CharacterSheet(placeholderCharacterSheetData);
 //export const PlaceholderCharacter: CharacterBase = new CharacterBase(placeholderCharacterData);
 export class PlaceholderScene extends SceneObjectBase {
     
@@ -57,7 +57,7 @@ export const placeholderScene: PlaceholderScene = new PlaceholderScene();
 
 export const placeholderBattleArenaData:BattleArenaDataType  = {
         BattleName: "Computer Combat",
-        PlayerCharacter: PlaceholderCharacterSheet,
+       // PlayerCharacter: ,
         EnemyCharacterDatas:[],
         NextScene: placeholderScene,
 }

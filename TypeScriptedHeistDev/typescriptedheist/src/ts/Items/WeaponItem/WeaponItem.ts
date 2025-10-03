@@ -18,14 +18,16 @@ export class WeaponItem extends ItemBase{
         this.BattleMoves = data.BattleMoves;
         this.WeaponHit = data.WeaponHit;
         this.WeaponDamage = data.WeaponDamage;
+
+        this.BuildWeaponBattleMoves();
     }
 
-    public BuildWeaponBattleMoves(){
+    private BuildWeaponBattleMoves(){
         var tmp: BattleMove[] = this.BattleMoves;
         this.BattleMoves = [];
         tmp.forEach(bm => {
             
-            const allBMReferences= JsonHandlerInstance.data[DataTypesEnum.BattleMove.toString()];
+            const allBMReferences= JsonHandlerInstance.JsonDatabase[DataTypesEnum.BattleMove.toString()];
             const battleMove = allBMReferences.find(w => w.DataDevName === bm);
             const newBM:BattleMove = new BattleMove(battleMove);
             this.BattleMoves.push(newBM);

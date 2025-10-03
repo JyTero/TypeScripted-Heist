@@ -7,9 +7,11 @@
     "BattleMove_Stab_Knife.json",
     "BattleMove_Stab_ShortSword.json"
   ],
-  "prison": [
-    "DataSource.json",
-    "fast.json"
+  "Character": [
+    "Character_Amalia.json",
+    "Character_PellePaikanpit\u00E4j\u00E4.json",
+    "Character_Player.json",
+    "Character_Svoordm\u00E4n.json"
   ],
   "Weapon": [
     "Weapon_Boots.json",

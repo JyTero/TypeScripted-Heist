@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TSHCreatorTools.dataClasses;
 
 namespace TSHCreatorTools
 {
     public class CreatorBase : Form
     {
         protected MetadataCreator metadataCreator;
+        protected SelectImage selectImage;
         protected string jsonFolderPath = "";
         public CreatorBase() 
         {
@@ -24,8 +26,8 @@ namespace TSHCreatorTools
         {
             if (metadataCreator.MetadataDevNameInputField.Text == "")
                 return false;
-            //else if (metadataCreator.MetadataTypeField.Text == "")
-            //    return false;
+            else if (metadataCreator.MetadataTypeField.Text == "")
+                return false;
             else
                 return true;
 
@@ -39,6 +41,13 @@ namespace TSHCreatorTools
         }
 
         protected virtual void OnCreateData() { }
+
+        protected T InsertMetadata<T>(T data) where T : BaseData
+        {
+            data.DataDevName = metadataCreator.MetadataDevNameInputField.Text;
+            data.DataType = metadataCreator.MetadataTypeField.Text;
+            return data;
+        }
         protected void CreateOutputJsonFile(string json)
         {
             string shortName = metadataCreator.MetadataDevNameInputField.Text.Replace(" ", "");
@@ -51,6 +60,7 @@ namespace TSHCreatorTools
                 sw.WriteLine(json);
             }
         }
+
         protected virtual void GetAllJsonInFolder()
         {
             //json base folder

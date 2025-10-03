@@ -46,7 +46,7 @@ namespace TSHCreatorTools
                 BattleMoveWeaponDamageMultiplier = dmgMultiplier,
             };
 
-            string jsonOutput = JsonSerializer.Serialize(data);
+            string jsonOutput = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
             Debug.WriteLine(jsonOutput);
 
             CreateOutputJsonFile(jsonOutput);

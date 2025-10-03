@@ -1,50 +1,71 @@
+import { IsDebug } from "../initialisation";
+
 export class JsonHandler {
     //Get all json files
     
     //private jsonRootFolderPath: string = "./src/Assets/DataJsons";
     //Make private get/set metodit
-    public data: Record<string, any[]> = {};
+    public JsonDatabase: Record<string, any[]> = {};
     public isJsonReady:boolean = false;
     public BeginJsonLoading(){
-        this.GetJsonLocations();
+        this.BuildJsonDatabase();
+      //  this.BuildImageDatabase();
     }
 
-    private async GetJsonLocations() {
+
+    private async BuildJsonDatabase() {
         if (typeof window != "undefined") {
             const fest = await fetch("./src/Assets/DataJsons/DataSource.json").then(r => r.json());
 
+            console.log(fest.toString());
             
             for (const [category, files] of Object.entries(fest)) {
-                this.data[category] = await this.LoadCategory(category, files as string[]);
+                this.JsonDatabase[category] = await this.LoadJsonCategory(category, files as string[]);
             }
-            console.log(this.data);
+            console.log(this.JsonDatabase);
             this.isJsonReady = true;
         }
     }
 
-        private async LoadCategory(category: string, files: string[]): Promise<any[]> {
+        private async LoadJsonCategory(category: string, files: string[]): Promise<any[]> {
         const results: any[] = [];
           for (const file of files) {
             const path = `./src/Assets/DataJsons/${category}/${file}`;
+            if(IsDebug)
+                console.log("Attempting to get " + path);
             const json = await fetch(path).then(r =>r.json());
+            if(IsDebug)
+                console.log("Loaded: " +  json.DataDevName);
             results.push(json);
         }
         return results;
     }
 
-    // public async ReadJson() {
-    //     if (typeof window !== "undefined") {
-    //         const path: string = "./src/Assets/DataJsons/BattleMoves/BattleMove_MoneyMoves.json";
+        private async BuildImageDatabase() {
+        if (typeof window != "undefined") {
+            const fest = await fetch("./src/Assets/DataJsons/ImageSources.json").then(r => r.json());
 
-    //         // Running in browser
-    //         const response = await fetch(path);
-    //         const jsonContent: string = await response.text();
-    //         console.log("Loaded Json Content:" + jsonContent);
-    //         const bm: BattleMoveData = JSON.parse(jsonContent) as BattleMoveData;
-    //         const s = "Name: " + bm.BattleMoveName + "\DevName: " + bm.DataDevName;
-    //         console.log(s);
-    //     }
-    // }
+            console.log(fest.toString());
+            
+            for (const [category, files] of Object.entries(fest)) {
+                this.JsonDatabase[category] = await this.LoadImageCategory(category, files as string[]);
+            }
+            console.log(this.JsonDatabase);
+            this.isJsonReady = true;
+        }
+    }
 
-
+        private async LoadImageCategory(category: string, files: string[]): Promise<any[]> {
+        const results: any[] = [];
+          for (const file of files) {
+            const path = `./src/Assets/Img/${category}/${file}`;
+            if(IsDebug)
+                console.log("Attempting to get " + path);
+            const json = await fetch(path).then(r =>r.json());
+            if(IsDebug)
+                console.log("Loaded: " +  json.DataDevName);
+            results.push(json);
+        }
+        return results;
+    }
 }

@@ -8,7 +8,7 @@ const attackHitDexMultiplier:number = 1.25;
 export function BeginMeleeAttack(attackerChar: CharacterBase, defenderChar:CharacterBase)
 {
     const attackerSheet = attackerChar.CharacterSheet;
-    const defenderSheet =defenderChar.CharacterSheet;
+    const defenderSheet = defenderChar.CharacterSheet;
 
     if(IsDebug)
         console.log(`${attackerSheet.CharacterName} tries to melee attack ${defenderSheet.CharacterName}`); 
@@ -17,7 +17,7 @@ export function BeginMeleeAttack(attackerChar: CharacterBase, defenderChar:Chara
         const totalDamage: number = CalculateMeleeDamage(attackerSheet);
         const reducedDamage = ArmorDamageReduction(defenderSheet, totalDamage);
         if(IsDebug)
-            console.log(`${defenderSheet.CharacterName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`); 
+            console.log(`${defenderSheet.CharacterName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`);
         defenderSheet.ReceiveDamage(reducedDamage);
 
         WriteAlertStorePrevious(`${defenderSheet.CharacterName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`); 

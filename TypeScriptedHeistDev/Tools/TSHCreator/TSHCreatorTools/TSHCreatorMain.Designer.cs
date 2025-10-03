@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            JsonFolderPathInput = new TextBox();
-            JsonPathGroup = new GroupBox();
-            FindJsonsRootButton = new Button();
-            JsonPathLabel = new Label();
+            AssetsFolderPathInput = new TextBox();
+            AssetsPathGroup = new GroupBox();
+            FindAssetFolderButton = new Button();
+            AssetsPathLabel = new Label();
             StrengthGroup = new GroupBox();
             numericUpDown1 = new NumericUpDown();
             StrengthLabel = new Label();
@@ -40,55 +40,56 @@
             OpenBattleMoveCreatorButton = new Button();
             openFileDialogFindJsonRoot = new OpenFileDialog();
             button1 = new Button();
-            JsonPathGroup.SuspendLayout();
+            OpenCharacterCreatorButton = new Button();
+            AssetsPathGroup.SuspendLayout();
             StrengthGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
-            // JsonFolderPathInput
+            // AssetsFolderPathInput
             // 
-            JsonFolderPathInput.Location = new Point(125, 15);
-            JsonFolderPathInput.Margin = new Padding(4, 3, 4, 3);
-            JsonFolderPathInput.Name = "JsonFolderPathInput";
-            JsonFolderPathInput.Size = new Size(408, 23);
-            JsonFolderPathInput.TabIndex = 1;
+            AssetsFolderPathInput.Location = new Point(125, 15);
+            AssetsFolderPathInput.Margin = new Padding(4, 3, 4, 3);
+            AssetsFolderPathInput.Name = "AssetsFolderPathInput";
+            AssetsFolderPathInput.Size = new Size(408, 23);
+            AssetsFolderPathInput.TabIndex = 1;
             // 
-            // JsonPathGroup
+            // AssetsPathGroup
             // 
-            JsonPathGroup.Controls.Add(FindJsonsRootButton);
-            JsonPathGroup.Controls.Add(JsonPathLabel);
-            JsonPathGroup.Controls.Add(JsonFolderPathInput);
-            JsonPathGroup.Location = new Point(13, 47);
-            JsonPathGroup.Margin = new Padding(4, 3, 4, 3);
-            JsonPathGroup.Name = "JsonPathGroup";
-            JsonPathGroup.Padding = new Padding(4, 3, 4, 3);
-            JsonPathGroup.Size = new Size(541, 79);
-            JsonPathGroup.TabIndex = 2;
-            JsonPathGroup.TabStop = false;
-            JsonPathGroup.Text = "Path to Json Root Folder";
+            AssetsPathGroup.Controls.Add(FindAssetFolderButton);
+            AssetsPathGroup.Controls.Add(AssetsPathLabel);
+            AssetsPathGroup.Controls.Add(AssetsFolderPathInput);
+            AssetsPathGroup.Location = new Point(13, 47);
+            AssetsPathGroup.Margin = new Padding(4, 3, 4, 3);
+            AssetsPathGroup.Name = "AssetsPathGroup";
+            AssetsPathGroup.Padding = new Padding(4, 3, 4, 3);
+            AssetsPathGroup.Size = new Size(541, 79);
+            AssetsPathGroup.TabIndex = 2;
+            AssetsPathGroup.TabStop = false;
+            AssetsPathGroup.Text = "Path to Assets Root Folder";
             // 
-            // FindJsonsRootButton
+            // FindAssetFolderButton
             // 
-            FindJsonsRootButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            FindJsonsRootButton.AutoSize = true;
-            FindJsonsRootButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            FindJsonsRootButton.Location = new Point(211, 44);
-            FindJsonsRootButton.Name = "FindJsonsRootButton";
-            FindJsonsRootButton.Size = new Size(64, 25);
-            FindJsonsRootButton.TabIndex = 7;
-            FindJsonsRootButton.Text = "Browse...";
-            FindJsonsRootButton.UseVisualStyleBackColor = true;
-            FindJsonsRootButton.Click += FindJsonsRootButton_Click;
+            FindAssetFolderButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            FindAssetFolderButton.AutoSize = true;
+            FindAssetFolderButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            FindAssetFolderButton.Location = new Point(211, 44);
+            FindAssetFolderButton.Name = "FindAssetFolderButton";
+            FindAssetFolderButton.Size = new Size(64, 25);
+            FindAssetFolderButton.TabIndex = 7;
+            FindAssetFolderButton.Text = "Browse...";
+            FindAssetFolderButton.UseVisualStyleBackColor = true;
+            FindAssetFolderButton.Click += FindJsonsRootButton_Click;
             // 
-            // JsonPathLabel
+            // AssetsPathLabel
             // 
-            JsonPathLabel.AutoSize = true;
-            JsonPathLabel.Location = new Point(8, 19);
-            JsonPathLabel.Margin = new Padding(4, 0, 4, 0);
-            JsonPathLabel.Name = "JsonPathLabel";
-            JsonPathLabel.Size = new Size(107, 15);
-            JsonPathLabel.TabIndex = 2;
-            JsonPathLabel.Text = "Path to Json Folder";
+            AssetsPathLabel.AutoSize = true;
+            AssetsPathLabel.Location = new Point(8, 19);
+            AssetsPathLabel.Margin = new Padding(4, 0, 4, 0);
+            AssetsPathLabel.Name = "AssetsPathLabel";
+            AssetsPathLabel.Size = new Size(117, 15);
+            AssetsPathLabel.TabIndex = 2;
+            AssetsPathLabel.Text = "Path to Assets Folder";
             // 
             // StrengthGroup
             // 
@@ -167,23 +168,36 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // OpenCharacterCreatorButton
+            // 
+            OpenCharacterCreatorButton.AutoSize = true;
+            OpenCharacterCreatorButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            OpenCharacterCreatorButton.Location = new Point(168, 459);
+            OpenCharacterCreatorButton.Name = "OpenCharacterCreatorButton";
+            OpenCharacterCreatorButton.Size = new Size(142, 25);
+            OpenCharacterCreatorButton.TabIndex = 8;
+            OpenCharacterCreatorButton.Text = "Open Character Creatpr";
+            OpenCharacterCreatorButton.UseVisualStyleBackColor = true;
+            OpenCharacterCreatorButton.Click += button2_Click;
+            // 
             // TSHCreator
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(617, 552);
+            Controls.Add(OpenCharacterCreatorButton);
             Controls.Add(button1);
             Controls.Add(OpenBattleMoveCreatorButton);
             Controls.Add(OpenWeaponCreatorButton);
             Controls.Add(label1);
             Controls.Add(StrengthGroup);
-            Controls.Add(JsonPathGroup);
+            Controls.Add(AssetsPathGroup);
             Margin = new Padding(4, 3, 4, 3);
             MinimizeBox = false;
             Name = "TSHCreator";
             Text = "TSHCreator";
-            JsonPathGroup.ResumeLayout(false);
-            JsonPathGroup.PerformLayout();
+            AssetsPathGroup.ResumeLayout(false);
+            AssetsPathGroup.PerformLayout();
             StrengthGroup.ResumeLayout(false);
             StrengthGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
@@ -193,9 +207,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox JsonFolderPathInput;
-        private System.Windows.Forms.GroupBox JsonPathGroup;
-        private System.Windows.Forms.Label JsonPathLabel;
+        private System.Windows.Forms.TextBox AssetsFolderPathInput;
+        private System.Windows.Forms.GroupBox AssetsPathGroup;
+        private System.Windows.Forms.Label AssetsPathLabel;
         private System.Windows.Forms.GroupBox StrengthGroup;
         private System.Windows.Forms.Label StrengthLabel;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
@@ -203,8 +217,9 @@
         private System.Windows.Forms.Button OpenWeaponCreatorButton;
         private Button OpenBattleMoveCreatorButton;
         private OpenFileDialog openFileDialogFindJsonRoot;
-        private Button FindJsonsRootButton;
+        private Button FindAssetFolderButton;
         private Button button1;
+        private Button OpenCharacterCreatorButton;
     }
 }
 

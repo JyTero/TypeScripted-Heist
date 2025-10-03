@@ -18,3 +18,5 @@ D:\Projects\TypeScript\TypeScripted-Heist\TypeScriptedHeistDev\Tools\TSHCreator\
 D:\Projects\TypeScript\TypeScripted-Heist\TypeScriptedHeistDev\Tools\TSHCreator\TSHCreatorTools\obj\Debug\net8.0-windows\TSHCreatorTools.TSHWeaponCreator.resources
 D:\Projects\TypeScript\TypeScripted-Heist\TypeScriptedHeistDev\Tools\TSHCreator\TSHCreatorTools\obj\Debug\net8.0-windows\TSHCreatorTools.TSHBattleMoveCreator.resources
 D:\Projects\TypeScript\TypeScripted-Heist\TypeScriptedHeistDev\Tools\TSHCreator\TSHCreatorTools\obj\Debug\net8.0-windows\TSHCreatorTools.MetadataCreator.resources
+D:\Projects\TypeScript\TypeScripted-Heist\TypeScriptedHeistDev\Tools\TSHCreator\TSHCreatorTools\obj\Debug\net8.0-windows\TSHCreatorTools.TSHCharacterCreator.resources
+D:\Projects\TypeScript\TypeScripted-Heist\TypeScriptedHeistDev\Tools\TSHCreator\TSHCreatorTools\obj\Debug\net8.0-windows\TSHCreatorTools.SelectImage.resources

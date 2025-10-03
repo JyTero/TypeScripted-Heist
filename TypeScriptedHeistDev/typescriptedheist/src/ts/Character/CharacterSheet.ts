@@ -7,7 +7,8 @@ import { WeaponItem } from "../Items/WeaponItem/WeaponItem";
 import { ItemBase } from "../Items/ItemBase";
 import { DataTypesEnum } from "../../Assets/DataJsons/DataTypesEnum";
 import { WeaponEnum } from "../../Assets/DataJsons/WeaponEnum";
-import { BuildWeapon } from "../JsonInput/DataToObjectBuilders";
+import { BBuildWeapon, BuildWeapon } from "../JsonInput/DataToObjectBuilders";
+import { CharacterJson } from "../JsonInput/CharacterJson";
 
 export class CharacterSheet {
     public CharacterName: string = "Name Namesson";
@@ -53,18 +54,18 @@ export class CharacterSheet {
 
 
 
-    constructor(data: CharacterSheetDataType) {
+    constructor(data: CharacterJson) {
 
-        this.CharacterName = data.Name;
-        this.Faction = data.Faction;
-        this.Strength.Value = data.Strength;
-        this.Dexterity.Value = data.Dexterity
-        this.Perception.Value = data.Perception;
-        this.WeaponSkill.Value = data.WeaponSkill;
-        this.Dodge.Value = data.Dodge;
-        this.baseSpeed.Value = data.BaseSpeed;
-        this.ArmourRating = data.ArmourRating;
-        this.equipedWeapon = data.CurrentWeapon;
+        this.CharacterName = data.CharacterName;
+        this.Faction = data.CharacterFaction;
+        this.Strength.Value = data.CharacterStrength;
+        this.Dexterity.Value = data.CharacterDexterity
+        this.Perception.Value = data.CharacterPerception;
+        this.WeaponSkill.Value = data.CharacterWeaponSkill;
+        this.Dodge.Value = data.CharacterDodge;
+        this.baseSpeed.Value = data.CharacterBaseSpeed;
+        this.ArmourRating = data.CharacterArmour;
+        this.equipedWeapon = BBuildWeapon(data.CharaterEquipedWeapon);
 
         this.BattleSpeed = this.Dexterity;
 
@@ -80,7 +81,7 @@ export class CharacterSheet {
     public ChangeWeapon(weaponEnum: WeaponEnum) {
 
         const newWeapon = BuildWeapon(weaponEnum);
-        newWeapon.BuildWeaponBattleMoves();
+        //newWeapon.BuildWeaponBattleMoves();
 
         this.PrintAllBattleMoves();
         this.equipedWeapon.BattleMoves.forEach(battleMoveInCurrentWeapon => {

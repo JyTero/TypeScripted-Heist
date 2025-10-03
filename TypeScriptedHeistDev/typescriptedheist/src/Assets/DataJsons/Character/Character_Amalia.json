@@ -1,0 +1,15 @@
+{
+  "CharacterName": "Amalia",
+  "CharcterFaction": 2,
+  "CharacterStrength": 2,
+  "CharacterDexterity": 12,
+  "CharacterPerception": 3,
+  "CharacterWeaponSkill": 20,
+  "CharacterDodge": 2,
+  "CharacterBaseSpeed": 10,
+  "CharacterArmour": 1,
+  "CharaterEquipedWeapon": "Weapon_Knife",
+  "CharacterImagePath": "amalia.png",
+  "DataDevName": "Character_Amalia",
+  "DataType": "Character"
+}

@@ -1,10 +1,23 @@
+import { CharacterEnum } from "../../Assets/DataJsons/CharacterEnum";
 import { DataTypesEnum } from "../../Assets/DataJsons/DataTypesEnum";
 import { WeaponEnum } from "../../Assets/DataJsons/WeaponEnum";
+import { CharacterBase } from "../Character/CharacterBase";
 import { JsonHandlerInstance } from "../initialisation";
 import { WeaponItem } from "../Items/WeaponItem/WeaponItem";
 
-  export function BuildWeapon(weaponEnum: WeaponEnum): WeaponItem {
-        const allWeaponReferences = JsonHandlerInstance.data[DataTypesEnum.Weapon.toString()];
-        const weapon = allWeaponReferences.find(w => w.DataDevName === weaponEnum.toString());
-        return new WeaponItem(weapon);
-    }
+export function BuildWeapon(weaponEnum: WeaponEnum): WeaponItem {
+  const allWeaponReferences = JsonHandlerInstance.JsonDatabase[DataTypesEnum.Weapon.toString()];
+  const weapon = allWeaponReferences.find(w => w.DataDevName === weaponEnum.toString());
+  return new WeaponItem(weapon);
+}
+export function BBuildWeapon(weaponEnum: string): WeaponItem {
+  const allWeaponReferences = JsonHandlerInstance.JsonDatabase[DataTypesEnum.Weapon.toString()];
+  const weapon = allWeaponReferences.find(w => w.DataDevName === weaponEnum.toString());
+  return new WeaponItem(weapon);
+}
+
+export function BuildCharacter(characterEnum: CharacterEnum):CharacterBase{
+  const allCharacters = JsonHandlerInstance.JsonDatabase[DataTypesEnum.Character.toString()];
+  const character = allCharacters.find(c => c.DataDevName === characterEnum.toString());
+  return new CharacterBase(character);
+}

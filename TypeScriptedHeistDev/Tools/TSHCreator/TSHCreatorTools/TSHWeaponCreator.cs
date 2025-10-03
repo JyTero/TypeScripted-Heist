@@ -44,12 +44,13 @@ namespace TSHCreatorTools
 
         protected override void OnCreateData()
         {
+            base.OnCreateData();
+
             string name = WeaponNameInput.Text;
             List<string> battleMoves = new();
             int hit = (int)WeaponHitInput.Value;
             int dmg = (int)WeaponDamageInput.Value;
             //TODO:
-            //Deal with reading and saving battle move data
             //Validate data inputs
             //Set output folder to proper subfolder of jsonRoot
 
@@ -61,14 +62,13 @@ namespace TSHCreatorTools
 
             WeaponData data = new WeaponData
             {
-                DataDevName = metadataCreator.MetadataDevNameInputField.Text,
-                DataType = metadataCreator.MetadataTypeField.Text,
-
                 WeaponName = name,
                 BattleMoves = battleMoves,
                 WeaponHit = hit,
                 WeaponDamage = dmg,
             };
+
+            data = InsertMetadata(data);
 
             string jsonOutput = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
             Debug.WriteLine(jsonOutput);

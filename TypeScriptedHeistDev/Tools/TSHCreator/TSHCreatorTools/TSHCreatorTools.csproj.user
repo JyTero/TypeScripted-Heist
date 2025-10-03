@@ -4,7 +4,13 @@
     <Compile Update="MetadataCreator.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="SelectImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="TSHBattleMoveCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="TSHCharacterCreator.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="TSHCreatorMain.cs">

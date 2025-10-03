@@ -9,15 +9,15 @@ export const CanvasGraphicsInstance: CanvasGraphicEngine = new CanvasGraphicEngi
 export const SceneManagerInstance: SceneManagement = new SceneManagement();
 export const JsonHandlerInstance:JsonHandler = new JsonHandler();
 
-
 CanvasGraphicsInstance.StartGraphicEngine();
 
 JsonHandlerInstance.BeginJsonLoading();
 
-
 while(!JsonHandlerInstance.isJsonReady){
     await Delay(FrameTimeMS);
 }
+
+console.log("Hello world!");
 
 console.log("Initialised");
 Game();

@@ -18,6 +18,7 @@ const battleScene: BattleArenaTestScene = new BattleArenaTestScene();
 export function Game() {
     console.log("Starting index main");
 
+
     mansionApproachScene.SceneOnStartUp();
     frontDoorScene.SceneOnStartUp();
     groundLevelWindowScene.SceneOnStartUp();
@@ -29,11 +30,16 @@ export function Game() {
     BackDoorTieUp();
     BattleTestTieUp();
 
+    InitialisePlayerCharacter();
+    
     TestingThings();
-
     SceneManagerInstance.BeginFirstScene(mansionApproachScene);
     mansionApproachScene.SceneMain();
 
+
+}
+function InitialisePlayerCharacter(){
+    console.log("PC: " + PlayerCharacter.instance.GetPlayerCharacter().CharacterSheet.CharacterName);
 
 }
 function TestingThings(){
@@ -43,7 +49,7 @@ function TestingThings(){
     //console.log("weapons: " + weapons);
     //const boot = weapons.find(w => w.DataDevName ===  WeaponItemsEnum.Weapon_Boots.toString())
     //console.log("Boot: " + boot);
-    PlayerCharacter.CharacterSheet.ChangeWeapon(WeaponEnum.Weapon_Hoe);
+   // PlayerCharacter.instance.GetPlayerCharacter().CharacterSheet.ChangeWeapon(WeaponEnum.Weapon_Hoe);
 
    // console.log("PC weapon: " + PlayerCharacter.CharacterSheet.GetEquipedWeapon().ItemName);
 }
