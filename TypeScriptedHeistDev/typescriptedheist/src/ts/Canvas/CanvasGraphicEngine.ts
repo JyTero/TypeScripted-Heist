@@ -95,6 +95,7 @@ export class CanvasGraphicEngine{
     public RemoveSpriteFromList(sprite:Sprite){
         const i = this.spritesToDraw.indexOf(sprite);
         delete this.spritesToDraw[i];
+        this.DrawFrame();
     }
     private SpriteIsReady(sprite:Sprite):boolean{
         if(sprite === undefined)

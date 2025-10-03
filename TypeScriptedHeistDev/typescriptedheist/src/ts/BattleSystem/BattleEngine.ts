@@ -1,4 +1,4 @@
-import { CanvasGraphicsInstance, FrameTimeMS, IsDebug } from "../initialisation";
+import { CanvasGraphicsInstance, FrameTimeMS, IsDebug, SceneManagerInstance } from "../initialisation";
 import { SceneObjectBase } from "../SceneObjectBase";
 import { BattleArenaScene as BattleArenaSceneBase } from "../BattleArenaSceneBase";
 import { CharacterBase } from "../Character/CharacterBase";
@@ -11,6 +11,7 @@ import { WeaponEnum } from "../../Assets/DataJsons/WeaponEnum";
 import { BuildCharacter } from "../JsonInput/DataToObjectBuilders";
 import { CharacterEnum } from "../../Assets/DataJsons/CharacterEnum";
 import { PlayerCharacter } from "../PlayerCharacter";
+import { SceneManagement } from "../Scenes/SceneManagement";
 
 export async function BeginBattleEngine(battleData: BattleArenaDataType, currentScene: BattleArenaSceneBase) {
     const battleStage: BattleEngine = new BattleEngine(battleData, PlayerCharacter.instance.GetPlayerCharacter(), currentScene);
@@ -150,14 +151,23 @@ class BattleEngine {
             targetMenu.BuildTargetMenuObject(this.turnOrder);
 
             const targetIndex = await targetMenu.HandleMenu();
-            const chosenTarget = targetMenu.allMenuItems[targetIndex - 1].MenuItemName;
+            const chosenTarget:string = targetMenu.allMenuItems[targetIndex - 1].MenuItemName;
+            const chosenTargetCharacter:CharacterBase =  this.turnOrder[targetMenu.allMenuItems[targetIndex - 1].MenuItemNumber - 1];
             // WriteMenuSelection(targetMenu.allMenuItems[targetIndex-1].MenuItemSelectionDescription);
 
             if (IsDebug)
                 console.log(`${this.characterInTurn.CharacterSheet.CharacterName} takes action ${chosenCombatMove.MoveName} against ${chosenTarget}`)
 
-            WriteAlert(`${this.characterInTurn.CharacterSheet.CharacterName} takes action ${chosenCombatMove.MoveName} against ${this.turnOrder[targetMenu.allMenuItems[targetIndex - 1].MenuItemNumber - 1].CharacterSheet.CharacterName}`);
-            chosenCombatMove.ExecuteMove(this.characterInTurn, this.turnOrder[targetMenu.allMenuItems[targetIndex - 1].MenuItemNumber - 1]);
+            WriteAlert(`${this.characterInTurn.CharacterSheet.CharacterName} takes action ${chosenCombatMove.MoveName} against ${chosenTargetCharacter.CharacterSheet.CharacterName}`);
+            chosenCombatMove.ExecuteMove(this.characterInTurn, chosenTargetCharacter);
+
+            //OnCharacterDeath
+            if(chosenTargetCharacter.CharacterSheet.CurrentHealth() <= 0){
+                CanvasGraphicsInstance.RemoveSpriteFromList(chosenTargetCharacter.CharacterSprite);
+                //Remove from turn order
+                const i = this.turnOrder.indexOf(chosenTargetCharacter);
+                this.turnOrder.splice(i, 1);
+            }
 
         }
         else {
@@ -180,7 +190,7 @@ class BattleEngine {
         var hpString = "";
         //Show all Hp, placeholder here
         this.turnOrder.forEach(character => {
-            hpString += `${character.CharacterSheet.CharacterName} has ${character.CharacterSheet.CurrentHealth()}hp}\n`;
+            hpString += `${character.CharacterSheet.CharacterName} has ${character.CharacterSheet.CurrentHealth()}hp\n`;
             hpString += "<br>";
         });
         await WriteAlertStorePrevious(hpString);
@@ -243,11 +253,12 @@ class BattleEngine {
 
     private OnBattleEnd() {
         this.battleOver = true;
-        this.nextScene.SceneMain();
+        //this.nextScene.SceneMain();
         this.OnEngineDestroy();
+        SceneManagerInstance.HandleNextScene(this.currentScene, this.nextScene);
     }
     private OnEngineDestroy() {
-        WriteAlert("Battle ended");
+        WriteAlertStorePrevious("Battle ended");
 
     }
 }

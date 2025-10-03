@@ -163,20 +163,8 @@
         },
         {
           "DockedWidth": 703,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TSHCreatorMain.cs [Design]",
-              "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\TSHCreatorMain.cs",
-              "RelativeDocumentMoniker": "TSHCreatorMain.cs",
-              "ToolTip": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\TSHCreatorMain.cs [Design]",
-              "RelativeToolTip": "TSHCreatorMain.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T12:46:01.035Z",
-              "EditorCaption": " [Design]"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 10,
@@ -212,6 +200,18 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-04T13:42:58.761Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TSHCreatorMain.cs [Design]",
+              "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\TSHCreatorMain.cs",
+              "RelativeDocumentMoniker": "TSHCreatorMain.cs",
+              "ToolTip": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\TSHCreatorMain.cs [Design]",
+              "RelativeToolTip": "TSHCreatorMain.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T12:46:01.035Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",

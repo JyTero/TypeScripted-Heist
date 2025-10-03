@@ -1,5 +1,5 @@
 import { MenuItemBase } from "./MenuItemBase";
-import { WaitForInput, WriteAlert, WriteAlertStorePrevious, WriteMenu} from "./IOMethods";
+import { WaitForInput, WriteAlert, WriteAlertStorePrevious, WriteMenu, WriteMenuStorePrevious } from "./IOMethods";
 import { Flags } from "./flags";
 import { SceneObjectBase } from "./SceneObjectBase";
 import { Delay } from "../Tools";
@@ -15,13 +15,13 @@ export class MenuObjectBase {
         this.allMenuItems = _menuItems ?? [];
     }
 
-   
+
     public async HandleMenu(): Promise<number> {
         let playerInputIsValid: Boolean = false;
         let playerInput: number = 0;
 
         while (!playerInputIsValid) {
-            this.DisplayMenu();
+            await this.DisplayMenu();
             playerInput = await this.GetAndCheckPlayerInput();
             if (playerInput === -1)
                 WriteAlertStorePrevious("Please select a valid option using the number keys.");
@@ -38,7 +38,7 @@ export class MenuObjectBase {
 
 
     }
-    public DisplayMenu() {
+    public async DisplayMenu() {
         let i: number = 1;
         let s: string = "";
         this.validMenuItems = [];
@@ -56,8 +56,8 @@ export class MenuObjectBase {
             i++;
 
         };
-        WriteMenu(s);
-        Delay(FrameTimeMS);
+        await WriteMenuStorePrevious(s);
+       // await Delay(FrameTimeMS);
     }
 
     private HasAnyForbiddenFlags(menuItem: MenuItemBase): boolean {
