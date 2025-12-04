@@ -1,0 +1,3 @@
+- Extends WorldItem
+- CharacterSheet
+- etc

@@ -1,10 +1,10 @@
 import { WriteAlert } from "../IOMethods";
 import { MenuItemBase } from "../MenuItemBase";
 import { GroundLevelWindowData01, GroundLevelWindowData02, GroundLevelWindowData03 } from "../SceneData/GroundLevelWindowData";
-import { SceneObjectBase } from "../SceneObjectBase";
+import { SceneBase } from "../SceneBase";
 
 
-export class GroundLevelWindowScene extends SceneObjectBase {
+export class GroundLevelWindowScene extends SceneBase {
     SceneSpsificStartUp(): void {
         this.SceneName = "GroundLevelWindowScene";
     }

@@ -32,12 +32,13 @@ export function WriteAlert(text: string) {
   textField.innerHTML = text;
 }
 
-export async function WriteAlertStorePrevious(text: string) {
-  const textField = document.getElementById("DescriptionText") as HTMLInputElement;
-  if (textField.textContent !== null)
-    await AddNewHistoryDiv(textField.textContent);
-  textField.innerHTML = text;
-}
+
+// export async function WriteAlertStorePrevious(text: string) {
+//   const textField = document.getElementById("DescriptionText") as HTMLInputElement;
+//   if (textField.textContent !== null)
+//     await AddNewHistoryDiv(textField.textContent);
+//   textField.innerHTML = text;
+// }
 
 export function WriteMenu(text: string) {
   const textField = document.getElementById("DescriptionText") as HTMLInputElement;
@@ -64,3 +65,4 @@ export function WriteMenuSelection(itemDescription: string) {
   //   textField.innerHTML = itemDescription;
 
 }
+

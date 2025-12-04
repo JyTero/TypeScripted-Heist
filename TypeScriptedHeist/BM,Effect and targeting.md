@@ -1,0 +1,36 @@
+- BM:
+	- Name
+	- Type
+		- Attack, Heal, Utility
+			- Guides the AI
+	- Hit chance
+	- Damage adjustment
+		- (Plan: hard to hit attacks deal more damage)
+	- Effects: List<>
+- Effect: 
+	- Name
+	- Potency ("The damage value", will be adjusted by buffs, debuffs, armour)
+	- Duration (In turns, for OT effects)
+	- Effect Target Stat
+- BM: Basic attack
+	- Name: Slash
+	- Type: Attack
+	- Hit Chance multiplier: 1
+	- //Damage multiplier: 1
+	- Effects:
+		- 2 health damage
+- BM: Bleed Attack
+	- Name: Bleeding Stab
+	- Type: Attack
+	- Hit Chance multiplier: 1
+	- Damage multiplier: 1
+	- Effects:
+		- 1 health damage
+		- 1 Health damage / 3 turns
+- BM: Basic Heal
+	- Name: Recover
+	- Type: Heal
+	- Hit Chance mutiplier: 1
+	- Damage multiplier: 1
+	- Effects: 
+		- 3 health healing

@@ -3,11 +3,9 @@ import { FrontDoorScene } from "./Scenes/FrontDoorScene";
 import { GroundLevelWindowScene } from "./Scenes/GroundLevelWindowScene";
 import { BackdoorScene } from "./Scenes/BackdoorScene";
 import { BattleArenaTestScene } from "./Scenes/BattleArenaTestScene";
-import { JsonHandlerInstance, SceneManagerInstance } from "./initialisation";
+import { SceneManagerInstance } from "./initialisation";
 import { PlayerCharacter } from "./PlayerCharacter";
-import { WeaponItem } from "./Items/WeaponItem/WeaponItem";
 import { WeaponEnum } from "../Assets/DataJsons/WeaponEnum";
-import { DataTypesEnum } from "../Assets/DataJsons/DataTypesEnum";
 
 const mansionApproachScene: MansionApproachScene = new MansionApproachScene();
 const frontDoorScene: FrontDoorScene = new FrontDoorScene();
@@ -31,28 +29,52 @@ export function Game() {
     BattleTestTieUp();
 
     InitialisePlayerCharacter();
-    
+
     TestingThings();
     SceneManagerInstance.BeginFirstScene(mansionApproachScene);
     mansionApproachScene.SceneMain();
 
 
 }
-function InitialisePlayerCharacter(){
-    console.log("PC: " + PlayerCharacter.instance.GetPlayerCharacter().CharacterSheet.CharacterName);
+function InitialisePlayerCharacter() {
+    console.log("PC: " + PlayerCharacter.instance.GetPlayerCharacter().ItemName);
 
 }
-function TestingThings(){
-   // console.log("PC weapon: " + PlayerCharacter.CharacterSheet.GetEquipedWeapon().ItemName);
-    
-    //const weapons = JsonHandlerInstance.data[DataTypesEnum.WeaponItems.toString()];
-    //console.log("weapons: " + weapons);
-    //const boot = weapons.find(w => w.DataDevName ===  WeaponItemsEnum.Weapon_Boots.toString())
-    //console.log("Boot: " + boot);
-   // PlayerCharacter.instance.GetPlayerCharacter().CharacterSheet.ChangeWeapon(WeaponEnum.Weapon_Hoe);
-
-   // console.log("PC weapon: " + PlayerCharacter.CharacterSheet.GetEquipedWeapon().ItemName);
+function TestingThings() {
+    PlayerCharacter.instance.GetPlayerCharacter().CharacterSheet.ChangeWeaponEnm(WeaponEnum.Weapon_Cane)
 }
+
+// function PrevTest(){
+//     const bleedEffect: EffectData = {
+//         EffectName: "Bleed",
+//         PotencePerTurn: 2,
+//         EffectLenghtTurns: 3,
+//         DataDevName: "Effect_Bleed",
+//         DataType: "Effect",
+//     }
+//     const moveData: BattleMoveData = {
+//         BattleMoveName: "Bleeder",
+//         IsRanged: false,
+//         BattleMoveHitMultiplier: 0.7,
+//         BattleMoveDamageMultiplier: 0.5,
+//         DataDevName: "Stab_Knife_BattleMove",
+//         DataType: "BattleMove",
+//         BattleMoveEffects: [new DamageOTEffect(bleedEffect)],
+//     }
+//     const bleederMove: BattleMove = new BattleMove(moveData);
+//     const weaponData: WeaponDatatype = {
+//         WeaponName: "Cloak Dagger",
+//         BattleMoves: [],
+//         WeaponHit: 1,
+//         WeaponDamage: 1,
+//         DataDevName: "Dev Daggers",
+//         DataType: "WeaponItems"
+//     }
+//     const weapon: WeaponItem = new WeaponItem(weaponData);
+//     weapon.AddBattleMoves(BattleMoveEnum.BattleMove_Stab_Knife);
+//     weapon.BattleMoves.push(bleederMove);
+//     PlayerCharacter.instance.GetPlayerCharacter().CharacterSheet.ChangeWeaponItm(weapon)
+// }
 function MansionApproachTieUp() {
     mansionApproachScene.TieMenuItemToSceneObject(0, frontDoorScene);
     mansionApproachScene.TieMenuItemToSceneObject(1, groundLevelWindowScene);
@@ -61,10 +83,10 @@ function MansionApproachTieUp() {
 
 }
 
-function BackDoorTieUp(){
+function BackDoorTieUp() {
     backdoorScene.TieMenuItemToSceneObject(2, backdoorScene);
 }
 
-function BattleTestTieUp(){
+function BattleTestTieUp() {
     battleScene.VictoryNextScene = mansionApproachScene;
 }

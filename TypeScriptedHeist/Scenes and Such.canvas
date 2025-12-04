@@ -1,0 +1,14 @@
+{
+	"nodes":[
+		{"id":"ac2eacad2bde9158","type":"file","file":"Classes/Scene.md","x":380,"y":-753,"width":305,"height":193},
+		{"id":"a8ef11949f4be87d","type":"text","text":"","x":560,"y":-400,"width":250,"height":60},
+		{"id":"f29ad51e2e0b0c3c","type":"file","file":"Classes/CharacterBase.md","x":-724,"y":-600,"width":250,"height":160},
+		{"id":"9c87eeede1fb1862","type":"text","text":"Item Spesific Classes","x":-400,"y":-589,"width":250,"height":139},
+		{"id":"8719c49cc7fcbd03","type":"file","file":"Classes/WorldItem.md","x":-560,"y":-927,"width":250,"height":174},
+		{"id":"52545a2a4cfae3a7","type":"file","file":"Classes/SceneItem.md","x":-150,"y":-880,"width":380,"height":200}
+	],
+	"edges":[
+		{"id":"ebffca7d41ba7955","fromNode":"8719c49cc7fcbd03","fromSide":"bottom","toNode":"f29ad51e2e0b0c3c","toSide":"top"},
+		{"id":"358b382d95a95fa8","fromNode":"8719c49cc7fcbd03","fromSide":"bottom","toNode":"9c87eeede1fb1862","toSide":"top"}
+	]
+}

@@ -1,11 +1,11 @@
 import { MenuItemBase } from "../MenuItemBase";
-import { SceneObjectBase } from "../SceneObjectBase";
-import { WriteAlert, WriteAlertStorePrevious } from "../IOMethods";
+import { SceneBase } from "../SceneBase";
 import { SceneDataType } from "../DataTypes/SceneDataType";
 import { Color } from "../Tools/Color";
 import { MansionApproachMenuItemData01, MansionApproachMenuItemData02, MansionApproachMenuItemData03, MansionApproachMenuItemData04 } from "../SceneData/MansionApproachData";
+import { AlertManager } from "../AlertManager";
 
-export class MansionApproachScene extends SceneObjectBase {
+export class MansionApproachScene extends SceneBase {
     
    public SceneSpsificStartUp(): void {
         this.SceneName = MansionApproachSceneData.SceneName;
@@ -13,7 +13,7 @@ export class MansionApproachScene extends SceneObjectBase {
     }
 
    public async SceneSpesificMain() {
-        WriteAlertStorePrevious("The target is in sight");
+       await AlertManager.Instance.WriteAlertStorePrevious("The target is in sight");
 
     }
 

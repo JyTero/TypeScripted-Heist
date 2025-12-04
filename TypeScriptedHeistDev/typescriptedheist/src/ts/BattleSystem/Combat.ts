@@ -1,7 +1,8 @@
-import { CharacterBase } from "../Character/CharacterBase";
-import { CharacterSheet } from "../Character/CharacterSheet";
+import { CharacterBase } from "../Items/Character/CharacterBase";
+import { CharacterSheet } from "../Items/Character/CharacterSheet";
 import { IsDebug } from "../initialisation";
-import { WriteAlertStorePrevious } from "../IOMethods";
+import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
+import { AlertManager } from "../AlertManager";
 
 const attackHitDexMultiplier:number = 1.25;
 
@@ -10,17 +11,22 @@ export function BeginMeleeAttack(attackerChar: CharacterBase, defenderChar:Chara
     const attackerSheet = attackerChar.CharacterSheet;
     const defenderSheet = defenderChar.CharacterSheet;
 
+
     if(IsDebug)
-        console.log(`${attackerSheet.CharacterName} tries to melee attack ${defenderSheet.CharacterName}`); 
+        console.log(`${attackerChar.ItemName} tries to melee attack ${defenderChar.ItemName}`); 
     if(AttackerHit(attackerSheet) > DefenderEvasion(defenderSheet)){
         //Hit
         const totalDamage: number = CalculateMeleeDamage(attackerSheet);
-        const reducedDamage = ArmorDamageReduction(defenderSheet, totalDamage);
+        var reducedDamage:number =ArmorDamageReduction(defenderSheet, totalDamage);
+        
         if(IsDebug)
-            console.log(`${defenderSheet.CharacterName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`);
-        defenderSheet.ReceiveDamage(reducedDamage);
+            console.log(`${defenderChar.ItemName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`);
+        AlertManager.Instance.WriteAlertStorePrevious(`${defenderChar.ItemName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`); 
 
-        WriteAlertStorePrevious(`${defenderSheet.CharacterName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`); 
+        reducedDamage = -Math.abs(reducedDamage);
+        //defenderSheet.ReceiveDamage(reducedDamage);
+        defenderChar.GetStat(CharcterStatTypeEnum.Health)?.AdjustValue(reducedDamage);
+
     }
     else{
         if(IsDebug)
@@ -39,6 +45,7 @@ function CalculateMeleeDamage(attacker: CharacterSheet): number {
     return ((attacker.Strength.Value * 2) / 100) + 0.4 * attacker.WeaponSkillDmg.Value;
 }
 function ArmorDamageReduction(defender: CharacterSheet, incomingDamage: number): number {
-    const dmgReduction = defender.ArmourRating * (incomingDamage / 100);
-    return incomingDamage - dmgReduction;
+    const dmgReduction = defender.ArmourRating.Value * (incomingDamage / 100);
+    const reducedDmg =  Math.max(0, (incomingDamage - dmgReduction));
+    return reducedDmg;
 }

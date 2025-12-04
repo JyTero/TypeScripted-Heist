@@ -1,0 +1,4 @@
+- SceneName
+- SceneIntro (shown before menu)
+- SceneItems[] 
+- SceneMenu :SceneMenu (MenuObject)

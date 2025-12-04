@@ -1,0 +1,3 @@
+- Name
+- HP (max&Cur)
+- Sprite

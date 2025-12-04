@@ -1,5 +1,5 @@
 import { FlagName, MenuItemFlagChange } from "../flags";
-import { SceneObjectBase } from "../SceneObjectBase";
+import { SceneBase } from "../SceneBase";
 
 
 export type MenuItemDataType = 
@@ -8,7 +8,7 @@ export type MenuItemDataType =
     MenuItemNumber: number;
     MenuItemText: string;
     MenuItemSelectionDescription: string;
-    NextSceneObject: SceneObjectBase;
+    NextSceneObject: SceneBase;
     MenuItemRequireAllFlags: FlagName[];
     MenuItemRequireAnyFlags: FlagName[];
     MenuItemForbiddenAllFlags: FlagName[]; 

@@ -1,0 +1,9 @@
+{
+  "EffectName": "Damage Health",
+  "TargetStat": 14,
+  "TargetEffectType": 1,
+  "EffectPotency": 2,
+  "EffectDuration": 0,
+  "DataDevName": "Effect_DamageHealth_2",
+  "DataType": "Effect"
+}

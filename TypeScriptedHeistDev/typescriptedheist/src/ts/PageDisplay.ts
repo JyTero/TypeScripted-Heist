@@ -10,8 +10,13 @@ const ctx = canvas.getContext("2d");
 export async function AddNewHistoryDiv(historyText:string){   
 
     const newEntry = document.createElement("div");
+    const p = document.createElement("p");
+
     newEntry.className = "HistoryEntry";
-    newEntry.textContent = historyText;
+
+    p.textContent = historyText;
+    newEntry.appendChild(p);
+
     history?.insertBefore(newEntry, history.firstChild);
     await Delay(FrameTimeMS);
 }

@@ -1,13 +1,13 @@
-import { SceneObjectBase } from "../SceneObjectBase";
+import { SceneBase } from "../SceneBase";
 import { MenuItemBase } from "../MenuItemBase";
 import { WriteAlert } from "../IOMethods";
-import { CharacterSheet } from "../Character/CharacterSheet";
+import { CharacterSheet } from "../Items/Character/CharacterSheet";
 import { CharacterSheetDataType } from "../DataTypes/CharacterSheetDataType";
 import { WeaponItem } from "../Items/WeaponItem/WeaponItem";
 import { DaggerItemData } from "../Items/ItemDatas/WeaponItemData/DaggerData";
 import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
 import { CharacterDataType } from "../DataTypes/CharacterData";
-import { CharacterBase } from "../Character/CharacterBase";
+import { CharacterBase } from "../Items/Character/CharacterBase";
 
 // const placeholderCharacterSheetData: CharacterSheetDataType = {
     
@@ -35,7 +35,7 @@ import { CharacterBase } from "../Character/CharacterBase";
 // }
 //export const PlaceholderCharacterSheet: CharacterSheet = new CharacterSheet(placeholderCharacterSheetData);
 //export const PlaceholderCharacter: CharacterBase = new CharacterBase(placeholderCharacterData);
-export class PlaceholderScene extends SceneObjectBase {
+export class PlaceholderScene extends SceneBase {
     
     SceneSpsificStartUp(): void {
         this.SceneName = "PlaceholderScene";

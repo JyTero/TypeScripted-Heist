@@ -1,0 +1,15 @@
+{
+  "CharacterName": "Skee Biddy",
+  "CharcterFaction": 2,
+  "CharacterStrength": 6,
+  "CharacterDexterity": 6,
+  "CharacterPerception": 6,
+  "CharacterWeaponSkill": 6,
+  "CharacterDodge": 6,
+  "CharacterBaseSpeed": 5,
+  "CharacterArmour": 10,
+  "CharaterEquipedWeapon": "Weapon_ShortSword",
+  "CharacterImagePath": "Pytty.png",
+  "DataDevName": "Character_SkeeBiddy",
+  "DataType": "Character"
+}

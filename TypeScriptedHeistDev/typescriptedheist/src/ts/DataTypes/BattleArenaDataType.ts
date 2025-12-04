@@ -1,6 +1,6 @@
 import { CharacterEnum } from "../../Assets/DataJsons/CharacterEnum";
-import { CharacterSheet } from "../Character/CharacterSheet";
-import { SceneObjectBase } from "../SceneObjectBase";
+import { CharacterSheet } from "../Items/Character/CharacterSheet";
+import { SceneBase } from "../SceneBase";
 import { CharacterDataType } from "./CharacterData";
 
 export type BattleArenaDataType={
@@ -9,7 +9,7 @@ export type BattleArenaDataType={
     //PlayerCharacter: CharacterSheet;
     EnemyCharacterDatas: CharacterEnum[];
     
-    NextScene:SceneObjectBase;
+    NextScene:SceneBase;
     //Enemy Distance, equipment, 
     //Art
 }

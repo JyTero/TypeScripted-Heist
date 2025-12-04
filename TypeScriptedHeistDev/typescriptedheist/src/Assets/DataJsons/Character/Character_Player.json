@@ -1,10 +1,10 @@
 {
   "CharacterName": "Casper",
   "CharcterFaction": 0,
-  "CharacterStrength": 50,
-  "CharacterDexterity": 25,
+  "CharacterStrength": 20,
+  "CharacterDexterity": 5,
   "CharacterPerception": 20,
-  "CharacterWeaponSkill": 120,
+  "CharacterWeaponSkill": 10,
   "CharacterDodge": 5,
   "CharacterBaseSpeed": 5,
   "CharacterArmour": 20,

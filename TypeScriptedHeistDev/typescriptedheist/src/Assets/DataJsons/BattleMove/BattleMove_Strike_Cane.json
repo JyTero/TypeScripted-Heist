@@ -1,0 +1,12 @@
+{
+  "BattleMoveName": "Cane Strike",
+  "IsRanged": false,
+  "BattleMoveWeaponHitMultiplier": 1,
+  "BattleMoveWeaponDamageMultiplier": 1,
+  "BattleMoveEffects": [
+    "Effect_DamageHealth_2"
+  ],
+  "BattleMoveType": 1,
+  "DataDevName": "BattleMove_Strike_Cane",
+  "DataType": "BattleMove"
+}

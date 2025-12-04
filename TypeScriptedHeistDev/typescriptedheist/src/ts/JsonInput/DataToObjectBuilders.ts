@@ -1,7 +1,7 @@
 import { CharacterEnum } from "../../Assets/DataJsons/CharacterEnum";
 import { DataTypesEnum } from "../../Assets/DataJsons/DataTypesEnum";
 import { WeaponEnum } from "../../Assets/DataJsons/WeaponEnum";
-import { CharacterBase } from "../Character/CharacterBase";
+import { CharacterBase } from "../Items/Character/CharacterBase";
 import { JsonHandlerInstance } from "../initialisation";
 import { WeaponItem } from "../Items/WeaponItem/WeaponItem";
 

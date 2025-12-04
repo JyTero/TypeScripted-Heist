@@ -40,17 +40,17 @@ namespace TSHCreatorTools
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if(lastImagePath != "")
+                    if (lastImagePath != "")
                         openFileDialog.InitialDirectory = lastImagePath;
 
                     try
                     {
-
                         if (ImagePrevieBox.Image != null)
                             ImagePrevieBox.Image.Dispose();
 
-                        ImagePrevieBox.Image = new Bitmap(openFileDialog.FileName);
-                        ImagePrevieBox.SizeMode = PictureBoxSizeMode.Zoom;
+                        DisplayImage(openFileDialog.FileName);
+                        //ImagePrevieBox.Image = new Bitmap(openFileDialog.FileName);
+                        //ImagePrevieBox.SizeMode = PictureBoxSizeMode.Zoom;
 
                         SelectedImageName = openFileDialog.SafeFileName;
                     }
@@ -70,5 +70,19 @@ namespace TSHCreatorTools
             lastImagePath = ToolSaveDataManager.Instance.GetRecentImagePath();
             ImagePathInputField.Text = lastImagePath;
         }
+
+        public void DisplayImage(string path)
+        {
+            ImagePrevieBox.Image = new Bitmap(path);
+            ImagePrevieBox.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+
+
+        private void SelectImage_HandleDestroyed(Object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

@@ -1,17 +1,17 @@
 import { CanvasGraphicsInstance, FrameTimeMS, IsDebug, SceneManagerInstance } from "../initialisation";
-import { SceneObjectBase } from "../SceneObjectBase";
+import { SceneBase } from "../SceneBase";
 import { BattleArenaScene as BattleArenaSceneBase } from "../BattleArenaSceneBase";
-import { CharacterBase } from "../Character/CharacterBase";
+import { CharacterBase } from "../Items/Character/CharacterBase";
 import { Delay, GetRandomInt } from "../../Tools";
 import { CombatMenuObject } from "../CombatMenuObject";
 import { TargetMenuObject } from "../TargetMenuObject";
 import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
-import { WriteAlert, WriteMenuSelection, WriteAlertStorePrevious } from "../IOMethods";
 import { WeaponEnum } from "../../Assets/DataJsons/WeaponEnum";
 import { BuildCharacter } from "../JsonInput/DataToObjectBuilders";
 import { CharacterEnum } from "../../Assets/DataJsons/CharacterEnum";
 import { PlayerCharacter } from "../PlayerCharacter";
 import { SceneManagement } from "../Scenes/SceneManagement";
+import { AlertGroup, AlertGroupType, AlertManager } from "../AlertManager";
 
 export async function BeginBattleEngine(battleData: BattleArenaDataType, currentScene: BattleArenaSceneBase) {
     const battleStage: BattleEngine = new BattleEngine(battleData, PlayerCharacter.instance.GetPlayerCharacter(), currentScene);
@@ -19,7 +19,8 @@ export async function BeginBattleEngine(battleData: BattleArenaDataType, current
 
     battleStage.OnBattleStartUp();
     //Begin Battle
-    WriteAlertStorePrevious("Battle Begins!");
+    //await WriteAlertStorePrevious("Battle Begins!");
+    await AlertManager.Instance.WriteAlertStorePrevious("Battle Begins!");
     //Begin rounds
     await battleStage.BattleLoop();
     //Give turns
@@ -41,7 +42,7 @@ class BattleEngine {
     private currentTurnIndex: number = -1;
     private battleOver = false;
     private currentScene: BattleArenaSceneBase;
-    private nextScene: SceneObjectBase;
+    private nextScene: SceneBase;
 
     private xPos: number = 5;
     private yPos: number = 10;
@@ -60,9 +61,9 @@ class BattleEngine {
         this.battleData.EnemyCharacterDatas.forEach(enemyCharacterData => {
             var enemChar = BuildCharacter(enemyCharacterData);
             if (IsDebug)
-                console.log("Battle Enemy Character: " + enemChar.CharacterSheet.CharacterName);
+                console.log("Battle Enemy Character: " + enemChar.ItemName);
             this.enemyCharacters.push(enemChar);
-            enemChar.CharacterSheet.ChangeWeapon(WeaponEnum.Weapon_ForcedHitter);
+            enemChar.CharacterSheet.ChangeWeaponEnm(WeaponEnum.Weapon_ForcedHitter);
 
         });
 
@@ -132,9 +133,13 @@ class BattleEngine {
     //Very placeholdery and proof of concept-y
     private async StartTurn() {
         if (IsDebug)
-            console.log(`${this.characterInTurn.CharacterSheet.CharacterName} takes turn`);
+            console.log(`${this.characterInTurn.ItemName} takes turn`);
 
-        await WriteAlertStorePrevious(`${this.characterInTurn.CharacterSheet.CharacterName} takes turn!`)
+        AlertManager.Instance.CreateAlertGroup(`${this.characterInTurn.ItemName} combat turn`, AlertGroupType.CombatTurn);
+
+        AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.ItemName} takes turn!`, AlertGroupType.CombatTurn);
+
+        //await WriteAlertStorePrevious(`${this.characterInTurn.ItemName} takes turn!`);
 
         if (this.characterInTurn === this.playerCharacter) {
             //Give Control to player
@@ -151,18 +156,19 @@ class BattleEngine {
             targetMenu.BuildTargetMenuObject(this.turnOrder);
 
             const targetIndex = await targetMenu.HandleMenu();
-            const chosenTarget:string = targetMenu.allMenuItems[targetIndex - 1].MenuItemName;
-            const chosenTargetCharacter:CharacterBase =  this.turnOrder[targetMenu.allMenuItems[targetIndex - 1].MenuItemNumber - 1];
+            const chosenTarget: string = targetMenu.allMenuItems[targetIndex - 1].MenuItemName;
+            const chosenTargetCharacter: CharacterBase = this.turnOrder[targetMenu.allMenuItems[targetIndex - 1].MenuItemNumber - 1];
             // WriteMenuSelection(targetMenu.allMenuItems[targetIndex-1].MenuItemSelectionDescription);
 
             if (IsDebug)
-                console.log(`${this.characterInTurn.CharacterSheet.CharacterName} takes action ${chosenCombatMove.MoveName} against ${chosenTarget}`)
+                console.log(`${this.characterInTurn.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTarget}`)
 
-            WriteAlert(`${this.characterInTurn.CharacterSheet.CharacterName} takes action ${chosenCombatMove.MoveName} against ${chosenTargetCharacter.CharacterSheet.CharacterName}`);
+            AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTargetCharacter.ItemName}`, AlertGroupType.CombatTurn);
+            //WriteAlert(`${this.characterInTurn.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTargetCharacter.ItemName}`);
             chosenCombatMove.ExecuteMove(this.characterInTurn, chosenTargetCharacter);
 
             //OnCharacterDeath
-            if(chosenTargetCharacter.CharacterSheet.CurrentHealth() <= 0){
+            if (chosenTargetCharacter.Health.Value <= 0) {
                 CanvasGraphicsInstance.RemoveSpriteFromList(chosenTargetCharacter.CharacterSprite);
                 //Remove from turn order
                 const i = this.turnOrder.indexOf(chosenTargetCharacter);
@@ -171,17 +177,22 @@ class BattleEngine {
 
         }
         else {
+            this.characterInTurn.RunOnceTurnEffects();
 
             const i = GetRandomInt(0, this.characterInTurn.CharacterSheet.BattleMoves.length - 1);
             const chosenMove = this.characterInTurn.CharacterSheet.BattleMoves[i];
-            await WriteAlertStorePrevious(`${this.characterInTurn.CharacterSheet.CharacterName} takes action ${chosenMove.MoveName} against ${this.playerCharacter.CharacterSheet.CharacterName}`);
+            AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.ItemName} takes action ${chosenMove.MoveName} against ${this.playerCharacter.ItemName}`, AlertGroupType.CombatTurn);
+            //await WriteAlertStorePrevious(`${this.characterInTurn.ItemName} takes action ${chosenMove.MoveName} against ${this.playerCharacter.ItemName}`);
             chosenMove.ExecuteMove(this.characterInTurn, this.playerCharacter);
 
         }
+
     }
     private EndTurn() {
         if (IsDebug)
-            console.log(`${this.characterInTurn.CharacterSheet.CharacterName} ends their turn`);
+            console.log(`${this.characterInTurn.ItemName} ends their turn`);
+        AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.ItemName} ends their turn`, AlertGroupType.CombatTurn);
+        AlertManager.Instance.PrintGroup(AlertGroupType.CombatTurn);
 
     }
 
@@ -190,10 +201,10 @@ class BattleEngine {
         var hpString = "";
         //Show all Hp, placeholder here
         this.turnOrder.forEach(character => {
-            hpString += `${character.CharacterSheet.CharacterName} has ${character.CharacterSheet.CurrentHealth()}hp\n`;
+            hpString += `${character.ItemName} has ${character.Health.Value}hp\n`;
             hpString += "<br>";
         });
-        await WriteAlertStorePrevious(hpString);
+        await AlertManager.Instance.WriteAlertStorePrevious(hpString);
     }
 
     private SetUpTurnOrder() {
@@ -205,7 +216,7 @@ class BattleEngine {
         if (IsDebug) {
             console.log("Turn order for this combat: ");
             this.turnOrder.forEach(character => {
-                console.log(character.CharacterSheet.CharacterName);
+                console.log(character.ItemName);
             });
         }
     }
@@ -236,7 +247,7 @@ class BattleEngine {
     }
 
     private IsCombatOver(): boolean {
-        if (this.playerCharacter.CharacterSheet.CurrentHealth() <= 0)
+        if (this.playerCharacter.Health.Value <= 0)
             return true;
         else if (this.AllEnemiesAreDead())
             return true;
@@ -247,7 +258,7 @@ class BattleEngine {
     private AllEnemiesAreDead(): boolean {
 
         return this.enemyCharacters.every(
-            enemy => enemy.CharacterSheet.CurrentHealth() <= 0
+            enemy => enemy.Health.Value <= 0
         );
     }
 
@@ -257,8 +268,8 @@ class BattleEngine {
         this.OnEngineDestroy();
         SceneManagerInstance.HandleNextScene(this.currentScene, this.nextScene);
     }
-    private OnEngineDestroy() {
-        WriteAlertStorePrevious("Battle ended");
+    private async OnEngineDestroy() {
+        await AlertManager.Instance.WriteAlertStorePrevious("Battle ended");
 
     }
 }

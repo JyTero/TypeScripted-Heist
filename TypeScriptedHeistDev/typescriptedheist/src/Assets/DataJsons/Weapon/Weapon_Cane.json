@@ -1,0 +1,11 @@
+{
+  "WeaponName": "Cane",
+  "BattleMoves": [
+    "BattleMove_Bleeder",
+    "BattleMove_Strike_Cane"
+  ],
+  "WeaponHit": 2,
+  "WeaponDamage": 2,
+  "DataDevName": "Weapon_Cane",
+  "DataType": "Weapon"
+}

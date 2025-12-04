@@ -1,9 +1,10 @@
 import { MenuItemBase } from "./MenuItemBase";
-import { WaitForInput, WriteAlert, WriteAlertStorePrevious, WriteMenu, WriteMenuStorePrevious } from "./IOMethods";
+import { WaitForInput, WriteAlert} from "./IOMethods";
 import { Flags } from "./flags";
-import { SceneObjectBase } from "./SceneObjectBase";
+import { SceneBase } from "./SceneBase";
 import { Delay } from "../Tools";
 import { FrameTimeMS } from "./initialisation";
+import { AlertManager } from "./AlertManager";
 
 export class MenuObjectBase {
 
@@ -24,7 +25,7 @@ export class MenuObjectBase {
             await this.DisplayMenu();
             playerInput = await this.GetAndCheckPlayerInput();
             if (playerInput === -1)
-                WriteAlertStorePrevious("Please select a valid option using the number keys.");
+                WriteAlert("Please select a valid option using the number keys.");
             else if (playerInput > this.validMenuItems.length || playerInput < 1)
                 WriteAlert("Please choose one of the given options with the number keys.");
             else
@@ -33,7 +34,7 @@ export class MenuObjectBase {
         }
         return playerInput;
     }
-    public TieMenuItemToSceneObject(menuItemIndex: number, targetScene: SceneObjectBase) {
+    public TieMenuItemToSceneObject(menuItemIndex: number, targetScene: SceneBase) {
         this.allMenuItems[menuItemIndex].NextSceneObject = targetScene;
 
 
@@ -56,7 +57,8 @@ export class MenuObjectBase {
             i++;
 
         };
-        await WriteMenuStorePrevious(s);
+       //await WriteMenuStorePrevious(s);
+       await AlertManager.Instance.WriteAlertStorePrevious(s);
        // await Delay(FrameTimeMS);
     }
 

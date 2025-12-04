@@ -1,4 +1,4 @@
-import { CharacterBase } from "./Character/CharacterBase";
+import { CharacterBase } from "./Items/Character/CharacterBase";
 import { MenuItemDataType } from "./DataTypes/MenuItemDataType";
 import { MenuItemBase } from "./MenuItemBase";
 import { MenuObjectBase } from "./MenuObjectBase";
@@ -24,10 +24,10 @@ export class TargetMenuObject extends MenuObjectBase{
     private MakeTargetMenuItemData(targetCharacter:CharacterBase,targetIndex:number){
         const combatTargetMenuData : MenuItemDataType=
         {
-            MenuItemName: "Combat Target " + targetCharacter.CharacterSheet.CharacterName,
+            MenuItemName: "Combat Target " + targetCharacter.ItemName,
             MenuItemNumber: targetIndex,
-            MenuItemText: targetCharacter.CharacterSheet.CharacterName,
-            MenuItemSelectionDescription: targetCharacter.CharacterSheet.CharacterName,
+            MenuItemText: targetCharacter.ItemName,
+            MenuItemSelectionDescription: targetCharacter.ItemName,
             NextSceneObject: placeholderScene,
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],

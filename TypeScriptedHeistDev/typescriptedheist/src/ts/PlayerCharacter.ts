@@ -1,5 +1,5 @@
 import { CharacterEnum } from "../Assets/DataJsons/CharacterEnum";
-import { CharacterBase } from "./Character/CharacterBase";
+import { CharacterBase } from "./Items/Character/CharacterBase";
 import { CharacterDataType } from "./DataTypes/CharacterData";
 import { CharacterSheetDataType as CharacterSheetDataType } from "./DataTypes/CharacterSheetDataType";
 import { DaggerItemData } from "./Items/ItemDatas/WeaponItemData/DaggerData";

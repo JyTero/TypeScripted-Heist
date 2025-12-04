@@ -1,0 +1,15 @@
+{
+  "CharacterName": "Muumi",
+  "CharcterFaction": 2,
+  "CharacterStrength": 0,
+  "CharacterDexterity": 0,
+  "CharacterPerception": 0,
+  "CharacterWeaponSkill": 0,
+  "CharacterDodge": 0,
+  "CharacterBaseSpeed": 0,
+  "CharacterArmour": 0,
+  "CharaterEquipedWeapon": "Weapon_Boots",
+  "CharacterImagePath": "N001_Neighborhood.png",
+  "DataDevName": "Character_Muumi",
+  "DataType": "Character"
+}

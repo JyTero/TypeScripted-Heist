@@ -1,0 +1,44 @@
+- Scene
+	- A single room, "scene"
+	- Combat/non-combat variety
+	- May contain objects, characters
+	- Builds a menu based on objects/chracters in scene
+		- BookshelfObject -> "Investigate bookshelf"
+		- Characters -> Talk to / Attack 
+		- Exit/entrys -> Objects which load up the next scene
+	- Player chooses what to do with them menu
+	- Persistance? (A secret door is opened, scene is left and then returned ???)
+			- A list of memorables, contains every memorable from every scene 
+				- Built by Creator
+- Menu
+	- Menus can be in
+		- Scenes
+		- Objects 
+		- Characters
+- Objects
+	- Items within scenese that cause a sprite to appear when the object is in scene and/or menu interactions
+	- Bookshelf
+		- Has bookshelf sprite whitch is placed into the scene when its loaded
+		- Adds "Investigate bookshelf" menu option to the 
+		- Has its own menu for investigating the bookshelf
+			- "Look at art piece"
+			- "Read a the old book"
+				- Reading it turns scene boolean "MysteriousStatueKnowledge  = true"
+			- "Pick up weapon"
+			- "Leave"
+	- Mysterious statue
+		- Statue sprite
+		- Adds "Investigate statue"
+		- if (MysteriousStatueKnowledge == true)
+			- Adds "Turn Statue"
+			- Adjust scene booleans to make thingy turned and open what ever it opens
+	- Decor
+		- Decor sprite
+	- Doorway
+		- May or may not add sprite
+		- Add "Enter NextRoom"
+- Character (Object)
+	- Add sprite
+	- Add Menu option to fight and talk
+		- Talking to hostile faction characters leads to fight
+		- Fighting allies ???

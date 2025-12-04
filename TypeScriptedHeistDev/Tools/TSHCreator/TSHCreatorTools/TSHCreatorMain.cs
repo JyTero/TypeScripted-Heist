@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Text.Json;
 using System.Windows.Forms;
+using TSHCreatorTools.Creators;
+using static TSHCreatorTools.Creators.Enums;
 
 namespace TSHCreatorTools
 {
@@ -9,12 +11,14 @@ namespace TSHCreatorTools
     {
         //public ToolSaveDataManager ToolSaveDataManagerVar = new();
         private string assetsFolderPath = "";
-        private string jsonFolderPath = "";
-        private string imageFolderPath = "";
+        //private string jsonFolderPath = "";
+        //private string imageFolderPath = "";
 
         public TSHCreator()
         {
             InitializeComponent();
+            Paths.Initialise();
+
             ToolSaveDataManager.Instance.InitialiseToolSettings();
             LoadAssetsRootPaht();
         }
@@ -25,7 +29,7 @@ namespace TSHCreatorTools
             if (IsJsonFolderPathValid())
             {
                 var weaponCreator = new TSHWeaponCreator();
-                weaponCreator.OnCreatorWindowOpen(jsonFolderPath);
+                weaponCreator.OnCreatorWindowOpen();
                 weaponCreator.ShowDialog();
             }
         }
@@ -35,14 +39,14 @@ namespace TSHCreatorTools
             Debug.WriteLine("Opening Battle Move Creator");
 
             var battleMoveCreator = new TSHBattleMoveCreator();
-            battleMoveCreator.OnCreatorWindowOpen(jsonFolderPath);
+            battleMoveCreator.OnCreatorWindowOpen();
             battleMoveCreator.ShowDialog();
 
         }
 
         private bool IsJsonFolderPathValid()
         {
-            jsonFolderPath = AssetsFolderPathInput.Text;
+            string jsonFolderPath = Paths.Instance.DataFolderPath();
 
             if (jsonFolderPath == null || jsonFolderPath == "")
             {
@@ -75,52 +79,24 @@ namespace TSHCreatorTools
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    assetsFolderPath = openFileDialog.SelectedPath;
-                    jsonFolderPath = Path.Combine(assetsFolderPath, "DataJsons");
-                    imageFolderPath = Path.Combine(assetsFolderPath, "Img");
-                    AssetsFolderPathInput.Text = assetsFolderPath;
+                    Paths.Instance.SetAssetFolderPath(openFileDialog.SelectedPath);
+                    SetAssetFolderPath();
                 }
             }
             SaveAssetsRootPath();
             Debug.WriteLine(AssetsFolderPathInput.Text);
         }
 
-        private void CreateTSEnumFile(string enumName, List<string> folderContentNames)
+        private void SetAssetFolderPath()
         {
-            string fileName = enumName + "Enum.ts";
-            string enumOpen = "export enum " + enumName + "Enum\n{";
-            string enumClose = "}";
-            string workingPath = Path.Combine(jsonFolderPath, fileName);
-            string s = "";
-
-            //File.Create(workingPath).Close();
-            using (StreamWriter sw = new StreamWriter(workingPath))
-            {
-                sw.WriteLine(enumOpen);
-                foreach (string fileInFolder in folderContentNames)
-                {
-                    string name = "";
-                    if (fileInFolder.Contains(".json"))
-                        name = fileInFolder.Replace(".json", "");
-                    else if (fileInFolder.Contains(".png"))
-                        name = fileInFolder.Replace(".png", "");
-                    else
-                    {
-                        Debug.WriteLine("Unexpected file extension " + fileInFolder + " (Enum " + fileName + ")");
-                        name = fileInFolder;
-                    }
-                        s = " = \"" + name + "\",";
-                    sw.WriteLine(name + s);
-                }
-                sw.WriteLine(enumClose);
-            }
+            AssetsFolderPathInput.Text = assetsFolderPath;
         }
 
         private void CreateDataSourceJson(Dictionary<string, List<string>> dataSources, string name)
         {
             string json = JsonSerializer.Serialize(dataSources, new JsonSerializerOptions { WriteIndented = true });
             string fileName = name + ".json";
-            string workingPath = Path.Combine(jsonFolderPath, fileName);
+            string workingPath = Path.Combine(Paths.Instance.DataFolderPath(), fileName);
             File.Create(workingPath).Close();
             using (StreamWriter sw = new StreamWriter(workingPath))
             {
@@ -141,23 +117,18 @@ namespace TSHCreatorTools
         private void LoadAssetsRootPaht()
         {
             assetsFolderPath = ToolSaveDataManager.Instance.GetAssetsRootPath();
-            AssetsFolderPathInput.Text = assetsFolderPath;
+            //SetAssetFolderPath(assetsFolderPath);
+            Paths.Instance.SetAssetFolderPath(assetsFolderPath);
+            SetAssetFolderPath();
+
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var characterCreator = new TSHCharacterCreator();
-            Debug.WriteLine("Opening Character Creator");
 
-            characterCreator.OnCreatorWindowOpen(jsonFolderPath);
-            characterCreator.ShowDialog();
-
-        }
-
+        //Hideous monster
         private void CreateEnumsForAllDatas()
         {
-            DirectoryInfo[] dataTypeFolders = new DirectoryInfo(jsonFolderPath).GetDirectories();
+            DirectoryInfo[] dataTypeFolders = new DirectoryInfo(Paths.Instance.DataFolderPath()).GetDirectories();
 
             Dictionary<string, List<string>> dataSources = new();
 
@@ -167,25 +138,25 @@ namespace TSHCreatorTools
             foreach (DirectoryInfo dataTypeFolder in dataTypeFolders)
             {
                 fileNames = [];
-                string p = Path.Combine(jsonFolderPath, dataTypeFolder.Name);
+                string p = Path.Combine(Paths.Instance.DataFolderPath(), dataTypeFolder.Name);
                 FileInfo[] filesInFolder = new DirectoryInfo(p).GetFiles("*.json");
-             
+
                 dataTypeFolderNames.Add(dataTypeFolder.Name);
 
                 foreach (FileInfo file in filesInFolder)
                 {
                     fileNames.Add(file.Name);
                 }
-                CreateTSEnumFile(dataTypeFolder.Name, fileNames);
+                CreateDataTSEnum(dataTypeFolder.Name, fileNames);
                 dataSources.Add(dataTypeFolder.Name, fileNames);
             }
-            CreateTSEnumFile("DataTypes", dataTypeFolderNames);
+            CreateDataTSEnum("DataTypes", dataTypeFolderNames);
             CreateDataSourceJson(dataSources, "DataSource");
 
             //Create something similar to images so that TS can find them easily
 
             //Get all image subfolders
-            DirectoryInfo[] imageTypeFolders = new DirectoryInfo(imageFolderPath).GetDirectories();
+            DirectoryInfo[] imageTypeFolders = new DirectoryInfo(Paths.Instance.SpriteFolderPath()).GetDirectories();
 
             Dictionary<string, List<string>> imageSources = new();
 
@@ -194,7 +165,7 @@ namespace TSHCreatorTools
             foreach (DirectoryInfo imageFolder in imageTypeFolders)
             {
                 fileNames = [];
-                string p = Path.Combine(imageFolderPath, imageFolder.Name);
+                string p = Path.Combine(Paths.Instance.SpriteFolderPath(), imageFolder.Name);
                 FileInfo[] filesInFolder = new DirectoryInfo(p).GetFiles("*.png");
 
                 imageFolderNames.Add(imageFolder.Name);
@@ -204,18 +175,91 @@ namespace TSHCreatorTools
                     fileNames.Add(file.Name);
                 }
 
-                CreateTSEnumFile("Images" + imageFolder.Name, fileNames);
+                CreateDataTSEnum("Images" + imageFolder.Name, fileNames);
                 imageSources.Add(imageFolder.Name, fileNames);
 
             }
-            CreateTSEnumFile("ImageTypes", dataTypeFolderNames);
+            CreateDataTSEnum("ImageTypes", dataTypeFolderNames);
             CreateDataSourceJson(imageSources, "ImageSources");
 
+            string[] enumList = Enum.GetNames(typeof(CharacterStatTypeEnum));
+            BuildTSEnumFromStringList(enumList, "CharcterStatType");
+            enumList = Enum.GetNames(typeof (EffectTypeEnum));
+            BuildTSEnumFromStringList(enumList, "EffectTypeEnum");
+
+        }
+        private void CreateDataTSEnum(string enumName, List<string> folderContentNames)
+        {
+            string fileName = enumName + "Enum.ts";
+            string enumOpen = "export enum " + enumName + "Enum\n{";
+            string enumClose = "}";
+            string workingPath = Path.Combine(Paths.Instance.DataFolderPath(), fileName);
+            string s = "";
+
+            //File.Create(workingPath).Close();
+            using (StreamWriter sw = new StreamWriter(workingPath))
+            {
+                sw.WriteLine(enumOpen);
+                foreach (string fileInFolder in folderContentNames)
+                {
+                    string name = "";
+                    if (fileInFolder.Contains(".json"))
+                        name = fileInFolder.Replace(".json", "");
+                    else if (fileInFolder.Contains(".png"))
+                        name = fileInFolder.Replace(".png", "");
+                    else
+                    {
+                        Debug.WriteLine("Unexpected file extension " + fileInFolder + " (Enum " + fileName + ")");
+                        name = fileInFolder;
+                    }
+                    s = " = \"" + name + "\",";
+                    sw.WriteLine(name + s);
+                }
+                sw.WriteLine(enumClose);
+            }
         }
 
-        private void TSHCreator_Load(object sender, EventArgs e)
+        private void BuildTSEnumFromStringList(string[] enumContent, string enumName)
         {
+            string fileName = enumName + "Enum.ts";
+            string enumOpen = "export enum " + enumName + "Enum\n{";
+            string enumClose = "}";
+            string workingPath = Path.Combine(Paths.Instance.DataFolderPath(), fileName);
+            //string enmunContent = "";
+           string workingString = "";
 
+            using (StreamWriter sw = new StreamWriter(workingPath))
+            {
+                sw.WriteLine(enumOpen);
+                foreach (string enumItem in enumContent)
+                {
+                    //workingString = "";
+                    workingString = enumItem + ",";
+                    sw.WriteLine(workingString);
+                }
+                sw.WriteLine(enumClose);
+
+                //sw.Write(workingString);
+            }
+        }
+
+        private void OpenCharacterCreatorButton_Click(object sender, EventArgs e)
+        {
+            var characterCreator = new TSHCharacterCreator();
+            Debug.WriteLine("Opening Character Creator");
+
+            characterCreator.OnCreatorWindowOpen();
+            characterCreator.ShowDialog();
+            //How to know when it quits
+        }
+
+        private void EffectCreatorButton_Click(object sender, EventArgs e)
+        {
+            var effectCreator = new TSHEffectCreator();
+            Debug.WriteLine("Opening Effect Creator");
+
+            effectCreator.OnCreatorWindowOpen();
+            effectCreator.ShowDialog();
         }
     }
 }

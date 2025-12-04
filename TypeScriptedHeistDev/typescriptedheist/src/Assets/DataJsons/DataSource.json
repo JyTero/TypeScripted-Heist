@@ -1,20 +1,30 @@
 {
   "BattleMove": [
+    "BattleMove_Bleeder.json",
     "BattleMove_Crying_Generic.json",
     "BattleMove_ForcedHit.json",
     "BattleMove_MoneyMoves.json",
     "BattleMove_Slash_ShortSword.json",
     "BattleMove_Stab_Knife.json",
-    "BattleMove_Stab_ShortSword.json"
+    "BattleMove_Stab_ShortSword.json",
+    "BattleMove_Strike_Cane.json"
   ],
   "Character": [
     "Character_Amalia.json",
+    "Character_Muumi.json",
     "Character_PellePaikanpit\u00E4j\u00E4.json",
     "Character_Player.json",
+    "Character_SkeeBiddy.json",
     "Character_Svoordm\u00E4n.json"
+  ],
+  "Effect": [
+    "Effect_DamageHealth_2.json",
+    "Effect_DamageHealth_3OT.json"
   ],
   "Weapon": [
     "Weapon_Boots.json",
+    "Weapon_Cane.json",
+    "Weapon_CreditCard.json",
     "Weapon_ForcedHitter.json",
     "Weapon_Hoe.json",
     "Weapon_Knife.json",

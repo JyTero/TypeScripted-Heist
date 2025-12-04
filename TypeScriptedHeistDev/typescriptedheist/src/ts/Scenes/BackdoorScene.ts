@@ -1,9 +1,9 @@
 import { MenuItemBase } from "../MenuItemBase";
-import { SceneObjectBase } from "../SceneObjectBase";
+import { SceneBase } from "../SceneBase";
 import { WriteAlert } from "../IOMethods";
 import { BackdoorData01, BackdoorData02, BackdoorData03, BackdoorData04 } from "../SceneData/BackdoorData";
 
-export class BackdoorScene extends SceneObjectBase{
+export class BackdoorScene extends SceneBase{
     
     SceneSpsificStartUp(): void {
         this.SceneName = "BackdoorScene";

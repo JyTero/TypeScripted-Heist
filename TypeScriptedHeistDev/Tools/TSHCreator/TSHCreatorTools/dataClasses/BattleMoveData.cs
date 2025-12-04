@@ -12,5 +12,7 @@ namespace TSHCreatorTools.dataClasses
         public bool IsRanged { get; set; }
         public float BattleMoveWeaponHitMultiplier { get; set; }
         public float BattleMoveWeaponDamageMultiplier { get; set; }
+        public List<string> BattleMoveEffects { get; set; }
+        public int BattleMoveType { get; set; }
     }
 }

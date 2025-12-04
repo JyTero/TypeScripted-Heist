@@ -1,0 +1,12 @@
+{
+  "BattleMoveName": "Bleeder",
+  "IsRanged": false,
+  "BattleMoveWeaponHitMultiplier": 1,
+  "BattleMoveWeaponDamageMultiplier": 1,
+  "BattleMoveEffects": [
+    "Effect_DamageHealth_3OT"
+  ],
+  "BattleMoveType": 1,
+  "DataDevName": "BattleMove_Bleeder",
+  "DataType": "BattleMove"
+}

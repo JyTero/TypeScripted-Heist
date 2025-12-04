@@ -1,5 +1,5 @@
 import { BattleMove } from "./BattleSystem/BattleMove";
-import { CharacterBase } from "./Character/CharacterBase";
+import { CharacterBase } from "./Items/Character/CharacterBase";
 import { MenuItemDataType } from "./DataTypes/MenuItemDataType";
 import { MenuItemBase } from "./MenuItemBase";
 import { MenuObjectBase } from "./MenuObjectBase";

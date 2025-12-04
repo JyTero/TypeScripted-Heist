@@ -1,4 +1,6 @@
-﻿namespace TSHCreatorTools
+﻿using System.Diagnostics;
+
+namespace TSHCreatorTools
 {
     partial class SelectImage
     {
@@ -97,7 +99,7 @@
             // 
             // ImagePathInput
             // 
-            ImagePathInput.Location = new Point(125, 15);
+            ImagePathInput.Location = new Point(125, 17);
             ImagePathInput.Margin = new Padding(4, 3, 4, 3);
             ImagePathInput.Name = "ImagePathInput";
             ImagePathInput.Size = new Size(408, 23);

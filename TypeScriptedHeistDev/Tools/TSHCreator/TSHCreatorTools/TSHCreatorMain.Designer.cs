@@ -41,6 +41,7 @@
             openFileDialogFindJsonRoot = new OpenFileDialog();
             button1 = new Button();
             OpenCharacterCreatorButton = new Button();
+            EffectCreatorButton = new Button();
             AssetsPathGroup.SuspendLayout();
             StrengthGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -178,13 +179,26 @@
             OpenCharacterCreatorButton.TabIndex = 8;
             OpenCharacterCreatorButton.Text = "Open Character Creatpr";
             OpenCharacterCreatorButton.UseVisualStyleBackColor = true;
-            OpenCharacterCreatorButton.Click += button2_Click;
+            OpenCharacterCreatorButton.Click += OpenCharacterCreatorButton_Click;
+            // 
+            // EffectCreatorButton
+            // 
+            EffectCreatorButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            EffectCreatorButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            EffectCreatorButton.Location = new Point(168, 490);
+            EffectCreatorButton.Name = "EffectCreatorButton";
+            EffectCreatorButton.Size = new Size(154, 23);
+            EffectCreatorButton.TabIndex = 9;
+            EffectCreatorButton.Text = "Open Effect Creator";
+            EffectCreatorButton.UseVisualStyleBackColor = true;
+            EffectCreatorButton.Click += EffectCreatorButton_Click;
             // 
             // TSHCreator
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(617, 552);
+            Controls.Add(EffectCreatorButton);
             Controls.Add(OpenCharacterCreatorButton);
             Controls.Add(button1);
             Controls.Add(OpenBattleMoveCreatorButton);
@@ -220,6 +234,7 @@
         private Button FindAssetFolderButton;
         private Button button1;
         private Button OpenCharacterCreatorButton;
+        private Button EffectCreatorButton;
     }
 }
 

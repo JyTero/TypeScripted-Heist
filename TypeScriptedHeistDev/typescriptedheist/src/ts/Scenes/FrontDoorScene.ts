@@ -1,9 +1,9 @@
 import { MenuItemBase } from "../MenuItemBase";
 import { FrontDoorData01, FrontDoorData02 } from "../SceneData/FrontDoorData";
-import { SceneObjectBase } from "../SceneObjectBase";
+import { SceneBase } from "../SceneBase";
 
 
-export class FrontDoorScene extends SceneObjectBase {
+export class FrontDoorScene extends SceneBase {
 
     SceneSpsificStartUp(): void {
         this.SceneName = "FrontDoorScene";
