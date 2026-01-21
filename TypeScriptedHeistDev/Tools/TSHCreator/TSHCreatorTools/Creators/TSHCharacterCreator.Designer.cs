@@ -54,6 +54,8 @@
             FactionLabel = new Label();
             FactionTooltip = new ToolTip(components);
             LoadDataButton = new Button();
+            OpenWeaponCreatorButton = new Button();
+            RefreshWeaponsButton = new Button();
             ((System.ComponentModel.ISupportInitialize)StrengthInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DexterityInput).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PerceptionInput).BeginInit();
@@ -278,11 +280,34 @@
             LoadDataButton.UseVisualStyleBackColor = true;
             LoadDataButton.Click += LoadDataButton_Click;
             // 
+            // OpenWeaponCreatorButton
+            // 
+            OpenWeaponCreatorButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            OpenWeaponCreatorButton.Location = new Point(182, 350);
+            OpenWeaponCreatorButton.Name = "OpenWeaponCreatorButton";
+            OpenWeaponCreatorButton.Size = new Size(150, 23);
+            OpenWeaponCreatorButton.TabIndex = 26;
+            OpenWeaponCreatorButton.Text = "Open Weapon Creator";
+            OpenWeaponCreatorButton.UseVisualStyleBackColor = true;
+            OpenWeaponCreatorButton.Click += OpenWeaponCreatorButton_Click;
+            // 
+            // RefreshWeaponsButton
+            // 
+            RefreshWeaponsButton.Location = new Point(359, 349);
+            RefreshWeaponsButton.Name = "RefreshWeaponsButton";
+            RefreshWeaponsButton.Size = new Size(75, 23);
+            RefreshWeaponsButton.TabIndex = 27;
+            RefreshWeaponsButton.Text = "Refresh";
+            RefreshWeaponsButton.UseVisualStyleBackColor = true;
+            RefreshWeaponsButton.Click += RefreshWeaponsButton_Click;
+            // 
             // TSHCharacterCreator
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 792);
+            Controls.Add(RefreshWeaponsButton);
+            Controls.Add(OpenWeaponCreatorButton);
             Controls.Add(LoadDataButton);
             Controls.Add(FactionLabel);
             Controls.Add(factionNumericInput);
@@ -348,5 +373,7 @@
         private Label FactionLabel;
         private ToolTip FactionTooltip;
         private Button LoadDataButton;
+        private Button OpenWeaponCreatorButton;
+        private Button RefreshWeaponsButton;
     }
 }

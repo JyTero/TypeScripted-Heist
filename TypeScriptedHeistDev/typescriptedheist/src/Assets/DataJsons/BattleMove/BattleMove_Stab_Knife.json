@@ -3,7 +3,10 @@
   "IsRanged": false,
   "BattleMoveWeaponHitMultiplier": 0.8,
   "BattleMoveWeaponDamageMultiplier": 2,
-  "BattleMoveEffects": null,
+  "BattleMoveEffects": [
+    "Effect_DamageHealth_2"
+  ],
+  "BattleMoveType": 0,
   "DataDevName": "BattleMove_Stab_Knife",
   "DataType": "BattleMove"
 }

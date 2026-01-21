@@ -9,11 +9,11 @@ using TSHCreatorTools.dataClasses;
 
 namespace TSHCreatorTools
 {
-    public class CreatorBase : Form
+    public class CreatorBaseForm : Form
     {
         protected MetadataCreator metadataCreator;
         protected SelectImage selectImage;
-        public CreatorBase()
+        public CreatorBaseForm()
         {
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;

@@ -22,12 +22,12 @@
     "Effect_DamageHealth_3OT.json"
   ],
   "Weapon": [
+    "Weapon_AmaliesKnife.json",
     "Weapon_Boots.json",
     "Weapon_Cane.json",
     "Weapon_CreditCard.json",
     "Weapon_ForcedHitter.json",
     "Weapon_Hoe.json",
-    "Weapon_Knife.json",
-    "Weapon_ShortSword.json"
+    "Weapon_Knife.json"
   ]
 }

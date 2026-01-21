@@ -14,7 +14,7 @@ using static TSHCreatorTools.Creators.Enums;
 
 namespace TSHCreatorTools.Creators
 {
-    public partial class TSHEffectCreator : CreatorBase
+    public partial class TSHEffectCreator : CreatorBaseForm
     {
         private ComboBoxHandler targetStatComboBox;
         private ComboBoxHandler effectTypeComboBox;

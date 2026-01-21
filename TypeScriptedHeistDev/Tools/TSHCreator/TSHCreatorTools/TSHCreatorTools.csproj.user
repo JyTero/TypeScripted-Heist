@@ -22,7 +22,7 @@
     <Compile Update="TSHCreatorMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="CreatorBase.cs">
+    <Compile Update="CreatorBaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

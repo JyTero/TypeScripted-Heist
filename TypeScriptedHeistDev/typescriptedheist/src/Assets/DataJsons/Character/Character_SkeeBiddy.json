@@ -5,11 +5,11 @@
   "CharacterDexterity": 6,
   "CharacterPerception": 6,
   "CharacterWeaponSkill": 6,
-  "CharacterDodge": 6,
+  "CharacterDodge": 0,
   "CharacterBaseSpeed": 5,
   "CharacterArmour": 10,
-  "CharaterEquipedWeapon": "Weapon_ShortSword",
-  "CharacterImagePath": "Pytty.png",
+  "CharaterEquipedWeapon": "Weapon_Knife",
+  "CharacterImagePath": null,
   "DataDevName": "Character_SkeeBiddy",
   "DataType": "Character"
 }

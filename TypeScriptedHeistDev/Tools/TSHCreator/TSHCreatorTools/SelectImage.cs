@@ -77,7 +77,10 @@ namespace TSHCreatorTools
             ImagePrevieBox.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-
+        public void ClearImage()
+        {
+            ImagePrevieBox.Image?.Dispose();
+        }
 
         private void SelectImage_HandleDestroyed(Object sender, EventArgs e)
         {

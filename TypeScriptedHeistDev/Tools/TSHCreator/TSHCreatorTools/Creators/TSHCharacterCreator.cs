@@ -5,7 +5,7 @@ using TSHCreatorTools.dataClasses;
 
 namespace TSHCreatorTools
 {
-    public partial class TSHCharacterCreator : CreatorBase
+    public partial class TSHCharacterCreator : CreatorBaseForm
     {
         private string battleDataFolderPathUnderRoot = "Weapon";
         ComboBoxHandler comboBoxHandler;
@@ -16,6 +16,12 @@ namespace TSHCreatorTools
 
 
         }
+
+        //class static jsoncoverter
+
+        //public static jsontoCharacter(json file)
+
+        //chatacter = jsoncoverter.jsontoCharacter(file);
 
         public override void OnCreatorWindowOpen()
         {
@@ -34,13 +40,18 @@ namespace TSHCreatorTools
         private void BuildWeaponsFromData()
         {
             string completeJsonPath = Path.Combine(Paths.Instance.DataFolderPath(), battleDataFolderPathUnderRoot);
+            List<string> weaponNames = new();
             foreach (string file in Directory.GetFiles(completeJsonPath, "*.json"))
             {
                 string jsonContent = File.ReadAllText(file);
                 WeaponData? data = JsonSerializer.Deserialize<WeaponData>(jsonContent);
                 if (data != null)
-                    SelectWeaponComboBox.Items.Add(data.DataDevName);
+                {
+                    //SelectWeaponComboBox.Items.Add(data.DataDevName);
+                    weaponNames.Add(data.DataDevName);
+                }
             }
+            comboBoxHandler.PopulateComboBox(weaponNames);
         }
 
         private void CreateCharacterDataButton_Click(object sender, EventArgs e)
@@ -67,7 +78,7 @@ namespace TSHCreatorTools
                 CharacterBaseSpeed = (int)BaseSpeedInput.Value,
                 CharacterArmour = (int)ArmourRatingInput.Value,
                 CharaterEquipedWeapon = SelectWeaponComboBox.SelectedItem.ToString(),
-                CharacterImagePath = SelectImage.SelectedImageName, 
+                CharacterImagePath = SelectImage.SelectedImageName,
 
             };
             data = InsertMetadata(data);
@@ -104,6 +115,8 @@ namespace TSHCreatorTools
 
         private async void FillFormFields(CharacterData characterData)
         {
+            //BuildWeaponsFromData();
+
             NameInput.Text = characterData.CharacterName;
             factionNumericInput.Value = characterData.CharcterFaction;
             StrengthInput.Value = characterData.CharacterStrength;
@@ -114,23 +127,40 @@ namespace TSHCreatorTools
             ArmourRatingInput.Value = characterData.CharacterArmour;
             comboBoxHandler.LoadSelectionData(characterData.CharaterEquipedWeapon);
 
-            string path = await Task.Run(() => FindImagePath(characterData.CharacterImagePath));
-
-            SelectImage.DisplayImage(path);
-
             metadataCreator.MetadataDevNameInputField.Text = characterData.DataDevName;
             metadataCreator.MetadataTypeField.Text = characterData.DataType;
+
+            string path = await Task.Run(() => FindImagePath(characterData.CharacterImagePath));
+            if (path == null)
+                selectImage.ClearImage();
+            else
+                SelectImage.DisplayImage(path);
         }
 
         private void LoadDataButton_Click(object sender, EventArgs e)
         {
             LoadData();
-           
+
         }
 
         private void SelectImage_HandleDestroyed(Object sender, EventArgs e)
         {
 
+        }
+
+        private void RefreshWeaponsButton_Click(object sender, EventArgs e)
+        {
+            BuildWeaponsFromData();
+            //comboBoxHandler.RefreshComboBoxContent();
+        }
+
+        private void OpenWeaponCreatorButton_Click(object sender, EventArgs e)
+        {
+            //Copied from TSHCreatorMain
+            Debug.WriteLine("Opening Weapon Creator");
+            var weaponCreator = new TSHWeaponCreator();
+            weaponCreator.OnCreatorWindowOpen();
+            weaponCreator.ShowDialog();
         }
     }
 }

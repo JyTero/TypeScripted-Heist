@@ -5,10 +5,10 @@
   "CharacterDexterity": 12,
   "CharacterPerception": 3,
   "CharacterWeaponSkill": 20,
-  "CharacterDodge": 2,
+  "CharacterDodge": 0,
   "CharacterBaseSpeed": 10,
   "CharacterArmour": 1,
-  "CharaterEquipedWeapon": "Weapon_Knife",
+  "CharaterEquipedWeapon": "Weapon_AmaliesKnife",
   "CharacterImagePath": "amalia.png",
   "DataDevName": "Character_Amalia",
   "DataType": "Character"

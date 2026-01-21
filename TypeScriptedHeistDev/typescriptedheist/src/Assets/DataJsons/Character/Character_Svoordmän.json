@@ -1,14 +1,15 @@
 {
   "CharacterName": "Svoordm\u00E4n",
+  "CharcterFaction": 0,
   "CharacterStrength": 3,
   "CharacterDexterity": 3,
   "CharacterPerception": 3,
   "CharacterWeaponSkill": 2,
-  "CharacterDodge": 2,
+  "CharacterDodge": 0,
   "CharacterBaseSpeed": 2,
   "CharacterArmour": 2,
-  "CharaterEquipedWeapon": "Weapon_ShortSword",
-  "CharacterImagePath": "BunnyPFEvil.png",
+  "CharaterEquipedWeapon": "Weapon_Hoe",
+  "CharacterImagePath": null,
   "DataDevName": "Character_Svoordm\u00E4n",
   "DataType": "Character"
 }

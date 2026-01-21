@@ -16,7 +16,7 @@ using static TSHCreatorTools.Creators.Enums;
 
 namespace TSHCreatorTools
 {
-    public partial class TSHBattleMoveCreator : CreatorBase
+    public partial class TSHBattleMoveCreator : CreatorBaseForm
     {
         private string effectDataFolderName = "Effect";
         private List<EffectData> allEffects = new();

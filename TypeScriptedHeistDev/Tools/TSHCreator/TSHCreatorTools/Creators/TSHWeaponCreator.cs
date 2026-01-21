@@ -6,7 +6,7 @@ using TSHCreatorTools.dataClasses;
 
 namespace TSHCreatorTools
 {
-    public partial class TSHWeaponCreator : CreatorBase
+    public partial class TSHWeaponCreator : CreatorBaseForm
     {
         private List<BattleMoveData> allBattleMoves = new();
         private string battleDataFolderName = "BattleMove";
