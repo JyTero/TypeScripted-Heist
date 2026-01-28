@@ -12,7 +12,7 @@ namespace TSHCreatorTools
     public class CreatorBaseForm : Form
     {
         protected MetadataCreator metadataCreator;
-        protected SelectImage selectImage;
+
         public CreatorBaseForm()
         {
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -94,34 +94,34 @@ namespace TSHCreatorTools
         protected virtual void DeserialiseData(string jsonContent) { }
 
 
-        private CancellationTokenSource? imageSearchCts;
+        //private CancellationTokenSource? imageSearchCts;
 
-        protected async Task<string> BeginImageSearch(string imgName)
-        {
-            string s = await Task.Run(() => FindImagePath(imgName));
-            return s;
-        }
+        //protected async Task<string> BeginImageSearch(string imgName)
+        //{
+        //    string s = await Task.Run(() => FindImagePath(imgName));
+        //    return s;
+        //}
 
-        protected string FindImagePath(string imageName)
-        {
-            imageSearchCts = new CancellationTokenSource();
-            var token = imageSearchCts.Token;
+        //protected string FindImagePath(string imageName)
+        //{
+        //    imageSearchCts = new CancellationTokenSource();
+        //    var token = imageSearchCts.Token;
 
-            int i = 0;
-            foreach (string file in Directory.EnumerateFiles(Paths.Instance.SpriteFolderPath(),"*.png", SearchOption.AllDirectories))
-            {
-                token.ThrowIfCancellationRequested();
-                i++;
+        //    int i = 0;
+        //    foreach (string file in Directory.EnumerateFiles(Paths.Instance.SpriteFolderPath(),"*.png", SearchOption.AllDirectories))
+        //    {
+        //        token.ThrowIfCancellationRequested();
+        //        i++;
 
-                if (Path.GetFileName(file) == imageName)
-                {
-                    Debug.WriteLine($"Found the image. Searched {i} files.");
-                    return file;
-                }
-            }
+        //        if (Path.GetFileName(file) == imageName)
+        //        {
+        //            Debug.WriteLine($"Found the image. Searched {i} files.");
+        //            return file;
+        //        }
+        //    }
 
-            Debug.WriteLine($"DId not find the image. Searched {i} files.");
-            return null;
-        }
+        //    Debug.WriteLine($"DId not find the image. Searched {i} files.");
+        //    return null;
+        //}
     }
 }

@@ -1,0 +1,12 @@
+{
+  "BattleMoveName": "NewMew",
+  "IsRanged": false,
+  "BattleMoveWeaponHitMultiplier": 1.1,
+  "BattleMoveWeaponDamageMultiplier": 1,
+  "BattleMoveEffects": [
+    "Effect_DamageHealth_2"
+  ],
+  "BattleMoveType": 0,
+  "DataDevName": "BattleMove_NewMew",
+  "DataType": "BattleMove"
+}

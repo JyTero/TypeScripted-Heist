@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Text.Json;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using TSHCreatorTools.CreatorBackend;
 using TSHCreatorTools.dataClasses;
 
 namespace TSHCreatorTools
@@ -10,6 +12,8 @@ namespace TSHCreatorTools
     {
         private List<BattleMoveData> allBattleMoves = new();
         private string battleDataFolderName = "BattleMove";
+
+        private WeaponCreator weaponCreator;
 
         private CheckedListHandler checkedListHandler;
 
@@ -25,10 +29,10 @@ namespace TSHCreatorTools
 
             checkedListHandler = new CheckedListHandler(battleMovesCheckedList);
 
-            //
             BuildListFromBattleMoveData();
             checkedListHandler.PopulateCheckedList(allBattleMoves.Cast<BaseData>().ToList());
 
+            weaponCreator = new WeaponCreator(this, metadataCreator);
         }
 
         private void BuildListFromBattleMoveData()
@@ -48,20 +52,46 @@ namespace TSHCreatorTools
         {
             Debug.WriteLine("Creating Weapon Json");
 
-            CreateData();
+            weaponCreator.CreateData();
         }
 
-        protected override void OnCreateData()
-        {
-            base.OnCreateData();
+        //protected override void OnCreateData()
+        //{
+        //    base.OnCreateData();
 
-            string name = WeaponNameInput.Text;
+        //    string name = WeaponNameInput.Text;
+        //    List<string> battleMoves = new();
+        //    int hit = (int)WeaponHitInput.Value;
+        //    int dmg = (int)WeaponDamageInput.Value;
+        //    //TODO:
+        //    //Validate data inputs
+        //    //Set output folder to proper subfolder of jsonRoot
+
+        //    foreach (var item in battleMovesCheckedList.CheckedItems)
+        //    {
+        //        if (item is BattleMoveData move)
+        //            battleMoves.Add(move.DataDevName);
+        //    }
+
+        //    WeaponData data = new WeaponData
+        //    {
+        //        WeaponName = name,
+        //        BattleMoves = battleMoves,
+        //        WeaponHit = hit,
+        //        WeaponDamage = dmg,
+        //    };
+
+        //    data = InsertMetadata(data);
+
+        //    string jsonOutput = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+        //    Debug.WriteLine(jsonOutput);
+
+        //    CreateOutputJsonFile(jsonOutput);
+        //}
+
+        public WeaponData CreateWeaponData()
+        {
             List<string> battleMoves = new();
-            int hit = (int)WeaponHitInput.Value;
-            int dmg = (int)WeaponDamageInput.Value;
-            //TODO:
-            //Validate data inputs
-            //Set output folder to proper subfolder of jsonRoot
 
             foreach (var item in battleMovesCheckedList.CheckedItems)
             {
@@ -71,18 +101,14 @@ namespace TSHCreatorTools
 
             WeaponData data = new WeaponData
             {
-                WeaponName = name,
+                WeaponName = WeaponNameInput.Text,
                 BattleMoves = battleMoves,
-                WeaponHit = hit,
-                WeaponDamage = dmg,
+                WeaponHit = (int)WeaponHitInput.Value,
+                WeaponDamage = (int)WeaponDamageInput.Value,
             };
 
             data = InsertMetadata(data);
-
-            string jsonOutput = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
-            Debug.WriteLine(jsonOutput);
-
-            CreateOutputJsonFile(jsonOutput);
+            return data;
         }
 
         private void LoadDataButton_Click(object sender, EventArgs e)
@@ -113,7 +139,7 @@ namespace TSHCreatorTools
             }
         }
 
-        private async void FillFormFields(WeaponData weaponData)
+        private void FillFormFields(WeaponData weaponData)
         {
             WeaponNameInput.Text = weaponData.WeaponName;
             //Handle battle moves
@@ -127,7 +153,7 @@ namespace TSHCreatorTools
 
         private void FillSelectedBattleMoves(WeaponData data)
         {
-           // ClearUpOldData();
+            // ClearUpOldData();
 
             List<string> selectedItems = new();
             foreach (string battleMove in data.BattleMoves)
@@ -151,7 +177,7 @@ namespace TSHCreatorTools
             //}
         }
 
-      
+
 
     }
 }

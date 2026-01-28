@@ -7,9 +7,11 @@ namespace TSHCreatorTools
 {
     public partial class TSHCharacterCreator : CreatorBaseForm
     {
-        private string battleDataFolderPathUnderRoot = "Weapon";
-        ComboBoxHandler comboBoxHandler;
+        protected SelectImage selectImage;
+        private string weaponFolderPathUnderRoot = "Weapon";
 
+        private ComboBoxHandler comboBoxHandler;
+        private CharacterCreator characterCreator;
         public TSHCharacterCreator()
         {
             InitializeComponent();
@@ -30,16 +32,17 @@ namespace TSHCreatorTools
             metadataCreator = MetadataCreatorTool;
             selectImage = SelectImage;
             comboBoxHandler = new(SelectWeaponComboBox);
-
             SelectWeaponComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            BuildWeaponsFromData();
+
+
+            characterCreator = new CharacterCreator(this, metadataCreator);
 
         }
 
-        private void BuildWeaponsFromData()
+        public void BuildWeaponsFromData()
         {
-            string completeJsonPath = Path.Combine(Paths.Instance.DataFolderPath(), battleDataFolderPathUnderRoot);
+            string completeJsonPath = Path.Combine(Paths.Instance.DataFolderPath(), weaponFolderPathUnderRoot);
             List<string> weaponNames = new();
             foreach (string file in Directory.GetFiles(completeJsonPath, "*.json"))
             {
@@ -53,18 +56,60 @@ namespace TSHCreatorTools
             }
             comboBoxHandler.PopulateComboBox(weaponNames);
         }
+        //private void BuildWeaponsFromData()
+        //{
+        //    string completeJsonPath = Path.Combine(Paths.Instance.DataFolderPath(), weaponFolderPathUnderRoot);
+        //    List<string> weaponNames = new();
+        //    foreach (string file in Directory.GetFiles(completeJsonPath, "*.json"))
+        //    {
+        //        string jsonContent = File.ReadAllText(file);
+        //        WeaponData? data = JsonSerializer.Deserialize<WeaponData>(jsonContent);
+        //        if (data != null)
+        //        {
+        //            //SelectWeaponComboBox.Items.Add(data.DataDevName);
+        //            weaponNames.Add(data.DataDevName);
+        //        }
+        //    }
+        //    comboBoxHandler.PopulateComboBox(weaponNames);
+        //}
 
         private void CreateCharacterDataButton_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("Creating Character Json");
 
-            CreateData();
+            characterCreator.CreateData();
         }
 
-        protected override void OnCreateData()
-        {
-            base.OnCreateData();
+        //protected override void OnCreateData()
+        //{
+        //    base.OnCreateData();
 
+        //    CharacterData data = new CharacterData
+        //    {
+
+        //        CharacterName = NameInput.Text,
+        //        CharcterFaction = (int)factionNumericInput.Value,
+        //        CharacterStrength = (int)StrengthInput.Value,
+        //        CharacterDexterity = (int)DexterityInput.Value,
+        //        CharacterPerception = (int)PerceptionInput.Value,
+        //        CharacterWeaponSkill = (int)WeaponSkillInput.Value,
+        //        CharacterDodge = (int)DodgeInput.Value,
+        //        CharacterBaseSpeed = (int)BaseSpeedInput.Value,
+        //        CharacterArmour = (int)ArmourRatingInput.Value,
+        //        CharaterEquipedWeapon = SelectWeaponComboBox.SelectedItem.ToString(),
+        //        CharacterImagePath = SelectImage.SelectedImageName(),
+
+        //    };
+        //    data = InsertMetadata(data);
+
+        //    string jsonOutput = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+        //    Debug.WriteLine(jsonOutput);
+
+        //    CreateOutputJsonFile(jsonOutput);
+        //}
+
+        public CharacterData CreateCharacterData()
+        {
             CharacterData data = new CharacterData
             {
 
@@ -78,26 +123,24 @@ namespace TSHCreatorTools
                 CharacterBaseSpeed = (int)BaseSpeedInput.Value,
                 CharacterArmour = (int)ArmourRatingInput.Value,
                 CharaterEquipedWeapon = SelectWeaponComboBox.SelectedItem.ToString(),
-                CharacterImagePath = SelectImage.SelectedImageName,
+                CharacterImagePath = SelectImage.SelectedImageName(),
 
             };
             data = InsertMetadata(data);
 
-            string jsonOutput = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
-            Debug.WriteLine(jsonOutput);
-
-            CreateOutputJsonFile(jsonOutput);
+            return data;
         }
 
+        //Move this (and handle all others breaking)
         protected override void DeserialiseData(string jsonContent)
         {
             try
             {
-                CharacterData BMData = JsonSerializer.Deserialize<CharacterData>(jsonContent);
-                if (BMData != null)
+                CharacterData characterData = JsonSerializer.Deserialize<CharacterData>(jsonContent);
+                if (characterData != null)
                 {
-                    Console.WriteLine("Success: " + BMData.CharacterName);
-                    FillFormFields(BMData);
+                    Console.WriteLine("Success: " + characterData.CharacterName);
+                    FillFormFields(characterData);
                 }
                 else
                     Console.WriteLine("Mistakes happen");
@@ -130,9 +173,9 @@ namespace TSHCreatorTools
             metadataCreator.MetadataDevNameInputField.Text = characterData.DataDevName;
             metadataCreator.MetadataTypeField.Text = characterData.DataType;
 
-            string path = await Task.Run(() => FindImagePath(characterData.CharacterImagePath));
+            string path = await Task.Run(() => SelectImage.FindImagePath(characterData.CharacterImagePath));
             if (path == null)
-                selectImage.ClearImage();
+                selectImage.DisposeOldPreviewImage();
             else
                 SelectImage.DisplayImage(path);
         }

@@ -13,59 +13,34 @@ namespace TSHCreatorTools
     public partial class SelectImage : UserControl
     {
         public TextBox ImagePathInputField;
-        public string SelectedImageName;
+        //public string SelectedImageName;
         private string lastImagePath = "";
+        private ImageSelect imageSelect;
 
         public SelectImage()
         {
             InitializeComponent();
             ImagePathInputField = ImagePathInput;
+            imageSelect = new ImageSelect(this);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FindImage();
+            imageSelect.FindImage();
             LoadLastImagePath();
         }
 
-        private void FindImage()
+        public string SelectedImageName()
         {
-            using (var openFileDialog = new OpenFileDialog())
-            {
-                //LoadData from save json
-
-                openFileDialog.Filter = "Image files(*.png)|*.png|All files (*.*)|*.*";
-                //openFileDialog.FilterIndex = 2;
-                //openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    if (lastImagePath != "")
-                        openFileDialog.InitialDirectory = lastImagePath;
-
-                    try
-                    {
-                        if (ImagePrevieBox.Image != null)
-                            ImagePrevieBox.Image.Dispose();
-
-                        DisplayImage(openFileDialog.FileName);
-                        //ImagePrevieBox.Image = new Bitmap(openFileDialog.FileName);
-                        //ImagePrevieBox.SizeMode = PictureBoxSizeMode.Zoom;
-
-                        SelectedImageName = openFileDialog.SafeFileName;
-                    }
-                    catch (Exception exception)
-                    {
-                        MessageBox.Show($"Couldn't load image: {exception.Message}");
-                    }
-
-                    ToolSaveDataManager.Instance.SetRecentImagePath(openFileDialog.FileName);
-                }
-            }
-
+            return imageSelect.SelectedImageName;
         }
 
-        private void LoadLastImagePath()
+        public void DisposeOldPreviewImage()
+        {
+            if (ImagePrevieBox.Image != null)
+                ImagePrevieBox.Image.Dispose();
+        }
+        public void LoadLastImagePath()
         {
             lastImagePath = ToolSaveDataManager.Instance.GetRecentImagePath();
             ImagePathInputField.Text = lastImagePath;
@@ -77,15 +52,69 @@ namespace TSHCreatorTools
             ImagePrevieBox.SizeMode = PictureBoxSizeMode.Zoom;
         }
 
-        public void ClearImage()
+        //Gummy
+        public string FindImagePath(string path)
         {
-            ImagePrevieBox.Image?.Dispose();
+            return imageSelect.FindImagePath(path);
         }
+        //private void FindImage()
+        //{
+        //    using (var openFileDialog = new OpenFileDialog())
+        //    {
+        //        //LoadData from save json
 
-        private void SelectImage_HandleDestroyed(Object sender, EventArgs e)
-        {
+        //        openFileDialog.Filter = "Image files(*.png)|*.png|All files (*.*)|*.*";
+        //        //openFileDialog.FilterIndex = 2;
+        //        //openFileDialog.RestoreDirectory = true;
 
-        }
+        //        if (openFileDialog.ShowDialog() == DialogResult.OK)
+        //        {
+        //            if (lastImagePath != "")
+        //                openFileDialog.InitialDirectory = lastImagePath;
+
+        //            try
+        //            {
+        //                if (ImagePrevieBox.Image != null)
+        //                    ImagePrevieBox.Image.Dispose();
+
+        //                DisplayImage(openFileDialog.FileName);
+        //                //ImagePrevieBox.Image = new Bitmap(openFileDialog.FileName);
+        //                //ImagePrevieBox.SizeMode = PictureBoxSizeMode.Zoom;
+
+        //                SelectedImageName = openFileDialog.SafeFileName;
+        //            }
+        //            catch (Exception exception)
+        //            {
+        //                MessageBox.Show($"Couldn't load image: {exception.Message}");
+        //            }
+
+        //            ToolSaveDataManager.Instance.SetRecentImagePath(openFileDialog.FileName);
+        //        }
+        //    }
+
+        //}
+
+        //private void LoadLastImagePath()
+        //{
+        //    lastImagePath = ToolSaveDataManager.Instance.GetRecentImagePath();
+        //    ImagePathInputField.Text = lastImagePath;
+        //}
+
+        //public void DisplayImage(string path)
+        //{
+        //    ImagePrevieBox.Image = new Bitmap(path);
+        //    ImagePrevieBox.SizeMode = PictureBoxSizeMode.Zoom;
+        //}
+
+        //public void ClearImage()
+        //{
+        //    ImagePrevieBox.Image?.Dispose();
+        //}
+
+        //private void SelectImage_HandleDestroyed(Object sender, EventArgs e)
+        //{
+
+        //}
 
     }
 }

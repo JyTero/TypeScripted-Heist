@@ -1,0 +1,15 @@
+{
+  "CharacterName": "Tuomo",
+  "CharcterFaction": 0,
+  "CharacterStrength": 2,
+  "CharacterDexterity": 0,
+  "CharacterPerception": 0,
+  "CharacterWeaponSkill": 0,
+  "CharacterDodge": 2,
+  "CharacterBaseSpeed": 0,
+  "CharacterArmour": 0,
+  "CharaterEquipedWeapon": "Weapon_AmaliesKnife",
+  "CharacterImagePath": "Pytty.png",
+  "DataDevName": "Character_Tuomo",
+  "DataType": "Character"
+}

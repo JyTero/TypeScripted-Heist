@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using TSHCreatorTools.CreatorBackend;
 using TSHCreatorTools.Creators;
 using TSHCreatorTools.dataClasses;
 using static TSHCreatorTools.Creators.Enums;
@@ -23,6 +24,8 @@ namespace TSHCreatorTools
         private List<string> bmTypes = new();
         private CheckedListHandler effectsComboBoxHanlder;
         private ComboBoxHandler bmTypeComboBoxHandler;
+
+        private BattleMoveCreator battleMoveCreator;
 
         public TSHBattleMoveCreator()
         {
@@ -42,6 +45,8 @@ namespace TSHCreatorTools
 
             effectsComboBoxHanlder.PopulateCheckedList(allEffects.Cast<BaseData>().ToList());
             bmTypeComboBoxHandler.PopulateComboBox(bmTypes);
+
+            battleMoveCreator = new BattleMoveCreator(this, metadataCreator);
         }
 
         private void BuildListFromEffecData()
@@ -69,40 +74,57 @@ namespace TSHCreatorTools
         {
             Debug.WriteLine("Creating BattleMoveData Json");
 
-            CreateData();
+           battleMoveCreator.CreateData();
         }
 
-        protected override void OnCreateData()
-        {
-            string name = BM_NameInput.Text;
-            bool isRanged = BM_IsRangedCheckbox.Checked;
-            float hitMultiplier = (float)BM_WeaponHitMultiplierInput.Value;
-            float dmgMultiplier = (float)BM_WeaponDamageMultiplierInput.Value;
+        //protected override void OnCreateData()
+        //{
+        //    string name = BM_NameInput.Text;
+        //    bool isRanged = BM_IsRangedCheckbox.Checked;
+        //    float hitMultiplier = (float)BM_WeaponHitMultiplierInput.Value;
+        //    float dmgMultiplier = (float)BM_WeaponDamageMultiplierInput.Value;
 
+        //    BattleMoveData data = new BattleMoveData
+        //    {
+        //        DataDevName = metadataCreator.MetadataDevNameInputField.Text,
+        //        DataType = metadataCreator.MetadataTypeField.Text,
+
+        //        BattleMoveName = name,
+        //        IsRanged = isRanged,
+        //        BattleMoveWeaponHitMultiplier = hitMultiplier,
+        //        BattleMoveWeaponDamageMultiplier = dmgMultiplier,
+
+
+        //        BattleMoveEffects = effectsComboBoxHanlder.GetSelectedItems(),
+        //        BattleMoveType = bmTypeComboBoxHandler.GetSelectedItem()
+        //    };
+
+        //    string jsonOutput = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+        //    Debug.WriteLine(jsonOutput);
+
+        //    CreateOutputJsonFile(jsonOutput);
+        //}
+
+        public BattleMoveData CreateBattleMoveData()
+        {
             BattleMoveData data = new BattleMoveData
             {
-                DataDevName = metadataCreator.MetadataDevNameInputField.Text,
-                DataType = metadataCreator.MetadataTypeField.Text,
-
-                BattleMoveName = name,
-                IsRanged = isRanged,
-                BattleMoveWeaponHitMultiplier = hitMultiplier,
-                BattleMoveWeaponDamageMultiplier = dmgMultiplier,
-
+                 BattleMoveName = BM_NameInput.Text,
+                IsRanged = BM_IsRangedCheckbox.Checked,
+                BattleMoveWeaponHitMultiplier = (float)BM_WeaponHitMultiplierInput.Value,
+                BattleMoveWeaponDamageMultiplier = (float)BM_WeaponDamageMultiplierInput.Value,
 
                 BattleMoveEffects = effectsComboBoxHanlder.GetSelectedItems(),
                 BattleMoveType = bmTypeComboBoxHandler.GetSelectedItem()
             };
 
-            string jsonOutput = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
-            Debug.WriteLine(jsonOutput);
-
-            CreateOutputJsonFile(jsonOutput);
+            data = InsertMetadata(data);
+            return data;
         }
 
         private void TSHBattleMoveCreator_Load(object sender, EventArgs e)
         {
-
+           
         }
 
 

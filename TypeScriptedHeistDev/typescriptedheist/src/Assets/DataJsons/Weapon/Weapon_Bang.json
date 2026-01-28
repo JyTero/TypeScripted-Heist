@@ -1,0 +1,10 @@
+{
+  "WeaponName": "Bang",
+  "BattleMoves": [
+    "BattleMove_Stab_Knife"
+  ],
+  "WeaponHit": 0,
+  "WeaponDamage": 0,
+  "DataDevName": "Weapon_Bang",
+  "DataType": "Weapon"
+}
