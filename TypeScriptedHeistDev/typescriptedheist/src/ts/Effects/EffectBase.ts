@@ -28,8 +28,8 @@ export enum AllEffects {
 }
 export class EffectBase {
     public EffectName: string;
-    protected TargetStat: number;
-    protected TargetEffectType: number;
+    protected TargetStat: CharcterStatTypeEnum;
+    protected TargetEffectType: EffectTypeEnumEnum;
     protected Potency: number;
     protected EffectDuration: number;
 

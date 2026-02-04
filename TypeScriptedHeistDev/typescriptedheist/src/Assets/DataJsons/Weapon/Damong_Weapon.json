@@ -1,0 +1,10 @@
+{
+  "WeaponName": "Damong",
+  "BattleMoves": [
+    "Damong_BattleMove"
+  ],
+  "WeaponHit": 2,
+  "WeaponDamage": 2,
+  "DataDevName": "Damong_Weapon",
+  "DataType": "Weapon"
+}

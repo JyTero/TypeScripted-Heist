@@ -40,6 +40,6 @@ import { placeholderScene } from "../Scenes/Placeholders";
 export const TestBattleData: BattleArenaDataType = {
     BattleName: "Computer Combat",
     //PlayerCharacter: PlaceholderCharacterSheet,
-    EnemyCharacterDatas:[CharacterEnum.Character_Amalia],
+    EnemyCharacterDatas:[CharacterEnum.Character_Damong, CharacterEnum.Character_Demong],
     NextScene: placeholderScene,
 }

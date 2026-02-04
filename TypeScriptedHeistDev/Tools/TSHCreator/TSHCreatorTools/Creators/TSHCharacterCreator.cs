@@ -12,11 +12,12 @@ namespace TSHCreatorTools
 
         private ComboBoxHandler comboBoxHandler;
         private CharacterCreator characterCreator;
-        public TSHCharacterCreator()
+        public TSHCharacterCreator() : base()
         {
             InitializeComponent();
-
-
+            metadataCreator = MetadataCreatorTool;
+            comboBoxHandler = new(SelectWeaponComboBox);
+            characterCreator = new CharacterCreator(this, metadataCreator);
         }
 
         //class static jsoncoverter
@@ -29,14 +30,10 @@ namespace TSHCreatorTools
         {
             base.OnCreatorWindowOpen();
 
-            metadataCreator = MetadataCreatorTool;
             selectImage = SelectImage;
-            comboBoxHandler = new(SelectWeaponComboBox);
             SelectWeaponComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
-
-
-            characterCreator = new CharacterCreator(this, metadataCreator);
+            BuildWeaponsFromData();
 
         }
 
@@ -200,10 +197,7 @@ namespace TSHCreatorTools
         private void OpenWeaponCreatorButton_Click(object sender, EventArgs e)
         {
             //Copied from TSHCreatorMain
-            Debug.WriteLine("Opening Weapon Creator");
-            var weaponCreator = new TSHWeaponCreator();
-            weaponCreator.OnCreatorWindowOpen();
-            weaponCreator.ShowDialog();
+            mainWindow.OpenWeaponCreator();
         }
     }
 }

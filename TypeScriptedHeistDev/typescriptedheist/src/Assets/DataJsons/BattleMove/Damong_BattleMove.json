@@ -1,0 +1,12 @@
+{
+  "BattleMoveName": "Damong",
+  "IsRanged": false,
+  "BattleMoveWeaponHitMultiplier": 1,
+  "BattleMoveWeaponDamageMultiplier": 1,
+  "BattleMoveEffects": [
+    "Effect_Damong"
+  ],
+  "BattleMoveType": 1,
+  "DataDevName": "Damong_BattleMove",
+  "DataType": "BattleMove"
+}

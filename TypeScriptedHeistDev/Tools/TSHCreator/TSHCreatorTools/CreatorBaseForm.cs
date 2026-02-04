@@ -11,7 +11,8 @@ namespace TSHCreatorTools
 {
     public class CreatorBaseForm : Form
     {
-        protected MetadataCreator metadataCreator;
+        protected MetadataCreator? metadataCreator;
+        protected TSHCreator? mainWindow;
 
         public CreatorBaseForm()
         {
@@ -19,22 +20,34 @@ namespace TSHCreatorTools
             MaximizeBox = false;
             MinimizeBox = true;
         }
+
+        //public CreatorBaseForm(TSHCreator mainWindow)
+        //{
+        //    this.mainWindow = mainWindow;
+
+        //}
         public virtual void OnCreatorWindowOpen()
         {
         }
-        public bool IsMetadataValid()
-        {
-            if (metadataCreator.MetadataDevNameInputField.Text == "")
-                return false;
-            else if (metadataCreator.MetadataTypeField.Text == "")
-                return false;
-            else
-                return true;
+        //public bool IsMetadataValid()
+        //{
+        //    if (metadataCreator.MetadataDevNameInputField.Text == "")
+        //        return false;
+        //    else if (metadataCreator.MetadataTypeField.Text == "")
+        //        return false;
+        //    else
+        //        return true;
 
+        //}
+
+        public void SetMainWindow(TSHCreator mw)
+        {
+            mainWindow = mw;
         }
+
         protected void CreateData()
         {
-            if (!IsMetadataValid())
+            if (!metadataCreator.IsMetadataValid())
                 return;
             OnCreateData();
 
@@ -93,6 +106,11 @@ namespace TSHCreatorTools
 
         protected virtual void DeserialiseData(string jsonContent) { }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            Debug.WriteLine("Closed " + this.Text);
+        }
 
         //private CancellationTokenSource? imageSearchCts;
 

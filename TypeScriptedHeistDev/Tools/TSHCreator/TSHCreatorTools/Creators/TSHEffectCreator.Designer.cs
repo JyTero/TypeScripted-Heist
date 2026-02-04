@@ -42,6 +42,7 @@ namespace TSHCreatorTools.Creators
             DurationLabel = new Label();
             EffectTypeComboBox = new ComboBox();
             EffectTypeLabel = new Label();
+            LoadEffectDataButton = new Button();
             NameGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)PotencyNumericUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DurationNumericUpDown).BeginInit();
@@ -164,11 +165,24 @@ namespace TSHCreatorTools.Creators
             EffectTypeLabel.TabIndex = 6;
             EffectTypeLabel.Text = "Effect type";
             // 
+            // LoadEffectDataButton
+            // 
+            LoadEffectDataButton.AutoSize = true;
+            LoadEffectDataButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            LoadEffectDataButton.Location = new Point(154, 399);
+            LoadEffectDataButton.Name = "LoadEffectDataButton";
+            LoadEffectDataButton.Size = new Size(103, 25);
+            LoadEffectDataButton.TabIndex = 12;
+            LoadEffectDataButton.Text = "Load Effect Data";
+            LoadEffectDataButton.UseVisualStyleBackColor = true;
+            LoadEffectDataButton.Click += LoadEffectDataButton_Click;
+            // 
             // TSHEffectCreator
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(LoadEffectDataButton);
             Controls.Add(DurationLabel);
             Controls.Add(PotencyLabel);
             Controls.Add(DurationNumericUpDown);
@@ -206,5 +220,6 @@ namespace TSHCreatorTools.Creators
         private Label DurationLabel;
         private ComboBox EffectTypeComboBox;
         private Label EffectTypeLabel;
+        private Button LoadEffectDataButton;
     }
 }

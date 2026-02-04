@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Text.Json;
 using System.Windows.Forms;
+using TSHCreatorTools.CreatorBackend;
 using TSHCreatorTools.Creators;
 using static TSHCreatorTools.Creators.Enums;
 
@@ -13,6 +14,7 @@ namespace TSHCreatorTools
         private string assetsFolderPath = "";
         //private string jsonFolderPath = "";
         //private string imageFolderPath = "";
+        private List<CreatorBaseForm> creatorWindows = new();
 
         public TSHCreator()
         {
@@ -28,22 +30,72 @@ namespace TSHCreatorTools
             Debug.WriteLine("Opening Weapon Creator");
             if (IsJsonFolderPathValid())
             {
-                var weaponCreator = new TSHWeaponCreator();
-                weaponCreator.OnCreatorWindowOpen();
-                weaponCreator.ShowDialog();
+                OpenWeaponCreator();
             }
         }
 
         private void OpenBattleMoveCreatorButton_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("Opening Battle Move Creator");
+            if (IsJsonFolderPathValid())
+            {
+                OpenBattleMoveCreator();
 
-            var battleMoveCreator = new TSHBattleMoveCreator();
-            battleMoveCreator.OnCreatorWindowOpen();
-            battleMoveCreator.ShowDialog();
+            }
+        }
+        private void OpenCharacterCreatorButton_Click(object sender, EventArgs e)
+        {
+            Debug.WriteLine("Opening Character Creator");
+            if (IsJsonFolderPathValid())
+            {
+                OpenCharacterCreator();
+            }
 
         }
 
+        private void EffectCreatorButton_Click(object sender, EventArgs e)
+        {
+            Debug.WriteLine("Opening Effect Creator");
+            if (IsJsonFolderPathValid())
+            {
+                OpenEffectCreator();
+            }
+        }
+
+        public void OpenWeaponCreator()
+        {
+            var weaponCreator = new TSHWeaponCreator();
+            weaponCreator.OnCreatorWindowOpen();
+            weaponCreator.ShowDialog();
+            creatorWindows.Add(weaponCreator);
+            weaponCreator.SetMainWindow(this);
+        }
+        public void OpenBattleMoveCreator()
+        {
+            var battleMoveCreator = new TSHBattleMoveCreator();
+            battleMoveCreator.OnCreatorWindowOpen();
+            battleMoveCreator.ShowDialog();
+            creatorWindows.Add(battleMoveCreator);
+            battleMoveCreator.SetMainWindow(this);
+        }
+        public void OpenCharacterCreator()
+        {
+            var characterCreator = new TSHCharacterCreator();
+            characterCreator.OnCreatorWindowOpen();
+            characterCreator.ShowDialog();
+            creatorWindows.Add(characterCreator);
+            characterCreator.SetMainWindow(this);
+        }
+        public void OpenEffectCreator()
+        {
+            var effectCreator = new TSHEffectCreator();
+            effectCreator.OnCreatorWindowOpen();
+            effectCreator.ShowDialog();
+            creatorWindows.Add(effectCreator);
+            effectCreator.SetMainWindow(this);
+        }
+
+        //LOGIC
         private bool IsJsonFolderPathValid()
         {
             string jsonFolderPath = Paths.Instance.DataFolderPath();
@@ -184,7 +236,7 @@ namespace TSHCreatorTools
 
             string[] enumList = Enum.GetNames(typeof(CharacterStatTypeEnum));
             BuildTSEnumFromStringList(enumList, "CharcterStatType");
-            enumList = Enum.GetNames(typeof (EffectTypeEnum));
+            enumList = Enum.GetNames(typeof(EffectTypeEnum));
             BuildTSEnumFromStringList(enumList, "EffectTypeEnum");
 
         }
@@ -226,7 +278,7 @@ namespace TSHCreatorTools
             string enumClose = "}";
             string workingPath = Path.Combine(Paths.Instance.DataFolderPath(), fileName);
             //string enmunContent = "";
-           string workingString = "";
+            string workingString = "";
 
             using (StreamWriter sw = new StreamWriter(workingPath))
             {
@@ -243,23 +295,6 @@ namespace TSHCreatorTools
             }
         }
 
-        private void OpenCharacterCreatorButton_Click(object sender, EventArgs e)
-        {
-            var characterCreator = new TSHCharacterCreator();
-            Debug.WriteLine("Opening Character Creator");
 
-            characterCreator.OnCreatorWindowOpen();
-            characterCreator.ShowDialog();
-            //How to know when it quits
-        }
-
-        private void EffectCreatorButton_Click(object sender, EventArgs e)
-        {
-            var effectCreator = new TSHEffectCreator();
-            Debug.WriteLine("Opening Effect Creator");
-
-            effectCreator.OnCreatorWindowOpen();
-            effectCreator.ShowDialog();
-        }
     }
 }

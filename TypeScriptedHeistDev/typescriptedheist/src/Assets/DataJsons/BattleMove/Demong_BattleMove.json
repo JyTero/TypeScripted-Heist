@@ -1,0 +1,12 @@
+{
+  "BattleMoveName": "Demong",
+  "IsRanged": false,
+  "BattleMoveWeaponHitMultiplier": 1,
+  "BattleMoveWeaponDamageMultiplier": 1,
+  "BattleMoveEffects": [
+    "Effect_Demong"
+  ],
+  "BattleMoveType": 1,
+  "DataDevName": "Demong_BattleMove",
+  "DataType": "BattleMove"
+}

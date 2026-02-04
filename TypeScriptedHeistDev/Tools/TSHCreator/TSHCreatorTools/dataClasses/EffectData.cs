@@ -9,8 +9,8 @@ namespace TSHCreatorTools.dataClasses
     public class EffectData : BaseData
     {
         public string EffectName { get; set; }
-        public int TargetStat {  get; set; }
-        public int TargetEffectType { get; set; }
+        public string TargetStat {  get; set; }
+        public string TargetEffectType { get; set; }
         public int EffectPotency { get; set; }
         public int EffectDuration { get; set; }
     }

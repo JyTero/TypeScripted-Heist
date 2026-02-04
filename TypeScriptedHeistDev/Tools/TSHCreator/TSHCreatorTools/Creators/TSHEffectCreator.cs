@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TSHCreatorTools.CreatorBackend;
 using TSHCreatorTools.dataClasses;
 using static TSHCreatorTools.Creators.Enums;
 
@@ -18,10 +19,15 @@ namespace TSHCreatorTools.Creators
     {
         private ComboBoxHandler targetStatComboBox;
         private ComboBoxHandler effectTypeComboBox;
+        private EffectCreator effectCreator;
         //private ComboBoxHandler target
         public TSHEffectCreator()
         {
             InitializeComponent();
+            metadataCreator = metadataCreator1;
+            targetStatComboBox = new(EffectTargetStatComboBox);
+            effectTypeComboBox = new(EffectTypeComboBox);
+            effectCreator = new EffectCreator(this, metadataCreator);
 
 
         }
@@ -30,14 +36,9 @@ namespace TSHCreatorTools.Creators
         public override void OnCreatorWindowOpen()
         {
             base.OnCreatorWindowOpen();
-
-            metadataCreator = metadataCreator1;
-
-            targetStatComboBox = new(EffectTargetStatComboBox);
             SetUpTargetStatsComboBox();
-
-            effectTypeComboBox = new(EffectTypeComboBox);
             SetUpEffectTypeComboBox();
+
         }
 
         private void SetUpTargetStatsComboBox()
@@ -67,37 +68,98 @@ namespace TSHCreatorTools.Creators
         {
             Debug.WriteLine("Creating Effect Json");
 
-            CreateData();
+            effectCreator.CreateData();
         }
 
-        protected override void OnCreateData()
-        {
-            base.OnCreateData();
+        //protected override void OnCreateData()
+        //{
+        //    base.OnCreateData();
 
+        //    EffectData data = new EffectData
+        //    {
+        //        DataDevName = metadataCreator.MetadataDevNameInputField.Text,
+        //        DataType = metadataCreator.MetadataTypeField.Text,
+
+        //        EffectName = EffectNameInput.Text,
+        //        TargetStat = EffectTargetStatComboBox.SelectedIndex,
+        //        TargetEffectType = EffectTypeComboBox.SelectedIndex,
+        //        EffectPotency = (int)PotencyNumericUpDown.Value,
+        //        EffectDuration = (int)DurationNumericUpDown.Value,
+        //    };
+        //    data = InsertMetadata(data);
+
+        //    string jsonOutput = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+        //    Debug.WriteLine(jsonOutput);
+
+        //    CreateOutputJsonFile(jsonOutput);
+
+        //}
+
+        public EffectData CreateEffectData()
+        {
             EffectData data = new EffectData
             {
                 DataDevName = metadataCreator.MetadataDevNameInputField.Text,
                 DataType = metadataCreator.MetadataTypeField.Text,
 
                 EffectName = EffectNameInput.Text,
-                TargetStat = EffectTargetStatComboBox.SelectedIndex,
-                TargetEffectType = EffectTypeComboBox.SelectedIndex,
+                TargetStat = EffectTargetStatComboBox.SelectedItem.ToString(),
+                TargetEffectType = EffectTypeComboBox.SelectedItem.ToString(),
                 EffectPotency = (int)PotencyNumericUpDown.Value,
                 EffectDuration = (int)DurationNumericUpDown.Value,
             };
             data = InsertMetadata(data);
-
-            string jsonOutput = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
-            Debug.WriteLine(jsonOutput);
-
-            CreateOutputJsonFile(jsonOutput);
-
+            return data;
         }
 
         private void TargetComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void LoadEffectDataButton_Click(object sender, EventArgs e)
+        {
+            LoadData();
+
+        }
+
+        protected override void DeserialiseData(string jsonContent)
+        {
+            try
+            {
+                EffectData effectData = JsonSerializer.Deserialize<EffectData>(jsonContent);
+                if (effectData != null)
+                {
+                    Console.WriteLine("Success: " + effectData.EffectName);
+                    FillFormFields(effectData);
+                }
+                else
+                    Console.WriteLine("Mistakes happen");
+            }
+            catch (JsonException)
+            {
+                MessageBox.Show("Invalid .json file. The file may not be a proper .json file, or it's ivalid format for the selected data", "Invalid Json File");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unexpected error:\n" + ex.Message, "Error");
+            }
+        }
+
+        private void FillFormFields(EffectData effectData)
+        {
+            EffectNameInput.Text = effectData.EffectName;
+            //Handle battle moves
+            targetStatComboBox.LoadSelectionData(effectData.TargetStat);
+            effectTypeComboBox.LoadSelectionData(effectData.TargetEffectType);
+
+            PotencyNumericUpDown.Value = effectData.EffectPotency;
+            DurationNumericUpDown.Value = effectData.EffectDuration;
+
+            metadataCreator.MetadataDevNameInputField.Text = effectData.DataDevName;
+            metadataCreator.MetadataTypeField.Text = effectData.DataType;
+        }
+
     }
 }
 

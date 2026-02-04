@@ -9,6 +9,7 @@ namespace TSHCreatorTools
 {
     public class Paths
     {
+        private string assetFolderPath = "";
         private string dataFolderName = "DataJsons";    //"Data"
         private string spriteFolderName = "Img";        //"Sprites
         private string battleMoveDataFolderName = "BattleMove";
@@ -27,7 +28,6 @@ namespace TSHCreatorTools
         {
             return assetFolderPath;
         }
-        private string assetFolderPath;
 
         public string DataFolderPath()
         {

@@ -1,3 +1,8 @@
+- .NET
+	- Multiple active windows
+	- Opening multiple of the same editor
+	- Separate CreatorMain logic (window/ui vs logic)
+		- Each window remembers most recent path for each its pathfindings
 - History
 	- Display only Chosen menuitem text (You chose insert *option text here*)
 	- If incorrect input on menu, don't write anything to history
@@ -12,3 +17,9 @@
 		- Each Scene has All- and ValidMenuItems 
 		- When checking item validity, add it to valid items if so
 		- This list is then used when dealing with the menuItems
+- .NET
+	- Load EffectData from .JSON
+		- Issue: Load logic compares list content to saved data.
+			- Currently game(=Saved data) uses numbers to pick enum variables, the list(=Loading logics) contains strings
+			- Game uses ints as they can easily compared to the enum
+				- Game should use enum (="True  Value" as often as possible)

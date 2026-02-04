@@ -1,0 +1,9 @@
+{
+  "EffectName": "Damong",
+  "TargetStat": "Health",
+  "TargetEffectType": "Damage",
+  "EffectPotency": 2,
+  "EffectDuration": 0,
+  "DataDevName": "Effect_Damong",
+  "DataType": "Effect"
+}

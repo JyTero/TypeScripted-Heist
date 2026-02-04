@@ -21,18 +21,19 @@ namespace TSHCreatorTools
         {
             InitializeComponent();
             metadataCreator = Metadata;
+            weaponCreator = new WeaponCreator(this, metadataCreator);
+            checkedListHandler = new CheckedListHandler(battleMovesCheckedList);
         }
 
         public override void OnCreatorWindowOpen()
         {
             base.OnCreatorWindowOpen();
 
-            checkedListHandler = new CheckedListHandler(battleMovesCheckedList);
 
             BuildListFromBattleMoveData();
             checkedListHandler.PopulateCheckedList(allBattleMoves.Cast<BaseData>().ToList());
 
-            weaponCreator = new WeaponCreator(this, metadataCreator);
+            
         }
 
         private void BuildListFromBattleMoveData()
