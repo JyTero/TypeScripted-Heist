@@ -1,7 +1,7 @@
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { BattleMoveData } from "../DataTypes/BattleMoveDataType";
 import { BeginMeleeAttack } from "./Combat";
-import { EffectBase } from "../Effects/EffectBase";
+import { Effect } from "../Effects/EffectBase";
 import { ItemBase } from "../Items/ItemBase";
 import { JsonHandlerInstance } from "../initialisation";
 import { DataTypesEnum } from "../../Assets/DataJsons/DataTypesEnum";
@@ -14,7 +14,7 @@ export class BattleMove {
     public MoveDamageMultiplier: number;
     public MoveHitMultiplier: number;
     //public AttackerMoveEffects: EffectBase[];
-    public MoveEffects: EffectBase[];
+    public MoveEffects: Effect[];
     public MoveScore: number;
     constructor(data: BattleMoveData) {
         this.MoveName = data.BattleMoveName;
@@ -29,13 +29,13 @@ export class BattleMove {
     }
 
     private BuildBattleMoveEffects() {
-        var tmp: EffectBase[] = this.MoveEffects;
+        var tmp: Effect[] = this.MoveEffects;
         this.MoveEffects = [];
         tmp.forEach(effect => {
 
             const allEffectReferences = JsonHandlerInstance.JsonDatabase[DataTypesEnum.Effect.toString()];
             const effectReference = allEffectReferences.find(e => e.DataDevName === effect);
-            const newEffect: EffectBase = new EffectBase(effectReference);
+            const newEffect: Effect = new Effect(effectReference);
             this.MoveEffects.push(newEffect);
 
         });

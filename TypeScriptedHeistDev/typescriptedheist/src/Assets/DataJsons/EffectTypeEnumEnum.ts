@@ -1,8 +1,8 @@
 export enum EffectTypeEnumEnum
 {
-Unknown,
-Damage,
-Destroy,
-Heal,
-Restore,
+Unknown = "Unknown",
+Damage = "Damage",
+Destroy = "Destroy",
+Heal = "Heal",
+Restore = "Restore",
 }

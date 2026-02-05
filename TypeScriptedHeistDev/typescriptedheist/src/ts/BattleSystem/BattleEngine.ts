@@ -63,7 +63,7 @@ class BattleEngine {
             if (IsDebug)
                 console.log("Battle Enemy Character: " + enemChar.ItemName);
             this.enemyCharacters.push(enemChar);
-            enemChar.CharacterSheet.ChangeWeaponEnm(WeaponEnum.Weapon_ForcedHitter);
+            //enemChar.CharacterSheet.ChangeWeaponEnm(WeaponEnum.Weapon_ForcedHitter);
 
         });
 

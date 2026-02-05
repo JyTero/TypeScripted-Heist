@@ -1,0 +1,12 @@
+{
+  "BattleMoveName": "Bleeding Stab",
+  "IsRanged": false,
+  "BattleMoveWeaponHitMultiplier": 1,
+  "BattleMoveWeaponDamageMultiplier": 0.8,
+  "BattleMoveEffects": [
+    "Effect_BleedingStab"
+  ],
+  "BattleMoveType": 1,
+  "DataDevName": "BattleMove_BleedingStab",
+  "DataType": "BattleMove"
+}

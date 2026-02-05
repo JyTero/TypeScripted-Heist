@@ -25,7 +25,7 @@ export function BeginMeleeAttack(attackerChar: CharacterBase, defenderChar:Chara
 
         reducedDamage = -Math.abs(reducedDamage);
         //defenderSheet.ReceiveDamage(reducedDamage);
-        defenderChar.GetStat(CharcterStatTypeEnum.Health)?.AdjustValue(reducedDamage);
+        defenderChar.GetStat(CharcterStatTypeEnum.Health)?.DamageStat(reducedDamage);
 
     }
     else{

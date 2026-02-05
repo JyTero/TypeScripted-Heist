@@ -179,7 +179,7 @@ export class CharacterSheet{
     }
     //Its own method to adjust damage based on target resistances and vulnerabilities                                                                                    
     public ReceiveDamage(damage: number) {
-        this.thisCharacter.Health.AdjustValue(damage);
+        this.thisCharacter.Health.DamageStat(damage);
         if (IsDebug)
             console.log(`${this.thisCharacter.ItemName} HP left: ${this.thisCharacter.Health.Value}`);
     }

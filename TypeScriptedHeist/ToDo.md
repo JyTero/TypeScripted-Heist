@@ -1,8 +1,8 @@
 - .NET
-	- Multiple active windows
-	- Opening multiple of the same editor
 	- Separate CreatorMain logic (window/ui vs logic)
-		- Each window remembers most recent path for each its pathfindings
+	- Each window remembers most recent path for each its pathfindings
+	- Each data dependant field needs refresh button
+		- Bonus: Tie refresh and the field togehter to be a component
 - History
 	- Display only Chosen menuitem text (You chose insert *option text here*)
 	- If incorrect input on menu, don't write anything to history

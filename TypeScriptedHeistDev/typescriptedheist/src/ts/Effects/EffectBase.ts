@@ -26,19 +26,27 @@ export enum AllEffects {
     DamageOT,
 
 }
-export class EffectBase {
+export class Effect {
     public EffectName: string;
     protected TargetStat: CharcterStatTypeEnum;
-    protected TargetEffectType: EffectTypeEnumEnum;
+    protected EffectType: EffectTypeEnumEnum;
     protected Potency: number;
     protected EffectDuration: number;
 
     //private targetStatIntance: CharacterStat
-    private effectRemainingTurns:number;
+    private effectRemainingTurns: number;
+
+    public GetEffectType(): EffectTypeEnumEnum {
+        return this.EffectType;
+    }
+    public GetTargetStat(): CharcterStatTypeEnum {
+        return this.TargetStat;
+    }
+
     constructor(data: EffectData) {
         this.EffectName = data.EffectName;
         this.TargetStat = data.TargetStat;
-        this.TargetEffectType = data.TargetEffectType;
+        this.EffectType = data.TargetEffectType;
         this.Potency = data.EffectPotency;
         this.EffectDuration = data.EffectDuration;
 
@@ -52,7 +60,7 @@ export class EffectBase {
         //is OT?
         if (this.DoesTargetHaveEffectTargetStat(target)) {
             if (this.EffectDuration === 0)
-                this.ApplyInstantEffect(target)
+                this.TriggerEffect(target)
             else
                 this.ApplyOTEffect(target);
         }
@@ -65,13 +73,14 @@ export class EffectBase {
         //Simply adjust stats
         //Apply effect to target for OT effects
     }
+
     protected OnEffectEnd(target: ItemBase): void {
         target.RemoveEffect(this);
     };
 
     private ApplyInstantEffect(target: ItemBase) {
         const statt = target.GetStat(this.TargetStat);
-        statt?.AdjustValue(this.Potency);
+        statt?.DamageStat(this.Potency);
 
     }
 
@@ -81,13 +90,14 @@ export class EffectBase {
     }
 
     private AdjustEffectPotencyToMatchType() {
-        if (this.TargetEffectType === EffectTypeEnumEnum.Damage || this.TargetEffectType === EffectTypeEnumEnum.Destroy) {
+        if (this.EffectType === EffectTypeEnumEnum.Damage || this.EffectType === EffectTypeEnumEnum.Destroy) {
             this.Potency = -Math.abs(this.Potency);
         }
     }
 
     private DoesTargetHaveEffectTargetStat(target: ItemBase): boolean {
         const targetStat = target.GetStat(this.TargetStat);
+
         if (targetStat === undefined)
             return false;
         else {
@@ -96,16 +106,64 @@ export class EffectBase {
         }
     }
 
+    public TriggerEffect(target: ItemBase) {
+        switch (this.EffectType) {
+            case EffectTypeEnumEnum.Damage:
+                this.ApplyDamageEffect(target);
+                break;
+            case EffectTypeEnumEnum.Destroy:
+                this.ApplyDestroyEffect(target);
+                break;
+            case EffectTypeEnumEnum.Heal:
+                this.ApplyHealEffect(target);
+                break;
+            case EffectTypeEnumEnum.Restore:
+                this.ApplyRestoreEffect(target);
+                break;
+            default:
+                console.log("UNKNOWN EffectType IN " + this.EffectName);
+        }
+        if (this.EffectDuration > 0)
+            this.HandleOvertimeEffects(target);
+
+    }
+
+    private ApplyDamageEffect(target: ItemBase) {
+        const targetStat = target.GetStat(this.TargetStat)
+        targetStat?.DamageStat(this.Potency);
+    }
+    private ApplyDestroyEffect(target: ItemBase) {
+        const targetStat = target.GetStat(this.TargetStat)
+        targetStat?.DestroyStat(this.Potency);
+    }
+    private ApplyHealEffect(target:ItemBase){
+        const targetStat = target.GetStat(this.TargetStat)
+        targetStat?.HealStat(this.Potency);
+    }
+    private ApplyRestoreEffect(target:ItemBase){
+        const targetStat = target.GetStat(this.TargetStat);
+        targetStat?.RestoreStat(this.Potency);
+    }
+
+    private HandleOvertimeEffects(target: ItemBase) {
+        this.effectRemainingTurns--;
+        if (this.effectRemainingTurns <= 0)
+            target.RemoveEffect(this);
+    }
+
     public async TriggerOTEffect(target: ItemBase) {
 
         await AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (${this.effectRemainingTurns}/${this.EffectDuration} turns)`);
+        this.TriggerEffect(target);
 
-        const stat = target.GetStat(this.TargetStat);
-        stat?.AdjustValue(this.Potency);
-        this.effectRemainingTurns--;
+        // const stat = target.GetStat(this.TargetStat);
+        // //Call different methods based if damage/destroy/heal/restore
 
-        if (this.effectRemainingTurns <= 0)
-            this.OnEffectEnd(target);
+        // stat?.DamageStat(this.Potency);
+        // this.effectRemainingTurns--;
+
+        // if (this.effectRemainingTurns <= 0)
+        //     this.OnEffectEnd(target);
 
     }
     //Instant value change

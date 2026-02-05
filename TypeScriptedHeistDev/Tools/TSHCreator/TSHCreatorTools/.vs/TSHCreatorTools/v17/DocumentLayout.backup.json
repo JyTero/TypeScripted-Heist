@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\creators\\tshbattlemovecreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:creators\\tshbattlemovecreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\tshcreatormain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:tshcreatormain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\coreenums\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:coreenums\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\creators\\tshweaponcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:creators\\tshweaponcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\tshcreatormain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:tshcreatormain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\creators\\tshcharactercreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:creators\\tshcharactercreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\creators\\tsheffectcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:creators\\tsheffectcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\creators\\tshbattlemovecreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:creators\\tshbattlemovecreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\creatorbaseform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,32 +39,12 @@
       "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:dataclasses\\effectdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\coreenums\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:coreenums\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\creators\\tsheffectcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:creators\\tsheffectcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\comboboxhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:comboboxhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\creators\\tsheffectcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:creators\\tsheffectcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\tshcreatormain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:tshcreatormain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\creators\\tshweaponcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:creators\\tshweaponcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\tshcreatormain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:tshcreatormain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,11 +54,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1111,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "EffectData.cs",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\dataClasses\\EffectData.cs",
               "RelativeDocumentMoniker": "dataClasses\\EffectData.cs",
@@ -70,7 +70,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "TSHEffectCreator.cs",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\Creators\\TSHEffectCreator.cs",
               "RelativeDocumentMoniker": "Creators\\TSHEffectCreator.cs",
@@ -83,7 +83,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "ComboBoxHandler.cs",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\ComboBoxHandler.cs",
               "RelativeDocumentMoniker": "ComboBoxHandler.cs",
@@ -95,7 +95,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "TSHBattleMoveCreator.cs",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\Creators\\TSHBattleMoveCreator.cs",
               "RelativeDocumentMoniker": "Creators\\TSHBattleMoveCreator.cs",
@@ -103,12 +103,11 @@
               "RelativeToolTip": "Creators\\TSHBattleMoveCreator.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T12:57:56.034Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-30T12:57:56.034Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "CreatorBaseForm.cs",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\CreatorBaseForm.cs",
               "RelativeDocumentMoniker": "CreatorBaseForm.cs",
@@ -120,13 +119,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 0,
               "Title": "TSHCreatorMain.cs",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\TSHCreatorMain.cs",
               "RelativeDocumentMoniker": "TSHCreatorMain.cs",
               "ToolTip": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\TSHCreatorMain.cs",
               "RelativeToolTip": "TSHCreatorMain.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAjwF4AAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAOUAAAAAAAAAAAArwCABAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-30T12:33:54.016Z",
               "EditorCaption": ""
@@ -135,11 +134,11 @@
         },
         {
           "DockedWidth": 1111,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "TSHEffectCreator.cs [Design]",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\Creators\\TSHEffectCreator.cs",
               "RelativeDocumentMoniker": "Creators\\TSHEffectCreator.cs",
@@ -150,7 +149,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "TSHCharacterCreator.cs",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\Creators\\TSHCharacterCreator.cs",
               "RelativeDocumentMoniker": "Creators\\TSHCharacterCreator.cs",
@@ -158,12 +157,11 @@
               "RelativeToolTip": "Creators\\TSHCharacterCreator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T13:01:39.566Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-30T13:01:39.566Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 3,
               "Title": "TSHCreatorMain.cs [Design]",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\TSHCreatorMain.cs",
               "RelativeDocumentMoniker": "TSHCreatorMain.cs",
@@ -174,14 +172,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 2,
               "Title": "TSHWeaponCreator.cs [Design]",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\Creators\\TSHWeaponCreator.cs",
               "RelativeDocumentMoniker": "Creators\\TSHWeaponCreator.cs",
               "ToolTip": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\Creators\\TSHWeaponCreator.cs [Design]",
               "RelativeToolTip": "Creators\\TSHWeaponCreator.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-30T13:43:11.455Z"
+              "WhenOpened": "2026-01-30T13:43:11.455Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }
@@ -206,13 +205,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Enums.cs",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\CoreEnums\\Enums.cs",
               "RelativeDocumentMoniker": "CoreEnums\\Enums.cs",
               "ToolTip": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\CoreEnums\\Enums.cs",
               "RelativeToolTip": "CoreEnums\\Enums.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-02T13:28:55.242Z",
               "EditorCaption": ""

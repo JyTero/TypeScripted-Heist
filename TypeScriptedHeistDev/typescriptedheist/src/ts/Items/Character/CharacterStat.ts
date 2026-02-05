@@ -5,7 +5,8 @@ import { ItemBase } from "../ItemBase";
 export class CharacterStat {
     private statName: string = "";
     private statValue: number;
-    private statMaxValue: number;
+    private trueMaxValue: number;
+    private currentMaxValue: number;
 
     private subscribers: (() => void)[] = [];
 
@@ -26,7 +27,8 @@ export class CharacterStat {
     constructor(name: string, initValue: number, maxValue: number, statType: CharcterStatTypeEnum, owner: ItemBase) {
         this.statName = name;
         this.statValue = initValue;
-        this.statMaxValue = maxValue;
+        this.trueMaxValue = maxValue;
+        this.currentMaxValue = this.trueMaxValue;
         this.owner = owner;
         owner.AddStatToDictionary(statType, this);
     }
@@ -35,11 +37,32 @@ export class CharacterStat {
         this.statValue = newValue;
         this.NotifyValueChange();
     }
-    public async AdjustValue(adjustValue: number) {
-        this.statValue = this.statValue + adjustValue;
+    public async DamageStat(adjust: number) {
+        this.statValue = this.statValue + adjust;
         this.NotifyValueChange();
-        this.WriteAlert(adjustValue);
-
+        this.WriteAlert(adjust);
+    }
+    public DestroyStat(adjust: number) {
+        this.currentMaxValue += this.currentMaxValue + adjust;
+        if (this.statValue > this.currentMaxValue)
+            this.SetValue(this.currentMaxValue);
+        this.WriteAlert(adjust);
+    }
+    public HealStat(adjust: number) {
+        if (this.statValue + adjust > this.currentMaxValue)
+            this.SetValue(this.currentMaxValue);
+        else {
+            this.statValue = this.statValue + adjust;
+            this.NotifyValueChange();
+            this.WriteAlert(adjust);
+        }
+    }
+    public RestoreStat(adjust: number) {
+        if (this.currentMaxValue + adjust > this.trueMaxValue)
+            this.currentMaxValue = this.trueMaxValue;
+        else {
+            this.currentMaxValue += adjust;
+        }
     }
 
     private WriteAlert(adjustValue: number) {

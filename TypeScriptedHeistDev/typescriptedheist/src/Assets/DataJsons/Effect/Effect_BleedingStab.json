@@ -1,9 +1,9 @@
 {
-  "EffectName": "Damage Health_2",
+  "EffectName": "Bleeding Stab",
   "TargetStat": "Health",
   "TargetEffectType": "Damage",
   "EffectPotency": 2,
-  "EffectDuration": 0,
-  "DataDevName": "Effect_DamageHealth_2",
+  "EffectDuration": 2,
+  "DataDevName": "Effect_BleedingStab",
   "DataType": "Effect"
 }

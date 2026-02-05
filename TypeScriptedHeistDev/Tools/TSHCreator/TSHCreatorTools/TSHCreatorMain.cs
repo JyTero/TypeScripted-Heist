@@ -66,7 +66,7 @@ namespace TSHCreatorTools
         {
             var weaponCreator = new TSHWeaponCreator();
             weaponCreator.OnCreatorWindowOpen();
-            weaponCreator.ShowDialog();
+            weaponCreator.Show();
             creatorWindows.Add(weaponCreator);
             weaponCreator.SetMainWindow(this);
         }
@@ -74,7 +74,7 @@ namespace TSHCreatorTools
         {
             var battleMoveCreator = new TSHBattleMoveCreator();
             battleMoveCreator.OnCreatorWindowOpen();
-            battleMoveCreator.ShowDialog();
+            battleMoveCreator.Show();
             creatorWindows.Add(battleMoveCreator);
             battleMoveCreator.SetMainWindow(this);
         }
@@ -82,7 +82,7 @@ namespace TSHCreatorTools
         {
             var characterCreator = new TSHCharacterCreator();
             characterCreator.OnCreatorWindowOpen();
-            characterCreator.ShowDialog();
+            characterCreator.Show();
             creatorWindows.Add(characterCreator);
             characterCreator.SetMainWindow(this);
         }
@@ -90,7 +90,7 @@ namespace TSHCreatorTools
         {
             var effectCreator = new TSHEffectCreator();
             effectCreator.OnCreatorWindowOpen();
-            effectCreator.ShowDialog();
+            effectCreator.Show();
             creatorWindows.Add(effectCreator);
             effectCreator.SetMainWindow(this);
         }
@@ -286,7 +286,7 @@ namespace TSHCreatorTools
                 foreach (string enumItem in enumContent)
                 {
                     //workingString = "";
-                    workingString = enumItem + ",";
+                    workingString = enumItem + " = \"" + enumItem + "\",";
                     sw.WriteLine(workingString);
                 }
                 sw.WriteLine(enumClose);

@@ -1,4 +1,4 @@
-import { EffectBase } from "../Effects/EffectBase";
+import { Effect } from "../Effects/EffectBase";
 import { MetaData } from "./MetaData";
 
 export interface BattleMoveData extends MetaData {
@@ -6,7 +6,7 @@ export interface BattleMoveData extends MetaData {
     IsRanged: boolean;
     BattleMoveWeaponHitMultiplier: number;
     BattleMoveWeaponDamageMultiplier: number;
-    BattleMoveEffects:EffectBase[];
+    BattleMoveEffects:Effect[];
     //TargetT
     // BattleMoveSource: WeaponItem;
 }

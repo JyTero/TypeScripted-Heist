@@ -1,7 +1,7 @@
 {
   "WeaponName": "Amalie\u0027s Knife",
   "BattleMoves": [
-    "BattleMove_Stab_Knife"
+    "BattleMove_BleedingStab"
   ],
   "WeaponHit": 3,
   "WeaponDamage": 1,

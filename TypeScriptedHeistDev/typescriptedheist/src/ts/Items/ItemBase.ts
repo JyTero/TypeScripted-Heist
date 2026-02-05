@@ -1,6 +1,7 @@
 import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
+import { EffectTypeEnumEnum } from "../../Assets/DataJsons/EffectTypeEnumEnum";
 import { AlertManager } from "../AlertManager";
-import { EffectBase } from "../Effects/EffectBase";
+import { Effect } from "../Effects/EffectBase";
 import { IsDebug } from "../initialisation";
 import { CharacterStat } from "./Character/CharacterStat";
 
@@ -9,7 +10,7 @@ export class ItemBase {
 
     public Health: CharacterStat;
 
-    private activeEffects: EffectBase[];
+    private activeEffects: Effect[];
 
     //private objectStats:{[key:CharacterStatTypes]:CharacterStat}; 
     private objectStats: Partial<Record<CharcterStatTypeEnum, CharacterStat>> = {};
@@ -19,7 +20,7 @@ export class ItemBase {
         this.activeEffects = [];
     }
 
-    public async ReceiveEffect(effect: EffectBase) {
+    public async ReceiveEffect(effect: Effect) {
         this.activeEffects.push(effect);
         await AlertManager.Instance.WriteAlertStorePrevious(`${this.ItemName} received effect ${effect.EffectName}`);
     }
@@ -28,6 +29,12 @@ export class ItemBase {
         this.activeEffects.forEach(effect => {
             effect.TriggerOTEffect(this);
         });
+    }
+
+
+
+    public ApplyDamageEffect(effect: Effect){
+        const targetStat = this.GetStat(effect.GetTargetStat())
     }
 
     public AddStatToDictionary(key: CharcterStatTypeEnum, stat: CharacterStat) {
@@ -41,13 +48,15 @@ export class ItemBase {
         }
     }
 
-    public async RemoveEffect(effect: EffectBase) {
+    public async RemoveEffect(effect: Effect) {
         const i = this.activeEffects.indexOf(effect);
         this.activeEffects.splice(i, 1);
         await AlertManager.Instance.WriteAlertStorePrevious(`${this.ItemName} no longer has OT  effect ${effect.EffectName}`);
     }
 
     public GetStat(key: CharcterStatTypeEnum): CharacterStat | undefined {
+        console.log(key, typeof key);
+        console.log(Object.keys(this.objectStats));
         return this.objectStats[key];
     }
 
