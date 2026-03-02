@@ -39,6 +39,25 @@ Battle AI
 			- Each Combat Option to be tagged for each trait, weapon, and have weighting curves
 - For now: Pick random enemy and random attack
 
+Each BattleMove is scored, default score is its combined immediate potency * 1.OTDuration.
+Heals count totalHealPotency/2, counted same as above.
+`if(characterInTurn.Traits.Empty())`
+	`PickHighestScoringValidActions()` //Do not attack allies or heal enemies
+`else if(characterInTurn.Traits.Include(Trait.Healer)`
+`{
+	double scoring for each Healing BattleMove
+}`
+``
+baseScore
+Traits
+Axis
+
+
+CombatCharacter
+- Character
+- hasAttacked
+- hasBeenTargetedByMelee
+
 
 Combat Abilities
 - Base, avaialble to most everyone

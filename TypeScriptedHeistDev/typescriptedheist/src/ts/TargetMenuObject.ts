@@ -3,6 +3,7 @@ import { MenuItemDataType } from "./DataTypes/MenuItemDataType";
 import { MenuItemBase } from "./MenuItemBase";
 import { MenuObjectBase } from "./MenuObjectBase";
 import { placeholderScene } from "./Scenes/Placeholders";
+import { CombatCharacter } from "./BattleSystem/CombatCharacter";
 
 export class TargetMenuObject extends MenuObjectBase{
 
@@ -10,11 +11,11 @@ export class TargetMenuObject extends MenuObjectBase{
         super([]);
     }
 
-    public BuildTargetMenuObject(combatTurnOrder:CharacterBase[]){
+    public BuildTargetMenuObject(combatTurnOrder:CombatCharacter[]){
         var combatTargetMenuItems: MenuItemBase[] = [];
         var targetIndex = 1;
-        combatTurnOrder.forEach(character => {
-            const menuItemData: MenuItemDataType = this.MakeTargetMenuItemData(character,targetIndex);
+        combatTurnOrder.forEach(combatCharacter => {
+            const menuItemData: MenuItemDataType = this.MakeTargetMenuItemData(combatCharacter.Character,targetIndex);
             combatTargetMenuItems.push(new MenuItemBase(menuItemData));
             targetIndex++;
         });

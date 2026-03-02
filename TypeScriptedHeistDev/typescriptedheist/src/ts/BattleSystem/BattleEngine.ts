@@ -12,6 +12,8 @@ import { CharacterEnum } from "../../Assets/DataJsons/CharacterEnum";
 import { PlayerCharacter } from "../PlayerCharacter";
 import { SceneManagement } from "../Scenes/SceneManagement";
 import { AlertGroup, AlertGroupType, AlertManager } from "../AlertManager";
+import { CombatCharacter } from "./CombatCharacter";
+import { EnemyCombatAI } from "./EnemyCombatAI";
 
 export async function BeginBattleEngine(battleData: BattleArenaDataType, currentScene: BattleArenaSceneBase) {
     const battleStage: BattleEngine = new BattleEngine(battleData, PlayerCharacter.instance.GetPlayerCharacter(), currentScene);
@@ -33,11 +35,11 @@ class BattleEngine {
     private playerCharacter: CharacterBase;
     private enemyCharacters: CharacterBase[] = [];
 
-    private turnOrder: CharacterBase[] = [];
+    private turnOrder: CombatCharacter[] = [];
 
     private battleData: BattleArenaDataType;
 
-    private characterInTurn: CharacterBase;
+    private characterInTurn: CombatCharacter;
     private currentRound: number = -1;
     private currentTurnIndex: number = -1;
     private battleOver = false;
@@ -83,8 +85,17 @@ class BattleEngine {
 
         this.SetUpTurnOrder();
         this.SetUpSprites();
+        this.SetUpEnemyAI();
         this.currentRound = 0;
         this.currentTurnIndex = 0;
+    }
+
+    private SetUpEnemyAI() {
+        //Loop though all
+        this.turnOrder.forEach(combatCharacter => {
+            const combatAI = new EnemyCombatAI(combatCharacter.Character);
+            combatAI.SetUpBattleActions(this.turnOrder, combatCharacter.Character.CharacterSheet.BattleMoves);
+        });
     }
 
     public async BattleLoop() {
@@ -133,23 +144,23 @@ class BattleEngine {
     //Very placeholdery and proof of concept-y
     private async StartTurn() {
         if (IsDebug)
-            console.log(`${this.characterInTurn.ItemName} takes turn`);
+            console.log(`${this.characterInTurn.Character.ItemName} takes turn`);
 
-        AlertManager.Instance.CreateAlertGroup(`${this.characterInTurn.ItemName} combat turn`, AlertGroupType.CombatTurn);
+        AlertManager.Instance.CreateAlertGroup(`${this.characterInTurn.Character.ItemName} combat turn`, AlertGroupType.CombatTurn);
 
-        AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.ItemName} takes turn!`, AlertGroupType.CombatTurn);
+        AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes turn!`, AlertGroupType.CombatTurn);
 
         //await WriteAlertStorePrevious(`${this.characterInTurn.ItemName} takes turn!`);
 
-        if (this.characterInTurn === this.playerCharacter) {
+        if (this.characterInTurn.Character === this.playerCharacter) {
             //Give Control to player
             //Create a menu out of potential moves
 
             const combatMoveMenu = new CombatMenuObject();
-            combatMoveMenu.BuildCombatMoveMenuObject(this.characterInTurn);
+            combatMoveMenu.BuildCombatMoveMenuObject(this.characterInTurn.Character);
 
             const combatMoveIndex = await combatMoveMenu.HandleMenu();
-            const chosenCombatMove = this.characterInTurn.CharacterSheet.BattleMoves[combatMoveIndex - 1];
+            const chosenCombatMove = this.characterInTurn.Character.CharacterSheet.BattleMoves[combatMoveIndex - 1];
             // WriteMenuSelection(combatMoveMenu.allMenuItems[combatMoveIndex-1].MenuItemSelectionDescription);
 
             const targetMenu = new TargetMenuObject();
@@ -157,41 +168,46 @@ class BattleEngine {
 
             const targetIndex = await targetMenu.HandleMenu();
             const chosenTarget: string = targetMenu.allMenuItems[targetIndex - 1].MenuItemName;
-            const chosenTargetCharacter: CharacterBase = this.turnOrder[targetMenu.allMenuItems[targetIndex - 1].MenuItemNumber - 1];
+            const chosenTargetCombatCharacter: CombatCharacter = this.turnOrder[targetMenu.allMenuItems[targetIndex - 1].MenuItemNumber - 1];
             // WriteMenuSelection(targetMenu.allMenuItems[targetIndex-1].MenuItemSelectionDescription);
 
             if (IsDebug)
-                console.log(`${this.characterInTurn.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTarget}`)
+                console.log(`${this.characterInTurn.Character.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTarget}`)
 
-            AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTargetCharacter.ItemName}`, AlertGroupType.CombatTurn);
+            AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTargetCombatCharacter.Character.ItemName}`, AlertGroupType.CombatTurn);
             //WriteAlert(`${this.characterInTurn.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTargetCharacter.ItemName}`);
-            chosenCombatMove.ExecuteMove(this.characterInTurn, chosenTargetCharacter);
+            chosenCombatMove.ExecuteMove(this.characterInTurn.Character, chosenTargetCombatCharacter.Character);
 
             //OnCharacterDeath
-            if (chosenTargetCharacter.Health.Value <= 0) {
-                CanvasGraphicsInstance.RemoveSpriteFromList(chosenTargetCharacter.CharacterSprite);
+            if (chosenTargetCombatCharacter.Character.Health.Value <= 0) {
+                CanvasGraphicsInstance.RemoveSpriteFromList(chosenTargetCombatCharacter.Character.CharacterSprite);
                 //Remove from turn order
-                const i = this.turnOrder.indexOf(chosenTargetCharacter);
+                const i = this.turnOrder.indexOf(chosenTargetCombatCharacter);
                 this.turnOrder.splice(i, 1);
             }
 
         }
         else {
-            this.characterInTurn.RunOnceTurnEffects();
+            this.characterInTurn.Character.RunOnceTurnEffects();
 
-            const i = GetRandomInt(0, this.characterInTurn.CharacterSheet.BattleMoves.length - 1);
-            const chosenMove = this.characterInTurn.CharacterSheet.BattleMoves[i];
-            AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.ItemName} takes action ${chosenMove.MoveName} against ${this.playerCharacter.ItemName}`, AlertGroupType.CombatTurn);
+            const i = GetRandomInt(0, this.characterInTurn.Character.CharacterSheet.BattleMoves.length - 1);
+            const chosenMove = this.characterInTurn.Character.CharacterSheet.BattleMoves[i];
+            AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes action ${chosenMove.MoveName} against ${this.playerCharacter.ItemName}`, AlertGroupType.CombatTurn);
             //await WriteAlertStorePrevious(`${this.characterInTurn.ItemName} takes action ${chosenMove.MoveName} against ${this.playerCharacter.ItemName}`);
-            chosenMove.ExecuteMove(this.characterInTurn, this.playerCharacter);
+            chosenMove.ExecuteMove(this.characterInTurn.Character, this.playerCharacter);
 
         }
 
     }
+
+    private EnemyTurn() {
+
+    }
+
     private EndTurn() {
         if (IsDebug)
-            console.log(`${this.characterInTurn.ItemName} ends their turn`);
-        AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.ItemName} ends their turn`, AlertGroupType.CombatTurn);
+            console.log(`${this.characterInTurn.Character.ItemName} ends their turn`);
+        AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} ends their turn`, AlertGroupType.CombatTurn);
         AlertManager.Instance.PrintGroup(AlertGroupType.CombatTurn);
 
     }
@@ -200,8 +216,8 @@ class BattleEngine {
         this.currentTurnIndex = 0;
         var hpString = "";
         //Show all Hp, placeholder here
-        this.turnOrder.forEach(character => {
-            hpString += `${character.ItemName} has ${character.Health.Value}hp\n`;
+        this.turnOrder.forEach(combatCharacter => {
+            hpString += `${combatCharacter.Character.ItemName} has ${combatCharacter.Character.Health.Value}hp\n`;
             hpString += "<br>";
         });
         await AlertManager.Instance.WriteAlertStorePrevious(hpString);
@@ -209,19 +225,21 @@ class BattleEngine {
 
     private SetUpTurnOrder() {
         this.enemyCharacters.forEach(enemy => {
-            this.turnOrder.push(enemy);
+            const combatCharacter = new CombatCharacter(enemy)
+            this.turnOrder.push(combatCharacter);
         });
-        this.turnOrder.push(this.playerCharacter);
+        const combatCharacter = new CombatCharacter(this.playerCharacter);
+        this.turnOrder.push(combatCharacter);
         this.SortTurnOrder();
         if (IsDebug) {
             console.log("Turn order for this combat: ");
             this.turnOrder.forEach(character => {
-                console.log(character.ItemName);
+                console.log(character.Character.ItemName);
             });
         }
     }
     private SortTurnOrder() {
-        this.turnOrder.sort((a, b) => b.CharacterSheet.BattleSpeed.Value - a.CharacterSheet.BattleSpeed.Value);
+        this.turnOrder.sort((a, b) => b.Character.CharacterSheet.BattleSpeed.Value - a.Character.CharacterSheet.BattleSpeed.Value);
     }
 
     private SetUpSprites() {
@@ -239,7 +257,7 @@ class BattleEngine {
 
     }
 
-    private GetNextInTurnCharacter(): CharacterBase {
+    private GetNextInTurnCharacter(): CombatCharacter {
         if (this.currentTurnIndex > this.turnOrder.length)
             return this.turnOrder[this.turnOrder.length - 1];     //If  previous was last turn of the round, reselect last one again
         else

@@ -1,9 +1,12 @@
 import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
 import { EffectTypeEnumEnum } from "../../Assets/DataJsons/EffectTypeEnumEnum";
+import { PersoanlityAxisEnumH } from "../../Assets/DataJsons/PersonalityAxisEnumHandmade";
 import { AlertManager } from "../AlertManager";
 import { Effect } from "../Effects/EffectBase";
 import { IsDebug } from "../initialisation";
 import { CharacterStat } from "./Character/CharacterStat";
+import { PersonalityAxis } from "./Character/PersonalityAxis";
+import { Trait } from "./Character/Trait";
 
 export class ItemBase {
     public ItemName: string = "Gia's Gunn";
@@ -15,10 +18,23 @@ export class ItemBase {
     //private objectStats:{[key:CharacterStatTypes]:CharacterStat}; 
     private objectStats: Partial<Record<CharcterStatTypeEnum, CharacterStat>> = {};
 
+    private itemPersonalityAxes: Partial<Record<PersoanlityAxisEnumH, PersonalityAxis>> = {};
+    private itemTraits: Trait[];
     constructor(maxHealth: number) {
         this.Health = new CharacterStat("Health", maxHealth, maxHealth, CharcterStatTypeEnum.Health, this);
         this.activeEffects = [];
     }
+
+    public AddTrait(trait: Trait) {
+        if (IsDebug)
+            console.log(`${trait.TraitName} has been added to ${this.ItemName}`);
+        this.itemTraits.push(trait);
+    }
+    public GetTraits(): Trait[] {
+        return this.itemTraits;
+    }
+
+
 
     public async ReceiveEffect(effect: Effect) {
         this.activeEffects.push(effect);
@@ -30,11 +46,20 @@ export class ItemBase {
             effect.TriggerOTEffect(this);
         });
     }
-
-
-
-    public ApplyDamageEffect(effect: Effect){
+    public ApplyDamageEffect(effect: Effect) {
         const targetStat = this.GetStat(effect.GetTargetStat())
+    }
+
+    public async RemoveEffect(effect: Effect) {
+        const i = this.activeEffects.indexOf(effect);
+        this.activeEffects.splice(i, 1);
+        await AlertManager.Instance.WriteAlertStorePrevious(`${this.ItemName} no longer has OT  effect ${effect.EffectName}`);
+    }
+
+    public GetStat(key: CharcterStatTypeEnum): CharacterStat | undefined {
+        console.log(key, typeof key);
+        console.log(Object.keys(this.objectStats));
+        return this.objectStats[key];
     }
 
     public AddStatToDictionary(key: CharcterStatTypeEnum, stat: CharacterStat) {
@@ -48,16 +73,21 @@ export class ItemBase {
         }
     }
 
-    public async RemoveEffect(effect: Effect) {
-        const i = this.activeEffects.indexOf(effect);
-        this.activeEffects.splice(i, 1);
-        await AlertManager.Instance.WriteAlertStorePrevious(`${this.ItemName} no longer has OT  effect ${effect.EffectName}`);
+    public AddPersonalityAxisToDictionary(key: PersoanlityAxisEnumH, axis: PersonalityAxis) {
+        if (key in this.itemPersonalityAxes)
+            if (IsDebug)
+                console.log("NOTE: " + this.ItemName + " already contains a " + key.toString() + " type stat" + "| " + this.itemPersonalityAxes[key]?.axisName + " vs " + axis.axisName);
+            else {
+                this.itemPersonalityAxes[key] = axis;
+            }
     }
+    public GetPersonalityAxes(): PersonalityAxis[] {
+        var personalityAxis: PersonalityAxis[] = [];
+        for(var axis of Object.values(this.itemPersonalityAxes)){
+            personalityAxis.push(axis);
+        }
 
-    public GetStat(key: CharcterStatTypeEnum): CharacterStat | undefined {
-        console.log(key, typeof key);
-        console.log(Object.keys(this.objectStats));
-        return this.objectStats[key];
+        return personalityAxis;
     }
 
     // private MaxHealth: number = 10;

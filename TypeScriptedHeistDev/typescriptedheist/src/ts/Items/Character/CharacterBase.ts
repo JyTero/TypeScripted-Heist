@@ -1,5 +1,6 @@
 
 import { ImagescharacterEnum } from "../../../Assets/DataJsons/ImagescharacterEnum";
+import { EnemyCombatAI } from "../../BattleSystem/EnemyCombatAI";
 import { Sprite } from "../../Canvas/Sprite";
 import { CharacterDataType } from "../../DataTypes/CharacterData";
 import { IsDebug } from "../../initialisation";
@@ -13,18 +14,20 @@ export class CharacterBase  extends ItemBase {
     public CharacterSprite: Sprite;
     public CharacterLoadingReady: boolean = false;
 
-
+    public enemyCombatAI: EnemyCombatAI;
 
 
     constructor(characterJson: CharacterJson) {
-        super(10)   //Real value will come from data
+        super(10);   //Real value will come from data
         this.LoadCharacterImage(characterJson.CharacterImagePath);
 
         this.ItemName = characterJson.CharacterName;
 
         this.CharacterSheet = new CharacterSheet(characterJson, this);
     }
-
+    public InitialiseCombatAI(enemyCombatAI:EnemyCombatAI){
+        this.enemyCombatAI = enemyCombatAI;
+    }
     private LoadCharacterImage(imgName: string) {
         const image = new Image();
         const imgPath = `./src/Assets/Img/character/${imgName}`;

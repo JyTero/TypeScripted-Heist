@@ -102,16 +102,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Scenes, menus & SceneObjects.md",
+                "file": "Combat.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Scenes, menus & SceneObjects"
+              "title": "Combat"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -256,24 +256,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "411161a8fb2b242f",
+  "active": "341a5433d6cd11c4",
   "lastOpenFiles": [
+    "Turn Based Combat System.md",
+    "Combat.md",
+    "Character Sheet Technical.md",
+    "ToDo.md",
+    "Scenes, menus & SceneObjects.md",
     "Character Sheet.md",
     "Tool.md",
-    "Combat.md",
     "Data.canvas",
     "Graphics.md",
     "IDEAS.md",
     "Pasted image 20250818200819.png",
     "Scenes and Such.canvas",
-    "Scenes, menus & SceneObjects.md",
-    "ToDo.md",
     "TSHCreator.md",
     "TypeScriptGame/Gameflow.canvas",
     "TypeScriptGame/House.canvas",
     "BM,Effect and targeting.md",
-    "Character Sheet Technical.md",
-    "Turn Based Combat System.md",
     "Classes/Scene.md",
     "Classes",
     "Classes/CharacterBase.md",

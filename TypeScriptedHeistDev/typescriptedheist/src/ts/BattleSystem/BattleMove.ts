@@ -6,6 +6,7 @@ import { ItemBase } from "../Items/ItemBase";
 import { JsonHandlerInstance } from "../initialisation";
 import { DataTypesEnum } from "../../Assets/DataJsons/DataTypesEnum";
 import { EffectData } from "../DataTypes/EffectDataType";
+import { EffectTypeEnumEnum } from "../../Assets/DataJsons/EffectTypeEnumEnum";
 
 
 export class BattleMove {
@@ -15,17 +16,23 @@ export class BattleMove {
     public MoveHitMultiplier: number;
     //public AttackerMoveEffects: EffectBase[];
     public MoveEffects: Effect[];
-    public MoveScore: number;
+
+    private isHealingMove = false;
+    public get IsHealingMove():boolean{
+      return this.isHealingMove;  
+    } 
+
     constructor(data: BattleMoveData) {
         this.MoveName = data.BattleMoveName;
         this.IsRanged = data.IsRanged;
         this.MoveDamageMultiplier = data.BattleMoveWeaponDamageMultiplier;
         this.MoveHitMultiplier = data.BattleMoveWeaponHitMultiplier
         this.MoveEffects = data.BattleMoveEffects;
-        this.MoveScore = -1;
 
         if (this.MoveEffects != null)
             this.BuildBattleMoveEffects();
+
+
     }
 
     private BuildBattleMoveEffects() {
@@ -37,7 +44,10 @@ export class BattleMove {
             const effectReference = allEffectReferences.find(e => e.DataDevName === effect);
             const newEffect: Effect = new Effect(effectReference);
             this.MoveEffects.push(newEffect);
-
+            
+            if(newEffect.GetEffectType() == EffectTypeEnumEnum.Heal ||newEffect.GetEffectType() == EffectTypeEnumEnum.Restore){
+                this.isHealingMove = true;
+            }
         });
     }
 
@@ -53,4 +63,5 @@ export class BattleMove {
             effect.ApplyEffect(defender);
         });
     }
+
 }

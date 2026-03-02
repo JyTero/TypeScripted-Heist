@@ -3,6 +3,8 @@
 	- Each window remembers most recent path for each its pathfindings
 	- Each data dependant field needs refresh button
 		- Bonus: Tie refresh and the field togehter to be a component
+- Enemy AI
+	- Currently, move is considred to be healing move if one of its effects either heals or restores
 - History
 	- Display only Chosen menuitem text (You chose insert *option text here*)
 	- If incorrect input on menu, don't write anything to history

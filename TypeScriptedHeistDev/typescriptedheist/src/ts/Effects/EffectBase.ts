@@ -30,11 +30,18 @@ export class Effect {
     public EffectName: string;
     protected TargetStat: CharcterStatTypeEnum;
     protected EffectType: EffectTypeEnumEnum;
-    protected Potency: number;
-    protected EffectDuration: number;
+    protected potency: number;
+    protected effectDuration: number;
 
     //private targetStatIntance: CharacterStat
     private effectRemainingTurns: number;
+
+    public get Potency(): number {
+        return this.potency;
+    }
+    public get EffectDuration():number{
+        return this.effectDuration;
+    }
 
     public GetEffectType(): EffectTypeEnumEnum {
         return this.EffectType;
@@ -47,8 +54,8 @@ export class Effect {
         this.EffectName = data.EffectName;
         this.TargetStat = data.TargetStat;
         this.EffectType = data.TargetEffectType;
-        this.Potency = data.EffectPotency;
-        this.EffectDuration = data.EffectDuration;
+        this.potency = data.EffectPotency;
+        this.effectDuration = data.EffectDuration;
 
         //Figure out what effect type (Heal, hurt), adjust value if needed
         this.AdjustEffectPotencyToMatchType();
@@ -59,7 +66,7 @@ export class Effect {
 
         //is OT?
         if (this.DoesTargetHaveEffectTargetStat(target)) {
-            if (this.EffectDuration === 0)
+            if (this.effectDuration === 0)
                 this.TriggerEffect(target)
             else
                 this.ApplyOTEffect(target);
@@ -80,18 +87,18 @@ export class Effect {
 
     private ApplyInstantEffect(target: ItemBase) {
         const statt = target.GetStat(this.TargetStat);
-        statt?.DamageStat(this.Potency);
+        statt?.DamageStat(this.potency);
 
     }
 
     private ApplyOTEffect(target: ItemBase) {
         target.ReceiveEffect(this);
-        this.effectRemainingTurns = this.EffectDuration;
+        this.effectRemainingTurns = this.effectDuration;
     }
 
     private AdjustEffectPotencyToMatchType() {
         if (this.EffectType === EffectTypeEnumEnum.Damage || this.EffectType === EffectTypeEnumEnum.Destroy) {
-            this.Potency = -Math.abs(this.Potency);
+            this.potency = -Math.abs(this.potency);
         }
     }
 
@@ -123,26 +130,26 @@ export class Effect {
             default:
                 console.log("UNKNOWN EffectType IN " + this.EffectName);
         }
-        if (this.EffectDuration > 0)
+        if (this.effectDuration > 0)
             this.HandleOvertimeEffects(target);
 
     }
 
     private ApplyDamageEffect(target: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
-        targetStat?.DamageStat(this.Potency);
+        targetStat?.DamageStat(this.potency);
     }
     private ApplyDestroyEffect(target: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
-        targetStat?.DestroyStat(this.Potency);
+        targetStat?.DestroyStat(this.potency);
     }
-    private ApplyHealEffect(target:ItemBase){
+    private ApplyHealEffect(target: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
-        targetStat?.HealStat(this.Potency);
+        targetStat?.HealStat(this.potency);
     }
-    private ApplyRestoreEffect(target:ItemBase){
+    private ApplyRestoreEffect(target: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat);
-        targetStat?.RestoreStat(this.Potency);
+        targetStat?.RestoreStat(this.potency);
     }
 
     private HandleOvertimeEffects(target: ItemBase) {
@@ -153,7 +160,7 @@ export class Effect {
 
     public async TriggerOTEffect(target: ItemBase) {
 
-        await AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (${this.effectRemainingTurns}/${this.EffectDuration} turns)`);
+        await AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (${this.effectRemainingTurns}/${this.effectDuration} turns)`);
         this.TriggerEffect(target);
 
         // const stat = target.GetStat(this.TargetStat);
