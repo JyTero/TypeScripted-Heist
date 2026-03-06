@@ -1,4 +1,4 @@
-import { CanvasGraphicsInstance, FrameTimeMS, IsDebug, SceneManagerInstance } from "../initialisation";
+import { CanvasGraphicsInstance, DebugWindowInstance, FrameTimeMS, IsDebug, SceneManagerInstance } from "../initialisation";
 import { SceneBase } from "../SceneBase";
 import { BattleArenaScene as BattleArenaSceneBase } from "../BattleArenaSceneBase";
 import { CharacterBase } from "../Items/Character/CharacterBase";
@@ -13,7 +13,10 @@ import { PlayerCharacter } from "../PlayerCharacter";
 import { SceneManagement } from "../Scenes/SceneManagement";
 import { AlertGroup, AlertGroupType, AlertManager } from "../AlertManager";
 import { CombatCharacter } from "./CombatCharacter";
-import { EnemyCombatAI } from "./EnemyCombatAI";
+import { BattleAction, EnemyCombatAI } from "./EnemyCombatAI";
+import { PersoanlityAxisEnumH } from "../../Assets/DataJsons/PersonalityAxisEnumHandmade";
+import { PersonalityAxis } from "../Items/Character/PersonalityAxis";
+import { DebugWindow } from "../Tools/DebugWindow";
 
 export async function BeginBattleEngine(battleData: BattleArenaDataType, currentScene: BattleArenaSceneBase) {
     const battleStage: BattleEngine = new BattleEngine(battleData, PlayerCharacter.instance.GetPlayerCharacter(), currentScene);
@@ -25,9 +28,7 @@ export async function BeginBattleEngine(battleData: BattleArenaDataType, current
     await AlertManager.Instance.WriteAlertStorePrevious("Battle Begins!");
     //Begin rounds
     await battleStage.BattleLoop();
-    //Give turns
-    //Manage Battle over
-    //On
+
 }
 
 //The Battle Stage Engine
@@ -65,7 +66,9 @@ class BattleEngine {
             if (IsDebug)
                 console.log("Battle Enemy Character: " + enemChar.ItemName);
             this.enemyCharacters.push(enemChar);
-            //enemChar.CharacterSheet.ChangeWeaponEnm(WeaponEnum.Weapon_ForcedHitter);
+
+            //DEBUG
+            this.GiveCharacterAgressivinessAxis(enemChar);
 
         });
 
@@ -79,6 +82,10 @@ class BattleEngine {
 
     }
 
+    //DEBUG
+    private GiveCharacterAgressivinessAxis(character: CharacterBase) {
+        const axis = new PersonalityAxis("Aggressiveness", 0.2, PersoanlityAxisEnumH.Aggressiveness, character)
+    }
 
     public OnBattleStartUp() {
         //TurnOrder
@@ -88,14 +95,20 @@ class BattleEngine {
         this.SetUpEnemyAI();
         this.currentRound = 0;
         this.currentTurnIndex = 0;
+
+        if(IsDebug)
+            DebugWindowInstance.OnCombatBegin(this.turnOrder)
     }
 
     private SetUpEnemyAI() {
         //Loop though all
-        this.turnOrder.forEach(combatCharacter => {
+        for (const combatCharacter of this.turnOrder) {
+            if (combatCharacter.Character == this.playerCharacter)
+                continue;
             const combatAI = new EnemyCombatAI(combatCharacter.Character);
+            combatCharacter.EnemyCombatAI = combatAI;
             combatAI.SetUpBattleActions(this.turnOrder, combatCharacter.Character.CharacterSheet.BattleMoves);
-        });
+        }
     }
 
     public async BattleLoop() {
@@ -119,7 +132,6 @@ class BattleEngine {
                     //End round, start new round
                     await this.EndRound();
                     this.OnRoundStart();
-
                 }
                 else {
                     this.characterInTurn = nextChar;
@@ -129,7 +141,6 @@ class BattleEngine {
                         console.log("End Combat");
                         this.OnBattleEnd();
                     }
-
                 }
             }
             await Delay(FrameTimeMS);
@@ -190,11 +201,14 @@ class BattleEngine {
         else {
             this.characterInTurn.Character.RunOnceTurnEffects();
 
-            const i = GetRandomInt(0, this.characterInTurn.Character.CharacterSheet.BattleMoves.length - 1);
-            const chosenMove = this.characterInTurn.Character.CharacterSheet.BattleMoves[i];
-            AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes action ${chosenMove.MoveName} against ${this.playerCharacter.ItemName}`, AlertGroupType.CombatTurn);
-            //await WriteAlertStorePrevious(`${this.characterInTurn.ItemName} takes action ${chosenMove.MoveName} against ${this.playerCharacter.ItemName}`);
-            chosenMove.ExecuteMove(this.characterInTurn.Character, this.playerCharacter);
+            const chosenBattleAction: BattleAction = this.characterInTurn.EnemyCombatAI.ChooseBattleAction();
+
+            // //OLD: Pick random BattleMove, always target the player
+            // const i = GetRandomInt(0, this.characterInTurn.Character.CharacterSheet.BattleMoves.length - 1);
+            // const chosenMove = this.characterInTurn.Character.CharacterSheet.BattleMoves[i];
+             AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes action ${chosenBattleAction.BattleMove.MoveName} against ${this.playerCharacter.ItemName}`, AlertGroupType.CombatTurn);
+            // //await WriteAlertStorePrevious(`${this.characterInTurn.ItemName} takes action ${chosenMove.MoveName} against ${this.playerCharacter.ItemName}`);
+            chosenBattleAction.BattleMove.ExecuteMove(this.characterInTurn.Character, chosenBattleAction.ActionTarget.Character);
 
         }
 

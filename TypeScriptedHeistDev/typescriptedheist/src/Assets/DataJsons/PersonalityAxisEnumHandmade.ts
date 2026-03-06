@@ -1,3 +1,3 @@
 export enum PersoanlityAxisEnumH{
-    aggressiveness,
+    Aggressiveness,
 }

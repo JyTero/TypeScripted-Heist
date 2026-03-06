@@ -1,0 +1,9 @@
+{
+  "EffectName": "HealHealth_3",
+  "TargetStat": "Health",
+  "TargetEffectType": "Heal",
+  "EffectPotency": 3,
+  "EffectDuration": 0,
+  "DataDevName": "Effect_HealHealth_3",
+  "DataType": "Effect"
+}

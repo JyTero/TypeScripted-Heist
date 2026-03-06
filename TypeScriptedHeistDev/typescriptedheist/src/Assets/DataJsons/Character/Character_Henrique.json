@@ -1,0 +1,15 @@
+{
+  "CharacterName": "Henrique",
+  "CharcterFaction": 0,
+  "CharacterStrength": 5,
+  "CharacterDexterity": 5,
+  "CharacterPerception": 5,
+  "CharacterWeaponSkill": 15,
+  "CharacterDodge": 15,
+  "CharacterBaseSpeed": 15,
+  "CharacterArmour": 10,
+  "CharaterEquipedWeapon": "HealersHoe_Weapon",
+  "CharacterImagePath": "WhmBunny.png",
+  "DataDevName": "Character_Henrique",
+  "DataType": "Character"
+}

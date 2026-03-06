@@ -1,0 +1,11 @@
+#app{
+    display: flex;
+    flex-direction: row;
+}
+p {
+    white-space: pre-line;
+}
+#CombatDebugging{
+    display: flex;
+    flex-direction: column;
+}

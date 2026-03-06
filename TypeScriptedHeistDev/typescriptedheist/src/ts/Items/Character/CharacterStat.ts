@@ -38,12 +38,12 @@ export class CharacterStat {
         this.NotifyValueChange();
     }
     public async DamageStat(adjust: number) {
-        this.statValue = this.statValue + adjust;
+        this.statValue = this.statValue - adjust;
         this.NotifyValueChange();
         this.WriteAlert(adjust);
     }
     public DestroyStat(adjust: number) {
-        this.currentMaxValue += this.currentMaxValue + adjust;
+        this.currentMaxValue += this.currentMaxValue - adjust;
         if (this.statValue > this.currentMaxValue)
             this.SetValue(this.currentMaxValue);
         this.WriteAlert(adjust);

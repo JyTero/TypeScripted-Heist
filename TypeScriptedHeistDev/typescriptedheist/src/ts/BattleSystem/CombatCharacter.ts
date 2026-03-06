@@ -1,4 +1,5 @@
 import { CharacterBase } from "../Items/Character/CharacterBase";
+import { EnemyCombatAI } from "./EnemyCombatAI";
 
 export class CombatCharacter{
     private character:CharacterBase;
@@ -7,6 +8,7 @@ export class CombatCharacter{
     }
 
     public hasBeenTargetedByMeleeThisTurn:boolean = false;
+    public EnemyCombatAI:EnemyCombatAI;
 
     constructor(character:CharacterBase){
         this.character = character;

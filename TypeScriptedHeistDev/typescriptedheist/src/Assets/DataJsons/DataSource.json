@@ -5,12 +5,14 @@
     "BattleMove_Stab_Knife.json",
     "BattleMove_Strike_Cane.json",
     "Damong_BattleMove.json",
-    "Demong_BattleMove.json"
+    "Demong_BattleMove.json",
+    "Healing_BattleMove.json"
   ],
   "Character": [
     "Character_Amalia.json",
     "Character_Damong.json",
     "Character_Demong.json",
+    "Character_Henrique.json",
     "Character_Muumi.json",
     "Character_PellePaikanpit\u00E4j\u00E4.json",
     "Character_Player.json",
@@ -24,11 +26,13 @@
     "Effect_DamageHealth_2.json",
     "Effect_DamageHealth_3OT.json",
     "Effect_Damong.json",
-    "Effect_Demong.json"
+    "Effect_Demong.json",
+    "Effect_HealHealth_3.json"
   ],
   "Weapon": [
     "Damong_Weapon.json",
     "Demong_Weapon.json",
+    "HealersHoe_Weapon.json",
     "Weapon_AmaliesKnife.json",
     "Weapon_Bang.json",
     "Weapon_Boots.json",

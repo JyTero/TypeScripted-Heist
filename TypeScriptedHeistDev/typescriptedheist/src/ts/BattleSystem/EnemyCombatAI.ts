@@ -8,7 +8,7 @@ import { CombatCharacter } from "./CombatCharacter";
 
 export class EnemyCombatAI {
     private thisCharacter: CharacterBase;
-    private battleActions: BattleAction[];
+    private battleActions: BattleAction[] = [];
     private lowHpHealingMoveScoreMultiplier: number;
     private canThisCharacterHeal: boolean = false;
 
@@ -22,10 +22,8 @@ export class EnemyCombatAI {
         // });
         character.InitialiseCombatAI(this);
 
-        this.GiveAllMovesBaseScore();
-        this.SetQuickFlags();
     }
-
+    
     private GiveAllMovesBaseScore() {
         this.battleActions.forEach(bm => {
             bm.BMDefaultScore();
@@ -37,8 +35,11 @@ export class EnemyCombatAI {
                 continue;
             battleMoves.forEach(bm => {
                 const ba = new BattleAction(this.thisCharacter, bm, character);
+                this.battleActions.push(ba);
             });
         }
+        this.GiveAllMovesBaseScore();
+        this.SetQuickFlags();
     }
 
     private SetQuickFlags() {
@@ -58,11 +59,15 @@ export class EnemyCombatAI {
         this.battleActions.forEach(ba => {
 
             this.ScoreBAByTraits(ba);
-            this.ScoreBAByPersonalityAxis(ba);
+            this.ScoreBAByPersonalityAxes(ba);
 
             this.DiscourageHealingEnemies(ba);
             this.DiscourageHurtingAllies(ba);
         });
+
+        this.battleActions.sort((a, b) => b.Score - a.Score);
+
+        return this.battleActions[0];
 
         //LowOwnHP REQUIRES SELFHEAL BM
         // const hp = this.thisCharacter.GetStat(CharcterStatTypeEnum.Health)?.Value;
@@ -76,12 +81,12 @@ export class EnemyCombatAI {
     }
 
     private ScoreBAByTraits(ba: BattleAction) {
-        this.thisCharacter.GetTraits().forEach(trait => {
+        this.thisCharacter.GetTraits()?.forEach(trait => {
             trait.AdjustBAScoreByTraits(ba);
         });
 
     }
-    private ScoreBAByPersonalityAxis(ba:BattleAction){
+    private ScoreBAByPersonalityAxes(ba:BattleAction){
         this.thisCharacter.GetPersonalityAxes().forEach(axis => {
             axis.AdjustBAScoreByPersonalityAxis(ba);
         });
@@ -120,7 +125,7 @@ export class BattleAction {
             this.TargetIsAlly = true;
 
     }
-    public BMDefaultScore(): number {
+    public BMDefaultScore() {
         var score = 0;
 
         this.BattleMove.MoveEffects.forEach(effect => {
@@ -130,8 +135,7 @@ export class BattleAction {
                 const durMult = (effect.Potency / 10) + 1
                 score += effect.Potency + durMult;
             }
+        this.Score = score;
         });
-
-        return score;
     }
 }

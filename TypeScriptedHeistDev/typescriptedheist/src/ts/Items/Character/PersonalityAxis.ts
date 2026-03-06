@@ -23,10 +23,8 @@ export class PersonalityAxis{
 
 export class Aggressiveness_PersonalityAxis extends PersonalityAxis {
 
-
     override AdjustBAScoreByPersonalityAxis(ba: BattleAction): void {
         super.AdjustBAScoreByPersonalityAxis(ba);
-
 
         //IF battle action is dealing damage to enemy
         if(!ba.TargetIsAlly && !ba.BattleMove.IsHealingMove){

@@ -1,0 +1,12 @@
+{
+  "BattleMoveName": "Healing",
+  "IsRanged": false,
+  "BattleMoveWeaponHitMultiplier": 1,
+  "BattleMoveWeaponDamageMultiplier": 1,
+  "BattleMoveEffects": [
+    "Effect_HealHealth_3"
+  ],
+  "BattleMoveType": 2,
+  "DataDevName": "Healing_BattleMove",
+  "DataType": "BattleMove"
+}

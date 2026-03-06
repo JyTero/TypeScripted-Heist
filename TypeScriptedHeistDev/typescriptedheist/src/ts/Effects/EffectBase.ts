@@ -58,7 +58,7 @@ export class Effect {
         this.effectDuration = data.EffectDuration;
 
         //Figure out what effect type (Heal, hurt), adjust value if needed
-        this.AdjustEffectPotencyToMatchType();
+        //this.AdjustEffectPotencyToMatchType();
     }
 
     public ApplyEffect(target: ItemBase) {
