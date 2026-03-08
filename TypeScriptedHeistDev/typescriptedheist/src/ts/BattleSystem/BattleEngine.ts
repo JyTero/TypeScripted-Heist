@@ -72,6 +72,8 @@ class BattleEngine {
 
         });
 
+        await this.WaitSpritesToLoad();
+
         //DEBUG
         //var enemChar = BuildCharacter(CharacterEnum.Character_Svoordmän);
         // this.enemyCharacters.push(enemChar);
@@ -96,7 +98,7 @@ class BattleEngine {
         this.currentRound = 0;
         this.currentTurnIndex = 0;
 
-        if(IsDebug)
+        if (IsDebug)
             DebugWindowInstance.OnCombatBegin(this.turnOrder)
     }
 
@@ -206,7 +208,7 @@ class BattleEngine {
             // //OLD: Pick random BattleMove, always target the player
             // const i = GetRandomInt(0, this.characterInTurn.Character.CharacterSheet.BattleMoves.length - 1);
             // const chosenMove = this.characterInTurn.Character.CharacterSheet.BattleMoves[i];
-             AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes action ${chosenBattleAction.BattleMove.MoveName} against ${this.playerCharacter.ItemName}`, AlertGroupType.CombatTurn);
+            AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes action ${chosenBattleAction.BattleMove.MoveName} against ${this.playerCharacter.ItemName}`, AlertGroupType.CombatTurn);
             // //await WriteAlertStorePrevious(`${this.characterInTurn.ItemName} takes action ${chosenMove.MoveName} against ${this.playerCharacter.ItemName}`);
             chosenBattleAction.BattleMove.ExecuteMove(this.characterInTurn.Character, chosenBattleAction.ActionTarget.Character);
 
@@ -256,7 +258,28 @@ class BattleEngine {
         this.turnOrder.sort((a, b) => b.Character.CharacterSheet.BattleSpeed.Value - a.Character.CharacterSheet.BattleSpeed.Value);
     }
 
+    private async WaitSpritesToLoad() {
+        //Hold and wait untill all sprites have been loaded
+        var spritesReady = false;
+
+        while (!spritesReady) {
+            await Delay(FrameTimeMS);
+            //Check all
+            for (var enemyCharacter of this.enemyCharacters) {
+                if (!enemyCharacter.CharacterLoadingReady)
+                    break;
+                if (this.enemyCharacters.indexOf(enemyCharacter) == this.enemyCharacters.length-1) {
+                    if (this.playerCharacter.CharacterLoadingReady)
+                        spritesReady = true;
+                }
+            }
+            //if all ready, flip bool   
+        }
+    }
+
     private SetUpSprites() {
+
+
         this.playerCharacter.CharacterSprite;
         this.playerCharacter.CharacterSprite.SetSpritePosScaleDataValues(5, 60, 10, 10);
         CanvasGraphicsInstance.AddSpriteToListPreComp(this.playerCharacter.CharacterSprite);

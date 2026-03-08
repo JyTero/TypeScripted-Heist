@@ -68,6 +68,9 @@ export class DebugWindow {
     private combatCharacterDivs = new Map<CombatCharacter, HTMLDivElement>();
     //COMBAT DEBUG
     public OnCombatBegin(turnOrder: CombatCharacter[]) {
+        if(!this.debugWindow)
+            return;
+
         const header = this.debugWindow.document.createElement("p")
         header.style.fontWeight = "bold";
         header.textContent = "BattleEngine";
@@ -87,12 +90,10 @@ export class DebugWindow {
     }
 
     public DebugTraitBAScoring(ba:BattleAction, trait:Trait, traitMultiplier:number){
-        ba
+        
     }
 
     public DisplayBattleActionDebugData(ba:BattleAction, owner:CharacterBase){
         
-    }
-
-    public 
+    } 
 }
