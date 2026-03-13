@@ -43,7 +43,8 @@ export class ItemBase {
 
     public RunOnceTurnEffects() {
         this.activeEffects.forEach(effect => {
-            effect.TriggerOTEffect(this);
+            const itemi = new ItemBase(2);
+            effect.TriggerOTEffect(this, itemi);
         });
     }
     public ApplyDamageEffect(effect: Effect) {

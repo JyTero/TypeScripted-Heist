@@ -9,10 +9,16 @@ export class Trait {
     public AdjustBAScoreByTraits(ba: BattleAction) {
 
     }
+
+    protected TraitScoringReason():string{
+        const s = "For " + this.TraitName;
+        return s;
+    }
 }
 
 
 export class Healer_Trait extends Trait {
+
 
     private healBMEffectScoreMultiplier: number = 1.25
     override AdjustBAScoreByTraits(ba: BattleAction): void {
@@ -20,7 +26,11 @@ export class Healer_Trait extends Trait {
 
         ba.BattleMove.MoveEffects.forEach(effect => {
             if (effect.GetEffectType() == EffectTypeEnumEnum.Heal || effect.GetEffectType() == EffectTypeEnumEnum.Restore) {
-                ba.Score *= this.healBMEffectScoreMultiplier;
+                {
+                    var score = ba.Score * this.healBMEffectScoreMultiplier;
+                    ba.AdjustScore(score, this.TraitScoringReason());
+                }
+                
             }
         });
     }

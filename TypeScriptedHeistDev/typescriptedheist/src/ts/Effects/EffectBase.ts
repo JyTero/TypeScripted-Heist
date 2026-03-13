@@ -61,15 +61,15 @@ export class Effect {
         //this.AdjustEffectPotencyToMatchType();
     }
 
-    public ApplyEffect(target: ItemBase) {
+    public ApplyEffect(target: ItemBase, attacker:ItemBase) {
         //Do all modifiers to attack values here
 
         //is OT?
         if (this.DoesTargetHaveEffectTargetStat(target)) {
             if (this.effectDuration === 0)
-                this.TriggerEffect(target)
+                this.TriggerEffect(target,attacker)
             else
-                this.ApplyOTEffect(target);
+                this.ApplyOTEffect(target,attacker);
         }
         else
             console.log(`${target.ItemName} does not have stat ${this.TargetStat} required by ${this.EffectName}`);
@@ -79,6 +79,22 @@ export class Effect {
         //Apply properly
         //Simply adjust stats
         //Apply effect to target for OT effects
+    }
+
+    public async TriggerOTEffect(target: ItemBase, attacker:ItemBase) {
+
+        await AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (${this.effectRemainingTurns}/${this.effectDuration} turns)`);
+        this.TriggerEffect(target, attacker);
+
+        // const stat = target.GetStat(this.TargetStat);
+        // //Call different methods based if damage/destroy/heal/restore
+
+        // stat?.DamageStat(this.Potency);
+        // this.effectRemainingTurns--;
+
+        // if (this.effectRemainingTurns <= 0)
+        //     this.OnEffectEnd(target);
+
     }
 
     protected OnEffectEnd(target: ItemBase): void {
@@ -91,15 +107,9 @@ export class Effect {
 
     }
 
-    private ApplyOTEffect(target: ItemBase) {
+    private ApplyOTEffect(target: ItemBase, attacker:ItemBase) {
         target.ReceiveEffect(this);
         this.effectRemainingTurns = this.effectDuration;
-    }
-
-    private AdjustEffectPotencyToMatchType() {
-        if (this.EffectType === EffectTypeEnumEnum.Damage || this.EffectType === EffectTypeEnumEnum.Destroy) {
-            this.potency = -Math.abs(this.potency);
-        }
     }
 
     private DoesTargetHaveEffectTargetStat(target: ItemBase): boolean {
@@ -113,74 +123,54 @@ export class Effect {
         }
     }
 
-    public TriggerEffect(target: ItemBase) {
+    public TriggerEffect(target: ItemBase, attacker:ItemBase) {
         switch (this.EffectType) {
             case EffectTypeEnumEnum.Damage:
-                this.ApplyDamageEffect(target);
+                this.ApplyDamageEffect(target, attacker);
                 break;
             case EffectTypeEnumEnum.Destroy:
-                this.ApplyDestroyEffect(target);
+                this.ApplyDestroyEffect(target, attacker);
                 break;
             case EffectTypeEnumEnum.Heal:
-                this.ApplyHealEffect(target);
+                this.ApplyHealEffect(target, attacker);
                 break;
             case EffectTypeEnumEnum.Restore:
-                this.ApplyRestoreEffect(target);
+                this.ApplyRestoreEffect(target, attacker);
                 break;
             default:
                 console.log("UNKNOWN EffectType IN " + this.EffectName);
         }
         if (this.effectDuration > 0)
-            this.HandleOvertimeEffects(target);
+            this.HandleOvertimeEffects(target, attacker);
 
     }
 
-    private ApplyDamageEffect(target: ItemBase) {
+    private ApplyDamageEffect(target: ItemBase, attacker:ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
         targetStat?.DamageStat(this.potency);
     }
-    private ApplyDestroyEffect(target: ItemBase) {
+    private ApplyDestroyEffect(target: ItemBase, attacker:ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
         targetStat?.DestroyStat(this.potency);
     }
-    private ApplyHealEffect(target: ItemBase) {
+    private ApplyHealEffect(target: ItemBase, attacker:ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
         targetStat?.HealStat(this.potency);
     }
-    private ApplyRestoreEffect(target: ItemBase) {
+    private ApplyRestoreEffect(target: ItemBase, attacker:ItemBase) {
         const targetStat = target.GetStat(this.TargetStat);
         targetStat?.RestoreStat(this.potency);
     }
 
-    private HandleOvertimeEffects(target: ItemBase) {
+    private HandleOvertimeEffects(target: ItemBase, attacker:ItemBase) {
         this.effectRemainingTurns--;
         if (this.effectRemainingTurns <= 0)
             target.RemoveEffect(this);
     }
-
-    public async TriggerOTEffect(target: ItemBase) {
-
-        await AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (${this.effectRemainingTurns}/${this.effectDuration} turns)`);
-        this.TriggerEffect(target);
-
-        // const stat = target.GetStat(this.TargetStat);
-        // //Call different methods based if damage/destroy/heal/restore
-
-        // stat?.DamageStat(this.Potency);
-        // this.effectRemainingTurns--;
-
-        // if (this.effectRemainingTurns <= 0)
-        //     this.OnEffectEnd(target);
-
+    private AdjustEffectPotencyToMatchType() {
+        if (this.EffectType === EffectTypeEnumEnum.Damage || this.EffectType === EffectTypeEnumEnum.Destroy) {
+            this.potency = -Math.abs(this.potency);
+        }
     }
-    //Instant value change
-    //And/OR
-    //Intant value set
-    //And/OR
-    //OT Value Change
-    //And/OR
-    //OT Value Set
-    //THEN
-    //OT Length (Turns? "On turn start...")
 
 }

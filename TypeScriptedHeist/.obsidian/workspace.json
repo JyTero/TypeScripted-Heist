@@ -123,9 +123,26 @@
               "icon": "lucide-file",
               "title": "Debug Window"
             }
+          },
+          {
+            "id": "cc65e598816a5482",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Untitled.canvas",
+                "viewState": {
+                  "x": 0,
+                  "y": 0,
+                  "zoom": 0
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Untitled"
+            }
           }
         ],
-        "currentTab": 7
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -270,10 +287,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "a7e8066251017bac",
+  "active": "cc65e598816a5482",
   "lastOpenFiles": [
-    "Browser Manipulation.md",
     "Debug Window.md",
+    "Untitled.canvas",
+    "Browser Manipulation.md",
     "Pasted image 20260305145140.png",
     "Combat.md",
     "Turn Based Combat System.md",

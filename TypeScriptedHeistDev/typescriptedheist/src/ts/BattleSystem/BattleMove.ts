@@ -60,7 +60,7 @@ export class BattleMove {
 
     private ApplyEffects(attacker: CharacterBase, defender: CharacterBase) {
         this.MoveEffects.forEach(effect => {
-            effect.ApplyEffect(defender);
+            effect.ApplyEffect(defender, attacker);
         });
     }
 

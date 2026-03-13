@@ -1,6 +1,7 @@
 import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
 import { EffectTypeEnumEnum } from "../../Assets/DataJsons/EffectTypeEnumEnum";
 import { Effect } from "../Effects/EffectBase";
+import { DebugWindowInstance, IsDebug } from "../initialisation";
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { CharacterStat } from "../Items/Character/CharacterStat";
 import { BattleMove } from "./BattleMove";
@@ -8,7 +9,7 @@ import { CombatCharacter } from "./CombatCharacter";
 
 export class EnemyCombatAI {
     private thisCharacter: CharacterBase;
-    private battleActions: BattleAction[] = [];
+    public battleActions: BattleAction[] = [];
     private lowHpHealingMoveScoreMultiplier: number;
     private canThisCharacterHeal: boolean = false;
 
@@ -67,6 +68,9 @@ export class EnemyCombatAI {
 
         this.battleActions.sort((a, b) => b.Score - a.Score);
 
+        if(IsDebug)
+            DebugWindowInstance.ChooseBattleActionDebug(this.thisCharacter, this.battleActions);
+
         return this.battleActions[0];
 
         //LowOwnHP REQUIRES SELFHEAL BM
@@ -79,6 +83,9 @@ export class EnemyCombatAI {
         //Other scoring affecting things, (Own/enemy/ally positions, potential targets, other traits)
 
     }
+    private discourageHurtingAlliesReason = "I won't hurt my friends";
+    private discourageHealingEnemiesReason = "I won't heal my enemies";
+    private lowHPScoringAdjustmentReason = "Low HP, I should heal...";
 
     private ScoreBAByTraits(ba: BattleAction) {
         this.thisCharacter.GetTraits()?.forEach(trait => {
@@ -93,18 +100,24 @@ export class EnemyCombatAI {
     }
 
     private DiscourageHurtingAllies(ba: BattleAction) {
-        if (ba.TargetIsAlly && !ba.BattleMove.IsHealingMove)
-            ba.Score += this.discourageUnwantedBattleACtions;
-
+        if (ba.TargetIsAlly && !ba.BattleMove.IsHealingMove){
+            var score = ba.Score + this.discourageUnwantedBattleACtions;
+            ba.AdjustScore(score, this.discourageHurtingAlliesReason);
+        }
     }
     private DiscourageHealingEnemies(ba: BattleAction) {
-        if (ba.TargetIsAlly && !ba.BattleMove.IsHealingMove)
-            ba.Score += this.discourageUnwantedBattleACtions;
+        if (!ba.TargetIsAlly && ba.BattleMove.IsHealingMove){
+            var score = ba.Score + this.discourageUnwantedBattleACtions;
+            ba.AdjustScore(score, this.discourageHealingEnemiesReason);
+        }
+
     }
     private LowHPScoring() {
         this.battleActions.forEach(bm => {
-            if (bm.BattleMove.IsHealingMove)
-                bm.Score *= this.lowHpHealingMoveScoreMultiplier;
+            if (bm.BattleMove.IsHealingMove){
+                var score = bm.Score * this.lowHpHealingMoveScoreMultiplier;
+                bm.AdjustScore(score, this.lowHPScoringAdjustmentReason);
+            }
         });
     }
 }
@@ -113,14 +126,19 @@ export class BattleAction {
     public ActionOwner: CharacterBase;
     public BattleMove: BattleMove;
     public ActionTarget: CombatCharacter;
-    public Score: number;
+    private score: number;
+    public get Score(){
+        return this.score;
+    }
+
+    public ScoringHistory = new Map<number,string>();
     public TargetIsAlly: boolean = false;
 
     constructor(actionOwner: CharacterBase, bm: BattleMove, target: CombatCharacter) {
         this.ActionOwner = actionOwner;
         this.BattleMove = bm;
         this.ActionTarget = target;
-        this.Score = 0;
+        this.score = 0;
         if (target.Character.CharacterSheet.Faction == actionOwner.CharacterSheet.Faction)
             this.TargetIsAlly = true;
 
@@ -135,7 +153,14 @@ export class BattleAction {
                 const durMult = (effect.Potency / 10) + 1
                 score += effect.Potency + durMult;
             }
-        this.Score = score;
+        this.score = score;
         });
+    }
+
+    public AdjustScore(adjustAmmount:number, changeReason:string){
+        
+        this.score += adjustAmmount;
+        this.ScoringHistory.set(adjustAmmount,changeReason);
+
     }
 }
