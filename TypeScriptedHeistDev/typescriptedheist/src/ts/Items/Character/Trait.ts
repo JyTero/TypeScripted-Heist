@@ -4,23 +4,29 @@ import { Effect } from "../../Effects/EffectBase";
 
 export class Trait {
     public TraitName: string;
+    constructor(){
 
+    }
 
     public AdjustBAScoreByTraits(ba: BattleAction) {
 
     }
 
     protected TraitScoringReason():string{
-        const s = "For " + this.TraitName;
+        const s = "For the " + this.TraitName + " trait";
         return s;
     }
 }
 
 
 export class Healer_Trait extends Trait {
-
-
+    
     private healBMEffectScoreMultiplier: number = 1.25
+    public constructor(){
+        super();
+        this.TraitName = "Healer";
+    }
+
     override AdjustBAScoreByTraits(ba: BattleAction): void {
         super.AdjustBAScoreByTraits(ba);
 

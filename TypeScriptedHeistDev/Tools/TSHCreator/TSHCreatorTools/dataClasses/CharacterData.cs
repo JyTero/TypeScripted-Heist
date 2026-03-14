@@ -9,7 +9,7 @@ namespace TSHCreatorTools.dataClasses
     public class CharacterData : BaseData
     {
         public string CharacterName { get; set; }
-        public int CharcterFaction { get; set; }
+        public int CharacterFaction { get; set; }
         public int CharacterStrength { get; set; }
         public int CharacterDexterity { get; set; }
         public int CharacterPerception { get; set; }

@@ -17,6 +17,8 @@ import { BattleAction, EnemyCombatAI } from "./EnemyCombatAI";
 import { PersoanlityAxisEnumH } from "../../Assets/DataJsons/PersonalityAxisEnumHandmade";
 import { PersonalityAxis } from "../Items/Character/PersonalityAxis";
 import { DebugWindow } from "../Tools/DebugWindow";
+import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
+import { Trait } from "../Items/Character/Trait";
 
 export async function BeginBattleEngine(battleData: BattleArenaDataType, currentScene: BattleArenaSceneBase) {
     const battleStage: BattleEngine = new BattleEngine(battleData, PlayerCharacter.instance.GetPlayerCharacter(), currentScene);
@@ -75,9 +77,7 @@ class BattleEngine {
         await this.WaitSpritesToLoad();
 
         //DEBUG
-        //var enemChar = BuildCharacter(CharacterEnum.Character_Svoordmän);
-        // this.enemyCharacters.push(enemChar);
-        //enemChar.CharacterSheet.ChangeWeapon(WeaponEnum.Weapon_ShortSword);
+
 
         this.nextScene = this.currentScene.VictoryNextScene;
         await Delay(FrameTimeMS);
@@ -98,8 +98,16 @@ class BattleEngine {
         this.currentRound = 0;
         this.currentTurnIndex = 0;
 
+        this.InsertFeaturesToGameDebug();
         if (IsDebug)
             DebugWindowInstance.OnCombatBegin(this.turnOrder)
+    }
+
+    private InsertFeaturesToGameDebug() {
+        this.enemyCharacters.forEach(enemy => {
+            if (enemy.ItemName == "Henrique")
+                enemy.AddTrait(TraitsEnumH.Healer);
+        });
     }
 
     private SetUpEnemyAI() {
@@ -268,7 +276,7 @@ class BattleEngine {
             for (var enemyCharacter of this.enemyCharacters) {
                 if (!enemyCharacter.CharacterLoadingReady)
                     break;
-                if (this.enemyCharacters.indexOf(enemyCharacter) == this.enemyCharacters.length-1) {
+                if (this.enemyCharacters.indexOf(enemyCharacter) == this.enemyCharacters.length - 1) {
                     if (this.playerCharacter.CharacterLoadingReady)
                         spritesReady = true;
                 }

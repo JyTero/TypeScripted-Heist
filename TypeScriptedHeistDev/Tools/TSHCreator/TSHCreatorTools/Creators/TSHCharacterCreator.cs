@@ -111,7 +111,7 @@ namespace TSHCreatorTools
             {
 
                 CharacterName = NameInput.Text,
-                CharcterFaction = (int)factionNumericInput.Value,
+                CharacterFaction = (int)factionNumericInput.Value,
                 CharacterStrength = (int)StrengthInput.Value,
                 CharacterDexterity = (int)DexterityInput.Value,
                 CharacterPerception = (int)PerceptionInput.Value,
@@ -158,7 +158,7 @@ namespace TSHCreatorTools
             //BuildWeaponsFromData();
 
             NameInput.Text = characterData.CharacterName;
-            factionNumericInput.Value = characterData.CharcterFaction;
+            factionNumericInput.Value = characterData.CharacterFaction;
             StrengthInput.Value = characterData.CharacterStrength;
             DexterityInput.Value = characterData.CharacterDexterity;
             PerceptionInput.Value = characterData.CharacterPerception;

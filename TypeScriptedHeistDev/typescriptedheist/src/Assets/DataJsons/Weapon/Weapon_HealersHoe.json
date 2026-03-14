@@ -1,0 +1,11 @@
+{
+  "WeaponName": "Healer\u0027s Hoe",
+  "BattleMoves": [
+    "BattleMove_Stab_Knife",
+    "Healing_BattleMove"
+  ],
+  "WeaponHit": 1,
+  "WeaponDamage": 1,
+  "DataDevName": "Weapon_HealersHoe",
+  "DataType": "Weapon"
+}

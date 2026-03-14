@@ -22,7 +22,7 @@ export class CharacterSheet{
     // public CurrentHealth(): number {
     //     return this.health;
     // }
-    public Faction: CharacterFaction = 0; //Enum
+    public Faction: CharacterFaction = CharacterFaction.None; //Enum
     public Strength: CharacterAttribute;
     public Dexterity: CharacterAttribute;
     public Perception: CharacterAttribute;
@@ -59,7 +59,11 @@ export class CharacterSheet{
     constructor(data: CharacterJson, _thisCharacter:CharacterBase) {
             
         this.thisCharacter = _thisCharacter;
+
+        console.log(data);
+        console.log(this.thisCharacter.ItemName + "| Faction: " + data.CharacterFaction)
         this.Faction = data.CharacterFaction;
+        console.log(data);
         this.Strength = new CharacterAttribute("Strength", data.CharacterStrength,CharcterStatTypeEnum.Strength, _thisCharacter);
         this.Dexterity = new CharacterAttribute("Dexterity", data.CharacterDexterity, CharcterStatTypeEnum.Dexterity, _thisCharacter);
         this.Perception = new CharacterAttribute("Perception", data.CharacterPerception, CharcterStatTypeEnum.Perception, _thisCharacter);

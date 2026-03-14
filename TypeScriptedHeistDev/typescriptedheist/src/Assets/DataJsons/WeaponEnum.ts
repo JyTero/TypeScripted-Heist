@@ -8,6 +8,7 @@ Weapon_Bang = "Weapon_Bang",
 Weapon_Boots = "Weapon_Boots",
 Weapon_Cane = "Weapon_Cane",
 Weapon_CreditCard = "Weapon_CreditCard",
+Weapon_HealersHoe = "Weapon_HealersHoe",
 Weapon_Hoe = "Weapon_Hoe",
 Weapon_Knife = "Weapon_Knife",
 }

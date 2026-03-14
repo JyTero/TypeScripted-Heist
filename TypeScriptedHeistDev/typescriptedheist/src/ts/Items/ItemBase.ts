@@ -1,12 +1,13 @@
 import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
 import { EffectTypeEnumEnum } from "../../Assets/DataJsons/EffectTypeEnumEnum";
 import { PersoanlityAxisEnumH } from "../../Assets/DataJsons/PersonalityAxisEnumHandmade";
+import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
 import { AlertManager } from "../AlertManager";
 import { Effect } from "../Effects/EffectBase";
 import { IsDebug } from "../initialisation";
 import { CharacterStat } from "./Character/CharacterStat";
 import { PersonalityAxis } from "./Character/PersonalityAxis";
-import { Trait } from "./Character/Trait";
+import { Healer_Trait, Trait } from "./Character/Trait";
 
 export class ItemBase {
     public ItemName: string = "Gia's Gunn";
@@ -19,13 +20,30 @@ export class ItemBase {
     private objectStats: Partial<Record<CharcterStatTypeEnum, CharacterStat>> = {};
 
     private itemPersonalityAxes: Partial<Record<PersoanlityAxisEnumH, PersonalityAxis>> = {};
-    private itemTraits: Trait[];
+    private itemTraits: Trait[] = [];
     constructor(maxHealth: number) {
         this.Health = new CharacterStat("Health", maxHealth, maxHealth, CharcterStatTypeEnum.Health, this);
         this.activeEffects = [];
     }
 
-    public AddTrait(trait: Trait) {
+    public AddTrait(traitEnum: TraitsEnumH){
+        switch(traitEnum){
+            case TraitsEnumH.Default:
+                console.log("Tried to add DEFAULT TRAIT for " + this.ItemName);
+                break;
+            case TraitsEnumH.Healer:
+                const newTrait = new Healer_Trait();
+                this.InserTraitToCharacter(newTrait);
+                break;
+            case TraitsEnumH.Reckless:
+                //stuff
+            default:
+                console.log("Tried to ad UNKNOWN TRAITT TYPE for " + this.ItemName);
+
+
+        }
+    }
+    private InserTraitToCharacter(trait: Trait) {
         if (IsDebug)
             console.log(`${trait.TraitName} has been added to ${this.ItemName}`);
         this.itemTraits.push(trait);
