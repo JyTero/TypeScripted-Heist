@@ -6,3 +6,7 @@ export function GetRandomInt(min: number, max: number): number {
 export function Delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
 }
+export function RemoveAllHTMLChildren(htmlElement:Element){
+    while (htmlElement.firstChild)
+        htmlElement.removeChild(htmlElement.firstChild);
+}

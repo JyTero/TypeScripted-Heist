@@ -2,10 +2,18 @@
     display: flex;
     flex-direction: row;
 }
-p {
-    white-space: pre-line;
-}
-#CombatDebugging{
+
+.CombatDebugging{
     display: flex;
     flex-direction: column;
+}
+.BattleActionHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.BattleActionHeader button{
+    margin: 0px;
+    padding: 0px;
+    height: 50%;
 }

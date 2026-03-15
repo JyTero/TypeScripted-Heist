@@ -24,7 +24,7 @@ export class EnemyCombatAI {
         character.InitialiseCombatAI(this);
 
     }
-    
+
     private GiveAllMovesBaseScore() {
         this.battleActions.forEach(bm => {
             bm.BMDefaultScore();
@@ -68,7 +68,7 @@ export class EnemyCombatAI {
 
         this.battleActions.sort((a, b) => b.Score - a.Score);
 
-        if(IsDebug)
+        if (IsDebug)
             DebugWindowInstance.ChooseBattleActionDebug(this.thisCharacter, this.battleActions);
 
         return this.battleActions[0];
@@ -93,20 +93,20 @@ export class EnemyCombatAI {
         });
 
     }
-    private ScoreBAByPersonalityAxes(ba:BattleAction){
+    private ScoreBAByPersonalityAxes(ba: BattleAction) {
         this.thisCharacter.GetPersonalityAxes().forEach(axis => {
             axis.AdjustBAScoreByPersonalityAxis(ba);
         });
     }
 
     private DiscourageHurtingAllies(ba: BattleAction) {
-        if (ba.TargetIsAlly && !ba.BattleMove.IsHealingMove){
+        if (ba.TargetIsAlly && !ba.BattleMove.IsHealingMove) {
             var score = ba.Score + this.discourageUnwantedBattleACtions;
             ba.AdjustScore(score, this.discourageHurtingAlliesReason);
         }
     }
     private DiscourageHealingEnemies(ba: BattleAction) {
-        if (!ba.TargetIsAlly && ba.BattleMove.IsHealingMove){
+        if (!ba.TargetIsAlly && ba.BattleMove.IsHealingMove) {
             var score = ba.Score + this.discourageUnwantedBattleACtions;
             ba.AdjustScore(score, this.discourageHealingEnemiesReason);
         }
@@ -114,11 +114,20 @@ export class EnemyCombatAI {
     }
     private LowHPScoring() {
         this.battleActions.forEach(bm => {
-            if (bm.BattleMove.IsHealingMove){
+            if (bm.BattleMove.IsHealingMove) {
                 var score = bm.Score * this.lowHpHealingMoveScoreMultiplier;
                 bm.AdjustScore(score, this.lowHPScoringAdjustmentReason);
             }
         });
+    }
+
+    public BeginTurn() {
+        this.battleActions.forEach(ba => {
+            ba.ResetBA();
+        });
+
+        this.GiveAllMovesBaseScore();
+        this.SetQuickFlags();
     }
 }
 
@@ -127,11 +136,11 @@ export class BattleAction {
     public BattleMove: BattleMove;
     public ActionTarget: CombatCharacter;
     private score: number;
-    public get Score(){
+    public get Score() {
         return this.score;
     }
 
-    public ScoringHistory = new Map<number,string>();
+    public ScoringHistory = new Map<number, string>();
     public TargetIsAlly: boolean = false;
 
     constructor(actionOwner: CharacterBase, bm: BattleMove, target: CombatCharacter) {
@@ -153,14 +162,19 @@ export class BattleAction {
                 const durMult = (effect.Potency / 10) + 1
                 score += effect.Potency + durMult;
             }
-        this.score = score;
+            this.score = score;
         });
     }
 
-    public AdjustScore(adjustAmmount:number, changeReason:string){
-        
-        this.score += adjustAmmount;
-        this.ScoringHistory.set(adjustAmmount,changeReason);
+    public AdjustScore(adjustAmmount: number, changeReason: string) {
 
+        this.score += adjustAmmount;
+        this.ScoringHistory.set(adjustAmmount, changeReason);
+
+    }
+
+    public ResetBA(){
+        this.score = 0;
+        this.ScoringHistory.clear();
     }
 }

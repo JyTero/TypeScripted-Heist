@@ -211,6 +211,7 @@ class BattleEngine {
         else {
             this.characterInTurn.Character.RunOnceTurnEffects();
 
+            this.characterInTurn.EnemyCombatAI.BeginTurn();
             const chosenBattleAction: BattleAction = this.characterInTurn.EnemyCombatAI.ChooseBattleAction();
 
             // //OLD: Pick random BattleMove, always target the player

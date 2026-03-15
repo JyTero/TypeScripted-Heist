@@ -1,4 +1,4 @@
-import { Delay } from "../../Tools";
+import { Delay, RemoveAllHTMLChildren } from "../../Tools";
 import { CombatCharacter } from "../BattleSystem/CombatCharacter";
 import { BattleAction } from "../BattleSystem/EnemyCombatAI";
 import { FrameTimeMS } from "../initialisation";
@@ -82,7 +82,7 @@ export class DebugWindow {
         turnOrder.forEach(combatCharacter => {
             const combatantDiv = this.debugWindow.document.createElement("div");
             combatantDiv.className = "CombatantDiv";
-            const divHeader = this.debugWindow.document.createElement("p");
+            const divHeader = this.debugWindow.document.createElement("h1");
             divHeader.textContent = combatCharacter.Character.ItemName;
             combatantDiv.appendChild(divHeader);
             this.combatEnemyAI?.appendChild(combatantDiv);
@@ -107,6 +107,7 @@ export class DebugWindow {
 
     private BAParentDivClassName: string = "BattleActionsParent";
     private BADivClassName: string = "BattleAction";
+    private BADivHeaderClassName: string = "BattleActionHeader";
     private DetailsButtonClassname: string = "DetailsButton";
 
     private ChooseBattleActionDebugProper(thisCombatCharacter: CombatCharacter, thisDiv: HTMLDivElement, BAs: BattleAction[]) {
@@ -119,10 +120,13 @@ export class DebugWindow {
             BAParentDiv = this.CreateBAParentDiv();
             thisDiv.appendChild(BAParentDiv);
         }
-        
-        const BAParentHeaderText = this.debugWindow.document.createElement("p");
-        BAParentHeaderText.textContent = "BAs: ";
-        thisDiv.appendChild(BAParentHeaderText);
+        else {
+            RemoveAllHTMLChildren(BAParentDiv);
+        }
+
+        // const BAParentHeaderText = this.debugWindow.document.createElement("p");
+        // BAParentHeaderText.textContent = "BAs: ";
+        // thisDiv.appendChild(BAParentHeaderText);
         var i = 0;
 
         BAs.forEach(ba => {
@@ -131,10 +135,15 @@ export class DebugWindow {
             BADiv.className = this.BADivClassName;
             BAParentDiv.appendChild(BADiv)
 
+            //BADivHeader
+            const BADivHeader = this.debugWindow.document.createElement("div");
+            BADivHeader.className = this.BADivHeaderClassName;
+            BADiv.appendChild(BADivHeader);
+
             //Texti
             const BAName = this.debugWindow.document.createElement("p");
             BAName.textContent = ba.Score + ": " + ba.BattleMove.MoveName + " (" + ba.ActionTarget.Character.ItemName + ")";
-            BADiv.appendChild(BAName);
+            BADivHeader.appendChild(BAName);
 
             //Button
             const seeDetailsBtn = this.debugWindow.document.createElement("button");
@@ -145,13 +154,13 @@ export class DebugWindow {
 
             //For pinning etc.
             //seeDetailsBtn.addEventListener()
+            BADivHeader.appendChild(seeDetailsBtn);
 
-            BADiv.appendChild(seeDetailsBtn);
 
             i++;
         });
-        
-        BAParentHeaderText.textContent += i;
+
+        //BAParentHeaderText.textContent += i;
     }
 
     private CreateBAParentDiv(): HTMLDivElement {
@@ -161,7 +170,7 @@ export class DebugWindow {
     }
     private DetailsClicked(event: MouseEvent) {
         const button = event.target as HTMLButtonElement;
-        const BADiv = button.parentElement as HTMLDivElement;
+        const BADiv = button.parentElement?.parentElement as HTMLDivElement;
         const BAParentDiv = BADiv.parentElement as HTMLDivElement;
 
         var reasonsTexts = "";
@@ -179,9 +188,18 @@ export class DebugWindow {
                     reasonsTexts += reasonText;
                 }
 
-                const reasonsP = this.debugWindow.document.createElement("p");
-                reasonsP.innerHTML = reasonsTexts;
-                BADiv.appendChild(reasonsP);
+                if (BADiv.children.length > 1) {
+                    if (BADiv.children[2].nodeName == "P") {
+                        BADiv.children[1].innerHTML = reasonsTexts;
+                    }
+                }
+                else {
+                    const reasonsP = this.debugWindow.document.createElement("p");
+                    reasonsP.innerHTML = reasonsTexts;
+                    BADiv.appendChild(reasonsP);
+
+                }
+
             }
 
 
