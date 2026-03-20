@@ -2,7 +2,7 @@ import { CharacterEnum } from "../../Assets/DataJsons/CharacterEnum";
 import { DataTypesEnum } from "../../Assets/DataJsons/DataTypesEnum";
 import { WeaponEnum } from "../../Assets/DataJsons/WeaponEnum";
 import { CharacterBase } from "../Items/Character/CharacterBase";
-import { IsDebug, JsonHandlerInstance } from "../initialisation";
+import { IsDebug, JsonHandlerInstance } from "../MainPageInitialisation";
 import { WeaponItem } from "../Items/WeaponItem/WeaponItem";
 
 export function BuildWeapon(weaponEnum: WeaponEnum): WeaponItem {

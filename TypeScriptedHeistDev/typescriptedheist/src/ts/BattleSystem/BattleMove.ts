@@ -3,7 +3,7 @@ import { BattleMoveData } from "../DataTypes/BattleMoveDataType";
 import { BeginMeleeAttack } from "./Combat";
 import { Effect } from "../Effects/EffectBase";
 import { ItemBase } from "../Items/ItemBase";
-import { JsonHandlerInstance } from "../initialisation";
+import { JsonHandlerInstance } from "../MainPageInitialisation";
 import { DataTypesEnum } from "../../Assets/DataJsons/DataTypesEnum";
 import { EffectData } from "../DataTypes/EffectDataType";
 import { EffectTypeEnumEnum } from "../../Assets/DataJsons/EffectTypeEnumEnum";

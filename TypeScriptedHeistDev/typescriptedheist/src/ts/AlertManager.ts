@@ -1,4 +1,4 @@
-import { IsDebug } from "./initialisation";
+import { IsDebug } from "./MainPageInitialisation";
 import { AddNewHistoryDiv } from "./PageDisplay";
 
 export enum AlertGroupType {

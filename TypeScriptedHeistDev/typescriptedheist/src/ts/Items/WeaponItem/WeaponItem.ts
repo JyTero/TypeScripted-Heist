@@ -3,7 +3,7 @@ import { DataTypesEnum } from "../../../Assets/DataJsons/DataTypesEnum";
 import { BattleMove } from "../../BattleSystem/BattleMove";
 import { BattleMoveData } from "../../DataTypes/BattleMoveDataType";
 import { WeaponDatatype } from "../../DataTypes/WeaponItemDataType";
-import { JsonHandlerInstance } from "../../initialisation";
+import { JsonHandlerInstance } from "../../MainPageInitialisation";
 import { ItemBase } from "../ItemBase";
 
 export class WeaponItem extends ItemBase{

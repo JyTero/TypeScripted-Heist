@@ -1,6 +1,6 @@
 import { SceneBase } from "../SceneBase";
 import { BattleArenaScene } from "../BattleArenaSceneBase";
-import { CanvasGraphicsInstance } from "../initialisation";
+import { CanvasGraphicsInstance } from "../MainPageInitialisation";
 export class SceneManagement {
 
     public BeginFirstScene(scene:SceneBase){

@@ -1,4 +1,4 @@
-import { IsDebug } from "./initialisation";
+import { IsDebug } from "./MainPageInitialisation";
 
 
 export type FlagName = keyof typeof Flags;

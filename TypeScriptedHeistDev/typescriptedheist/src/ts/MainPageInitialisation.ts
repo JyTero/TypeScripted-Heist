@@ -4,12 +4,15 @@ import { CanvasGraphicEngine } from "./Canvas/CanvasGraphicEngine";
 import { JsonHandler } from "./JsonInput/JsonHandler";
 import { Delay } from "../Tools";
 import { DebugWindow } from "./Tools/DebugWindow";
-export const IsDebug:boolean = true;
+import { PageDisplayManager } from "./PageDisplay";
+export const IsDebug: boolean = true;
 export const FrameTimeMS: number = 16.67;
+await Delay(FrameTimeMS);
+//export const MainPagePageDisplayManagerInstance: PageDisplayManager = new PageDisplayManager();
 export const CanvasGraphicsInstance: CanvasGraphicEngine = new CanvasGraphicEngine();
 export const SceneManagerInstance: SceneManagement = new SceneManagement();
-export const JsonHandlerInstance:JsonHandler = new JsonHandler();
-export const DebugWindowInstance:DebugWindow = new DebugWindow();
+export const JsonHandlerInstance: JsonHandler = new JsonHandler();
+export const DebugWindowInstance: DebugWindow = new DebugWindow();
 
 CanvasGraphicsInstance.StartGraphicEngine();
 
@@ -19,7 +22,7 @@ DebugWindowInstance.UseDebugWindow = true;
 DebugWindowInstance.InitializeDebugWindow();
 
 
-while(!JsonHandlerInstance.isJsonReady){
+while (!JsonHandlerInstance.isJsonReady) {
     await Delay(FrameTimeMS);
 }
 

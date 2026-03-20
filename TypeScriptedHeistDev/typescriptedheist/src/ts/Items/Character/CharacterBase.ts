@@ -3,7 +3,7 @@ import { ImagescharacterEnum } from "../../../Assets/DataJsons/ImagescharacterEn
 import { EnemyCombatAI } from "../../BattleSystem/EnemyCombatAI";
 import { Sprite } from "../../Canvas/Sprite";
 import { CharacterDataType } from "../../DataTypes/CharacterData";
-import { IsDebug } from "../../initialisation";
+import { IsDebug } from "../../MainPageInitialisation";
 import { CharacterJson } from "../../JsonInput/CharacterJson";
 import { ItemBase } from "../ItemBase";
 import { CharacterSheet } from "./CharacterSheet";

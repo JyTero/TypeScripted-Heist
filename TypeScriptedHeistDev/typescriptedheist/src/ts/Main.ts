@@ -3,7 +3,7 @@ import { FrontDoorScene } from "./Scenes/FrontDoorScene";
 import { GroundLevelWindowScene } from "./Scenes/GroundLevelWindowScene";
 import { BackdoorScene } from "./Scenes/BackdoorScene";
 import { BattleArenaTestScene } from "./Scenes/BattleArenaTestScene";
-import { SceneManagerInstance } from "./initialisation";
+import { SceneManagerInstance } from "./MainPageInitialisation";
 import { PlayerCharacter } from "./PlayerCharacter";
 import { WeaponEnum } from "../Assets/DataJsons/WeaponEnum";
 

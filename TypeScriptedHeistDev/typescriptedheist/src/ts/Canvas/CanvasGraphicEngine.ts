@@ -1,5 +1,5 @@
 import { Delay } from "../../Tools";
-import { FrameTimeMS } from "../initialisation";
+import { FrameTimeMS } from "../MainPageInitialisation";
 import { Color } from "../Tools/Color";
 import { Sprite } from "./Sprite";
 

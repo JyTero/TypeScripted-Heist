@@ -3,7 +3,7 @@ import { WaitForInput, WriteAlert} from "./IOMethods";
 import { Flags } from "./flags";
 import { SceneBase } from "./SceneBase";
 import { Delay } from "../Tools";
-import { FrameTimeMS } from "./initialisation";
+import { FrameTimeMS } from "./MainPageInitialisation";
 import { AlertManager } from "./AlertManager";
 
 export class MenuObjectBase {

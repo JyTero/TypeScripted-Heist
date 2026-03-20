@@ -4,7 +4,7 @@ import { PersoanlityAxisEnumH } from "../../Assets/DataJsons/PersonalityAxisEnum
 import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
 import { AlertManager } from "../AlertManager";
 import { Effect } from "../Effects/EffectBase";
-import { IsDebug } from "../initialisation";
+import { IsDebug } from "../MainPageInitialisation";
 import { CharacterStat } from "./Character/CharacterStat";
 import { PersonalityAxis } from "./Character/PersonalityAxis";
 import { Healer_Trait, Trait } from "./Character/Trait";
@@ -56,13 +56,13 @@ export class ItemBase {
 
     public async ReceiveEffect(effect: Effect) {
         this.activeEffects.push(effect);
-        await AlertManager.Instance.WriteAlertStorePrevious(`${this.ItemName} received effect ${effect.EffectName}`);
+       // await AlertManager.Instance.WriteAlertStorePrevious(`${this.ItemName} received effect ${effect.EffectName}`);
     }
 
     public RunOnceTurnEffects() {
         this.activeEffects.forEach(effect => {
-            const itemi = new ItemBase(2);
-            effect.TriggerOTEffect(this, itemi);
+
+            effect.TriggerOTEffect(this);
         });
     }
     public ApplyDamageEffect(effect: Effect) {

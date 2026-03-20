@@ -2,7 +2,7 @@ import { BattleMove } from "../../BattleSystem/BattleMove";
 import { CharacterStat } from "./CharacterStat";
 import { CharacterSheetDataType } from "../../DataTypes/CharacterSheetDataType";
 import { CharacterFaction } from "../../Enums";
-import { IsDebug, JsonHandlerInstance } from "../../initialisation";
+import { IsDebug, JsonHandlerInstance } from "../../MainPageInitialisation";
 import { WeaponItem } from "../WeaponItem/WeaponItem";
 import { ItemBase } from "../ItemBase";
 import { DataTypesEnum } from "../../../Assets/DataJsons/DataTypesEnum";

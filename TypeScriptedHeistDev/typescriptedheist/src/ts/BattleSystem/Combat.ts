@@ -1,6 +1,6 @@
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { CharacterSheet } from "../Items/Character/CharacterSheet";
-import { IsDebug } from "../initialisation";
+import { IsDebug } from "../MainPageInitialisation";
 import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
 import { AlertManager } from "../AlertManager";
 

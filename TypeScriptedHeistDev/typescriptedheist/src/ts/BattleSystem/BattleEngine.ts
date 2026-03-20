@@ -1,4 +1,4 @@
-import { CanvasGraphicsInstance, DebugWindowInstance, FrameTimeMS, IsDebug, SceneManagerInstance } from "../initialisation";
+import { CanvasGraphicsInstance, DebugWindowInstance, FrameTimeMS, IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
 import { SceneBase } from "../SceneBase";
 import { BattleArenaScene as BattleArenaSceneBase } from "../BattleArenaSceneBase";
 import { CharacterBase } from "../Items/Character/CharacterBase";
@@ -171,6 +171,8 @@ class BattleEngine {
 
         AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes turn!`, AlertGroupType.CombatTurn);
 
+        this.characterInTurn.Character.RunOnceTurnEffects();
+        
         //await WriteAlertStorePrevious(`${this.characterInTurn.ItemName} takes turn!`);
 
         if (this.characterInTurn.Character === this.playerCharacter) {
@@ -209,7 +211,6 @@ class BattleEngine {
 
         }
         else {
-            this.characterInTurn.Character.RunOnceTurnEffects();
 
             this.characterInTurn.EnemyCombatAI.BeginTurn();
             const chosenBattleAction: BattleAction = this.characterInTurn.EnemyCombatAI.ChooseBattleAction();

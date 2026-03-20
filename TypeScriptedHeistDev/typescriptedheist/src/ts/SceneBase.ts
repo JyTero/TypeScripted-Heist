@@ -2,7 +2,7 @@
 import { ChangeFlagValue } from "./flags";
 import { MenuItemBase } from "./MenuItemBase";
 import { MenuObjectBase } from "./MenuObjectBase";
-import { IsDebug, SceneManagerInstance } from "./initialisation";
+import { IsDebug, SceneManagerInstance } from "./MainPageInitialisation";
 import { WriteMenuSelection } from "./IOMethods";
 import { Sprite } from "./Canvas/Sprite";
 import { MenuItemDataType } from "./DataTypes/MenuItemDataType";

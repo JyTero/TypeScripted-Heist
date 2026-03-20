@@ -2,6 +2,7 @@ import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnu
 import { EffectTypeEnumEnum } from "../../Assets/DataJsons/EffectTypeEnumEnum";
 import { AlertManager } from "../AlertManager";
 import { EffectData } from "../DataTypes/EffectDataType";
+import { CharacterBase } from "../Items/Character/CharacterBase";
 import { ItemBase } from "../Items/ItemBase";
 
 
@@ -31,7 +32,11 @@ export class Effect {
     protected TargetStat: CharcterStatTypeEnum;
     protected EffectType: EffectTypeEnumEnum;
     protected potency: number;
-    protected effectDuration: number;
+    protected effectDuration: number = 0;
+
+    protected Caster: CharacterBase;
+    protected Source: ItemBase;
+
 
     //private targetStatIntance: CharacterStat
     private effectRemainingTurns: number;
@@ -39,7 +44,7 @@ export class Effect {
     public get Potency(): number {
         return this.potency;
     }
-    public get EffectDuration():number{
+    public get EffectDuration(): number {
         return this.effectDuration;
     }
 
@@ -61,15 +66,15 @@ export class Effect {
         //this.AdjustEffectPotencyToMatchType();
     }
 
-    public ApplyEffect(target: ItemBase, attacker:ItemBase) {
+    public ApplyEffect(target: ItemBase, attacker: ItemBase) {
         //Do all modifiers to attack values here
 
-        //is OT?
         if (this.DoesTargetHaveEffectTargetStat(target)) {
+            //is OT?
             if (this.effectDuration === 0)
-                this.TriggerEffect(target,attacker)
+                this.TriggerEffect(target, attacker)
             else
-                this.ApplyOTEffect(target,attacker);
+                this.ApplyOTEffect(target, attacker);
         }
         else
             console.log(`${target.ItemName} does not have stat ${this.TargetStat} required by ${this.EffectName}`);
@@ -81,19 +86,10 @@ export class Effect {
         //Apply effect to target for OT effects
     }
 
-    public async TriggerOTEffect(target: ItemBase, attacker:ItemBase) {
+    public async TriggerOTEffect(target: ItemBase) {
 
-        await AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (${this.effectRemainingTurns}/${this.effectDuration} turns)`);
-        this.TriggerEffect(target, attacker);
-
-        // const stat = target.GetStat(this.TargetStat);
-        // //Call different methods based if damage/destroy/heal/restore
-
-        // stat?.DamageStat(this.Potency);
-        // this.effectRemainingTurns--;
-
-        // if (this.effectRemainingTurns <= 0)
-        //     this.OnEffectEnd(target);
+        //await AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (${this.effectRemainingTurns}/${this.effectDuration} turns)`);
+        this.TriggerEffect(target, this.Caster);
 
     }
 
@@ -107,8 +103,9 @@ export class Effect {
 
     }
 
-    private ApplyOTEffect(target: ItemBase, attacker:ItemBase) {
+    private ApplyOTEffect(target: ItemBase, attacker: ItemBase) {
         target.ReceiveEffect(this);
+        this.Caster = attacker as CharacterBase;
         this.effectRemainingTurns = this.effectDuration;
     }
 
@@ -123,7 +120,7 @@ export class Effect {
         }
     }
 
-    public TriggerEffect(target: ItemBase, attacker:ItemBase) {
+    public TriggerEffect(target: ItemBase, attacker: ItemBase) {
         switch (this.EffectType) {
             case EffectTypeEnumEnum.Damage:
                 this.ApplyDamageEffect(target, attacker);
@@ -145,24 +142,40 @@ export class Effect {
 
     }
 
-    private ApplyDamageEffect(target: ItemBase, attacker:ItemBase) {
+    private ApplyDamageEffect(target: ItemBase, attacker: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
+        if (this.effectDuration > 0)
+            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
+        else
+            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
         targetStat?.DamageStat(this.potency);
     }
-    private ApplyDestroyEffect(target: ItemBase, attacker:ItemBase) {
+    private ApplyDestroyEffect(target: ItemBase, attacker: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
+        if (this.effectDuration > 0)
+            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
+        else
+            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
         targetStat?.DestroyStat(this.potency);
     }
-    private ApplyHealEffect(target: ItemBase, attacker:ItemBase) {
+    private ApplyHealEffect(target: ItemBase, attacker: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
+        if (this.effectDuration > 0)
+            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
+        else
+            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
         targetStat?.HealStat(this.potency);
     }
-    private ApplyRestoreEffect(target: ItemBase, attacker:ItemBase) {
+    private ApplyRestoreEffect(target: ItemBase, attacker: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat);
+        if (this.effectDuration > 0)
+            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
+        else
+            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
         targetStat?.RestoreStat(this.potency);
     }
 
-    private HandleOvertimeEffects(target: ItemBase, attacker:ItemBase) {
+    private HandleOvertimeEffects(target: ItemBase, attacker: ItemBase) {
         this.effectRemainingTurns--;
         if (this.effectRemainingTurns <= 0)
             target.RemoveEffect(this);
