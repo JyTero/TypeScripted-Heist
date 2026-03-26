@@ -282,8 +282,7 @@ class BattleEngine {
                     if (this.playerCharacter.CharacterLoadingReady)
                         spritesReady = true;
                 }
-            }
-            //if all ready, flip bool   
+            }   
         }
     }
 

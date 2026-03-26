@@ -40,6 +40,9 @@ export class Effect {
 
     //private targetStatIntance: CharacterStat
     private effectRemainingTurns: number;
+    public get EffectRemainingTurns():number {
+        return this.effectRemainingTurns;
+    }
 
     public get Potency(): number {
         return this.potency;

@@ -21,7 +21,7 @@ export class CharacterBase  extends ItemBase {
         super(10);   //Real value will come from data
         this.LoadCharacterImage(characterJson.CharacterImagePath);
 
-        this.ItemName = characterJson.CharacterName;
+        this.itemName = characterJson.CharacterName;
 
         this.CharacterSheet = new CharacterSheet(characterJson, this);
     }

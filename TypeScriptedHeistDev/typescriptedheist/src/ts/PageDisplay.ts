@@ -23,6 +23,12 @@ export class PageDisplayManager {
     // }
 
     //Find
+
+    public CreatePageElementsOnPageLoad(){
+        const app :HTMLElement|null = document.getElementById("app");
+        if(app != null)
+            new PageElement(app, "MainApp", this);
+    }
     public FindPageElementByHTMLElement(html: HTMLElement): PageElement | null {
         var i = 0;
         this.pageElements.forEach(element => {

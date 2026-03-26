@@ -4,13 +4,17 @@ import { PersoanlityAxisEnumH } from "../../Assets/DataJsons/PersonalityAxisEnum
 import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
 import { AlertManager } from "../AlertManager";
 import { Effect } from "../Effects/EffectBase";
+import { StringChangedListner } from "../EventTypes";
 import { IsDebug } from "../MainPageInitialisation";
 import { CharacterStat } from "./Character/CharacterStat";
 import { PersonalityAxis } from "./Character/PersonalityAxis";
 import { Healer_Trait, Trait } from "./Character/Trait";
 
 export class ItemBase {
-    public ItemName: string = "Gia's Gunn";
+    protected itemName: string;
+    public get ItemName(): string {
+        return this.itemName;
+    }
 
     public Health: CharacterStat;
 
@@ -21,13 +25,16 @@ export class ItemBase {
 
     private itemPersonalityAxes: Partial<Record<PersoanlityAxisEnumH, PersonalityAxis>> = {};
     private itemTraits: Trait[] = [];
+
+    private onNameChangeSubscribers: StringChangedListner[] = [];
+
     constructor(maxHealth: number) {
         this.Health = new CharacterStat("Health", maxHealth, maxHealth, CharcterStatTypeEnum.Health, this);
         this.activeEffects = [];
     }
 
-    public AddTrait(traitEnum: TraitsEnumH){
-        switch(traitEnum){
+    public AddTrait(traitEnum: TraitsEnumH) {
+        switch (traitEnum) {
             case TraitsEnumH.Default:
                 console.log("Tried to add DEFAULT TRAIT for " + this.ItemName);
                 break;
@@ -36,7 +43,7 @@ export class ItemBase {
                 this.InserTraitToCharacter(newTrait);
                 break;
             case TraitsEnumH.Reckless:
-                //stuff
+            //stuff
             default:
                 console.log("Tried to ad UNKNOWN TRAITT TYPE for " + this.ItemName);
 
@@ -56,14 +63,17 @@ export class ItemBase {
 
     public async ReceiveEffect(effect: Effect) {
         this.activeEffects.push(effect);
-       // await AlertManager.Instance.WriteAlertStorePrevious(`${this.ItemName} received effect ${effect.EffectName}`);
+        // await AlertManager.Instance.WriteAlertStorePrevious(`${this.ItemName} received effect ${effect.EffectName}`);
     }
 
     public RunOnceTurnEffects() {
+        var debug = `Running OT effects for ${this.ItemName} (`;
         this.activeEffects.forEach(effect => {
-
+            debug += `${effect.EffectName}, ${effect.EffectDuration}/${effect.EffectRemainingTurns} | `
             effect.TriggerOTEffect(this);
         });
+        if (IsDebug)
+            console.log(debug);
     }
     public ApplyDamageEffect(effect: Effect) {
         const targetStat = this.GetStat(effect.GetTargetStat())
@@ -76,8 +86,8 @@ export class ItemBase {
     }
 
     public GetStat(key: CharcterStatTypeEnum): CharacterStat | undefined {
-        console.log(key, typeof key);
-        console.log(Object.keys(this.objectStats));
+        // console.log(key, typeof key);
+        // console.log(Object.keys(this.objectStats));
         return this.objectStats[key];
     }
 
@@ -102,7 +112,7 @@ export class ItemBase {
     }
     public GetPersonalityAxes(): PersonalityAxis[] {
         var personalityAxis: PersonalityAxis[] = [];
-        for(var axis of Object.values(this.itemPersonalityAxes)){
+        for (var axis of Object.values(this.itemPersonalityAxes)) {
             personalityAxis.push(axis);
         }
 
@@ -124,4 +134,8 @@ export class ItemBase {
     // public CurrentHealth(): number {
     //     return this.currentHealth;
     // }
+
+    public SubscribeToNameChange(listener: StringChangedListner) {
+        this.onNameChangeSubscribers.push(listener);
+    }
 }

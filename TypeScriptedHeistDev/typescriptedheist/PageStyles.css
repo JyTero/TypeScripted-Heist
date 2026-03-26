@@ -1,18 +1,23 @@
 #app{
     display: flex;
+    flex-direction: column;
+}
+#GameLogDiv{
+    display: flex;
     flex-direction: row;
+    height: 600px;
 }
 p {
     white-space: pre-line;
 }
-
+#GameWindow{}
 #TextSide{
     display: flex;
     flex-direction: column;
 }
 #TextHistory{
     flex-grow: 1;
-    height:  600px;
+    height:  100%;
     display: flex;
     flex-direction: column-reverse;
     

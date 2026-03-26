@@ -3,9 +3,11 @@ import { FrontDoorScene } from "./Scenes/FrontDoorScene";
 import { GroundLevelWindowScene } from "./Scenes/GroundLevelWindowScene";
 import { BackdoorScene } from "./Scenes/BackdoorScene";
 import { BattleArenaTestScene } from "./Scenes/BattleArenaTestScene";
-import { SceneManagerInstance } from "./MainPageInitialisation";
+import { MainWindowPageDisplayManagerInstance, SceneManagerInstance } from "./MainPageInitialisation";
 import { PlayerCharacter } from "./PlayerCharacter";
 import { WeaponEnum } from "../Assets/DataJsons/WeaponEnum";
+import { PageDisplayManager } from "./PageDisplay";
+import { DebugPageDisplayManagerInstance } from "./DebugPageInitialisation";
 
 const mansionApproachScene: MansionApproachScene = new MansionApproachScene();
 const frontDoorScene: FrontDoorScene = new FrontDoorScene();
@@ -38,6 +40,11 @@ export function Game() {
 }
 function InitialisePlayerCharacter() {
     console.log("PC: " + PlayerCharacter.instance.GetPlayerCharacter().ItemName);
+    //const pc = PlayerCharacter.instance.GetPlayerCharacter();
+    //MainWindowPageDisplayManagerInstance.FindPageElementByElementId("PlayerName")?.SetElementText(pc.ItemName);
+    //MainWindowPageDisplayManagerInstance.FindPageElementByElementId("PlayerHP")?.SetElementText(`HP: ${pc.Health.Value} / ${pc.Health.MaxValue}`)
+
+
 
 }
 function TestingThings() {

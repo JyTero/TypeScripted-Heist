@@ -1,5 +1,6 @@
 import { CharcterStatTypeEnum } from "../../../Assets/DataJsons/CharcterStatTypeEnum";
 import { AlertGroupType, AlertManager } from "../../AlertManager";
+import { StatChangedListener } from "../../EventTypes";
 import { ItemBase } from "../ItemBase";
 
 export class CharacterStat {
@@ -8,7 +9,9 @@ export class CharacterStat {
     private trueMaxValue: number;
     private currentMaxValue: number;
 
-    private subscribers: (() => void)[] = [];
+
+    private onValueChangeSubscribers: StatChangedListener[] = [];
+    private onMaxChangeSubscribers: StatChangedListener[] = [];
 
     private owner: ItemBase;
 
@@ -18,6 +21,9 @@ export class CharacterStat {
 
     get Value(): number {
         return this.statValue
+    }
+    get MaxValue(): number {
+        return this.currentMaxValue;
     }
     // private set Value(newValue: number) {
     //     this.statValue = newValue;
@@ -31,15 +37,17 @@ export class CharacterStat {
         this.currentMaxValue = this.trueMaxValue;
         this.owner = owner;
         owner.AddStatToDictionary(statType, this);
+        this.NotifyMaxValueChange(maxValue, 0);
     }
 
     public SetValue(newValue: number) {
         this.statValue = newValue;
-        this.NotifyValueChange();
+        this.NotifyValueChange(this.statValue, NaN);
     }
+
     public async DamageStat(adjust: number) {
         this.statValue = this.statValue - adjust;
-        this.NotifyValueChange();
+        this.NotifyValueChange(this.statValue, adjust);
         this.WriteAlert(adjust);
     }
     public DestroyStat(adjust: number) {
@@ -47,13 +55,14 @@ export class CharacterStat {
         if (this.statValue > this.currentMaxValue)
             this.SetValue(this.currentMaxValue);
         this.WriteAlert(adjust);
+        this.NotifyMaxValueChange(this.MaxValue, adjust);
     }
     public HealStat(adjust: number) {
         if (this.statValue + adjust > this.currentMaxValue)
             this.SetValue(this.currentMaxValue);
         else {
             this.statValue = this.statValue + adjust;
-            this.NotifyValueChange();
+            this.NotifyValueChange(this.statValue, adjust);
             this.WriteAlert(adjust);
         }
     }
@@ -63,6 +72,7 @@ export class CharacterStat {
         else {
             this.currentMaxValue += adjust;
         }
+        this.NotifyMaxValueChange(this.MaxValue, adjust);
     }
 
     private WriteAlert(adjustValue: number) {
@@ -72,13 +82,22 @@ export class CharacterStat {
             AlertManager.Instance.WriteAlertStorePrevious(`${this.owner.ItemName} stat ${this.StatName} changes by ${adjustValue}`);
     }
 
-    SubscribeToOnValueChange(callback: () => void) {
-        this.subscribers.push(callback);
+    SubscribeToOnValueChange(listener: StatChangedListener) {
+        this.onValueChangeSubscribers.push(listener);
     }
 
-    private NotifyValueChange() {
-        for (const cb of this.subscribers) {
-            cb();
+    SubscribeToOnMaxValueChange(listener: StatChangedListener){
+        this.onMaxChangeSubscribers.push(listener);
+    }
+
+    private NotifyValueChange(newValue: number, change: number) {
+        for (const cb of this.onValueChangeSubscribers) {
+            cb(newValue, change);
+        }
+    }
+    private NotifyMaxValueChange(newValue: number, change: number) {
+        for (const cb of this.onMaxChangeSubscribers) {
+            cb(newValue, change);
         }
     }
 }

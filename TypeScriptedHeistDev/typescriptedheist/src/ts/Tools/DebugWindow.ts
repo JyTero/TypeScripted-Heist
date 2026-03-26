@@ -63,7 +63,7 @@ export class DebugWindow {
     private OnPageOpen() {
         var appHTML: HTMLElement | null = this.debugWindow.document.getElementById("App");
         if (appHTML)
-            this.appRoot = new PageElement(appHTML, appHTML.id, DebugPageDisplayManagerInstance);
+            this.appRoot = new PageElement(appHTML, "DebugApp", DebugPageDisplayManagerInstance);
 
 
         var htmlElement: PageElement | null = DebugPageDisplayManagerInstance.FindPageElementByElementId("CombatDebugging");

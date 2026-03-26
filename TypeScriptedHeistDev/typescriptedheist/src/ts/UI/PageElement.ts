@@ -48,13 +48,13 @@ export class PageElement {
 
         this.ElementName = name;
         pageManager.NewPageElement(this);
-        
+
         //If blank type, html element already exists, create object with that
         if (IsHTMLElement(arg1)) {
             this.PreExistingElement(arg1, pageManager);
         }
         else {
-            
+
             const n = arg1 as DOMElementType;
             this.element = document.createElement(n);
             if (!this.element) {
@@ -106,7 +106,7 @@ export class PageElement {
 
     }
 
-    //Children
+    //Children - Add
     public InsertAsFirstChild(newFirst: PageElement) {
         this.element.insertBefore(newFirst.element, this.element.firstChild)
         this.childElements.push(newFirst); //List order, is it relevant?
@@ -117,9 +117,30 @@ export class PageElement {
         this.childElements.push(child);
         child.AddParent(this);
     }
+
+    //Children - Remove
     public RemoveAllChildren() {
         //Requires call on all children the destroy self, make sure children destroy their children
     }
+
+    //Children - Misc
+    public FindChildByID(id: string) {
+       for (var element of this.childElements){
+            if (element.id == id) {
+                // if (IsDebug)
+                //     console.log(`Match by HTMLElement: ${element.Element} is  ${html} | ${element.Element.id} vs ${html.id}`);
+                return element;
+            }
+            else
+                continue;
+            // else if (IsDebug)
+            //     console.log(`Match by HTMLElement: ${element.Element} is not ${html} | ${element.Element.id} vs ${html.id}`);
+        }
+        if (IsDebug)
+            console.log(`Couldn't find child PageElement containing ${id} on ${this.ElementName}!`);
+        return null
+    }
+
     public AddParent(parent: PageElement) {
         this.elementParent = parent;
     }

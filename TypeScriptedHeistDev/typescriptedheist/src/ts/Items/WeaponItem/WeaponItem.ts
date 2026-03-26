@@ -16,7 +16,7 @@ export class WeaponItem extends ItemBase{
 
     constructor(data:WeaponDatatype){
         super(10);
-        this.ItemName = data.WeaponName;
+        this.itemName = data.WeaponName;
         this.BattleMoves = data.BattleMoves;
         this.WeaponHit = data.WeaponHit;
         this.WeaponDamage = data.WeaponDamage;
