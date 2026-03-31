@@ -4,7 +4,7 @@ import { PersoanlityAxisEnumH } from "../../Assets/DataJsons/PersonalityAxisEnum
 import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
 import { AlertManager } from "../AlertManager";
 import { Effect } from "../Effects/EffectBase";
-import { StringChangedListner } from "../EventTypes";
+import { StringChangedListner } from "../EventListeners";
 import { IsDebug } from "../MainPageInitialisation";
 import { CharacterStat } from "./Character/CharacterStat";
 import { PersonalityAxis } from "./Character/PersonalityAxis";

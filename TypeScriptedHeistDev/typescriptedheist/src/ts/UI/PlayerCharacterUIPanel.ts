@@ -1,4 +1,5 @@
 import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
+import { StatChangedEvent } from "../EventTypes";
 import { CharacterStat } from "../Items/Character/CharacterStat";
 import { MainWindowPageDisplayManagerInstance } from "../MainPageInitialisation";
 import { PlayerCharacter } from "../PlayerCharacter";
@@ -21,8 +22,8 @@ export class PlayerCharacterUIPanel {
         //Subscribe to stuff
         const pc = PlayerCharacter.instance.GetPlayerCharacter();
         const pcHealth = pc.GetStat(CharcterStatTypeEnum.Health) as CharacterStat;
-        pcHealth.SubscribeToOnValueChange(((newValue, change) => this.OnHealthChange(newValue, change)));
-        pcHealth.SubscribeToOnMaxValueChange(((newValue, change) => this.OnMaxHealthChange(newValue, change)));
+        pcHealth.SubscribeToOnValueChange(((statChangedEventer) => this.OnHealthChange(statChangedEventer)));
+        pcHealth.SubscribeToOnMaxValueChange(((statChangedEventer) => this.OnMaxHealthChange(statChangedEventer)));
 
 
         //Find pagelements;
@@ -38,20 +39,20 @@ export class PlayerCharacterUIPanel {
         if(t!=null)
             this.playerNamePE = t;
 
-        // this.currentMaxHP = pc.GetStat(CharcterStatTypeEnum.Health)?.MaxValue as number; 
-        // this.name = pc.ItemName;
-        // this.currentHP = this.currentMaxHP
-        // this.OnHealthChange(0,0);
+        this.currentMaxHP = pc.GetStat(CharcterStatTypeEnum.Health)?.MaxValue as number; 
+        this.name = pc.ItemName;
+        this.currentHP = this.currentMaxHP
+        this.playerHPPE.SetElementText(this.HPUIText());
     }
 
 
-    private OnHealthChange(newValue:number, change:number) {
-        this.currentHP = newValue;
+    private OnHealthChange(statChangedEventer:StatChangedEvent) {
+        this.currentHP = statChangedEventer.newValue;
         this.playerHPPE.SetElementText(this.HPUIText());
         
     }
-    private OnMaxHealthChange(newValue:number, change:number){
-        this.currentMaxHP = newValue;
+    private OnMaxHealthChange(statChangedEventer:StatChangedEvent){
+        this.currentMaxHP = statChangedEventer.newValue;
         this.playerHPPE.SetElementText(this.HPUIText());
     }
     private HPUIText():string{

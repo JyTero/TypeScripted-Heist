@@ -1,7 +1,8 @@
 import { CharcterStatTypeEnum } from "../../../Assets/DataJsons/CharcterStatTypeEnum";
 import { AlertGroupType, AlertManager } from "../../AlertManager";
-import { StatChangedListener } from "../../EventTypes";
+import { StatChangedListener } from "../../EventListeners";
 import { ItemBase } from "../ItemBase";
+import { NewStatChangedEvent, StatChangedEvent } from "../../EventTypes";
 
 export class CharacterStat {
     private statName: string = "";
@@ -37,7 +38,6 @@ export class CharacterStat {
         this.currentMaxValue = this.trueMaxValue;
         this.owner = owner;
         owner.AddStatToDictionary(statType, this);
-        this.NotifyMaxValueChange(maxValue, 0);
     }
 
     public SetValue(newValue: number) {
@@ -92,12 +92,15 @@ export class CharacterStat {
 
     private NotifyValueChange(newValue: number, change: number) {
         for (const cb of this.onValueChangeSubscribers) {
-            cb(newValue, change);
+            //cb(newValue, change);
+            cb(NewStatChangedEvent(cb.name + " StatChange", newValue, change));
         }
     }
-    private NotifyMaxValueChange(newValue: number, change: number) {
+    private NotifyMaxValueChange(newValue:number, change:number) {
         for (const cb of this.onMaxChangeSubscribers) {
-            cb(newValue, change);
+            
+            //cb(newValue, change);
+            cb(NewStatChangedEvent(cb.name + " StatChange", newValue, change));
         }
     }
 }
