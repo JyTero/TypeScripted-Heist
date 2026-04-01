@@ -1,9 +1,10 @@
 import { MenuItemBase } from "../MenuItemBase";
-import { SceneBase } from "../SceneBase";
-import { SceneDataType } from "../DataTypes/SceneDataType";
+import { SceneBase } from "../Scenes/SceneBase";
+import { SceneBaseData } from "../DataTypes/SceneDataType";
 import { Color } from "../Tools/Color";
 import { MansionApproachMenuItemData01, MansionApproachMenuItemData02, MansionApproachMenuItemData03, MansionApproachMenuItemData04 } from "../SceneData/MansionApproachData";
 import { AlertManager } from "../AlertManager";
+import { SceneTypesEnumHandmade } from "../Scenes/SceneTypesEnumHandmade";
 
 export class MansionApproachScene extends SceneBase {
     
@@ -29,9 +30,11 @@ export class MansionApproachScene extends SceneBase {
     }
 }
 
-const MansionApproachSceneData:SceneDataType ={
+const MansionApproachSceneData:SceneBaseData ={
     SceneName: "Mansion approach",
-    SceneBackgroundColor: new Color(255,0,16,1),
+    SceneType: SceneTypesEnumHandmade.ExplorationScene.toString(),
+    SceneBackgroundColor: new Color(255,0,16,1)
+
 }
 
 

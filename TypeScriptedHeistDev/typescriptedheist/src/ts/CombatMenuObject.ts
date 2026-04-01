@@ -1,9 +1,9 @@
 import { BattleMove } from "./BattleSystem/BattleMove";
 import { CharacterBase } from "./Items/Character/CharacterBase";
-import { MenuItemDataType } from "./DataTypes/MenuItemDataType";
+import { ExplorationMenuItemDataType } from "./DataTypes/MenuItemDataType";
 import { MenuItemBase } from "./MenuItemBase";
 import { MenuObjectBase } from "./MenuObjectBase";
-import { placeholderScene } from "./Scenes/Placeholders";
+import { placeholderScene } from "./ScenesLegacy/Placeholders";
 
 export class CombatMenuObject extends MenuObjectBase {
     constructor() {
@@ -14,15 +14,15 @@ export class CombatMenuObject extends MenuObjectBase {
         var combatMovesMenuItems: MenuItemBase[] = [];
         var moveIndex = 1;
         characterInTurn.CharacterSheet.BattleMoves.forEach(battleMove => {
-            const menuItemData: MenuItemDataType = this.MakeCombatMenuItemData(battleMove,moveIndex);
+            const menuItemData: ExplorationMenuItemDataType = this.MakeCombatMenuItemData(battleMove,moveIndex);
             combatMovesMenuItems.push(new MenuItemBase(menuItemData));
             moveIndex++;
         });
         this.allMenuItems = combatMovesMenuItems;
     }
 
-    private MakeCombatMenuItemData(battleMove:BattleMove, moveIndex:number):MenuItemDataType {
-         const combatMoveMenuData : MenuItemDataType =
+    private MakeCombatMenuItemData(battleMove:BattleMove, moveIndex:number):ExplorationMenuItemDataType {
+         const combatMoveMenuData : ExplorationMenuItemDataType =
         {
             MenuItemName: "CombatMove " + battleMove.MoveName,
             MenuItemNumber: moveIndex,

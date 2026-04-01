@@ -1,5 +1,5 @@
 import { MenuItemBase } from "../MenuItemBase";
-import { SceneBase } from "../SceneBase";
+import { SceneBase } from "../Scenes/SceneBase";
 import { WriteAlert } from "../IOMethods";
 import { BackdoorData01, BackdoorData02, BackdoorData03, BackdoorData04 } from "../SceneData/BackdoorData";
 

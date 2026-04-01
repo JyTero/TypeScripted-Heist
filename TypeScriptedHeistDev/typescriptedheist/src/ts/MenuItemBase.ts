@@ -1,6 +1,7 @@
-import { MenuItemDataType } from "./DataTypes/MenuItemDataType";
+import { ExplorationMenuItemDataType } from "./DataTypes/MenuItemDataType";
 import { FlagName, MenuItemFlagChange } from "./flags";
-import { SceneBase } from "./SceneBase";
+import { SceneBase } from "./Scenes/SceneBase";
+import { ScenesEnumHandmade } from "./ScenesLegacy/ScenesEnumHandMade";
 
 
 export class MenuItemBase {
@@ -15,14 +16,14 @@ export class MenuItemBase {
   MenuItemFlagsToChange: MenuItemFlagChange[] = [];
 
 
-  NextSceneObject: SceneBase;
+  NextSceneDataReference: ScenesEnumHandmade;
 
-  constructor(menuItemData: MenuItemDataType) {
+  constructor(menuItemData: ExplorationMenuItemDataType) {
     this.MenuItemName = menuItemData.MenuItemName;
     //this.MenuItemNumber = menuItemData.MenuItemNumber;
     this.MenuItemText = menuItemData.MenuItemText;
     this.MenuItemSelectionDescription = menuItemData.MenuItemSelectionDescription;
-    this.NextSceneObject = menuItemData.NextSceneObject;
+    this.NextSceneDataReference = menuItemData.NextSceneObject as ScenesEnumHandmade;
     this.MenuItemRequireAllFlags = menuItemData.MenuItemRequireAllFlags;
     this.MenuItemRequireAnyFlags = menuItemData.MenuItemRequireAnyFlags;
     this.MenuItemForbiddenAllFlags = menuItemData.MenuItemForbiddenAllFlags;

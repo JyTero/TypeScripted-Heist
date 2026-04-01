@@ -59,11 +59,7 @@ export class CharacterSheet{
     constructor(data: CharacterJson, _thisCharacter:CharacterBase) {
             
         this.thisCharacter = _thisCharacter;
-
-        console.log(data);
-        console.log(this.thisCharacter.ItemName + "| Faction: " + data.CharacterFaction)
         this.Faction = data.CharacterFaction;
-        console.log(data);
         this.Strength = new CharacterAttribute("Strength", data.CharacterStrength,CharcterStatTypeEnum.Strength, _thisCharacter);
         this.Dexterity = new CharacterAttribute("Dexterity", data.CharacterDexterity, CharcterStatTypeEnum.Dexterity, _thisCharacter);
         this.Perception = new CharacterAttribute("Perception", data.CharacterPerception, CharcterStatTypeEnum.Perception, _thisCharacter);

@@ -1,5 +1,5 @@
 import { Game as Game } from "./Main";
-import { SceneManagement } from "./Scenes/SceneManagement";
+import { SceneManagement } from "./ScenesLegacy/SceneManagement";
 import { CanvasGraphicEngine } from "./Canvas/CanvasGraphicEngine";
 import { JsonHandler } from "./JsonInput/JsonHandler";
 import { Delay } from "../Tools";

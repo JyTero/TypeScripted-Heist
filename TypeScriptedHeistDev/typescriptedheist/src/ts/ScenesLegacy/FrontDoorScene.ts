@@ -1,6 +1,6 @@
 import { MenuItemBase } from "../MenuItemBase";
 import { FrontDoorData01, FrontDoorData02 } from "../SceneData/FrontDoorData";
-import { SceneBase } from "../SceneBase";
+import { SceneBase } from "../Scenes/SceneBase";
 
 
 export class FrontDoorScene extends SceneBase {

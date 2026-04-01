@@ -1,26 +1,22 @@
 import { CanvasGraphicsInstance, DebugWindowInstance, FrameTimeMS, IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
-import { SceneBase } from "../SceneBase";
-import { BattleArenaScene as BattleArenaSceneBase } from "../BattleArenaSceneBase";
 import { CharacterBase } from "../Items/Character/CharacterBase";
-import { Delay, GetRandomInt } from "../../Tools";
+import { Delay } from "../../Tools";
 import { CombatMenuObject } from "../CombatMenuObject";
 import { TargetMenuObject } from "../TargetMenuObject";
 import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
-import { WeaponEnum } from "../../Assets/DataJsons/WeaponEnum";
 import { BuildCharacter } from "../JsonInput/DataToObjectBuilders";
-import { CharacterEnum } from "../../Assets/DataJsons/CharacterEnum";
 import { PlayerCharacter } from "../PlayerCharacter";
-import { SceneManagement } from "../Scenes/SceneManagement";
-import { AlertGroup, AlertGroupType, AlertManager } from "../AlertManager";
+import { AlertGroupType, AlertManager } from "../AlertManager";
 import { CombatCharacter } from "./CombatCharacter";
 import { BattleAction, EnemyCombatAI } from "./EnemyCombatAI";
 import { PersoanlityAxisEnumH } from "../../Assets/DataJsons/PersonalityAxisEnumHandmade";
 import { PersonalityAxis } from "../Items/Character/PersonalityAxis";
-import { DebugWindow } from "../Tools/DebugWindow";
 import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
-import { Trait } from "../Items/Character/Trait";
+import { ScenesEnumHandmade } from "../ScenesLegacy/ScenesEnumHandMade";
+import { CombatScene } from "../Scenes/CombatScene";
+import { SceneBase } from "../Scenes/SceneBase";
 
-export async function BeginBattleEngine(battleData: BattleArenaDataType, currentScene: BattleArenaSceneBase) {
+export async function BeginBattleEngine(battleData: BattleArenaDataType, currentScene: CombatScene) {
     const battleStage: BattleEngine = new BattleEngine(battleData, PlayerCharacter.instance.GetPlayerCharacter(), currentScene);
     await battleStage.OnEngineStartUp();
 
@@ -46,19 +42,20 @@ class BattleEngine {
     private currentRound: number = -1;
     private currentTurnIndex: number = -1;
     private battleOver = false;
-    private currentScene: BattleArenaSceneBase;
-    private nextScene: SceneBase;
+    private currentScene: CombatScene;
+    private nextSceneVictory: ScenesEnumHandmade;
+    private previousScene: SceneBase;
 
     private xPos: number = 5;
     private yPos: number = 10;
     private xScale: number = 10;
     private yScale: number = 10;
 
-    constructor(data: BattleArenaDataType, playerCharacter: CharacterBase, currentScene: BattleArenaSceneBase) {
+    constructor(data: BattleArenaDataType, playerCharacter: CharacterBase, currentScene: CombatScene) {
         this.playerCharacter = playerCharacter;
         this.battleData = data;
         this.currentScene = currentScene;
-        this.nextScene = data.NextScene;
+        this.nextSceneVictory = data.NextSceneOnVictory;
     }
     public async OnEngineStartUp() {
         if (IsDebug)
@@ -76,11 +73,8 @@ class BattleEngine {
 
         await this.WaitSpritesToLoad();
 
-        //DEBUG
 
-
-        this.nextScene = this.currentScene.VictoryNextScene;
-        await Delay(FrameTimeMS);
+       // await Delay(FrameTimeMS);
 
     }
 
@@ -330,7 +324,7 @@ class BattleEngine {
         this.battleOver = true;
         //this.nextScene.SceneMain();
         this.OnEngineDestroy();
-        SceneManagerInstance.HandleNextScene(this.currentScene, this.nextScene);
+        SceneManagerInstance.HandleNextScene(this.currentScene, this.nextSceneVictory);
     }
     private async OnEngineDestroy() {
         await AlertManager.Instance.WriteAlertStorePrevious("Battle ended");

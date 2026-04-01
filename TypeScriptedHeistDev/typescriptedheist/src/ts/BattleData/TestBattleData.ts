@@ -1,45 +1,22 @@
 import { CharacterEnum } from "../../Assets/DataJsons/CharacterEnum";
-import { WeaponEnum } from "../../Assets/DataJsons/WeaponEnum";
 import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
-import { CharacterDataType } from "../DataTypes/CharacterData";
-import { CharacterSheetDataType } from "../DataTypes/CharacterSheetDataType";
-import { DaggerItemData } from "../Items/ItemDatas/WeaponItemData/DaggerData";
-import { WeaponItem } from "../Items/WeaponItem/WeaponItem";
-import { placeholderScene } from "../Scenes/Placeholders";
+import { CombatSceneData } from "../DataTypes/SceneDataType";
+import { SceneTypesEnumHandmade } from "../Scenes/SceneTypesEnumHandmade";
+import { placeholderScene } from "../ScenesLegacy/Placeholders";
+import { ScenesEnumHandmade } from "../ScenesLegacy/ScenesEnumHandMade";
+import { Color } from "../Tools/Color";
 
 
-// const Enemy01Sheet: CharacterSheetDataType = {
 
-//     Name: "Amalie",
-//     Faction: 2,
-
-//     //Attributes
-//     Strength: 3,
-//     Dexterity: 12,
-//     Perception: 4,
-
-//     //Skills
-//     WeaponSkill: 50,
-//     Dodge: 2,
-
-//     BaseSpeed: 10,
-
-//     //Gear
-//     ArmourRating: 1,
-//     CurrentWeapon: new WeaponItem(DaggerItemData),
-    
-// }
-// const Enemy01:CharacterDataType ={
-//     CharacterSheet: Enemy01Sheet,
-//     CharacterImageString: "src/Assets/img/character/amalia.png",
-//     // SpriteDefaultXpos: 25,
-//     // SpriteDefaulyYpos: 25,
-//     // SpriteDefaultXScale: 10,
-//     // SpriteDefaultYScale: 10,
-// }
 export const TestBattleData: BattleArenaDataType = {
     BattleName: "Computer Combat",
     //PlayerCharacter: PlaceholderCharacterSheet,
-    EnemyCharacterDatas:[CharacterEnum.Character_Amalia, CharacterEnum.Character_Henrique],
-    NextScene: placeholderScene,
+    EnemyCharacterDatas: [CharacterEnum.Character_Amalia, CharacterEnum.Character_Henrique],
+    NextSceneOnVictory: ScenesEnumHandmade.Placeholder,
+}
+export const BattleArenaTestSceneData: CombatSceneData = {
+    SceneName: TestBattleData.BattleName + "Scene",
+    SceneType: SceneTypesEnumHandmade.CombatScene.toString(),
+    SceneBackgroundColor: new Color(16, 255, 16, 1),
+    battleArenaData: TestBattleData
 }

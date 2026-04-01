@@ -1,9 +1,22 @@
+import { CharacterBase } from "../Items/Character/CharacterBase";
 import { Color } from "../Tools/Color";
+import { BattleArenaDataType } from "./BattleArenaDataType";
+import { ExplorationMenuItemDataType} from "./MenuItemDataType";
 
-export type SceneDataType = {
-    SceneName:string,
+export interface SceneBaseData {
+    SceneName: string,
+    SceneType: string, //SceneTypesEnum
+    SceneBackgroundColor: Color;
 
-    SceneBackgroundColor:Color;
-    //SceneSprites: Sprite[],
-    //SpriteLocationData: SpriteLocationDataType[],
+
 }
+
+export interface ExplorationSceneData extends SceneBaseData {
+    MenuItems: ExplorationMenuItemDataType[];
+
+}
+
+export interface CombatSceneData extends SceneBaseData {
+    battleArenaData: BattleArenaDataType,
+}
+

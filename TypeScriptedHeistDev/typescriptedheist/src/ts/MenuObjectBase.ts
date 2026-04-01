@@ -1,7 +1,7 @@
 import { MenuItemBase } from "./MenuItemBase";
 import { WaitForInput, WriteAlert} from "./IOMethods";
 import { Flags } from "./flags";
-import { SceneBase } from "./SceneBase";
+import { SceneBase } from "./Scenes/SceneBase";
 import { Delay } from "../Tools";
 import { FrameTimeMS } from "./MainPageInitialisation";
 import { AlertManager } from "./AlertManager";
@@ -34,11 +34,10 @@ export class MenuObjectBase {
         }
         return playerInput;
     }
-    public TieMenuItemToSceneObject(menuItemIndex: number, targetScene: SceneBase) {
-        this.allMenuItems[menuItemIndex].NextSceneObject = targetScene;
-
-
-    }
+    // public TieMenuItemToSceneObject(menuItemIndex: number, targetScene: SceneBase) {
+    //     this.allMenuItems[menuItemIndex].NextSceneDataReference = targetScene;
+    // }
+    
     public async DisplayMenu() {
         let i: number = 1;
         let s: string = "";

@@ -1,4 +1,4 @@
-import { SceneBase } from "../SceneBase";
+import { SceneBase } from "../Scenes/SceneBase";
 import { MenuItemBase } from "../MenuItemBase";
 import { WriteAlert } from "../IOMethods";
 import { CharacterSheet } from "../Items/Character/CharacterSheet";
@@ -8,6 +8,10 @@ import { DaggerItemData } from "../Items/ItemDatas/WeaponItemData/DaggerData";
 import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
 import { CharacterDataType } from "../DataTypes/CharacterData";
 import { CharacterBase } from "../Items/Character/CharacterBase";
+import { SceneBaseData } from "../DataTypes/SceneDataType";
+import { SceneTypesEnumHandmade } from "../Scenes/SceneTypesEnumHandmade";
+import { Color } from "../Tools/Color";
+import { AlertManager } from "../AlertManager";
 
 // const placeholderCharacterSheetData: CharacterSheetDataType = {
     
@@ -42,7 +46,7 @@ export class PlaceholderScene extends SceneBase {
     }
     
     async SceneSpesificMain() {
-        WriteAlert("PLACEHOLDER SCENE, SHOULD NOT BE RUN");
+        AlertManager.Instance.WriteAlertStorePrevious("PLACEHOLDER SCENE, SHOULD NOT BE RUN\n(Unless you won combat, in which case this should be seen, though it is still placeholder and should be replaced)");
         // await this.DoTheMenu();
         
     }
@@ -53,11 +57,16 @@ export class PlaceholderScene extends SceneBase {
         
     }
 }
-export const placeholderScene: PlaceholderScene = new PlaceholderScene();
-
-export const placeholderBattleArenaData:BattleArenaDataType  = {
-        BattleName: "Computer Combat",
-       // PlayerCharacter: ,
-        EnemyCharacterDatas:[],
-        NextScene: placeholderScene,
+const PlaceholderSceneData:SceneBaseData ={
+    SceneName: "Placeholder",
+    SceneType: SceneTypesEnumHandmade.ExplorationScene.toString(),
+    SceneBackgroundColor: new Color(245, 40, 196, 1),
 }
+export const placeholderScene: SceneBase = new PlaceholderScene(PlaceholderSceneData);
+
+// export const placeholderBattleArenaData:BattleArenaDataType  = {
+//         BattleName: "Computer Combat",
+//        // PlayerCharacter: ,
+//         EnemyCharacterDatas:[],
+//         NextScene: placeholderScene,
+// }

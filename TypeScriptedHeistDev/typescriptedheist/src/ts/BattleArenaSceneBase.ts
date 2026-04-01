@@ -1,18 +1,22 @@
+import { BeginBattleEngine } from "./BattleSystem/BattleEngine";
 import { BattleArenaDataType } from "./DataTypes/BattleArenaDataType";
 import { MenuItemBase } from "./MenuItemBase";
-import { SceneBase } from "./SceneBase";
-import { placeholderBattleArenaData, placeholderScene } from "./Scenes/Placeholders";
+import { SceneBase } from "./Scenes/SceneBase";
+import { placeholderScene } from "./ScenesLegacy/Placeholders";
+import { ScenesEnumHandmade } from "./ScenesLegacy/ScenesEnumHandMade";
 
-export abstract class BattleArenaScene extends SceneBase{
- 
-    public VictoryNextScene: SceneBase;
-    protected battleArenaData:BattleArenaDataType = placeholderBattleArenaData;
+export class BattleArenaSceneOLD extends SceneBase {
+
+    public VictoryNextScene: ScenesEnumHandmade;
+    protected battleArenaData: BattleArenaDataType;
     protected previousScene: SceneBase = placeholderScene;
 
-   
-    public abstract SceneSpsificStartUp(): void;
-    public abstract SceneSpesificMain(): void;
-    public abstract BuildMenuItems(): MenuItemBase[];
-    public abstract BeginBattleScene(prevScene:SceneBase):void;
-    public abstract OnBattleEnd(): void;
+
+    public SceneSpsificStartUp(): void { }
+    public SceneSpesificMain(): void { }
+    public BuildMenuItems(): MenuItemBase[] { return [] }
+    public BeginBattleScene(prevScene: SceneBase): void {
+
+    }
+    public OnBattleEnd(): void { }
 }
