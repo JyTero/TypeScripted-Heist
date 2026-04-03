@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TSHCreatorTools.dataClasses;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace TSHCreatorTools
+namespace TSHCreatorTools.Helpers
 {
     public class CheckedListHandler
     {

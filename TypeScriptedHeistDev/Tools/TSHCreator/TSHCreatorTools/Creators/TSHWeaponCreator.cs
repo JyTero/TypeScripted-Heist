@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using TSHCreatorTools.CreatorBackend;
 using TSHCreatorTools.dataClasses;
+using TSHCreatorTools.Helpers;
 
 namespace TSHCreatorTools
 {

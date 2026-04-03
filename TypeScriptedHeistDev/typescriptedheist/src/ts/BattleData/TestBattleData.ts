@@ -1,9 +1,9 @@
 import { CharacterEnum } from "../../Assets/DataJsons/CharacterEnum";
 import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
 import { CombatSceneData } from "../DataTypes/SceneDataType";
-import { SceneTypesEnumHandmade } from "../Scenes/SceneTypesEnumHandmade";
+import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 import { placeholderScene } from "../ScenesLegacy/Placeholders";
-import { ScenesEnumHandmade } from "../ScenesLegacy/ScenesEnumHandMade";
+import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
 import { Color } from "../Tools/Color";
 
 

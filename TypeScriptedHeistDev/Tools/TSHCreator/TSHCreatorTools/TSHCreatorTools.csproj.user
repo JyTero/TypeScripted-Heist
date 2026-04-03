@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Compile Update="Creators\TSHSceneCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Creators\TSHCharacterCreator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -10,10 +13,13 @@
     <Compile Update="Creators\TSHWeaponCreator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MetadataCreator.cs">
+    <Compile Update="WindowComponents\Colorpicker.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="SelectImage.cs">
+    <Compile Update="WindowComponents\MetadataCreator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="WindowComponents\SelectImage.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Creators\TSHBattleMoveCreator.cs">

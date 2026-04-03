@@ -1,6 +1,6 @@
 ﻿namespace TSHCreatorTools
 {
-    partial class TSHCreator
+    partial class TSHCreatorMain
     {
         /// <summary>
         /// Required designer variable.
@@ -42,6 +42,7 @@
             button1 = new Button();
             OpenCharacterCreatorButton = new Button();
             EffectCreatorButton = new Button();
+            OpenSceneCreatorButton = new Button();
             AssetsPathGroup.SuspendLayout();
             StrengthGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -193,11 +194,23 @@
             EffectCreatorButton.UseVisualStyleBackColor = true;
             EffectCreatorButton.Click += EffectCreatorButton_Click;
             // 
+            // OpenSceneCreatorButton
+            // 
+            OpenSceneCreatorButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            OpenSceneCreatorButton.Location = new Point(168, 521);
+            OpenSceneCreatorButton.Name = "OpenSceneCreatorButton";
+            OpenSceneCreatorButton.Size = new Size(154, 23);
+            OpenSceneCreatorButton.TabIndex = 10;
+            OpenSceneCreatorButton.Text = "Open Scene Creator";
+            OpenSceneCreatorButton.UseVisualStyleBackColor = true;
+            OpenSceneCreatorButton.Click += OpenSceneCreatorButton_Click;
+            // 
             // TSHCreator
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(617, 552);
+            Controls.Add(OpenSceneCreatorButton);
             Controls.Add(EffectCreatorButton);
             Controls.Add(OpenCharacterCreatorButton);
             Controls.Add(button1);
@@ -235,6 +248,7 @@
         private Button button1;
         private Button OpenCharacterCreatorButton;
         private Button EffectCreatorButton;
+        private Button OpenSceneCreatorButton;
     }
 }
 

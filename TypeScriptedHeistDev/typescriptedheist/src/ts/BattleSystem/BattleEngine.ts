@@ -9,10 +9,10 @@ import { PlayerCharacter } from "../PlayerCharacter";
 import { AlertGroupType, AlertManager } from "../AlertManager";
 import { CombatCharacter } from "./CombatCharacter";
 import { BattleAction, EnemyCombatAI } from "./EnemyCombatAI";
-import { PersoanlityAxisEnumH } from "../../Assets/DataJsons/PersonalityAxisEnumHandmade";
+import { PersoanlityAxisEnumH } from "../../Assets/PersonalityAxisEnumHandmade";
 import { PersonalityAxis } from "../Items/Character/PersonalityAxis";
 import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
-import { ScenesEnumHandmade } from "../ScenesLegacy/ScenesEnumHandMade";
+import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
 import { CombatScene } from "../Scenes/CombatScene";
 import { SceneBase } from "../Scenes/SceneBase";
 

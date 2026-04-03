@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using TSHCreatorTools.CreatorBackend;
 using TSHCreatorTools.Creators;
 using TSHCreatorTools.dataClasses;
+using TSHCreatorTools.Helpers;
 using static TSHCreatorTools.Creators.Enums;
 
 namespace TSHCreatorTools

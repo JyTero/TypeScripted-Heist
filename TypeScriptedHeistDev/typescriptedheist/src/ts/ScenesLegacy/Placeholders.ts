@@ -9,7 +9,7 @@ import { BattleArenaDataType } from "../DataTypes/BattleArenaDataType";
 import { CharacterDataType } from "../DataTypes/CharacterData";
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { SceneBaseData } from "../DataTypes/SceneDataType";
-import { SceneTypesEnumHandmade } from "../Scenes/SceneTypesEnumHandmade";
+import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 import { Color } from "../Tools/Color";
 import { AlertManager } from "../AlertManager";
 

@@ -12,7 +12,7 @@ namespace TSHCreatorTools
     public class CreatorBaseForm : Form
     {
         protected MetadataCreator? metadataCreator;
-        protected TSHCreator? mainWindow;
+        protected TSHCreatorMain? mainWindow;
 
         public CreatorBaseForm()
         {
@@ -40,7 +40,7 @@ namespace TSHCreatorTools
 
         //}
 
-        public void SetMainWindow(TSHCreator mw)
+        public void SetMainWindow(TSHCreatorMain mw)
         {
             mainWindow = mw;
         }

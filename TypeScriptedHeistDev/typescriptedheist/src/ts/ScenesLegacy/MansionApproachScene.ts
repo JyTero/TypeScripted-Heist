@@ -4,7 +4,7 @@ import { SceneBaseData } from "../DataTypes/SceneDataType";
 import { Color } from "../Tools/Color";
 import { MansionApproachMenuItemData01, MansionApproachMenuItemData02, MansionApproachMenuItemData03, MansionApproachMenuItemData04 } from "../SceneData/MansionApproachData";
 import { AlertManager } from "../AlertManager";
-import { SceneTypesEnumHandmade } from "../Scenes/SceneTypesEnumHandmade";
+import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 
 export class MansionApproachScene extends SceneBase {
     

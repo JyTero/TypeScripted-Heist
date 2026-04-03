@@ -1,6 +1,6 @@
 import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
 import { EffectTypeEnumEnum } from "../../Assets/DataJsons/EffectTypeEnumEnum";
-import { PersoanlityAxisEnumH } from "../../Assets/DataJsons/PersonalityAxisEnumHandmade";
+import { PersoanlityAxisEnumH } from "../../Assets/PersonalityAxisEnumHandmade";
 import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
 import { AlertManager } from "../AlertManager";
 import { Effect } from "../Effects/EffectBase";

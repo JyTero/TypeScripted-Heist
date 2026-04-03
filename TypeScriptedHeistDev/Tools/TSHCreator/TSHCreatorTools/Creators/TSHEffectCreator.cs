@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TSHCreatorTools.CreatorBackend;
 using TSHCreatorTools.dataClasses;
+using TSHCreatorTools.Helpers;
 using static TSHCreatorTools.Creators.Enums;
 
 namespace TSHCreatorTools.Creators

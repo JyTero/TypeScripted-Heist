@@ -8,7 +8,7 @@ using static TSHCreatorTools.Creators.Enums;
 
 namespace TSHCreatorTools
 {
-    public partial class TSHCreator : Form
+    public partial class TSHCreatorMain : Form
     {
         //public ToolSaveDataManager ToolSaveDataManagerVar = new();
         private string assetsFolderPath = "";
@@ -16,7 +16,7 @@ namespace TSHCreatorTools
         //private string imageFolderPath = "";
         private List<CreatorBaseForm> creatorWindows = new();
 
-        public TSHCreator()
+        public TSHCreatorMain()
         {
             InitializeComponent();
             Paths.Initialise();
@@ -61,6 +61,15 @@ namespace TSHCreatorTools
                 OpenEffectCreator();
             }
         }
+        private void OpenSceneCreatorButton_Click(object sender, EventArgs e)
+        {
+            Debug.WriteLine("Opening Scene Creator");
+            if (IsJsonFolderPathValid())
+            {
+                OpenSceneCreator();
+            }
+        }
+
 
         public void OpenWeaponCreator()
         {
@@ -93,6 +102,14 @@ namespace TSHCreatorTools
             effectCreator.Show();
             creatorWindows.Add(effectCreator);
             effectCreator.SetMainWindow(this);
+        }
+        public void OpenSceneCreator()
+        {
+            var sceneCreator = new TSHSceneCreator();
+            sceneCreator.OnCreatorWindowOpen();
+            sceneCreator.Show();
+            creatorWindows.Add(sceneCreator);
+            sceneCreator.SetMainWindow(this);
         }
 
         //LOGIC
@@ -294,7 +311,6 @@ namespace TSHCreatorTools
                 //sw.Write(workingString);
             }
         }
-
 
     }
 }

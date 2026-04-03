@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TSHCreatorTools.dataClasses;
 
-namespace TSHCreatorTools
+namespace TSHCreatorTools.Helpers
 {
     public class ComboBoxHandler
     {

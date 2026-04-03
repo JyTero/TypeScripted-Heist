@@ -1,8 +1,8 @@
 import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
 import { ExplorationSceneData } from "../DataTypes/SceneDataType";
-import { SceneTypesEnumHandmade } from "../Scenes/SceneTypesEnumHandmade";
+import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 import { placeholderScene } from "../ScenesLegacy/Placeholders";
-import { ScenesEnumHandmade } from "../ScenesLegacy/ScenesEnumHandMade";
+import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
 import { Color } from "../Tools/Color";
 
 

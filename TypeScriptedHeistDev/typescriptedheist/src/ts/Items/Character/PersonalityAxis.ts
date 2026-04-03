@@ -1,4 +1,4 @@
-import { PersoanlityAxisEnumH } from "../../../Assets/DataJsons/PersonalityAxisEnumHandmade";
+import { PersoanlityAxisEnumH } from "../../../Assets/PersonalityAxisEnumHandmade";
 import { BattleAction } from "../../BattleSystem/EnemyCombatAI";
 import { ItemBase } from "../ItemBase";
 

@@ -1,7 +1,7 @@
 import { ExplorationMenuItemDataType } from "./DataTypes/MenuItemDataType";
 import { FlagName, MenuItemFlagChange } from "./flags";
 import { SceneBase } from "./Scenes/SceneBase";
-import { ScenesEnumHandmade } from "./ScenesLegacy/ScenesEnumHandMade";
+import { ScenesEnumHandmade } from "../Assets/ScenesEnumHandMade";
 
 
 export class MenuItemBase {

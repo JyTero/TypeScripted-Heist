@@ -9,7 +9,7 @@ import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
 import { SceneBaseData } from "../DataTypes/SceneDataType";
 import { Color } from "../Tools/Color";
 import { ItemBase } from "../Items/ItemBase";
-import { SceneTypesEnumHandmade } from "./SceneTypesEnumHandmade";
+import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 
 export class SceneBase {
     public SceneName: string = "";
