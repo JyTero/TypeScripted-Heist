@@ -71,7 +71,7 @@ export class PageElement {
 
         this.id = name;
         this.element.id = this.id;
-        Delay(FrameTimeMS*100000);
+        Delay(FrameTimeMS);
     }
 
     private PreExistingElement(htmlElement: HTMLElement, pageManager: PageDisplayManager) {
