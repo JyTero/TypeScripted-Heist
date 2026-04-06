@@ -3,9 +3,14 @@ import { EffectTypeEnumEnum } from "../../Assets/DataJsons/EffectTypeEnumEnum";
 import { PersoanlityAxisEnumH } from "../../Assets/PersonalityAxisEnumHandmade";
 import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
 import { AlertManager } from "../AlertManager";
+import { Sprite } from "../Canvas/Sprite";
+import { ItemBaseData } from "../DataTypes/ItemDataTypes";
+import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
+import { SpriteData } from "../DataTypes/SpriteLocationDataType";
 import { Effect } from "../Effects/EffectBase";
 import { StringChangedListner } from "../EventListeners";
-import { IsDebug } from "../MainPageInitialisation";
+import { AlertManagerInstance, CanvasGraphicsInstance, IsDebug } from "../MainPageInitialisation";
+import { SceneBase } from "../Scenes/SceneBase";
 import { CharacterStat } from "./Character/CharacterStat";
 import { PersonalityAxis } from "./Character/PersonalityAxis";
 import { Healer_Trait, Trait } from "./Character/Trait";
@@ -16,7 +21,10 @@ export class ItemBase {
         return this.itemName;
     }
 
+    public ItemSprite: Sprite;
     public Health: CharacterStat;
+
+    public ItemLoadingReady: boolean = false;
 
     private activeEffects: Effect[];
 
@@ -28,9 +36,27 @@ export class ItemBase {
 
     private onNameChangeSubscribers: StringChangedListner[] = [];
 
-    constructor(maxHealth: number) {
-        this.Health = new CharacterStat("Health", maxHealth, maxHealth, CharcterStatTypeEnum.Health, this);
+    public parentScene:SceneBase;
+
+    private hasMenuItems: boolean = true;
+    public get HasMenuItems(): boolean {
+        return this.hasMenuItems;
+    }
+    private itemMenuItems: ExplorationMenuItemDataType[] = [];
+    public get ItemMenuItems(): ExplorationMenuItemDataType[] {
+        return this.itemMenuItems;
+    }
+
+    constructor(itemData: ItemBaseData) {
+        this.itemName = itemData.ItemName;
+        this.Health = new CharacterStat("Health", itemData.ItemMaxHP, itemData.ItemMaxHP, CharcterStatTypeEnum.Health, this);
+        if (itemData.ItemSpriteData != undefined)
+            this.LoadItemImage(itemData.ItemSpriteData);
         this.activeEffects = [];
+        if (itemData.ItemSceneMenuItems == undefined)
+            this.hasMenuItems = false;
+        else
+            this.itemMenuItems = itemData.ItemSceneMenuItems;
     }
 
     public AddTrait(traitEnum: TraitsEnumH) {
@@ -82,7 +108,7 @@ export class ItemBase {
     public async RemoveEffect(effect: Effect) {
         const i = this.activeEffects.indexOf(effect);
         this.activeEffects.splice(i, 1);
-        await AlertManager.Instance.WriteAlertStorePrevious(`${this.ItemName} no longer has OT  effect ${effect.EffectName}`);
+        await AlertManagerInstance.WriteAlertStorePrevious(`${this.ItemName} no longer has OT  effect ${effect.EffectName}`);
     }
 
     public GetStat(key: CharcterStatTypeEnum): CharacterStat | undefined {
@@ -119,23 +145,36 @@ export class ItemBase {
         return personalityAxis;
     }
 
-    // private MaxHealth: number = 10;
-    // public AdjustMaxHealth(value:number){
-    //     this.MaxHealth = this.MaxHealth + value;
-    // }
-    // public GetMaxHealth():number{
-    //     return this.MaxHealth;
-    // }
-    // private currentHealth: number =  this.MaxHealth;
+    protected LoadItemImage(spriteData: SpriteData) {
+        const image = new Image();
+        const imgPath = `./src/Assets/Img/character/${spriteData.Sprite}`; //TODO: This needs to change to look for different folders with different sprite users (character, item, UI)
+        image.src = imgPath;
 
-    // public AdjustHealth(value: number) {
-    //     this.currentHealth = this.currentHealth + value;
-    // }
-    // public CurrentHealth(): number {
-    //     return this.currentHealth;
-    // }
+        this.ItemSprite = new Sprite();
+        image.onload = () => {
+            this.ItemSprite.SetSpriteImage(image);
+            if (IsDebug)
+                console.log("Loaded " + this.ItemName + "'s image");
+
+            //this.CharacterSprite.SetSpritePosScaleDataValues(characterData.SpriteDefaultXpos, characterData.SpriteDefaulyYpos, characterData.SpriteDefaultXScale, characterData.SpriteDefaultYScale);
+            this.ItemSprite.SpritePosScaleData = spriteData.LocationData;
+            this.ItemLoadingReady = true;
+
+        }
+        image.onerror = () => {
+            console.error("Failed to load " + this.ItemName + "'s image!", {
+                src: image.src,
+            });
+        };
+    }
 
     public SubscribeToNameChange(listener: StringChangedListner) {
         this.onNameChangeSubscribers.push(listener);
+    }
+
+    public DestroySelf() {
+        //CanvasGraphicsInstance.RemoveSpriteFromList(this.ItemSprite);
+        if(this.parentScene != undefined)
+            this.parentScene.RemoveSceneItem(this);
     }
 }

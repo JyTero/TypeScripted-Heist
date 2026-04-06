@@ -18,14 +18,16 @@ export class CombatScene extends SceneBase {
 
         public SceneSpsificStartUp() { }
         public SceneSpesificMain() { }
-        public BuildMenuItems(): MenuItemBase[] { return [] }
+        protected SceneSpesificExit(): void {
+
+        }
         public BeginBattleScene(prevScene: SceneBase) {
                 this.previousScene = prevScene;
                 this.SceneSpesificMain();
                 BeginBattleEngine(this.battleArenaData, this);
         }
-        public ReturnToPreviousScene(){
-                SceneManagerInstance.ReturnToPreviousScene(this.previousScene);
+        public ReturnToPreviousScene() {
+                SceneManagerInstance.ReturnToPreviousScene();
         }
         public OnBattleEnd() { }
 }

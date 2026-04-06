@@ -1,6 +1,6 @@
 import { SceneBase } from "../Scenes/SceneBase";
 import { BattleArenaSceneOLD } from "../BattleArenaSceneBase";
-import { CanvasGraphicsInstance } from "../MainPageInitialisation";
+import { CanvasGraphicsInstance, FrameTimeMS } from "../MainPageInitialisation";
 import { CombatSceneData, ExplorationSceneData, SceneBaseData } from "../DataTypes/SceneDataType";
 import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
 import { MansionApproachSceneData } from "../SceneData/MansionApproachData";
@@ -12,9 +12,14 @@ import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 import { ExplorationScene } from "../Scenes/ExplorationScene";
 import { CombatScene } from "../Scenes/CombatScene";
 import { placeholderScene } from "./Placeholders";
+import { MindPalaceScenData } from "../SceneData/MindPalaceData";
+import { Delay } from "../../Tools";
 export class SceneManagement {
 
     private allSceneDatas: Partial<Record<ScenesEnumHandmade, SceneBaseData>> = {};
+
+    private currentScene: SceneBase;
+    private previousScene: SceneBase;
 
     constructor() {
         this.allSceneDatas[ScenesEnumHandmade.First] = MansionApproachSceneData;
@@ -22,6 +27,7 @@ export class SceneManagement {
         this.allSceneDatas[ScenesEnumHandmade.Frontdoor] = FrontDoorSceneData;
         this.allSceneDatas[ScenesEnumHandmade.GroundWindow] = GroundLevelWindowSceneData;
         this.allSceneDatas[ScenesEnumHandmade.CombatTest] = BattleArenaTestSceneData;
+        this.allSceneDatas[ScenesEnumHandmade.MindPalace] = MindPalaceScenData;
     }
 
     public BuildScene(s: ScenesEnumHandmade): SceneBase | null {
@@ -40,9 +46,9 @@ export class SceneManagement {
                 scene = new CombatScene(combatData);
                 return scene;
             }
-            default: {
-                console.log(`Unknown scene type in data! Scene name: ${sceneData?.SceneName} (Type: ${sceneData?.SceneType})`);
-            }
+            // default: {
+            //     console.log(`Unknown scene type in data! Scene name: ${sceneData?.SceneName} (Type: ${sceneData?.SceneType})`);
+            // }
         }
         return scene;
     }
@@ -53,25 +59,29 @@ export class SceneManagement {
         const scene = this.BuildScene(ScenesEnumHandmade.First);
         if (scene) {
             //this.DrawSceneGraphics(scene);
+            this.currentScene = scene;
             this.BeginNextScene(scene);
         }
     }
-    public HandleNextScene(currentScene: SceneBase, nextSceneE: ScenesEnumHandmade) {
-        this.ClearOldData();
+    public async HandleNextScene(currentScene: SceneBase, nextSceneE: ScenesEnumHandmade) {
 
-        if (nextSceneE == ScenesEnumHandmade.Placeholder){
+        //If true, next scene is to be the current scene
+        if (nextSceneE.toString() == "") {
+            this.ReturnToCurrentScene();
+            return;
+        }
+        this.ClearOldData();
+        if (nextSceneE == ScenesEnumHandmade.Placeholder) {
             this.BeginNextScene(placeholderScene);
             return;
         }
 
-        //If true, next scene is to be the current scene
-        if (nextSceneE.toString() == "") {
-            this.BeginNextScene(currentScene);
-        }
         else {
-
             const nextScene = this.BuildScene(nextSceneE);
             if (nextScene) {
+                while (!nextScene.IsSceneLoadingReady()) {
+                    await Delay(FrameTimeMS);
+                }
                 //this.DrawSceneGraphics(nextScene);
                 if (nextScene.SceneType == SceneTypesEnumHandmade.CombatScene) {
                     const battleScene: CombatScene = nextScene as CombatScene;
@@ -84,13 +94,22 @@ export class SceneManagement {
         }
     }
 
-    public ReturnToPreviousScene(prevScene:SceneBase) {
-        this.BeginNextScene(prevScene);
-    }
+    public ReturnToPreviousScene() {
+        this.BeginNextScene(this.previousScene);
 
-    private BeginNextScene(sceneObjectBase: SceneBase) {
-        this.DrawSceneGraphics(sceneObjectBase);
-        sceneObjectBase.SceneMain();
+    }
+    public ReturnToCurrentScene() {
+        CanvasGraphicsInstance.RefreshGraphicsData(this.currentScene.SceneSprites);
+        this.currentScene.SceneMain();
+    }
+    private BeginNextScene(nextScene: SceneBase) {
+        this.currentScene.OnSceneEnd();
+
+        nextScene.SceneOnStartUp();
+        this.DrawSceneGraphics(nextScene);
+        this.previousScene = this.currentScene;
+        this.currentScene = nextScene;
+        nextScene.SceneMain();
     }
 
     private DrawSceneGraphics(nextScene: SceneBase) {

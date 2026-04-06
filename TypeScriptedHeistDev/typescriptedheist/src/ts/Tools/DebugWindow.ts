@@ -5,41 +5,49 @@ import { FrameTimeMS } from "../MainPageInitialisation";
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { Trait } from "../Items/Character/Trait";
 import { PageElement } from "../UI/PageElement";
-import { DebugPageDisplayManagerInstance } from "../DebugPageInitialisation";
+import { DebugWindowIntance } from "../DebugPageInitialisation";
 import { IsHTMLElement as IsHTMLElement } from "./HTMLHelpers";
+import { SubWindow } from "./SubWindow";
 
 //This will be the debug window
-export class DebugWindow {
+export class DebugWindow extends SubWindow {
     public UseDebugWindow: boolean;
 
-    private debugWindow: Window;
+   // private debugWindow: Window;
     // private combatDebug: HTMLElement | null;
     // private combatGeneral: HTMLElement | null;
     // private combatEnemyAI: HTMLElement | null;
 
-    private appRoot: PageElement;
+
     private combatDebugElement: PageElement;
     private combatGeneral: PageElement;
     private combatEnemyAI: PageElement;
+
+    constructor() {
+        super("Debug", "debugPage");
+    }
     public async InitializeDebugWindow() {
         if (!this.UseDebugWindow)
             return;
 
-        this.OpenDebugPage();
+        this.OpenSubWindow();
 
-        const btn = document.createElement("button");
-        btn.textContent = "Open debug";
+        // this.OpenDebugPage();
 
-        btn.addEventListener("click", () => {
-            this.OpenDebugPage();
+        // if (this.debugWindow == undefined) {
+        //     const btn = document.createElement("button");
+        //     btn.textContent = "Open debug";
+
+        //     btn.addEventListener("click", () => {
+        //         this.OpenDebugPage();
 
 
 
-        });
-        await Delay(FrameTimeMS);
+        //     });
+        //     await Delay(FrameTimeMS);
 
-        document.body.appendChild(btn);
-
+        //     document.body.appendChild(btn);
+        // }
 
         // const debugWindow = window.open(
         //     "", // URL (empty for a blank window)
@@ -49,57 +57,43 @@ export class DebugWindow {
 
     }
 
-    private OpenDebugPage() {
-        const debugWind = window.open("debugPage.html", "DebugWindow", "width=600,height=400");
-        if (debugWind != null) {
-            this.debugWindow = debugWind;
-        }
-        else
-            return;
+    // private OpenDebugPage() {
+    //     const debugWind = window.open("debugPage.html", "DebugWindow", "width=600,height=400");
+    //     if (debugWind != null) {
+    //         this.debugWindow = debugWind;
+    //     }
+    //     else
+    //         return;
 
-        debugWind.addEventListener("DOMContentLoaded", this.OnPageOpen.bind(this));
-    }
+    //     debugWind.addEventListener("DOMContentLoaded", this.OnPageOpen.bind(this));
+    // }
 
-    private OnPageOpen() {
-        var appHTML: HTMLElement | null = this.debugWindow.document.getElementById("App");
-        if (appHTML)
-            this.appRoot = new PageElement(appHTML, "DebugApp", DebugPageDisplayManagerInstance);
+    // private OnPageOpen() {
+    //     var appHTML: HTMLElement | null = this.debugWindow.document.getElementById("App");
+    //     if (appHTML)
+    //         this.appRoot = new PageElement(appHTML, "DebugApp", DebugPageDisplayManagerInstance);
 
 
-        var htmlElement: PageElement | null = DebugPageDisplayManagerInstance.FindPageElementByElementId("CombatDebugging");
+    //     var htmlElement: PageElement | null = DebugPageDisplayManagerInstance.FindPageElementByElementId("CombatDebugging");
+    //     if (htmlElement)
+    //         this.combatDebugElement = htmlElement;
+    //     htmlElement = null;
+
+    //     htmlElement = DebugPageDisplayManagerInstance.FindPageElementByElementId("CombatEnemyAI");
+    //     if (htmlElement)
+    //         this.combatEnemyAI = htmlElement;
+
+    // }
+    protected override IndividualOnPageOpen() {
+        var htmlElement: PageElement | null = this.PDM.FindPageElementByElementId("CombatDebugging");
         if (htmlElement)
             this.combatDebugElement = htmlElement;
         htmlElement = null;
 
-        htmlElement = DebugPageDisplayManagerInstance.FindPageElementByElementId("CombatEnemyAI");
+        htmlElement = this.PDM.FindPageElementByElementId("CombatEnemyAI");
         if (htmlElement)
             this.combatEnemyAI = htmlElement;
-
-
-        // var htmlElement: HTMLElement | null = this.debugWindow.document.getElementById("CombatDebugging");
-        // if (htmlElement)
-        //     this.combatDebug = new PageElement(htmlElement, "CombatDebugging", DebugPageDisplayManagerInstance);
-        // else
-        //     throw console.error("Couldn't find CombatDebugging HTML element");
-
-        // htmlElement = null;
-        // htmlElement = this.debugWindow.document.getElementById("CombatGeneral");
-
-        // if (htmlElement)
-        //     this.combatGeneral = new PageElement(htmlElement, "CombatGeneral", DebugPageDisplayManagerInstance);
-        // else
-        //     throw console.error("Couldn't find CombatGeneral HTML element");
-
-        // htmlElement = null;
-        // htmlElement = this.debugWindow.document.getElementById("CombatEnemyAI");
-
-        // if (htmlElement)
-        //     this.combatEnemyAI = new PageElement(htmlElement, "CombatEnemyAI", DebugPageDisplayManagerInstance);
-        // else
-        //     throw console.error("Couldn't find CombatEnemyAI HTML element");
-
     }
-
     private MakePageElementsFromPreExistingPage() {
 
     }
@@ -110,7 +104,7 @@ export class DebugWindow {
 
     //COMBAT DEBUG
     public OnCombatBegin(turnOrder: CombatCharacter[]) {
-        if (!this.debugWindow)
+        if (!this.window)
             return;
 
         // const header = this.debugWindow.document.createElement("p")
@@ -118,7 +112,7 @@ export class DebugWindow {
         // header.textContent = "BattleEngine";
         // this.combatDebug?.insertBefore(header, this.combatDebug.firstChild);
 
-        const header = new PageElement("p", "CombatBeginHeader", DebugPageDisplayManagerInstance)
+        const header = this.PDM.CreateNewPageElement("p", "CombatBeginHeader");
         header.SetFontWeight("bold");
         header.SetElementText("BattleEngine");
         this.combatDebugElement.InsertAsFirstChild(header);
@@ -130,13 +124,13 @@ export class DebugWindow {
             // combatantDiv.className = "CombatantDiv";
             // this.combatEnemyAI?.appendChild(combatantDiv);
             const elementName = combatCharacter.Character.ItemName + "CombatDiv";
-            const combatantDiv = new PageElement("div", elementName, DebugPageDisplayManagerInstance);
+            const combatantDiv = this.PDM.CreateNewPageElement("div", elementName);
             this.combatEnemyAI.AppendChild(combatantDiv);
 
             // const divHeader = this.debugWindow.document.createElement("h1");
             // divHeader.textContent = combatCharacter.Character.ItemName;
             // combatantDiv.appendChild(divHeader);
-            const divHeader = new PageElement("h1", combatCharacter.Character.ItemName + "CombatDivHeader", DebugPageDisplayManagerInstance);
+            const divHeader = this.PDM.CreateNewPageElement("h1", combatCharacter.Character.ItemName + "CombatDivHeader");
             divHeader.SetElementText(combatCharacter.Character.ItemName);
             combatantDiv.AppendChild(divHeader);
 
@@ -167,7 +161,7 @@ export class DebugWindow {
 
     //This fucks up the debug layout
     private ChooseBattleActionDebugProper(thisCombatCharacter: CombatCharacter, combatantPageElement: PageElement, BAs: BattleAction[]) {
-        if (!this.debugWindow)
+        if (!this.window)
             return;
         if (!IsHTMLElement(combatantPageElement.Element)) {
             throw console.error(`Invalid HTML element given as a div for ${thisCombatCharacter.Character.ItemName} (HTML details: ${combatantPageElement.Element}|${(combatantPageElement.Element as HTMLElement).textContent})`);
@@ -184,10 +178,10 @@ export class DebugWindow {
         //     RemoveAllHTMLChildren(BAParentElement.Element);
         // }
 
-        var BAParentPE: PageElement | null = DebugPageDisplayManagerInstance.FindPageElementByElementId(thisCombatCharacter.Character.ItemName + "BAParent")
+        var BAParentPE: PageElement | null = this.PDM.FindPageElementByElementId(thisCombatCharacter.Character.ItemName + "BAParent")
 
         if (BAParentPE == null) {
-            BAParentPE = new PageElement("div", thisCombatCharacter.Character.ItemName + "BAParent", DebugPageDisplayManagerInstance);
+            BAParentPE = this.PDM.CreateNewPageElement("div", thisCombatCharacter.Character.ItemName + "BAParent");
             BAParentPE.Element.className = this.BAParentDivClassName;
             combatantPageElement.AppendChild(BAParentPE);
 
@@ -203,22 +197,22 @@ export class DebugWindow {
         // return;
         BAs.forEach(ba => {
             //Code
-            const BAPageElement = new PageElement("div", ba.BattleMove.MoveName, DebugPageDisplayManagerInstance);
+            const BAPageElement = this.PDM.CreateNewPageElement("div", ba.BattleMove.MoveName);
             BAPageElement.Element.className = this.BADivClassName;
             BAParentPE!.AppendChild(BAPageElement)
 
             //BADivHeader
-            const BAHeaderPE = new PageElement("div", ba.BattleMove.MoveName + "Header", DebugPageDisplayManagerInstance);
+            const BAHeaderPE = this.PDM.CreateNewPageElement("div", ba.BattleMove.MoveName + "Header");
             BAHeaderPE.Element.className = this.BADivHeaderClassName;
             BAPageElement.AppendChild(BAHeaderPE);
 
             //Texti
-            const BAName = new PageElement("p", "BAName", DebugPageDisplayManagerInstance);
+            const BAName = this.PDM.CreateNewPageElement("p", "BAName");
             BAName.Element.textContent = ba.Score + ": " + ba.BattleMove.MoveName + " (" + ba.ActionTarget.Character.ItemName + ")";
             BAHeaderPE.AppendChild(BAName);
 
             //Button
-            const seeDetailsBtn = new PageElement("button", ba.BattleMove.MoveName + "DetailsButton", DebugPageDisplayManagerInstance);
+            const seeDetailsBtn = this.PDM.CreateNewPageElement("button", ba.BattleMove.MoveName + "DetailsButton");
             seeDetailsBtn.Element.textContent = "🔎";
             seeDetailsBtn.Element.className = this.DetailsButtonClassname;
             seeDetailsBtn.Element.addEventListener("click", this.DetailsClicked.bind(this));
@@ -236,25 +230,20 @@ export class DebugWindow {
         //BAParentHeaderText.textContent += i;
     }
 
-    private CreateBAParentDiv(): PageElement {
-        const parentDiv = new PageElement("div", "BAParent", DebugPageDisplayManagerInstance);
-        parentDiv.Element.className = this.BAParentDivClassName;
-        return parentDiv;
-    }
     private DetailsClicked(event: MouseEvent) {
 
         const buton = event.target as HTMLButtonElement;
         const BADiv = buton.parentElement?.parentElement as HTMLDivElement;
         const BAParentDiv = BADiv.parentElement as HTMLDivElement;
 
-        DebugPageDisplayManagerInstance.PrintAllElmentsDEBUG(); //Undefined IDs
+        this.PDM.PrintAllElmentsDEBUG(); //Undefined IDs
 
         //const button = DebugPageDisplayManagerInstance.FindPageElementByElementId(buton.id);
         //How to find the PageElement this HTML Button is tied to?
 
-        const buttonPageElement = DebugPageDisplayManagerInstance.FindPageElementByElementId(buton!.id);
-        const BAPageElement = DebugPageDisplayManagerInstance.FindPageElementByElementId(BADiv!.id);
-        const BAParentPageElement = DebugPageDisplayManagerInstance.FindPageElementByElementId(BAParentDiv!.id);
+        const buttonPageElement = this.PDM.FindPageElementByElementId(buton!.id);
+        const BAPageElement = this.PDM.FindPageElementByElementId(BADiv!.id);
+        const BAParentPageElement = this.PDM.FindPageElementByElementId(BAParentDiv!.id);
 
         if (!BAParentPageElement)
             return;
@@ -279,7 +268,7 @@ export class DebugWindow {
                     }
                 }
                 else {
-                    const reasonsP = this.debugWindow.document.createElement("p");
+                    const reasonsP = this.window.document.createElement("p");
                     reasonsP.innerHTML = reasonsTexts;
                     BADiv.appendChild(reasonsP);
 

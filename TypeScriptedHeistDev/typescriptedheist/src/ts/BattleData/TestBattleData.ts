@@ -18,5 +18,6 @@ export const BattleArenaTestSceneData: CombatSceneData = {
     SceneName: TestBattleData.BattleName + "Scene",
     SceneType: SceneTypesEnumHandmade.CombatScene.toString(),
     SceneBackgroundColor: new Color(16, 255, 16, 1),
-    battleArenaData: TestBattleData
+    battleArenaData: TestBattleData,
+    SceneItems: [],
 }

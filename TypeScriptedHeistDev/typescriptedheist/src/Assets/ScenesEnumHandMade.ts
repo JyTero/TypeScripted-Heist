@@ -5,5 +5,7 @@ export enum ScenesEnumHandmade {
     Frontdoor = "Frontdoor",
     GroundWindow = "GroundWindow",
     CombatTest = "CombatTest",
+    MindPalace = "MindPalace",
+    
 
 }

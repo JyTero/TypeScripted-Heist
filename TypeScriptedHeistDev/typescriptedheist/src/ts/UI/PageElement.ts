@@ -1,4 +1,5 @@
-import { IsDebug } from "../MainPageInitialisation";
+import { Delay } from "../../Tools";
+import { FrameTimeMS, IsDebug } from "../MainPageInitialisation";
 import { PageDisplayManager } from "../PageDisplay";
 import { GetHTMLElementChildren, IsHTMLElement as IsHTMLElement } from "../Tools/HTMLHelpers";
 
@@ -47,25 +48,30 @@ export class PageElement {
     constructor(arg1: string | HTMLElement, name: string, pageManager: PageDisplayManager) {
 
         this.ElementName = name;
-        pageManager.NewPageElement(this);
+
 
         //If blank type, html element already exists, create object with that
         if (IsHTMLElement(arg1)) {
             this.PreExistingElement(arg1, pageManager);
         }
         else {
+            this.CreateNewHTMLElement(arg1,name);
 
-            const n = arg1 as DOMElementType;
-            this.element = document.createElement(n);
-            if (!this.element) {
-                throw console.error("Invalid element type in " + name + "!");
-                return;
-            }
-
-            this.id = name + arg1.toString();
-            this.element.id = this.id;
         }
         //this.data = data;
+    }
+
+    private async CreateNewHTMLElement(htmlElmentType:string, name:string) {
+        const n = htmlElmentType as DOMElementType;
+        this.element = document.createElement(n);
+        if (!this.element) {
+            throw console.error("Invalid element type in " + name + "!");
+            return;
+        }
+
+        this.id = name;
+        this.element.id = this.id;
+        Delay(FrameTimeMS*100000);
     }
 
     private PreExistingElement(htmlElement: HTMLElement, pageManager: PageDisplayManager) {
@@ -81,28 +87,29 @@ export class PageElement {
             if (v)
                 this.AddParent(v);
             else if (this.element.parentElement.id != "app")
-                this.AddParent(new PageElement(this.element.parentElement, this.element.parentElement.id, pageManager))
+                this.AddParent(pageManager.CreateNewPageElement(this.element.parentElement, this.element.parentElement.id))
             else
                 if (IsDebug)
                     console.log(`${this.ElementName} doens't seem to have valid parent`);
+
+
+            // const children = Array.from(htmlElement.children)
+            //     .filter((el): el is HTMLElement => el instanceof HTMLElement);
+            this.DiscoverChildren(pageManager);
+            // const children = GetHTMLElementChildren(htmlElement);
+
+            // var i = 0;
+            // children.forEach(child => {
+            //     const id = child.id;
+            //     var newName = "";
+
+            //     newName = this.ElementName + "child" + i;
+
+            //     const c = pageManager.CreateNewPageElement(child, newName)
+            //     this.childElements.push(c);
+            //     c.AddParent(this);
+            // });
         }
-
-
-        // const children = Array.from(htmlElement.children)
-        //     .filter((el): el is HTMLElement => el instanceof HTMLElement);
-        const children = GetHTMLElementChildren(htmlElement);
-
-        var i = 0;
-        children.forEach(child => {
-            const id = child.id;
-            var newName = "";
-
-            newName = this.ElementName + "child" + i;
-
-            const c = new PageElement(child, newName, pageManager)
-            this.childElements.push(c);
-            c.AddParent(this);
-        });
 
     }
 
@@ -125,7 +132,7 @@ export class PageElement {
 
     //Children - Misc
     public FindChildByID(id: string) {
-       for (var element of this.childElements){
+        for (var element of this.childElements) {
             if (element.id == id) {
                 // if (IsDebug)
                 //     console.log(`Match by HTMLElement: ${element.Element} is  ${html} | ${element.Element.id} vs ${html.id}`);
@@ -140,7 +147,21 @@ export class PageElement {
             console.log(`Couldn't find child PageElement containing ${id} on ${this.ElementName}!`);
         return null
     }
+    public DiscoverChildren(pageManager: PageDisplayManager) {
+        const children = GetHTMLElementChildren(this.element);
 
+        var i = 0;
+        children.forEach(child => {
+            const id = child.id;
+            var newName = "";
+
+            newName = this.ElementName + "child" + i;
+
+            const c = pageManager.CreateNewPageElement(child, newName)
+            this.childElements.push(c);
+            c.AddParent(this);
+        });
+    }
     public AddParent(parent: PageElement) {
         this.elementParent = parent;
     }

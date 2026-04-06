@@ -7,6 +7,6 @@ export class UIGeneralManager{
         this.PlayerUIPanel = new PlayerCharacterUIPanel();
     }
     public InitializeUI(){
-        this.PlayerUIPanel.OnPanelOpen();
+        //this.PlayerUIPanel.OnPanelOpen();
     }
 }

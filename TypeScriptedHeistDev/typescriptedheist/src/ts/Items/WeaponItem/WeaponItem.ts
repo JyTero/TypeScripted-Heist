@@ -2,7 +2,7 @@ import { BattleMoveEnum } from "../../../Assets/DataJsons/BattleMoveEnum";
 import { DataTypesEnum } from "../../../Assets/DataJsons/DataTypesEnum";
 import { BattleMove } from "../../BattleSystem/BattleMove";
 import { BattleMoveData } from "../../DataTypes/BattleMoveDataType";
-import { WeaponDatatype } from "../../DataTypes/WeaponItemDataType";
+import { WeaponDatatype } from "../../DataTypes/ItemDataTypes";
 import { JsonHandlerInstance } from "../../MainPageInitialisation";
 import { ItemBase } from "../ItemBase";
 

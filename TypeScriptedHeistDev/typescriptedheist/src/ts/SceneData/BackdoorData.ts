@@ -9,14 +9,16 @@ import { Color } from "../Tools/Color";
 export const BackdoorSceneData: ExplorationSceneData = {
     SceneName: "Backdoor",
     SceneType: SceneTypesEnumHandmade.ExplorationScene,
-    SceneBackgroundColor: new Color(-1, -1, -1, -1,),
+    SceneBackgroundColor: new Color(-1, -1, -1, -1),
     MenuItems: [
         {
             MenuItemName: "Break the backdoor lock",
-            MenuItemNumber: 1,
             MenuItemText: "Break the lock on the door, forcing the door to open",
             MenuItemSelectionDescription: "With some knowhow and smart applying of force, you manage to break the lock on the door. It's not prety, but the door is now open.",
-            NextSceneObject: ScenesEnumHandmade.Placeholder.toString(),
+            NextScene: ScenesEnumHandmade.Placeholder.toString(),
+            ItemSelectionEffects: [],
+            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
             MenuItemForbiddenAllFlags: [],
@@ -25,10 +27,12 @@ export const BackdoorSceneData: ExplorationSceneData = {
         },
         {
             MenuItemName: "Lockpick the backdoor lock",
-            MenuItemNumber: 2,
             MenuItemText: "Use your tools, and time, to open the lock on the door",
             MenuItemSelectionDescription: "After some tinkering in the darknes you hear the familiar and ever welcome sound of a lock clicking open",
-            NextSceneObject: "",
+            NextScene: "",
+            ItemSelectionEffects: [],
+            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
             MenuItemForbiddenAllFlags: [],
@@ -37,10 +41,12 @@ export const BackdoorSceneData: ExplorationSceneData = {
         },
         {
             MenuItemName: "Look for the backdoor key",
-            MenuItemNumber: 3,
             MenuItemText: "Spend some time, and risk looking silly, by looking for the key to the door by looking through the traditional key hiding locations",
             MenuItemSelectionDescription: "Classics are classics for a reason: You find the key to the back door from under a flover pot next to the door.",
-            NextSceneObject: "",
+            NextScene: "",
+            ItemSelectionEffects: [],
+            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
             MenuItemForbiddenAllFlags: [],
@@ -51,18 +57,20 @@ export const BackdoorSceneData: ExplorationSceneData = {
         },
         {
             MenuItemName: "Open door with the key",
-            MenuItemNumber: 4,
             MenuItemText: "You the key to open the door",
             MenuItemSelectionDescription: "You use the back door key to open the back door and enter.",
-            NextSceneObject: ScenesEnumHandmade.Placeholder.toString(),
+            NextScene: ScenesEnumHandmade.Placeholder.toString(),
+            ItemSelectionEffects: [],
+            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: ["HasPorchDoorKey"],
             MenuItemRequireAnyFlags: [],
             MenuItemForbiddenAllFlags: [],
             MenuItemForbiddenAnyFlags: [],
             MenuItemFlagsToChange: [],
         },
-
-    ]
+    ],
+    SceneItems: []
 }
 
 //LEGACY

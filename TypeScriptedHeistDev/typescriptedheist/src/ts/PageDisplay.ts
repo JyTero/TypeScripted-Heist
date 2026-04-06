@@ -7,27 +7,61 @@ import { DOMElementType, PageElement } from "./UI/PageElement";
 
 export class PageDisplayManager {
 
-    public ThisPage: string;
+    private window: Window;
+    public ThisPageName: string;
     private pageElements: PageElement[] = [];
 
-    public NewPageElement(page: PageElement) {
+    protected AddNewPageElement(page: PageElement) {
         this.pageElements.push(page);
     }
 
-    constructor(name: string) {
-        this.ThisPage = name;
+    constructor(name: string, widw: Window) {
+        this.ThisPageName = name;
+        this.window = widw;
     }
     // public ExistingPageElement(element: HTMLElement, name: string) {
     //     const pElement = new PageElement(element, name, );
     //     this.pageElements.push(pElement);
     // }
+    // public PageRootHandling() {
+    //     const rootPE = //Make new PageElement constructor to handle root but retain compatibility
+    // }
 
-    //Find
-
-    public CreatePageElementsOnPageLoad(){
-        const app :HTMLElement|null = document.getElementById("app");
-        if(app != null)
+    //CREATE
+    public CreatePageElementFromRoot(html: string | HTMLElement, name: string): PageElement {
+        const newpe = this.CreateNewPageElement(html, name);
+        newpe.DiscoverChildren(this);
+        return newpe;
+    }
+    public CreateNewPageElement(html: string | HTMLElement, name: string): PageElement {
+        // this.pageElementCreateQueue.push({html, name});
+        // if(!this.creatingPEs)
+        //     this.PECreator();
+        const newpe = new PageElement(html, name, this);
+        this.AddNewPageElement(newpe);
+        return newpe;
+    }
+    public CreatePageElementsOnPageLoad() {
+        const app: HTMLElement | null = document.getElementById("app");
+        if (app != null)
             new PageElement(app, "MainApp", this);
+    }
+
+    private pageElementCreateQueue: pageElementDataType[] = [];
+    private creatingPEs: boolean = false;
+    private PECreator() {
+        this.creatingPEs = true;
+
+        while (this.creatingPEs) {
+
+        }
+    }
+
+    //FIND
+    public FindHTMLElementByID(id: string): HTMLElement | undefined {
+        var app = this.window.document.getElementById(id);
+        if (app)
+            return app;
     }
     public FindPageElementByHTMLElement(html: HTMLElement): PageElement | null {
         var i = 0;
@@ -51,13 +85,15 @@ export class PageDisplayManager {
                 //     console.log(`Match by ID: ${element.Id} is  ${id}`);
                 return element;
             }
-            // else if (IsDebug)
-            //     console.log(`No match by ID: ${element.Id} is  ${id}`);
+        // else if (IsDebug)
+        //     console.log(`No match by ID: ${element.Id} is  ${id}`);
 
         if (IsDebug)
             console.log(`Couldn't find PageElement with id ${id} `);
         return null;
     }
+
+    //
 
     public PrintAllElmentsDEBUG() {
         var i = 0;
@@ -68,10 +104,16 @@ export class PageDisplayManager {
     }
 }
 
+type pageElementDataType = {
+    html: string | HTMLElement,
+    name: string
+}
+
 //OLD stuff
 const history = document.getElementById("TextHistory");
 const canvas = document.getElementById("GameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d");
+
 
 export async function AddNewHistoryDiv(historyText: string) {
 

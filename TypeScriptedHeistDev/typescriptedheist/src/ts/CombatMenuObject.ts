@@ -28,7 +28,7 @@ export class CombatMenuObject extends MenuObjectBase {
             MenuItemNumber: moveIndex,
             MenuItemText: battleMove.MoveName,
             MenuItemSelectionDescription: "You " + battleMove.MoveName,
-            NextSceneObject: placeholderScene,
+            NextScene: placeholderScene,
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
             MenuItemForbiddenAllFlags: [],

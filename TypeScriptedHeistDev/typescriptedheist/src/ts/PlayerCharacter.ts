@@ -1,10 +1,7 @@
 import { CharacterEnum } from "../Assets/DataJsons/CharacterEnum";
 import { CharacterBase } from "./Items/Character/CharacterBase";
-import { CharacterDataType } from "./DataTypes/CharacterData";
-import { CharacterSheetDataType as CharacterSheetDataType } from "./DataTypes/CharacterSheetDataType";
-import { DaggerItemData } from "./Items/ItemDatas/WeaponItemData/DaggerData";
-import { WeaponItem } from "./Items/WeaponItem/WeaponItem";
 import { BuildCharacter } from "./JsonInput/DataToObjectBuilders";
+import { PlayerInventory } from "./PlayerInventory";
 
 
 // const PlayerCharacterSheetData: CharacterSheetDataType = {
@@ -43,11 +40,19 @@ import { BuildCharacter } from "./JsonInput/DataToObjectBuilders";
 export class PlayerCharacter{
 
     public static instance:PlayerCharacter = new PlayerCharacter();
+    public PlayerInventory: PlayerInventory;
     private playerCharacter:CharacterBase;
+    
+    constructor(){
+       
+    }
+
     public GetPlayerCharacter():CharacterBase{
         if(!this.playerCharacter){
             this.playerCharacter =  BuildCharacter(CharacterEnum.Character_Player);
+             this.PlayerInventory = new PlayerInventory();
         }
         return this.playerCharacter;
     }
+
 }

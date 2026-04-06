@@ -1,7 +1,7 @@
 import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
 import { ExplorationSceneData } from "../DataTypes/SceneDataType";
 import { WriteMenuSelection } from "../IOMethods";
-import { IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
+import { FCE, IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
 import { MenuItemBase } from "../MenuItemBase";
 import { MenuObjectBase } from "../MenuObjectBase";
 import { SceneBase } from "./SceneBase"
@@ -18,12 +18,21 @@ export class ExplorationScene extends SceneBase {
     }
 
     private BuildMenuitems(menuItemDatas: ExplorationMenuItemDataType[]): MenuItemBase[] {
-        var items: MenuItemBase[] = [];
+        var menuItems: MenuItemBase[] = [];
+        //Data menuItems
         for (var menuItemData of menuItemDatas) {
             var mi: MenuItemBase = new MenuItemBase(menuItemData);
-            items.push(mi);
+            menuItems.push(mi);
         }
-        return items;
+        //Item menuItems (Objects.. Chairs, characters and the like)
+        for (var menuItem of this.SceneItems) {
+            if (menuItem.HasMenuItems)
+                for (var menuItemData of menuItem.ItemMenuItems) {
+                var mi: MenuItemBase = new MenuItemBase(menuItemData);
+                menuItems.push(mi);
+                }
+        }
+        return menuItems;
     }
 
     public SceneSpsificStartUp(): void {
@@ -35,6 +44,9 @@ export class ExplorationScene extends SceneBase {
         this.HandleMenuSelection(menuSelection);
     }
 
+    protected SceneSpesificExit(): void {
+
+    }
     private async GetMenuInput(): Promise<number> {
         let response: number = 0;
         if (this.MenuObject)
@@ -56,9 +68,11 @@ export class ExplorationScene extends SceneBase {
                 this.AdjustFlags(chosenMenuItem);
 
             WriteMenuSelection(chosenMenuItem.MenuItemSelectionDescription);
+            FCE.RunFunctionalityComponents(chosenMenuItem, this)
             SceneManagerInstance.HandleNextScene(this, chosenMenuItem.NextSceneDataReference); //Move to ScenMain / Move to its own class, guttin base class
         }
         else
             console.log(`sceneMenu ${this.MenuObject} of ${this.SceneName} is null`)
     }
+
 }

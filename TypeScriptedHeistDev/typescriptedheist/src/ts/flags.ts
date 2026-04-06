@@ -6,6 +6,7 @@ export const Flags =
 {
     BrokeWindow: false,
     HasPorchDoorKey: false,
+    MindPalaceGlassIsBroken: false,
     
 };
 

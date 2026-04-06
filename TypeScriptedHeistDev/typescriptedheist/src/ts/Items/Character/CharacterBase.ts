@@ -7,46 +7,45 @@ import { IsDebug } from "../../MainPageInitialisation";
 import { CharacterJson } from "../../JsonInput/CharacterJson";
 import { ItemBase } from "../ItemBase";
 import { CharacterSheet } from "./CharacterSheet";
+import { ItemBaseData } from "../../DataTypes/ItemDataTypes";
 
-export class CharacterBase  extends ItemBase {
+export class CharacterBase extends ItemBase {
     public CharacterSheet: CharacterSheet;
     //public CharacterImage: HTMLImageElement;
-    public CharacterSprite: Sprite;
-    public CharacterLoadingReady: boolean = false;
+
 
     public enemyCombatAI: EnemyCombatAI;
 
 
     constructor(characterJson: CharacterJson) {
-        super(10);   //Real value will come from data
-        this.LoadCharacterImage(characterJson.CharacterImagePath);
+
+        //TEMP till item construction gets confirmed
+        const itemData: ItemBaseData = {
+            ItemName: characterJson.CharacterName,
+            ItemMaxHP: 10,
+            ItemSpriteData: {
+                Sprite: characterJson.CharacterImagePath,
+                LocationData: {
+                    positionX: 0,
+                    positionY: 0,
+                    scaleX: 25,
+                    scaleY: 25
+                }
+            },
+            DataDevName: characterJson.CharacterName + "Meta",
+            DataType: "ItemBase"
+        }
+
+        super(itemData);   //Real value will come from data
+
 
         this.itemName = characterJson.CharacterName;
 
         this.CharacterSheet = new CharacterSheet(characterJson, this);
     }
-    public InitialiseCombatAI(enemyCombatAI:EnemyCombatAI){
+    public InitialiseCombatAI(enemyCombatAI: EnemyCombatAI) {
         this.enemyCombatAI = enemyCombatAI;
     }
-    private LoadCharacterImage(imgName: string) {
-        const image = new Image();
-        const imgPath = `./src/Assets/Img/character/${imgName}`;
-        image.src = imgPath;
 
-        this.CharacterSprite = new Sprite();
-        image.onload = () => {
-            this.CharacterSprite.SetSpriteImage(image);
-            if (IsDebug)
-                console.log("Loaded " + this.ItemName + "'s image");
 
-            //this.CharacterSprite.SetSpritePosScaleDataValues(characterData.SpriteDefaultXpos, characterData.SpriteDefaulyYpos, characterData.SpriteDefaultXScale, characterData.SpriteDefaultYScale);
-            this.CharacterLoadingReady = true;
-
-        }
-        image.onerror = () => {
-            console.error("Failed to load " + this.ItemName + "'s image!", {
-                src: image.src,
-            });
-        };
-    }
 }

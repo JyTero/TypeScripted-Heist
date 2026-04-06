@@ -4,3 +4,7 @@ export type SpriteLocationDataType = {
     scaleX:number, 
     scaleY:number
 }
+export type SpriteData ={
+    Sprite :string,
+    LocationData:SpriteLocationDataType,
+}

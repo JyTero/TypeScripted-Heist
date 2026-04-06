@@ -4,15 +4,16 @@ import { AddNewHistoryDiv } from "./PageDisplay";
 export enum AlertGroupType {
     default,
     CombatTurn,
+    DialogLine,
 }
 export class AlertManager {
-    private static _instance: AlertManager;
+    // private static _instance: AlertManager;
 
-    public static get Instance() {
-        if (!this._instance)
-            this._instance = new AlertManager();
-        return this._instance;
-    }
+    // public static get Instance() {
+    //     if (!this._instance)
+    //         this._instance = new AlertManager();
+    //     return this._instance;
+    // }
 
     private alertGroups: AlertGroup[];
 

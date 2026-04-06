@@ -1,3 +1,4 @@
 import { PageDisplayManager } from "./PageDisplay";
+import { DebugWindow } from "./Tools/DebugWindow";
 
-export const DebugPageDisplayManagerInstance: PageDisplayManager = new PageDisplayManager("DebugWindow");
+export const DebugWindowIntance: DebugWindow = new DebugWindow();

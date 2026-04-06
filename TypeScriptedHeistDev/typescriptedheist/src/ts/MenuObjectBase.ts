@@ -1,10 +1,11 @@
 import { MenuItemBase } from "./MenuItemBase";
-import { WaitForInput, WriteAlert} from "./IOMethods";
+import { WaitForInput, WriteAlert } from "./IOMethods";
 import { Flags } from "./flags";
 import { SceneBase } from "./Scenes/SceneBase";
 import { Delay } from "../Tools";
-import { FrameTimeMS } from "./MainPageInitialisation";
+import { AlertManagerInstance, FrameTimeMS } from "./MainPageInitialisation";
 import { AlertManager } from "./AlertManager";
+import { ExplorationMenuItemDataType } from "./DataTypes/MenuItemDataType";
 
 export class MenuObjectBase {
 
@@ -37,7 +38,7 @@ export class MenuObjectBase {
     // public TieMenuItemToSceneObject(menuItemIndex: number, targetScene: SceneBase) {
     //     this.allMenuItems[menuItemIndex].NextSceneDataReference = targetScene;
     // }
-    
+
     public async DisplayMenu() {
         let i: number = 1;
         let s: string = "";
@@ -56,9 +57,18 @@ export class MenuObjectBase {
             i++;
 
         };
-       //await WriteMenuStorePrevious(s);
-       await AlertManager.Instance.WriteAlertStorePrevious(s);
-       // await Delay(FrameTimeMS);
+        //await WriteMenuStorePrevious(s);
+        await AlertManagerInstance.WriteAlertStorePrevious(s);
+        // await Delay(FrameTimeMS);
+    }
+
+    public RemoveMenuItem(menuItems: ExplorationMenuItemDataType[]){
+        for(var menuItemData of menuItems){
+            for(var menuItem of this.allMenuItems){
+                if(menuItemData.MenuItemName == menuItem.MenuItemName)
+                    this.allMenuItems.splice(this.allMenuItems.indexOf(menuItem),1);
+            }
+        }
     }
 
     private HasAnyForbiddenFlags(menuItem: MenuItemBase): boolean {

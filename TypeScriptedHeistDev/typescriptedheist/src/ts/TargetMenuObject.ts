@@ -29,7 +29,7 @@ export class TargetMenuObject extends MenuObjectBase{
             MenuItemNumber: targetIndex,
             MenuItemText: targetCharacter.ItemName,
             MenuItemSelectionDescription: targetCharacter.ItemName,
-            NextSceneObject: placeholderScene,
+            NextScene: placeholderScene,
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
             MenuItemForbiddenAllFlags: [],

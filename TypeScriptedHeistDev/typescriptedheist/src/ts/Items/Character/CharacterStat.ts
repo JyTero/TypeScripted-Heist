@@ -3,6 +3,7 @@ import { AlertGroupType, AlertManager } from "../../AlertManager";
 import { StatChangedListener } from "../../EventListeners";
 import { ItemBase } from "../ItemBase";
 import { NewStatChangedEvent, StatChangedEvent } from "../../EventTypes";
+import { AlertManagerInstance } from "../../MainPageInitialisation";
 
 export class CharacterStat {
     private statName: string = "";
@@ -76,10 +77,10 @@ export class CharacterStat {
     }
 
     private WriteAlert(adjustValue: number) {
-        if (AlertManager.Instance.DoesAlertGroupExist(AlertGroupType.CombatTurn))
-            AlertManager.Instance.AddAlertToGroup(`${this.owner.ItemName} stat ${this.StatName} changes by ${adjustValue}`, AlertGroupType.CombatTurn);
+        if (AlertManagerInstance.DoesAlertGroupExist(AlertGroupType.CombatTurn))
+            AlertManagerInstance.AddAlertToGroup(`${this.owner.ItemName} stat ${this.StatName} changes by ${adjustValue}`, AlertGroupType.CombatTurn);
         else
-            AlertManager.Instance.WriteAlertStorePrevious(`${this.owner.ItemName} stat ${this.StatName} changes by ${adjustValue}`);
+            AlertManagerInstance.WriteAlertStorePrevious(`${this.owner.ItemName} stat ${this.StatName} changes by ${adjustValue}`);
     }
 
     SubscribeToOnValueChange(listener: StatChangedListener) {

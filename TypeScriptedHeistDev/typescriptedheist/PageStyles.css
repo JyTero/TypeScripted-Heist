@@ -10,7 +10,6 @@
 p {
     white-space: pre-line;
 }
-#GameWindow{}
 #TextSide{
     display: flex;
     flex-direction: column;

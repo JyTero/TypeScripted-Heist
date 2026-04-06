@@ -8,14 +8,16 @@ import { Color } from "../Tools/Color";
 export const GroundLevelWindowSceneData: ExplorationSceneData = {
         SceneName: "Ground window",
         SceneType: SceneTypesEnumHandmade.ExplorationScene.toString(),
-        SceneBackgroundColor: new Color(-1, -1, -1, -1,),
+        SceneBackgroundColor: new Color(-1, -1, -1, -1),
         MenuItems: [
                 {
                         MenuItemName: "Break the lock",
                         MenuItemNumber: 1,
                         MenuItemText: "Break the lock on the window, forcing it to open",
                         MenuItemSelectionDescription: "With some knowhow and smart applying of force, you manage to break the lock on the window. It's not prety, but the windowis now open.",
-                        NextSceneObject: ScenesEnumHandmade.Placeholder.toString(),
+                        NextScene: ScenesEnumHandmade.Placeholder.toString(),
+                        ItemSelectionEffects: [],
+                        ItemSelectionFunctionalityComponents: [],
                         MenuItemRequireAllFlags: [],
                         MenuItemRequireAnyFlags: [],
                         MenuItemForbiddenAllFlags: [],
@@ -27,7 +29,9 @@ export const GroundLevelWindowSceneData: ExplorationSceneData = {
                         MenuItemNumber: 1,
                         MenuItemText: "Break the window",
                         MenuItemSelectionDescription: "You break the window by hitting it with your elbow. The jacket you're wearing took most of the damage.",
-                        NextSceneObject: ScenesEnumHandmade.Placeholder.toString(),
+                        NextScene: ScenesEnumHandmade.Placeholder.toString(),
+                        ItemSelectionEffects: [],
+                        ItemSelectionFunctionalityComponents: [],
                         MenuItemRequireAllFlags: [],
                         MenuItemRequireAnyFlags: [],
                         MenuItemForbiddenAllFlags: [],
@@ -39,14 +43,17 @@ export const GroundLevelWindowSceneData: ExplorationSceneData = {
                         MenuItemNumber: 2,
                         MenuItemText: "Use your tools, and time, to open the lock on the window",
                         MenuItemSelectionDescription: "After some tinkering in the darknes you hear the familiar and ever welcome sound of a lock clicking open",
-                        NextSceneObject: ScenesEnumHandmade.Placeholder.toString(),
+                        NextScene: ScenesEnumHandmade.Placeholder.toString(),
+                        ItemSelectionEffects: [],
+                        ItemSelectionFunctionalityComponents: [],
                         MenuItemRequireAllFlags: [],
                         MenuItemRequireAnyFlags: [],
                         MenuItemForbiddenAllFlags: [],
                         MenuItemForbiddenAnyFlags: [],
                         MenuItemFlagsToChange: [],
                 },
-        ]
+        ],
+        SceneItems: []
 }
 
 //LEGACY

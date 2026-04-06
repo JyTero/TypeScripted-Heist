@@ -1,9 +1,9 @@
 
-import { MainWindowPageDisplayManagerInstance, SceneManagerInstance } from "./MainPageInitialisation";
+import { SceneManagerInstance, UIManager, WindowManagerInstance } from "./MainPageInitialisation";
 import { PlayerCharacter } from "./PlayerCharacter";
 import { WeaponEnum } from "../Assets/DataJsons/WeaponEnum";
 import { PageDisplayManager } from "./PageDisplay";
-import { DebugPageDisplayManagerInstance } from "./DebugPageInitialisation";
+import { DebugWindowIntance } from "./DebugPageInitialisation";
 
 // const mansionApproachScene: MansionApproachScene = new MansionApproachScene();
 // const frontDoorScene: FrontDoorScene = new FrontDoorScene();
@@ -14,13 +14,18 @@ import { DebugPageDisplayManagerInstance } from "./DebugPageInitialisation";
 export function Game() {
     console.log("Starting index main");
 
-
+    //thx mozilla documentation
+    addEventListener("onunload", (event) => { })
+    onbeforeunload = (event) => {WindowManagerInstance.CloseAllSubWindows(); }
 
 
     InitialisePlayerCharacter();
 
     TestingThings();
 
+    
+    UIManager.InitializeUI();
+    
     SceneManagerInstance.BeginFirstScene();
     //SceneManagerInstance.BeginFirstScene(mansionApproachScene);
     //mansionApproachScene.SceneMain();
@@ -47,11 +52,8 @@ export function Game() {
 //     mansionApproachScene.SceneMain();
 // }
 function InitialisePlayerCharacter() {
-    console.log("PC: " + PlayerCharacter.instance.GetPlayerCharacter().ItemName);
-    //const pc = PlayerCharacter.instance.GetPlayerCharacter();
-    //MainWindowPageDisplayManagerInstance.FindPageElementByElementId("PlayerName")?.SetElementText(pc.ItemName);
-    //MainWindowPageDisplayManagerInstance.FindPageElementByElementId("PlayerHP")?.SetElementText(`HP: ${pc.Health.Value} / ${pc.Health.MaxValue}`)
 
+    console.log("PC: " + PlayerCharacter.instance.GetPlayerCharacter().ItemName);
 
 
 }
@@ -59,32 +61,6 @@ function TestingThings() {
     PlayerCharacter.instance.GetPlayerCharacter().CharacterSheet.ChangeWeaponEnm(WeaponEnum.Weapon_Cane)
 }
 
-// function PrevTest(){
-//     const bleedEffect: EffectData = {
-//         EffectName: "Bleed",
-//         PotencePerTurn: 2,
-//         EffectLenghtTurns: 3,
-//         DataDevName: "Effect_Bleed",
-//         DataType: "Effect",
-//     }
-//     const moveData: BattleMoveData = {
-//         BattleMoveName: "Bleeder",
-//         IsRanged: false,
-//         BattleMoveHitMultiplier: 0.7,
-//         BattleMoveDamageMultiplier: 0.5,
-//         DataDevName: "Stab_Knife_BattleMove",
-//         DataType: "BattleMove",
-//         BattleMoveEffects: [new DamageOTEffect(bleedEffect)],
-//     }
-//     const bleederMove: BattleMove = new BattleMove(moveData);
-//     const weaponData: WeaponDatatype = {
-//         WeaponName: "Cloak Dagger",
-//         BattleMoves: [],
-//         WeaponHit: 1,
-//         WeaponDamage: 1,
-//         DataDevName: "Dev Daggers",
-//         DataType: "WeaponItems"
-//     }
 //     const weapon: WeaponItem = new WeaponItem(weaponData);
 //     weapon.AddBattleMoves(BattleMoveEnum.BattleMove_Stab_Knife);
 //     weapon.BattleMoves.push(bleederMove);

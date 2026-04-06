@@ -1,4 +1,4 @@
-import { CanvasGraphicsInstance, DebugWindowInstance, FrameTimeMS, IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
+import { AlertManagerInstance, CanvasGraphicsInstance, DebugWindowInstance, FrameTimeMS, IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { Delay } from "../../Tools";
 import { CombatMenuObject } from "../CombatMenuObject";
@@ -23,7 +23,7 @@ export async function BeginBattleEngine(battleData: BattleArenaDataType, current
     battleStage.OnBattleStartUp();
     //Begin Battle
     //await WriteAlertStorePrevious("Battle Begins!");
-    await AlertManager.Instance.WriteAlertStorePrevious("Battle Begins!");
+    await AlertManagerInstance.WriteAlertStorePrevious("Battle Begins!");
     //Begin rounds
     await battleStage.BattleLoop();
 
@@ -119,7 +119,7 @@ class BattleEngine {
 
         while (!this.battleOver) {
             if (this.currentRound == 0) {
-                const allCharactersReady = this.enemyCharacters.every(character => character.CharacterLoadingReady === true)
+                const allCharactersReady = this.enemyCharacters.every(character => character.ItemLoadingReady === true)
                 if (allCharactersReady) {
                     this.OnRoundStart();
                 }
@@ -161,9 +161,9 @@ class BattleEngine {
         if (IsDebug)
             console.log(`${this.characterInTurn.Character.ItemName} takes turn`);
 
-        AlertManager.Instance.CreateAlertGroup(`${this.characterInTurn.Character.ItemName} combat turn`, AlertGroupType.CombatTurn);
+        AlertManagerInstance.CreateAlertGroup(`${this.characterInTurn.Character.ItemName} combat turn`, AlertGroupType.CombatTurn);
 
-        AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes turn!`, AlertGroupType.CombatTurn);
+        AlertManagerInstance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes turn!`, AlertGroupType.CombatTurn);
 
         this.characterInTurn.Character.RunOnceTurnEffects();
         
@@ -191,13 +191,13 @@ class BattleEngine {
             if (IsDebug)
                 console.log(`${this.characterInTurn.Character.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTarget}`)
 
-            AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTargetCombatCharacter.Character.ItemName}`, AlertGroupType.CombatTurn);
+            AlertManagerInstance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTargetCombatCharacter.Character.ItemName}`, AlertGroupType.CombatTurn);
             //WriteAlert(`${this.characterInTurn.ItemName} takes action ${chosenCombatMove.MoveName} against ${chosenTargetCharacter.ItemName}`);
             chosenCombatMove.ExecuteMove(this.characterInTurn.Character, chosenTargetCombatCharacter.Character);
 
             //OnCharacterDeath
             if (chosenTargetCombatCharacter.Character.Health.Value <= 0) {
-                CanvasGraphicsInstance.RemoveSpriteFromList(chosenTargetCombatCharacter.Character.CharacterSprite);
+                CanvasGraphicsInstance.RemoveSpriteFromList(chosenTargetCombatCharacter.Character.ItemSprite);
                 //Remove from turn order
                 const i = this.turnOrder.indexOf(chosenTargetCombatCharacter);
                 this.turnOrder.splice(i, 1);
@@ -212,7 +212,7 @@ class BattleEngine {
             // //OLD: Pick random BattleMove, always target the player
             // const i = GetRandomInt(0, this.characterInTurn.Character.CharacterSheet.BattleMoves.length - 1);
             // const chosenMove = this.characterInTurn.Character.CharacterSheet.BattleMoves[i];
-            AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes action ${chosenBattleAction.BattleMove.MoveName} against ${this.playerCharacter.ItemName}`, AlertGroupType.CombatTurn);
+            AlertManagerInstance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes action ${chosenBattleAction.BattleMove.MoveName} against ${this.playerCharacter.ItemName}`, AlertGroupType.CombatTurn);
             // //await WriteAlertStorePrevious(`${this.characterInTurn.ItemName} takes action ${chosenMove.MoveName} against ${this.playerCharacter.ItemName}`);
             chosenBattleAction.BattleMove.ExecuteMove(this.characterInTurn.Character, chosenBattleAction.ActionTarget.Character);
 
@@ -227,8 +227,8 @@ class BattleEngine {
     private EndTurn() {
         if (IsDebug)
             console.log(`${this.characterInTurn.Character.ItemName} ends their turn`);
-        AlertManager.Instance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} ends their turn`, AlertGroupType.CombatTurn);
-        AlertManager.Instance.PrintGroup(AlertGroupType.CombatTurn);
+        AlertManagerInstance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} ends their turn`, AlertGroupType.CombatTurn);
+        AlertManagerInstance.PrintGroup(AlertGroupType.CombatTurn);
 
     }
 
@@ -240,7 +240,7 @@ class BattleEngine {
             hpString += `${combatCharacter.Character.ItemName} has ${combatCharacter.Character.Health.Value}hp\n`;
             hpString += "<br>";
         });
-        await AlertManager.Instance.WriteAlertStorePrevious(hpString);
+        await AlertManagerInstance.WriteAlertStorePrevious(hpString);
     }
 
     private SetUpTurnOrder() {
@@ -270,10 +270,10 @@ class BattleEngine {
             await Delay(FrameTimeMS);
             //Check all
             for (var enemyCharacter of this.enemyCharacters) {
-                if (!enemyCharacter.CharacterLoadingReady)
+                if (!enemyCharacter.ItemLoadingReady)
                     break;
                 if (this.enemyCharacters.indexOf(enemyCharacter) == this.enemyCharacters.length - 1) {
-                    if (this.playerCharacter.CharacterLoadingReady)
+                    if (this.playerCharacter.ItemLoadingReady)
                         spritesReady = true;
                 }
             }   
@@ -283,16 +283,16 @@ class BattleEngine {
     private SetUpSprites() {
 
 
-        this.playerCharacter.CharacterSprite;
-        this.playerCharacter.CharacterSprite.SetSpritePosScaleDataValues(5, 60, 10, 10);
-        CanvasGraphicsInstance.AddSpriteToListPreComp(this.playerCharacter.CharacterSprite);
+        this.playerCharacter.ItemSprite;
+        this.playerCharacter.ItemSprite.SetSpritePosScaleDataValues(5, 60, 10, 10);
+        CanvasGraphicsInstance.AddSpriteToListPreComp(this.playerCharacter.ItemSprite);
 
         //Give enemy sprite its x/y pos and x/y scale
 
         this.enemyCharacters.forEach(enemy => {
-            enemy.CharacterSprite.SetSpritePosScaleDataValues(this.xPos, this.yPos, this.xScale, this.yScale);
+            enemy.ItemSprite.SetSpritePosScaleDataValues(this.xPos, this.yPos, this.xScale, this.yScale);
             this.xPos = this.xPos + 10
-            CanvasGraphicsInstance.AddSpriteToListPreComp(enemy.CharacterSprite);
+            CanvasGraphicsInstance.AddSpriteToListPreComp(enemy.ItemSprite);
         });
 
     }
@@ -327,7 +327,7 @@ class BattleEngine {
         SceneManagerInstance.HandleNextScene(this.currentScene, this.nextSceneVictory);
     }
     private async OnEngineDestroy() {
-        await AlertManager.Instance.WriteAlertStorePrevious("Battle ended");
+        await AlertManagerInstance.WriteAlertStorePrevious("Battle ended");
 
     }
 }

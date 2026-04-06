@@ -4,6 +4,7 @@ import { AlertManager } from "../AlertManager";
 import { EffectData } from "../DataTypes/EffectDataType";
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { ItemBase } from "../Items/ItemBase";
+import { AlertManagerInstance } from "../MainPageInitialisation";
 
 
 // //Stat enum, will be made by tool 
@@ -148,33 +149,33 @@ export class Effect {
     private ApplyDamageEffect(target: ItemBase, attacker: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
         if (this.effectDuration > 0)
-            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
+            AlertManagerInstance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
         else
-            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
+            AlertManagerInstance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
         targetStat?.DamageStat(this.potency);
     }
     private ApplyDestroyEffect(target: ItemBase, attacker: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
         if (this.effectDuration > 0)
-            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
+            AlertManagerInstance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
         else
-            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
+            AlertManagerInstance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
         targetStat?.DestroyStat(this.potency);
     }
     private ApplyHealEffect(target: ItemBase, attacker: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat)
         if (this.effectDuration > 0)
-            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
+            AlertManagerInstance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
         else
-            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
+            AlertManagerInstance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
         targetStat?.HealStat(this.potency);
     }
     private ApplyRestoreEffect(target: ItemBase, attacker: ItemBase) {
         const targetStat = target.GetStat(this.TargetStat);
         if (this.effectDuration > 0)
-            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
+            AlertManagerInstance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}. Continues for ${this.effectRemainingTurns - 1}/${this.effectDuration} turns)`);
         else
-            AlertManager.Instance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
+            AlertManagerInstance.WriteAlertStorePrevious(`${target.ItemName} is affected by ${this.EffectName} (Caused by: ${attacker.ItemName}.)`);
         targetStat?.RestoreStat(this.potency);
     }
 
