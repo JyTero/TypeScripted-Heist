@@ -1,11 +1,12 @@
 import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
 import { EffectTypeEnumEnum } from "../../Assets/DataJsons/EffectTypeEnumEnum";
 import { Effect } from "../Effects/EffectBase";
-import { DebugWindowInstance, IsDebug } from "../MainPageInitialisation";
+import { IsDebug } from "../MainPageInitialisation";
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { CharacterStat } from "../Items/Character/CharacterStat";
 import { BattleMove } from "./BattleMove";
 import { CombatCharacter } from "./CombatCharacter";
+import { DebugWindowInstance } from "../DebugPageInitialisation";
 
 export class EnemyCombatAI {
     private thisCharacter: CharacterBase;

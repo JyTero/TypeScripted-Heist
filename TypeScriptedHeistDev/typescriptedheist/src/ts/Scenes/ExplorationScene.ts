@@ -36,9 +36,20 @@ export class ExplorationScene extends SceneBase {
     }
 
     public SceneSpsificStartUp(): void {
-
+        this.AddSceneSpesificMenuItems();
     }
 
+    private AddSceneSpesificMenuItems(){
+        var menuDatas:ExplorationMenuItemDataType[] = SceneManagerInstance.GetSpesificMenuItems(this.SceneItems,this);
+        if(menuDatas.length == 0)
+            return;
+        else{
+            for(var menudata of menuDatas){
+                var mi:MenuItemBase = new MenuItemBase(menudata);
+                this.MenuObject.allMenuItems.push(mi);
+            }
+        }
+    }
     public async SceneSpesificMain() {
         const menuSelection = await this.GetMenuInput();
         this.HandleMenuSelection(menuSelection);

@@ -1,5 +1,5 @@
 import { ExplorationMenuItemDataType } from "./DataTypes/MenuItemDataType";
-import { FlagName, MenuItemFlagChange } from "./flags";
+import { FlagName, FlagType } from "./flags";
 import { SceneBase } from "./Scenes/SceneBase";
 import { ScenesEnumHandmade } from "../Assets/ScenesEnumHandMade";
 import { FunctionalityComponentsHandmade } from "../Assets/FunctionalityComponentsEnumHandmade";
@@ -17,7 +17,7 @@ export class MenuItemBase {
   MenuItemRequireAnyFlags: FlagName[] = [];
   MenuItemForbiddenAllFlags: FlagName[] = [];
   MenuItemForbiddenAnyFlags: FlagName[] = [];
-  MenuItemFlagsToChange: MenuItemFlagChange[] = [];
+  MenuItemFlagsToChange: FlagType[] = [];
   NextSceneDataReference: ScenesEnumHandmade;
 
   constructor(menuItemData: ExplorationMenuItemDataType) {

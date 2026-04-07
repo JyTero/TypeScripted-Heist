@@ -1,13 +1,15 @@
-export class CharacterJson{
-    public CharacterName:string;
-    public CharacterFaction:number;
-    public CharacterStrength:number;
-    public CharacterDexterity:number;
-    public CharacterPerception:number;
-    public CharacterWeaponSkill:number;
-    public CharacterDodge:number;
-    public CharacterBaseSpeed:number;
-    public CharacterArmour:number;
-    public CharaterEquipedWeapon:string;
-    public CharacterImagePath:string;
+import { MetaData } from "../DataTypes/MetaData";
+
+export interface CharacterJson extends MetaData {
+    CharacterName:string;
+    CharacterFaction:number;
+     CharacterStrength:number;
+     CharacterDexterity:number;
+     CharacterPerception:number;
+     CharacterWeaponSkill:number;
+     CharacterDodge:number;
+     CharacterBaseSpeed:number;
+     CharacterArmour:number;
+     CharaterEquipedWeapon:string;
+     CharacterImagePath:string;
 }

@@ -1,9 +1,10 @@
 
-import { SceneManagerInstance, UIManager, WindowManagerInstance } from "./MainPageInitialisation";
+import { FrameTimeMS, SceneManagerInstance, UIManager, WindowManagerInstance } from "./MainPageInitialisation";
 import { PlayerCharacter } from "./PlayerCharacter";
 import { WeaponEnum } from "../Assets/DataJsons/WeaponEnum";
 import { PageDisplayManager } from "./PageDisplay";
-import { DebugWindowIntance } from "./DebugPageInitialisation";
+import { DebugWindowInstance } from "./DebugPageInitialisation";
+import { Delay } from "../Tools";
 
 // const mansionApproachScene: MansionApproachScene = new MansionApproachScene();
 // const frontDoorScene: FrontDoorScene = new FrontDoorScene();
@@ -11,7 +12,7 @@ import { DebugWindowIntance } from "./DebugPageInitialisation";
 // const backdoorScene: BackdoorScene = new BackdoorScene();
 // const battleScene: BattleArenaTestScene = new BattleArenaTestScene();
 
-export function Game() {
+export async function Game() {
     console.log("Starting index main");
 
     //thx mozilla documentation
@@ -26,6 +27,7 @@ export function Game() {
     
     UIManager.InitializeUI();
     
+    await Delay(FrameTimeMS)
     SceneManagerInstance.BeginFirstScene();
     //SceneManagerInstance.BeginFirstScene(mansionApproachScene);
     //mansionApproachScene.SceneMain();

@@ -42,6 +42,10 @@ export function BuildItemHandmade(itemEnum: ItemsEnumHandmade): ItemBase {
       return new ItemBase(FragileGlassItem);
     case ItemsEnumHandmade.Character_Amalia:
       return BuildCharacter(CharacterEnum.Character_Amalia);
+    case ItemsEnumHandmade.Character_Michelle:
+      return BuildCharacter(CharacterEnum.Character_Michelle);
+    case ItemsEnumHandmade.Character_Bob:
+      return BuildCharacter(CharacterEnum.Character_Bob);
   }
 
 }

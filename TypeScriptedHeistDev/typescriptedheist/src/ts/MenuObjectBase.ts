@@ -1,9 +1,8 @@
 import { MenuItemBase } from "./MenuItemBase";
 import { WaitForInput, WriteAlert } from "./IOMethods";
-import { Flags } from "./flags";
 import { SceneBase } from "./Scenes/SceneBase";
 import { Delay } from "../Tools";
-import { AlertManagerInstance, FrameTimeMS } from "./MainPageInitialisation";
+import { AlertManagerInstance, FlagManager, FrameTimeMS } from "./MainPageInitialisation";
 import { AlertManager } from "./AlertManager";
 import { ExplorationMenuItemDataType } from "./DataTypes/MenuItemDataType";
 
@@ -62,11 +61,11 @@ export class MenuObjectBase {
         // await Delay(FrameTimeMS);
     }
 
-    public RemoveMenuItem(menuItems: ExplorationMenuItemDataType[]){
-        for(var menuItemData of menuItems){
-            for(var menuItem of this.allMenuItems){
-                if(menuItemData.MenuItemName == menuItem.MenuItemName)
-                    this.allMenuItems.splice(this.allMenuItems.indexOf(menuItem),1);
+    public RemoveMenuItem(menuItems: ExplorationMenuItemDataType[]) {
+        for (var menuItemData of menuItems) {
+            for (var menuItem of this.allMenuItems) {
+                if (menuItemData.MenuItemName == menuItem.MenuItemName)
+                    this.allMenuItems.splice(this.allMenuItems.indexOf(menuItem), 1);
             }
         }
     }
@@ -74,28 +73,33 @@ export class MenuObjectBase {
     private HasAnyForbiddenFlags(menuItem: MenuItemBase): boolean {
         if (menuItem.MenuItemForbiddenAnyFlags.length === 0)
             return false;
-        else
-            return menuItem.MenuItemForbiddenAnyFlags.some(flag => Flags[flag])
+        else {
+            const c = menuItem.MenuItemForbiddenAnyFlags.some(flag => FlagManager.Flags[flag])
+            //From here, call debug method to display if item is not valid why its not
+            if (c == true)
+                return true;
+        }
+        return false;
 
     }
     private HasAllForbiddenFlags(menuItem: MenuItemBase): boolean {
         if (menuItem.MenuItemForbiddenAllFlags.length === 0)
             return false;
         else
-            return menuItem.MenuItemForbiddenAllFlags.every(flag => Flags[flag]);
+            return menuItem.MenuItemForbiddenAllFlags.every(flag => FlagManager.Flags[flag]);
     }
     private HasAnyRequriedFlags(menuItem: MenuItemBase): boolean {
         if (menuItem.MenuItemRequireAnyFlags.length === 0)
             return true;
         else
-            return menuItem.MenuItemRequireAnyFlags.some(flag => Flags[flag])
+            return menuItem.MenuItemRequireAnyFlags.some(flag => FlagManager.Flags[flag])
 
     }
     private HasAllRequriedFlags(menuItem: MenuItemBase): boolean {
         if (menuItem.MenuItemRequireAllFlags.length === 0)
             return true;
         else
-            return menuItem.MenuItemRequireAllFlags.every(flag => Flags[flag]);
+            return menuItem.MenuItemRequireAllFlags.every(flag => FlagManager.Flags[flag]);
     }
 
     private WriteMenuItem(_menuItem: MenuItemBase, menuItemNumber: number): string {

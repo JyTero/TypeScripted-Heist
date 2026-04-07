@@ -32,8 +32,9 @@ export class CharacterBase extends ItemBase {
                     scaleY: 25
                 }
             },
-            DataDevName: characterJson.CharacterName + "Meta",
-            DataType: "ItemBase"
+            DataDevName: characterJson.DataDevName,
+            DataType: "ItemBase",
+            ItemSceneMenuItems: []
         }
 
         super(itemData);   //Real value will come from data

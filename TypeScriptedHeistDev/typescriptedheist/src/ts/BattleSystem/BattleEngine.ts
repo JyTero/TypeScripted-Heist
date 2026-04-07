@@ -1,4 +1,4 @@
-import { AlertManagerInstance, CanvasGraphicsInstance, DebugWindowInstance, FrameTimeMS, IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
+import { AlertManagerInstance, CanvasGraphicsInstance, FlagManager, FrameTimeMS, IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { Delay } from "../../Tools";
 import { CombatMenuObject } from "../CombatMenuObject";
@@ -15,9 +15,13 @@ import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
 import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
 import { CombatScene } from "../Scenes/CombatScene";
 import { SceneBase } from "../Scenes/SceneBase";
+import { CombatSceneData, SceneBaseData } from "../DataTypes/SceneDataType";
+import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
+import { DebugWindowInstance } from "../DebugPageInitialisation";
+import { FlagType } from "../flags";
 
-export async function BeginBattleEngine(battleData: BattleArenaDataType, currentScene: CombatScene) {
-    const battleStage: BattleEngine = new BattleEngine(battleData, PlayerCharacter.instance.GetPlayerCharacter(), currentScene);
+export async function BeginBattleEngine(sceneData: CombatSceneData, currentScene: CombatScene) {
+    const battleStage: BattleEngine = new BattleEngine(sceneData, PlayerCharacter.instance.GetPlayerCharacter(), currentScene);
     await battleStage.OnEngineStartUp();
 
     battleStage.OnBattleStartUp();
@@ -44,6 +48,9 @@ class BattleEngine {
     private battleOver = false;
     private currentScene: CombatScene;
     private nextSceneVictory: ScenesEnumHandmade;
+    private flagsToChangeVictory: FlagType[];
+    private nextSceneLoss: ScenesEnumHandmade;
+    private flagsToChangeLoss: FlagType[]
     private previousScene: SceneBase;
 
     private xPos: number = 5;
@@ -51,11 +58,14 @@ class BattleEngine {
     private xScale: number = 10;
     private yScale: number = 10;
 
-    constructor(data: BattleArenaDataType, playerCharacter: CharacterBase, currentScene: CombatScene) {
+    constructor(sceneData: CombatSceneData, playerCharacter: CharacterBase, currentScene: CombatScene) {
         this.playerCharacter = playerCharacter;
-        this.battleData = data;
+        this.battleData = sceneData.battleArenaData;
         this.currentScene = currentScene;
-        this.nextSceneVictory = data.NextSceneOnVictory;
+        this.nextSceneVictory = sceneData.combatVictoryNextScene;
+        this.flagsToChangeVictory = sceneData.combatVictoryFlagsToChange;
+        this.nextSceneLoss = sceneData.combatLossNextScene;
+        this.flagsToChangeLoss = sceneData.combatLossFlagsToChange
     }
     public async OnEngineStartUp() {
         if (IsDebug)
@@ -74,7 +84,7 @@ class BattleEngine {
         await this.WaitSpritesToLoad();
 
 
-       // await Delay(FrameTimeMS);
+        // await Delay(FrameTimeMS);
 
     }
 
@@ -143,7 +153,10 @@ class BattleEngine {
                     this.EndTurn();
                     if (this.IsCombatOver()) {
                         console.log("End Combat");
-                        this.OnBattleEnd();
+                        if (this.playerCharacter.GetStat(CharcterStatTypeEnum.Health)!.Value <= 0)
+                            this.OnBattleEnd(false);    //t/f if the player won
+                        else
+                            this.OnBattleEnd(true);
                     }
                 }
             }
@@ -166,7 +179,7 @@ class BattleEngine {
         AlertManagerInstance.AddAlertToGroup(`${this.characterInTurn.Character.ItemName} takes turn!`, AlertGroupType.CombatTurn);
 
         this.characterInTurn.Character.RunOnceTurnEffects();
-        
+
         //await WriteAlertStorePrevious(`${this.characterInTurn.ItemName} takes turn!`);
 
         if (this.characterInTurn.Character === this.playerCharacter) {
@@ -276,7 +289,7 @@ class BattleEngine {
                     if (this.playerCharacter.ItemLoadingReady)
                         spritesReady = true;
                 }
-            }   
+            }
         }
     }
 
@@ -313,6 +326,7 @@ class BattleEngine {
             return false;
     }
 
+
     private AllEnemiesAreDead(): boolean {
 
         return this.enemyCharacters.every(
@@ -320,14 +334,29 @@ class BattleEngine {
         );
     }
 
-    private OnBattleEnd() {
+    private OnBattleEnd(playerWon: boolean) {
         this.battleOver = true;
         //this.nextScene.SceneMain();
         this.OnEngineDestroy();
-        SceneManagerInstance.HandleNextScene(this.currentScene, this.nextSceneVictory);
+
+        if (playerWon) {
+            AlertManagerInstance.WriteAlertStorePrevious("Player won the battle ended");
+            this.AdjustFlags(this.flagsToChangeVictory)
+            SceneManagerInstance.HandleNextScene(this.currentScene, this.nextSceneVictory);
+        }
+        else {
+            AlertManagerInstance.WriteAlertStorePrevious("Player lost the battle ended");
+            this.AdjustFlags(this.flagsToChangeLoss)
+            SceneManagerInstance.HandleNextScene(this.currentScene, this.nextSceneLoss);
+        }
     }
+
+    private AdjustFlags(flags:FlagType[]) {
+        for(var fc of flags){
+            FlagManager.ChangeFlagValue(fc)
+        }
+     }
     private async OnEngineDestroy() {
-        await AlertManagerInstance.WriteAlertStorePrevious("Battle ended");
 
     }
 }

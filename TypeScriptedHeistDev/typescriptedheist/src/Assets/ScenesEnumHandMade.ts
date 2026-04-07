@@ -6,6 +6,9 @@ export enum ScenesEnumHandmade {
     GroundWindow = "GroundWindow",
     CombatTest = "CombatTest",
     MindPalace = "MindPalace",
+    MindPalaceNeighbor = "MindPalaceNeighbor",
+    BobCombat = "BobCombat",
+    
     
 
 }

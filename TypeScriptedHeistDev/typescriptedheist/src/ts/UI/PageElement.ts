@@ -42,26 +42,28 @@ export class PageElement {
         return this.id;
     }
 
+    private PDM:PageDisplayManager;
+
     //pageElement?:HTMLElementTagNameMap[T]
 
     // constructor(element: HTMLElement, name: string)
     constructor(arg1: string | HTMLElement, name: string, pageManager: PageDisplayManager) {
 
         this.ElementName = name;
-
+        this.PDM = pageManager;
 
         //If blank type, html element already exists, create object with that
         if (IsHTMLElement(arg1)) {
             this.PreExistingElement(arg1, pageManager);
         }
         else {
-            this.CreateNewHTMLElement(arg1,name);
+            this.CreateNewHTMLElement(arg1, name);
 
         }
         //this.data = data;
     }
 
-    private async CreateNewHTMLElement(htmlElmentType:string, name:string) {
+    private async CreateNewHTMLElement(htmlElmentType: string, name: string) {
         const n = htmlElmentType as DOMElementType;
         this.element = document.createElement(n);
         if (!this.element) {
@@ -71,7 +73,7 @@ export class PageElement {
 
         this.id = name;
         this.element.id = this.id;
-        Delay(FrameTimeMS);
+        await Delay(FrameTimeMS);
     }
 
     private PreExistingElement(htmlElement: HTMLElement, pageManager: PageDisplayManager) {
@@ -95,7 +97,7 @@ export class PageElement {
 
             // const children = Array.from(htmlElement.children)
             //     .filter((el): el is HTMLElement => el instanceof HTMLElement);
-            this.DiscoverChildren(pageManager);
+            // this.DiscoverChildren(pageManager);
             // const children = GetHTMLElementChildren(htmlElement);
 
             // var i = 0;
@@ -126,8 +128,13 @@ export class PageElement {
     }
 
     //Children - Remove
-    public RemoveAllChildren() {
+    public DestroyAllChildren() {
         //Requires call on all children the destroy self, make sure children destroy their children
+        for(var childElement of this.childElements){
+            childElement.DestroyAllChildren();
+            childElement.DestroySelf();
+        }
+
     }
 
     //Children - Misc
@@ -151,16 +158,20 @@ export class PageElement {
         const children = GetHTMLElementChildren(this.element);
 
         var i = 0;
-        children.forEach(child => {
+        for (var child of children) {
+            //If its found, its already a PE
+            if (pageManager.FindPageElementByElementId(child.id) != null)
+                continue;
             const id = child.id;
             var newName = "";
 
             newName = this.ElementName + "child" + i;
 
             const c = pageManager.CreateNewPageElement(child, newName)
+            pageManager.AddNewPageElement(c);
             this.childElements.push(c);
             c.AddParent(this);
-        });
+        }
     }
     public AddParent(parent: PageElement) {
         this.elementParent = parent;
@@ -173,6 +184,11 @@ export class PageElement {
     //Styling
     public SetFontWeight(weight: string) {
         this.element.style.fontWeight = weight;
+    }
+
+    private DestroySelf(){
+        this.element.remove();
+        this.PDM.RemovePageElement(this);
     }
 
 }

@@ -5,24 +5,27 @@ import { FrameTimeMS } from "../MainPageInitialisation";
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { Trait } from "../Items/Character/Trait";
 import { PageElement } from "../UI/PageElement";
-import { DebugWindowIntance } from "../DebugPageInitialisation";
+import { DebugWindowInstance } from "../DebugPageInitialisation";
 import { IsHTMLElement as IsHTMLElement } from "./HTMLHelpers";
 import { SubWindow } from "./SubWindow";
+import { SceneBase } from "../Scenes/SceneBase";
 
 //This will be the debug window
 export class DebugWindow extends SubWindow {
     public UseDebugWindow: boolean;
 
-   // private debugWindow: Window;
-    // private combatDebug: HTMLElement | null;
-    // private combatGeneral: HTMLElement | null;
-    // private combatEnemyAI: HTMLElement | null;
 
-
+    //private combatCharacterDivs: Record<CombatCharacter, HTMLElement> = {};
+    private combatCharacterDivs = new Map<CombatCharacter, PageElement>();
+    private combatCharacterDivsReverse = new Map<PageElement, CombatCharacter>();
     private combatDebugElement: PageElement;
-    private combatGeneral: PageElement;
-    private combatEnemyAI: PageElement;
+    private combatGeneralPE: PageElement;
+    private combatEnemyAIPE: PageElement;
 
+    private SceneDebugParentPE: PageElement;
+    private sceneMenuItemsDebugPE: PageElement;
+    private sceneDebugHeaderPE: PageElement;
+    private sceneMenuItemsDebugHeaderPE: PageElement;
     constructor() {
         super("Debug", "debugPage");
     }
@@ -31,77 +34,64 @@ export class DebugWindow extends SubWindow {
             return;
 
         this.OpenSubWindow();
-
-        // this.OpenDebugPage();
-
-        // if (this.debugWindow == undefined) {
-        //     const btn = document.createElement("button");
-        //     btn.textContent = "Open debug";
-
-        //     btn.addEventListener("click", () => {
-        //         this.OpenDebugPage();
-
-
-
-        //     });
-        //     await Delay(FrameTimeMS);
-
-        //     document.body.appendChild(btn);
-        // }
-
-        // const debugWindow = window.open(
-        //     "", // URL (empty for a blank window)
-        //     "DebugWindow", // Window name (for targeting)
-        //     "width=600,height=400,left=200,top=200" // Window features
-        // );
-
     }
 
-    // private OpenDebugPage() {
-    //     const debugWind = window.open("debugPage.html", "DebugWindow", "width=600,height=400");
-    //     if (debugWind != null) {
-    //         this.debugWindow = debugWind;
-    //     }
-    //     else
-    //         return;
-
-    //     debugWind.addEventListener("DOMContentLoaded", this.OnPageOpen.bind(this));
-    // }
-
-    // private OnPageOpen() {
-    //     var appHTML: HTMLElement | null = this.debugWindow.document.getElementById("App");
-    //     if (appHTML)
-    //         this.appRoot = new PageElement(appHTML, "DebugApp", DebugPageDisplayManagerInstance);
+    private combatDebugDivID: string = "CombatDebug";
+    private combatAIDebugDivID: string = "CombatEnemyAI";
+    private sceneDebugParentDivID: string = "SceneDebug";
+    private sceneMenuItemsDebugID: string = "SceneMenuItemsDebug";
+    private sceneDebugHeaderID: string = "SceneDebugHeader";
 
 
-    //     var htmlElement: PageElement | null = DebugPageDisplayManagerInstance.FindPageElementByElementId("CombatDebugging");
-    //     if (htmlElement)
-    //         this.combatDebugElement = htmlElement;
-    //     htmlElement = null;
-
-    //     htmlElement = DebugPageDisplayManagerInstance.FindPageElementByElementId("CombatEnemyAI");
-    //     if (htmlElement)
-    //         this.combatEnemyAI = htmlElement;
-
-    // }
     protected override IndividualOnPageOpen() {
-        var htmlElement: PageElement | null = this.PDM.FindPageElementByElementId("CombatDebugging");
+        var htmlElement: PageElement | null = this.PDM.FindPageElementByElementId(this.combatDebugDivID);
         if (htmlElement)
             this.combatDebugElement = htmlElement;
         htmlElement = null;
 
-        htmlElement = this.PDM.FindPageElementByElementId("CombatEnemyAI");
+        htmlElement = this.PDM.FindPageElementByElementId(this.combatAIDebugDivID);
         if (htmlElement)
-            this.combatEnemyAI = htmlElement;
-    }
-    private MakePageElementsFromPreExistingPage() {
+            this.combatEnemyAIPE = htmlElement;
+        htmlElement = null;
+
+        htmlElement = this.PDM.FindPageElementByElementId(this.sceneDebugParentDivID);
+        if (htmlElement)
+            this.SceneDebugParentPE = htmlElement;
+        htmlElement = null;
+
+        htmlElement = this.PDM.FindPageElementByElementId(this.sceneMenuItemsDebugID);
+        if (htmlElement)
+            this.sceneMenuItemsDebugPE = htmlElement;
+        htmlElement = null;
+
+        htmlElement = this.PDM.FindPageElementByElementId(this.sceneDebugHeaderID);
+        if (htmlElement)
+            this.sceneDebugHeaderPE = htmlElement;
+        htmlElement = null;
 
     }
 
-    //private combatCharacterDivs: Record<CombatCharacter, HTMLElement> = {};
-    private combatCharacterDivs = new Map<CombatCharacter, PageElement>();
-    private combatCharacterDivsReverse = new Map<PageElement, CombatCharacter>();
 
+
+    //SCENE DEBUG§§
+    public OnSceneOpen(scene: SceneBase) {
+        this.sceneDebugHeaderPE.Element.textContent = `${scene.SceneName}`;
+        this.sceneMenuItemsDebugPE.DestroyAllChildren();
+
+
+    }
+
+    private numberOfInvalidMenuItems: number = 0;
+
+
+    public InvalidSceneMenuItem() {
+        if (this.numberOfInvalidMenuItems == 0) {
+            this.sceneMenuItemsDebugHeaderPE = this.PDM.CreateNewPageElement("h3", "sceneMenuItemsDebugHeader");
+            this.sceneMenuItemsDebugHeaderPE.Element.textContent = `Invalid menu items ${this.numberOfInvalidMenuItems}`
+            this.sceneMenuItemsDebugPE.AppendChild(this.sceneMenuItemsDebugHeaderPE);
+        }
+
+    }
     //COMBAT DEBUG
     public OnCombatBegin(turnOrder: CombatCharacter[]) {
         if (!this.window)
@@ -125,7 +115,7 @@ export class DebugWindow extends SubWindow {
             // this.combatEnemyAI?.appendChild(combatantDiv);
             const elementName = combatCharacter.Character.ItemName + "CombatDiv";
             const combatantDiv = this.PDM.CreateNewPageElement("div", elementName);
-            this.combatEnemyAI.AppendChild(combatantDiv);
+            this.combatEnemyAIPE.AppendChild(combatantDiv);
 
             // const divHeader = this.debugWindow.document.createElement("h1");
             // divHeader.textContent = combatCharacter.Character.ItemName;
@@ -159,24 +149,12 @@ export class DebugWindow extends SubWindow {
 
     private BAParentPEIDSuffix: string = "BAParent";
 
-    //This fucks up the debug layout
     private ChooseBattleActionDebugProper(thisCombatCharacter: CombatCharacter, combatantPageElement: PageElement, BAs: BattleAction[]) {
         if (!this.window)
             return;
         if (!IsHTMLElement(combatantPageElement.Element)) {
             throw console.error(`Invalid HTML element given as a div for ${thisCombatCharacter.Character.ItemName} (HTML details: ${combatantPageElement.Element}|${(combatantPageElement.Element as HTMLElement).textContent})`);
         }
-        //Create BAParent Div
-        // var BAParentElement: PageElement = combatantPageElement.ElementParent;
-        // //var BAParentDiv = thisDiv.getElementsByClassName(this.BAParentDivClassName)[0];
-
-        // if (!BAParentElement) {
-        //     BAParentElement = this.CreateBAParentDiv();
-        //     combatantPageElement.AppendChild(BAParentElement);
-        // }
-        // else {
-        //     RemoveAllHTMLChildren(BAParentElement.Element);
-        // }
 
         var BAParentPE: PageElement | null = this.PDM.FindPageElementByElementId(thisCombatCharacter.Character.ItemName + "BAParent")
 

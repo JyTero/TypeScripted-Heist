@@ -11,8 +11,12 @@ export class PageDisplayManager {
     public ThisPageName: string;
     private pageElements: PageElement[] = [];
 
-    protected AddNewPageElement(page: PageElement) {
-        this.pageElements.push(page);
+    public AddNewPageElement(pe: PageElement) {
+        this.pageElements.push(pe);
+        pe.DiscoverChildren(this);
+    }
+    public RemovePageElement(pe:PageElement){
+        this.pageElements.splice(this.pageElements.indexOf(pe));
     }
 
     constructor(name: string, widw: Window) {
@@ -33,19 +37,18 @@ export class PageDisplayManager {
         newpe.DiscoverChildren(this);
         return newpe;
     }
-    public CreateNewPageElement(html: string | HTMLElement, name: string): PageElement {
+    public CreateNewPageElement(html: string | HTMLElement, name: string) {
         // this.pageElementCreateQueue.push({html, name});
         // if(!this.creatingPEs)
         //     this.PECreator();
         const newpe = new PageElement(html, name, this);
-        this.AddNewPageElement(newpe);
         return newpe;
     }
-    public CreatePageElementsOnPageLoad() {
-        const app: HTMLElement | null = document.getElementById("app");
-        if (app != null)
-            new PageElement(app, "MainApp", this);
-    }
+    // public CreatePageElementsOnPageLoad() {
+    //     const app: HTMLElement | null = document.getElementById("app");
+    //     if (app != null)
+    //         new PageElement(app, "MainApp", this);
+    // }
 
     private pageElementCreateQueue: pageElementDataType[] = [];
     private creatingPEs: boolean = false;

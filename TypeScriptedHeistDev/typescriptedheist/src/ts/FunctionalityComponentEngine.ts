@@ -44,7 +44,7 @@ export class FunctionalityComponentEngine {
     }
     private ShowDialog(datas: string[]) {
         AlertManagerInstance.CreateAlertGroup(`${datas[0]}`, AlertGroupType.DialogLine);
-        for (var i = 1; i < (datas.length - 1); i++) {
+        for (var i = 1; i < (datas.length); i++) {
             AlertManagerInstance.AddAlertToGroup(datas[i], AlertGroupType.DialogLine);
         }
         AlertManagerInstance.PrintGroup(AlertGroupType.DialogLine);

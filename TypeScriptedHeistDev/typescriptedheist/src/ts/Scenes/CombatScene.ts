@@ -11,9 +11,11 @@ export class CombatScene extends SceneBase {
         protected battleArenaData: BattleArenaDataType;
         protected previousScene: SceneBase;
 
+        private sceneData: CombatSceneData;
         constructor(data: CombatSceneData) {
                 super(data);
                 this.battleArenaData = data.battleArenaData;
+                this.sceneData = data;
         }
 
         public SceneSpsificStartUp() { }
@@ -24,7 +26,7 @@ export class CombatScene extends SceneBase {
         public BeginBattleScene(prevScene: SceneBase) {
                 this.previousScene = prevScene;
                 this.SceneSpesificMain();
-                BeginBattleEngine(this.battleArenaData, this);
+                BeginBattleEngine(this.sceneData, this);
         }
         public ReturnToPreviousScene() {
                 SceneManagerInstance.ReturnToPreviousScene();

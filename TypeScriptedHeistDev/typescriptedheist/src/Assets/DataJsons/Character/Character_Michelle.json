@@ -1,0 +1,15 @@
+{
+  "CharacterName": "Michelle",
+  "CharacterFaction": 1,
+  "CharacterStrength": 2,
+  "CharacterDexterity": 3,
+  "CharacterPerception": 1,
+  "CharacterWeaponSkill": 1,
+  "CharacterDodge": 0,
+  "CharacterBaseSpeed": 1,
+  "CharacterArmour": 1,
+  "CharaterEquipedWeapon": "Weapon_Knife",
+  "CharacterImagePath": "Michelle.png",
+  "DataDevName": "Character_Michelle",
+  "DataType": "Character"
+}

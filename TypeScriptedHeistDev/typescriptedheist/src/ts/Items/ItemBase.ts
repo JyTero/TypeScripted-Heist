@@ -36,7 +36,7 @@ export class ItemBase {
 
     private onNameChangeSubscribers: StringChangedListner[] = [];
 
-    public parentScene:SceneBase;
+    public parentScene: SceneBase;
 
     private hasMenuItems: boolean = true;
     public get HasMenuItems(): boolean {
@@ -47,8 +47,14 @@ export class ItemBase {
         return this.itemMenuItems;
     }
 
+    private devName:string;
+    public get DevName():string{
+        return this.devName;
+    }
+
     constructor(itemData: ItemBaseData) {
         this.itemName = itemData.ItemName;
+        this.devName = itemData.DataDevName;
         this.Health = new CharacterStat("Health", itemData.ItemMaxHP, itemData.ItemMaxHP, CharcterStatTypeEnum.Health, this);
         if (itemData.ItemSpriteData != undefined)
             this.LoadItemImage(itemData.ItemSpriteData);
@@ -85,7 +91,9 @@ export class ItemBase {
         return this.itemTraits;
     }
 
+    protected AddSceneSpesificMenuItemsHandmade(){
 
+    }
 
     public async ReceiveEffect(effect: Effect) {
         this.activeEffects.push(effect);
@@ -157,7 +165,7 @@ export class ItemBase {
                 console.log("Loaded " + this.ItemName + "'s image");
 
             //this.CharacterSprite.SetSpritePosScaleDataValues(characterData.SpriteDefaultXpos, characterData.SpriteDefaulyYpos, characterData.SpriteDefaultXScale, characterData.SpriteDefaultYScale);
-            this.ItemSprite.SpritePosScaleData = spriteData.LocationData;
+            // this.ItemSprite.SpritePosScaleData = spriteData.LocationData;
             this.ItemLoadingReady = true;
 
         }
@@ -174,7 +182,7 @@ export class ItemBase {
 
     public DestroySelf() {
         //CanvasGraphicsInstance.RemoveSpriteFromList(this.ItemSprite);
-        if(this.parentScene != undefined)
+        if (this.parentScene != undefined)
             this.parentScene.RemoveSceneItem(this);
     }
 }

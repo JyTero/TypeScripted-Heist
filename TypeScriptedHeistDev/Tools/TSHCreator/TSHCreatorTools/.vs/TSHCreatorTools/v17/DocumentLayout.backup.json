@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\windowcomponents\\colorpicker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:windowcomponents\\colorpicker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\windowcomponents\\colorpicker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:windowcomponents\\colorpicker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\creators\\tshscenecreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:creators\\tshscenecreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\creators\\tshscenecreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:creators\\tshscenecreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\windowcomponents\\colorpicker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:windowcomponents\\colorpicker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\creators\\tshscenecreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|solutionrelative:creators\\tshscenecreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6E41E8BC-4A98-4F9C-B6B4-52641BCBAC5B}|TSHCreatorTools.csproj|d:\\projects\\typescript\\typescripted-heist\\typescriptedheistdev\\tools\\tshcreator\\tshcreatortools\\coreenums\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,7 +34,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Colorpicker.cs [Design]",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\WindowComponents\\Colorpicker.cs",
               "RelativeDocumentMoniker": "WindowComponents\\Colorpicker.cs",
@@ -48,11 +48,11 @@
         },
         {
           "DockedWidth": 1111,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "TSHSceneCreator.cs [Design]",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\Creators\\TSHSceneCreator.cs",
               "RelativeDocumentMoniker": "Creators\\TSHSceneCreator.cs",
@@ -64,7 +64,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "TSHSceneCreator.cs",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\Creators\\TSHSceneCreator.cs",
               "RelativeDocumentMoniker": "Creators\\TSHSceneCreator.cs",
@@ -72,12 +72,11 @@
               "RelativeToolTip": "Creators\\TSHSceneCreator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-03T13:48:06.508Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-03T13:48:06.508Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Colorpicker.cs",
               "DocumentMoniker": "D:\\Projects\\TypeScript\\TypeScripted-Heist\\TypeScriptedHeistDev\\Tools\\TSHCreator\\TSHCreatorTools\\WindowComponents\\Colorpicker.cs",
               "RelativeDocumentMoniker": "WindowComponents\\Colorpicker.cs",
@@ -85,8 +84,7 @@
               "RelativeToolTip": "WindowComponents\\Colorpicker.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAEwC0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-03T12:37:56.896Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-03T12:37:56.896Z"
             }
           ]
         }

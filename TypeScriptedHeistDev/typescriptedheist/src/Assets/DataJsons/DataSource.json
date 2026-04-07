@@ -8,7 +8,9 @@
   ],
   "Character": [
     "Character_Amalia.json",
+    "Character_Bob.json",
     "Character_Henrique.json",
+    "Character_Michelle.json",
     "Character_Player.json"
   ],
   "Effect": [

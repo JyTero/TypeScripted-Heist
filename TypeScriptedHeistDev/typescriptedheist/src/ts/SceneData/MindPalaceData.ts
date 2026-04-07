@@ -8,10 +8,15 @@ import { FragileGlassItem, WallArtBayek, WallArtAltGramp } from "../Items/ItemDa
 import { Color } from "../Tools/Color";
 
 export const MindPalaceScenData: ExplorationSceneData = {
-    SceneName: "Mindpalace",
+    SceneName: "MindPalace",
     SceneType: SceneTypesEnumHandmade.ExplorationScene.toString(),
     SceneBackgroundColor: new Color(179, 76, 202, 1),
-    SceneItems: [ItemsEnumHandmade.WallArtBayek, ItemsEnumHandmade.WallArtAltGramp, ItemsEnumHandmade.FragileGlassItem, ItemsEnumHandmade.Character_Amalia], //WallArtItem01, WallArtItem02, FragileGlassItem
+    SceneItems: [ItemsEnumHandmade.WallArtBayek, ItemsEnumHandmade.WallArtAltGramp, ItemsEnumHandmade.FragileGlassItem, ItemsEnumHandmade.Character_Michelle], //WallArtItem01, WallArtItem02, FragileGlassItem
+    SceneItemLocationDatas: [{ positionX: 75, positionY: 75, scaleX: 5, scaleY: 5 },
+    { positionX: 50, positionY: 50, scaleX: 5, scaleY: 5 },
+    { positionX: 25, positionY: 25, scaleX: 10, scaleY: 10 },
+    { positionX: 75, positionY: 10, scaleX: 80, scaleY: 90 },
+    ],
     MenuItems: [
         {
             MenuItemName: "Paint ",
@@ -48,6 +53,20 @@ export const MindPalaceScenData: ExplorationSceneData = {
             MenuItemFlagsToChange: [],
         },
         {
+            MenuItemName: "GoToNeighbor",
+            MenuItemText: "Walk along the alley",
+            MenuItemSelectionDescription: "You walk further along",
+            NextScene: ScenesEnumHandmade.MindPalaceNeighbor.toString(),
+            ItemSelectionEffects: [],
+            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentDatas: [],
+            MenuItemRequireAllFlags: ["MindPalaceMichelleChat01"],
+            MenuItemRequireAnyFlags: [],
+            MenuItemForbiddenAllFlags: [],
+            MenuItemForbiddenAnyFlags: [],
+            MenuItemFlagsToChange: [],
+        },
+        {
             MenuItemName: "Return to Approach",
             MenuItemText: "Return to the true world",
             MenuItemSelectionDescription: "You leave the peace of your mind palace, returning to the true world",
@@ -62,12 +81,5 @@ export const MindPalaceScenData: ExplorationSceneData = {
             MenuItemFlagsToChange: [],
         },
     ],
+
 }
-
-// export const PaintItBlackSceneData: InteractionSceneData = {
-//     SceneName: "PaintItBlack",
-//     SceneType: SceneTypesEnumHandmade.InteractionScene.toString(),
-//     SceneBackgroundColor: new Color(-1,-1,-1,1),
-//     SceneItems: []
-
-// }

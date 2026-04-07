@@ -1,9 +1,7 @@
 //import { MenuObject } from "./MenuObject";
-import { ChangeFlagValue } from "../flags";
 import { MenuItemBase } from "../MenuItemBase";
 import { MenuObjectBase } from "../MenuObjectBase";
-import { CanvasGraphicsInstance, IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
-import { WriteMenuSelection } from "../IOMethods";
+import { FlagManager, IsDebug } from "../MainPageInitialisation";
 import { Sprite } from "../Canvas/Sprite";
 import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
 import { SceneBaseData } from "../DataTypes/SceneDataType";
@@ -11,6 +9,7 @@ import { Color } from "../Tools/Color";
 import { ItemBase } from "../Items/ItemBase";
 import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 import { BuildItemHandmade } from "../JsonInput/DataToObjectBuilders";
+import { DebugWindowInstance } from "../DebugPageInitialisation";
 
 export abstract class SceneBase {
     public SceneName: string = "";
@@ -52,6 +51,9 @@ export abstract class SceneBase {
     public async SceneMain() {
         this.SceneSpesificMain();
 
+        if(IsDebug)
+            DebugWindowInstance.OnSceneOpen(this);
+
         // const menuSelection = await this.GetMenuInput();
         // this.HandleMenuSelection(menuSelection);
         //Call spesific, general method within to 
@@ -74,6 +76,9 @@ export abstract class SceneBase {
     private BuildSceneItems(data: SceneBaseData) {
         for (var itemData of data.SceneItems) {
             var i = BuildItemHandmade(itemData);
+            var posData = data.SceneItemLocationDatas[data.SceneItems.indexOf(itemData)];
+            i.ItemSprite.SetSpritePosScaleDataValues(posData.positionX, posData.positionY, posData.scaleX, posData.scaleY);
+            //i.ItemSprite.SpritePosScaleData = data.SceneItemLocationDatas[data.SceneItems.indexOf(itemData)];
             i.parentScene = this;
             this.SceneItems.push(i);
             this.SceneSprites.push(i.ItemSprite);
@@ -87,7 +92,7 @@ export abstract class SceneBase {
     }
     protected AdjustFlags(menuItem: MenuItemBase) {
         for (const flagToChange of menuItem.MenuItemFlagsToChange) {
-            ChangeFlagValue(flagToChange);
+           FlagManager.ChangeFlagValue(flagToChange);
         }
     }
 

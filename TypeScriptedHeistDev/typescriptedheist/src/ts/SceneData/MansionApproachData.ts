@@ -12,6 +12,7 @@ export const MansionApproachSceneData: ExplorationSceneData = {
     SceneType: SceneTypesEnumHandmade.ExplorationScene.toString(),
     SceneBackgroundColor: new Color(57, 47, 87, 1),
     SceneItems: [],
+    SceneItemLocationDatas: [],
     MenuItems: [
         {
             MenuItemName: "Lockpick Gate",
@@ -83,8 +84,8 @@ export const MansionApproachSceneData: ExplorationSceneData = {
             MenuItemForbiddenAnyFlags: [],
             MenuItemFlagsToChange: [],
         },
+    ],
 
-    ]
 }
 //LEGACY
 // export const MansionApproachMenuItemData01: ExplorationMenuItemDataType =

@@ -10,7 +10,7 @@ export interface ItemBaseData extends MetaData {
     ItemSceneMenuItems:ExplorationMenuItemDataType[],
 }
 
-export interface WeaponDatatype extends MetaData {
+export interface WeaponDatatype extends ItemBaseData {
 
     BattleMoves: BattleMove[];
     WeaponHit: number;

@@ -7,13 +7,17 @@ import { MansionApproachSceneData } from "../SceneData/MansionApproachData";
 import { BackdoorSceneData } from "../SceneData/BackdoorData";
 import { FrontDoorSceneData } from "../SceneData/FrontDoorData";
 import { GroundLevelWindowSceneData } from "../SceneData/GroundLevelWindowData";
-import { BattleArenaTestSceneData } from "../BattleData/TestBattleData";
+import { BattleArenaTestSceneData, BobBattleSceneData } from "../BattleData/TestBattleData";
 import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 import { ExplorationScene } from "../Scenes/ExplorationScene";
 import { CombatScene } from "../Scenes/CombatScene";
 import { placeholderScene } from "./Placeholders";
 import { MindPalaceScenData } from "../SceneData/MindPalaceData";
 import { Delay } from "../../Tools";
+import { ExplorationMenuItemDataType, SceneSpesificItemSceneMenuItemDataType } from "../DataTypes/MenuItemDataType";
+import { BobMindPalaceNeighborSpesificMenuItem01, MichelleMindPalaceSpesificMenuItem01, MichelleMindPalaceSpesificMenuItem02, MichelleMindPalaceSpesificMenuItem03, MichelleMindPalaceSpesificMenuItem04 } from "../Items/ItemData/ItemDatasHandmade";
+import { ItemBase } from "../Items/ItemBase";
+import { MindPalaceNeighborData } from "../SceneData/MindPalaceNeighborData";
 export class SceneManagement {
 
     private allSceneDatas: Partial<Record<ScenesEnumHandmade, SceneBaseData>> = {};
@@ -28,6 +32,9 @@ export class SceneManagement {
         this.allSceneDatas[ScenesEnumHandmade.GroundWindow] = GroundLevelWindowSceneData;
         this.allSceneDatas[ScenesEnumHandmade.CombatTest] = BattleArenaTestSceneData;
         this.allSceneDatas[ScenesEnumHandmade.MindPalace] = MindPalaceScenData;
+        this.allSceneDatas[ScenesEnumHandmade.MindPalaceNeighbor] = MindPalaceNeighborData;
+        this.allSceneDatas[ScenesEnumHandmade.BobCombat] = BobBattleSceneData;
+        this.GetAllSSMI();
     }
 
     public BuildScene(s: ScenesEnumHandmade): SceneBase | null {
@@ -122,5 +129,31 @@ export class SceneManagement {
 
     private ClearOldData() {
         CanvasGraphicsInstance.ClearSpriteList();
+    }
+
+    //DEBUG
+    private allSceneSpesificMenuItems: SceneSpesificItemSceneMenuItemDataType[] = [];
+
+    private GetAllSSMI() {
+        this.allSceneSpesificMenuItems.push(MichelleMindPalaceSpesificMenuItem01);
+        this.allSceneSpesificMenuItems.push(MichelleMindPalaceSpesificMenuItem02);
+        this.allSceneSpesificMenuItems.push(MichelleMindPalaceSpesificMenuItem03);
+        this.allSceneSpesificMenuItems.push(MichelleMindPalaceSpesificMenuItem04);
+        this.allSceneSpesificMenuItems.push(BobMindPalaceNeighborSpesificMenuItem01);
+    }
+
+    public GetSpesificMenuItems(sceneItems: ItemBase[], scene: SceneBase):ExplorationMenuItemDataType[] {
+        var retList:ExplorationMenuItemDataType[] = [];
+        for (var SSMI of this.allSceneSpesificMenuItems) {
+            if (SSMI.TargetScene == scene.SceneName) {
+                for (var sceneItem of sceneItems) {
+                    if(SSMI.SourceItem == sceneItem.DevName){
+                        retList.push(SSMI);
+                    }
+                }
+
+            }
+        }
+        return retList;
     }
 }

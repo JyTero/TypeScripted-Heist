@@ -10,7 +10,7 @@ export type BattleArenaDataType={
     //PlayerCharacter: CharacterSheet;
     EnemyCharacterDatas: CharacterEnum[];
     
-    NextSceneOnVictory:ScenesEnumHandmade;
+    //NextSceneOnVictory:ScenesEnumHandmade;
     //Enemy Distance, equipment, 
     //Art
 }
