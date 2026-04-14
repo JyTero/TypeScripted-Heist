@@ -1,4 +1,4 @@
-import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
+import { ExplorationMenuItemData } from "../DataTypes/MenuItemDataType";
 import { ExplorationSceneData, SceneBaseData } from "../DataTypes/SceneDataType";
 import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 import { placeholderScene } from "../ScenesLegacy/Placeholders";
@@ -21,7 +21,7 @@ export const FrontDoorSceneData: ExplorationSceneData = {
             MenuItemForbiddenAnyFlags: [],
             MenuItemFlagsToChange: [],
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: []
         },
         {
@@ -35,11 +35,12 @@ export const FrontDoorSceneData: ExplorationSceneData = {
             MenuItemForbiddenAnyFlags: [],
             MenuItemFlagsToChange: [],
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: []
         },
     ],
-    SceneItems: []
+    SceneItems: [],
+    SceneItemLocationDatas: []
 }
 //LEGACY
 // export const FrontDoorData01: ExplorationMenuItemDataType =

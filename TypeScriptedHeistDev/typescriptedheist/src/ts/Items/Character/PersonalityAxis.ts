@@ -29,7 +29,7 @@ export class Aggressiveness_PersonalityAxis extends PersonalityAxis {
         //IF battle action is dealing damage to enemy
         if(!ba.TargetIsAlly && !ba.BattleMove.IsHealingMove){
             const scoreMultiplier = this.currentValue + 1;
-            ba.Score *= scoreMultiplier;
+            ba.MultiplyScore(scoreMultiplier,"PersonalityAxis");
 
         }
 

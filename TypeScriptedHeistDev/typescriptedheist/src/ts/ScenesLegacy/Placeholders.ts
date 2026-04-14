@@ -39,7 +39,7 @@ export class PlaceholderScene extends SceneBase {
     }
     
     async SceneSpesificMain() {
-        AlertManagerInstance.WriteAlertStorePrevious("PLACEHOLDER SCENE, SHOULD NOT BE RUN\n(Unless you won combat, in which case this should be seen, though it is still placeholder and should be replaced)");
+        AlertManagerInstance.WriteAlertStorePrevious("PLACEHOLDER SCENE, SHOULD NOT BE RUN\n(Unless you won combat, in which case this should be seen, though it is still placeholder and should be replaced)",[]);
         // await this.DoTheMenu();
         
     }
@@ -50,7 +50,8 @@ const PlaceholderSceneData:SceneBaseData ={
     SceneName: "Placeholder",
     SceneType: SceneTypesEnumHandmade.ExplorationScene.toString(),
     SceneBackgroundColor: new Color(245, 40, 196, 1),
-    SceneItems: []
+    SceneItems: [],
+    SceneItemLocationDatas: []
 }
 export const placeholderScene: SceneBase = new PlaceholderScene(PlaceholderSceneData);
 

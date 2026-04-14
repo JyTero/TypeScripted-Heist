@@ -5,18 +5,18 @@ import { SceneBase } from "./Scenes/SceneBase";
 import { placeholderScene } from "./ScenesLegacy/Placeholders";
 import { ScenesEnumHandmade } from "../Assets/ScenesEnumHandMade";
 
-export class BattleArenaSceneOLD extends SceneBase {
+// export class BattleArenaSceneOLD extends SceneBase {
 
-    public VictoryNextScene: ScenesEnumHandmade;
-    protected battleArenaData: BattleArenaDataType;
-    protected previousScene: SceneBase = placeholderScene;
+//     public VictoryNextScene: ScenesEnumHandmade;
+//     protected battleArenaData: BattleArenaDataType;
+//     protected previousScene: SceneBase = placeholderScene;
 
 
-    public SceneSpsificStartUp(): void { }
-    public SceneSpesificMain(): void { }
-    public BuildMenuItems(): MenuItemBase[] { return [] }
-    public BeginBattleScene(prevScene: SceneBase): void {
+//     public SceneSpsificStartUp(): void { }
+//     public SceneSpesificMain(): void { }
+//     public BuildMenuItems(): MenuItemBase[] { return [] }
+//     public BeginBattleScene(prevScene: SceneBase): void {
 
-    }
-    public OnBattleEnd(): void { }
-}
+//     }
+//     public OnBattleEnd(): void { }
+// }

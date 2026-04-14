@@ -126,6 +126,11 @@ export class PageElement {
         this.childElements.push(child);
         child.AddParent(this);
     }
+    public AppendChildFirst(child:PageElement) {
+        this.element.insertBefore(child.element, this.element.firstChild);
+        this.childElements.push(child);
+        child.AddParent(this);
+    }
 
     //Children - Remove
     public DestroyAllChildren() {

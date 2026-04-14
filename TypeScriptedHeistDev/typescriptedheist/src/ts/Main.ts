@@ -1,5 +1,5 @@
 
-import { FrameTimeMS, SceneManagerInstance, UIManager, WindowManagerInstance } from "./MainPageInitialisation";
+import { FrameTimeMS, InitialisationManager, SceneManagerInstance, UIManager, WindowManagerInstance } from "./MainPageInitialisation";
 import { PlayerCharacter } from "./PlayerCharacter";
 import { WeaponEnum } from "../Assets/DataJsons/WeaponEnum";
 import { PageDisplayManager } from "./PageDisplay";
@@ -27,7 +27,10 @@ export async function Game() {
     
     UIManager.InitializeUI();
     
-    await Delay(FrameTimeMS)
+    while(InitialisationManager.StillPreparing()){
+        
+        await Delay(FrameTimeMS);
+    }
     SceneManagerInstance.BeginFirstScene();
     //SceneManagerInstance.BeginFirstScene(mansionApproachScene);
     //mansionApproachScene.SceneMain();

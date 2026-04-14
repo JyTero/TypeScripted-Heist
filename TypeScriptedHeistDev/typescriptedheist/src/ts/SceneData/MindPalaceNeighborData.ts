@@ -1,7 +1,7 @@
 import { ItemsEnumHandmade } from "../../Assets/ItemsEnumHandmade";
 import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
 import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
-import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
+import { ExplorationMenuItemData } from "../DataTypes/MenuItemDataType";
 import { ExplorationSceneData } from "../DataTypes/SceneDataType";
 import { Color } from "../Tools/Color";
 
@@ -21,7 +21,7 @@ export const MindPalaceNeighborData: ExplorationSceneData = {
             MenuItemSelectionDescription: "You return to your mind palace",
             NextScene: ScenesEnumHandmade.MindPalace,
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],

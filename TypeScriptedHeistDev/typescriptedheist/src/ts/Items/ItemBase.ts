@@ -5,7 +5,7 @@ import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
 import { AlertManager } from "../AlertManager";
 import { Sprite } from "../Canvas/Sprite";
 import { ItemBaseData } from "../DataTypes/ItemDataTypes";
-import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
+import { ExplorationMenuItemData } from "../DataTypes/MenuItemDataType";
 import { SpriteData } from "../DataTypes/SpriteLocationDataType";
 import { Effect } from "../Effects/EffectBase";
 import { StringChangedListner } from "../EventListeners";
@@ -42,8 +42,8 @@ export class ItemBase {
     public get HasMenuItems(): boolean {
         return this.hasMenuItems;
     }
-    private itemMenuItems: ExplorationMenuItemDataType[] = [];
-    public get ItemMenuItems(): ExplorationMenuItemDataType[] {
+    private itemMenuItems: ExplorationMenuItemData[] = [];
+    public get ItemMenuItems(): ExplorationMenuItemData[] {
         return this.itemMenuItems;
     }
 
@@ -116,7 +116,7 @@ export class ItemBase {
     public async RemoveEffect(effect: Effect) {
         const i = this.activeEffects.indexOf(effect);
         this.activeEffects.splice(i, 1);
-        await AlertManagerInstance.WriteAlertStorePrevious(`${this.ItemName} no longer has OT  effect ${effect.EffectName}`);
+        await AlertManagerInstance.WriteAlertStorePrevious(`${this.ItemName} no longer has OT  effect ${effect.EffectName}`,[]);
     }
 
     public GetStat(key: CharcterStatTypeEnum): CharacterStat | undefined {

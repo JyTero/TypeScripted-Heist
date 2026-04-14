@@ -44,8 +44,8 @@ export const FragileGlassItem: ItemBaseData = {
     ItemSpriteData: {
         Sprite: "FragileGlass.png",
         LocationData: {
-            positionX: 5,
-            positionY: 20,
+            positionX: 0,
+            positionY: 0,
             scaleX: 20,
             scaleY: 20,
         }
@@ -56,8 +56,8 @@ export const FragileGlassItem: ItemBaseData = {
         MenuItemSelectionDescription: "You break the discarded glass item",
         NextScene: "",
         ItemSelectionEffects: [],
-        ItemSelectionFunctionalityComponents: [FunctionalityComponentsHandmade.RemoveSceneItemSelf, FunctionalityComponentsHandmade.PlaySFX],
-        ItemSelectionFunctionalityComponentDatas: [["ClassCup"/*ItemName*/, "5", "20", "20", "20",], ["BottleBreak.wav"]],//Name, LocationData[]
+        ItemSelectionFunctionalityComponentsEnum: [FunctionalityComponentsHandmade.RemoveSceneItemSelf, FunctionalityComponentsHandmade.PlaySFX],
+        ItemSelectionFunctionalityComponentDatas: [["ClassCup"/*ItemName*/, "25", "25", "10", "10",/*ItemPos, as defined in scene data*/], ["BottleBreak.wav"]],//Name, LocationData[]
         MenuItemRequireAllFlags: [],
         MenuItemRequireAnyFlags: [],
         MenuItemForbiddenAllFlags: [],
@@ -67,7 +67,24 @@ export const FragileGlassItem: ItemBaseData = {
     DataDevName: "FragileGlassItem",
     DataType: "Item"
 }
+export const MichellesPurseItem: ItemBaseData = {
+    ItemName: "Michelle's Purse",
+    ItemMaxHP: 2,
+    ItemSpriteData: {
+        Sprite: "bag.png",
+        LocationData: {
+            positionX: 0,
+            positionY: 0,
+            scaleX: 150,
+            scaleY: 150,
+        }
+    },
+    ItemSceneMenuItems: [],
+    DataDevName: "MichellesPurseItem",
+    DataType: "Item"
+}
 
+//MENU ITEMS
 export const MichelleMindPalaceSpesificMenuItem01: SceneSpesificItemSceneMenuItemDataType = {
     SourceItem: CharacterEnum.Character_Michelle.toString(),
     TargetScene: ScenesEnumHandmade.MindPalace,
@@ -76,7 +93,7 @@ export const MichelleMindPalaceSpesificMenuItem01: SceneSpesificItemSceneMenuIte
     MenuItemSelectionDescription: "You approach the woman. She's fidgeting with a small metallic cube. She raises her gaze and talks to you",
     NextScene: "",
     ItemSelectionEffects: [],
-    ItemSelectionFunctionalityComponents: [FunctionalityComponentsHandmade.ShowDialog],
+    ItemSelectionFunctionalityComponentsEnum: [FunctionalityComponentsHandmade.ShowDialog],
     ItemSelectionFunctionalityComponentDatas: [[
         "Michelle01",
         "Name's Michelle, what do you want?",
@@ -89,8 +106,8 @@ export const MichelleMindPalaceSpesificMenuItem01: SceneSpesificItemSceneMenuIte
     MenuItemRequireAllFlags: [],
     MenuItemRequireAnyFlags: [],
     MenuItemForbiddenAllFlags: [],
-    MenuItemForbiddenAnyFlags: ["MindPalaceMichelleChat01"],
-    MenuItemFlagsToChange: [{ FlagToChange: "MindPalaceMichelleChat01", FlagValue: true }],
+    MenuItemForbiddenAnyFlags: ["MindPalaceMichelleSpokenTo"],
+    MenuItemFlagsToChange: [{ FlagName: "MindPalaceMichelleSpokenTo", FlagValue: true }],
 }
 
 export const MichelleMindPalaceSpesificMenuItem02: SceneSpesificItemSceneMenuItemDataType = {
@@ -101,16 +118,16 @@ export const MichelleMindPalaceSpesificMenuItem02: SceneSpesificItemSceneMenuIte
     MenuItemSelectionDescription: "You approach the woman. She looks at you",
     NextScene: "",
     ItemSelectionEffects: [],
-    ItemSelectionFunctionalityComponents: [FunctionalityComponentsHandmade.ShowDialog],
+    ItemSelectionFunctionalityComponentsEnum: [FunctionalityComponentsHandmade.ShowDialog],
     ItemSelectionFunctionalityComponentDatas: [[
         "Michelle02",
         "You again, and without my purse...",
         "What do you want?",
 
     ]],
-    MenuItemRequireAllFlags: ["MindPalaceMichelleChat01"],
+    MenuItemRequireAllFlags: ["MindPalaceMichelleSpokenTo"],
     MenuItemRequireAnyFlags: [],
-    MenuItemForbiddenAllFlags: ["MindPalaceMichelleChat02"],
+    MenuItemForbiddenAllFlags: ["MindPalaceItemReceived"],
     MenuItemForbiddenAnyFlags: [],
     MenuItemFlagsToChange: [],
 }
@@ -122,19 +139,19 @@ export const MichelleMindPalaceSpesificMenuItem03: SceneSpesificItemSceneMenuIte
     MenuItemSelectionDescription: "You approach the woman. She notices the purse and smiles at you",
     NextScene: "",
     ItemSelectionEffects: [],
-    ItemSelectionFunctionalityComponents: [FunctionalityComponentsHandmade.ShowDialog],
+    ItemSelectionFunctionalityComponentsEnum: [FunctionalityComponentsHandmade.ShowDialog],
     ItemSelectionFunctionalityComponentDatas: [[
-                "Michelle03",
+        "Michelle03",
         "Hi again, and with my purse...",
         "The cash, naturally, seems to have walked away but the rest is here, thanks.",
         "And no, I'm not blaming you.",
         "Here's the toy",
     ]],
-    MenuItemRequireAllFlags: ["MindPalaceMichelleChat01", "MindPalaceMichelleChat02", "MindPalaceMichelleChat03"],
+    MenuItemRequireAllFlags: ["MindPalaceMichelleSpokenTo", "MindPalaceItemReceived"],
     MenuItemRequireAnyFlags: [],
-    MenuItemForbiddenAllFlags: ["MindPalaceMichelleChat04"],
+    MenuItemForbiddenAllFlags: ["MindPalaceItemReturned"],
     MenuItemForbiddenAnyFlags: [],
-    MenuItemFlagsToChange: [{ FlagToChange: "MindPalaceMichelleChat04", FlagValue: true }],
+    MenuItemFlagsToChange: [{ FlagName: "MindPalaceItemReturned", FlagValue: true }],
 }
 export const MichelleMindPalaceSpesificMenuItem04: SceneSpesificItemSceneMenuItemDataType = {
     SourceItem: CharacterEnum.Character_Michelle.toString(),
@@ -144,15 +161,16 @@ export const MichelleMindPalaceSpesificMenuItem04: SceneSpesificItemSceneMenuIte
     MenuItemSelectionDescription: "You approach the woman. Shesmiles at you",
     NextScene: "",
     ItemSelectionEffects: [],
-    ItemSelectionFunctionalityComponents: [FunctionalityComponentsHandmade.ShowDialog],
+    ItemSelectionFunctionalityComponentsEnum: [FunctionalityComponentsHandmade.ShowDialog],
     ItemSelectionFunctionalityComponentDatas: [[
-                "Michelle04",
+        "Michelle04",
         "Hello, handsome.",
         "You got me my stuff, I gave you the toy, what else could you possibly want?",
-        "Unless, of course, you want to... but we'll have to see about that later, I'm busy extracting revenge.",
-        "TTYL ♥",
+        "Unless, of course, you want to...",
+        "...but we'll have to see about that later, I'm busy extracting revenge.",
+        "Hope to catch you later",
     ]],
-    MenuItemRequireAllFlags: ["MindPalaceMichelleChat04"],
+    MenuItemRequireAllFlags: ["MindPalaceItemReturned"],
     MenuItemRequireAnyFlags: [],
     MenuItemForbiddenAllFlags: [],
     MenuItemForbiddenAnyFlags: [],
@@ -166,7 +184,7 @@ export const BobMindPalaceNeighborSpesificMenuItem01: SceneSpesificItemSceneMenu
     MenuItemSelectionDescription: "Before you get the question out into the air, the eyes of the man before you go wild. Violent, even.",
     NextScene: ScenesEnumHandmade.BobCombat,
     ItemSelectionEffects: [],
-    ItemSelectionFunctionalityComponents: [],
+    ItemSelectionFunctionalityComponentsEnum: [],
     ItemSelectionFunctionalityComponentDatas: [],
     MenuItemRequireAllFlags: [],
     MenuItemRequireAnyFlags: [],

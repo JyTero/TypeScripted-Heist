@@ -1,4 +1,5 @@
 import { ItemBase } from "./Items/ItemBase";
+import { InitialisationManager } from "./MainPageInitialisation";
 import { PlayerCharacter } from "./PlayerCharacter";
 import { SubWindow } from "./Tools/SubWindow";
 import { PageElement } from "./UI/PageElement";
@@ -11,8 +12,10 @@ export class PlayerInventory extends SubWindow {
 
     private inventorySlotRows: number = 3;
     private inventorySlotColumn: number = 3;
-    private invetorySlots: InventorySlot[] = [];
-    private numberOfInventorySlots: number = 16;
+    private allInvetorySlots: InventorySlot[] = [];
+    private emptyInventorySlot: InventorySlot[] = [];
+    private fullInventorySlots: InventorySlot[] = [];
+    private numberOfInventorySlots: number = 6;
     private numberOfSlotsCreated: number = 0;
 
     public get InventoryItems(): ItemBase[] {
@@ -28,9 +31,11 @@ export class PlayerInventory extends SubWindow {
     }
 
     protected override IndividualOnPageOpen(): void {
-        this.window.document.body.style.backgroundColor = "green";
         //this.appRoot.Element.style.backgroundColor = "red";
         this.PrepareInventoryDisplay();
+
+        //InitialisationManager.PlayerInventoryWindowReady = true;
+        InitialisationManager.UIReady(InitialisationManager.PlayerInventoryWindowReady);
     }
 
     private inventorySlotsParentName: string = "inventorySlotsParent";
@@ -41,8 +46,13 @@ export class PlayerInventory extends SubWindow {
         this.AppendToRoot(this.slotParent);
         for (var i = 0; i < this.numberOfInventorySlots; i++) {
             var inventorySlot = this.CreateInventorySlot();
-            this.invetorySlots.push(inventorySlot);
+            this.allInvetorySlots.push(inventorySlot);
             this.slotParent.AppendChild(inventorySlot);
+
+            if (inventorySlot.isEmpty)
+                this.emptyInventorySlot.push(inventorySlot);
+            else
+                this.fullInventorySlots.push(inventorySlot);
         }
 
     }
@@ -54,7 +64,11 @@ export class PlayerInventory extends SubWindow {
     }
 
     public AddInventoryItem(item: ItemBase) {
-
+        const slot = this.emptyInventorySlot.pop();
+        if (!slot)
+            return
+        slot.AddItemToSlot(item);
+        slot.Element.style.backgroundImage = "url('./src/Assets/Img/character/bag.png')";
     }
     public RemoveInventoryItem(item: ItemBase) {
 
@@ -62,5 +76,10 @@ export class PlayerInventory extends SubWindow {
 }
 
 class InventorySlot extends PageElement {
-    public slotFull: boolean = false;
+    public isEmpty: boolean = true;
+    private itemInSlot: ItemBase;
+
+    public AddItemToSlot(item: ItemBase) {
+        this.itemInSlot = item;
+    }
 }

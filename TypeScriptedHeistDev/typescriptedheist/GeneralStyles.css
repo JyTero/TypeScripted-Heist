@@ -1,0 +1,7 @@
+#app{
+    display: flex;
+    flex-direction: column;
+}
+p {
+    white-space: pre-line;
+}

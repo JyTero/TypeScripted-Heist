@@ -1,4 +1,4 @@
-import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
+import { ExplorationMenuItemData } from "../DataTypes/MenuItemDataType";
 import { ExplorationSceneData, SceneBaseData } from "../DataTypes/SceneDataType";
 import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 import { placeholderScene } from "../ScenesLegacy/Placeholders";
@@ -20,7 +20,7 @@ export const MansionApproachSceneData: ExplorationSceneData = {
             MenuItemSelectionDescription: "You easily pick the broken lock on the gate and sneak in.",
             NextScene: ScenesEnumHandmade.Frontdoor.toString(), //FrontDoorScene
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
@@ -34,7 +34,7 @@ export const MansionApproachSceneData: ExplorationSceneData = {
             MenuItemSelectionDescription: "You manage to climb over the brick fence.",
             NextScene: ScenesEnumHandmade.GroundWindow.toString(),
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
@@ -48,7 +48,7 @@ export const MansionApproachSceneData: ExplorationSceneData = {
             MenuItemSelectionDescription: "You walk along the fence and find a collapsed section on the far end of the back garden.",
             NextScene: ScenesEnumHandmade.Backdoor.toString(),
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
@@ -62,7 +62,7 @@ export const MansionApproachSceneData: ExplorationSceneData = {
             MenuItemSelectionDescription: "You run up to a citizen minding their own business and kick them.",
             NextScene: ScenesEnumHandmade.CombatTest.toString(),
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
@@ -76,7 +76,7 @@ export const MansionApproachSceneData: ExplorationSceneData = {
             MenuItemSelectionDescription: "You close your eyes and fall into your own peace and quiet, your own mind palace.",
             NextScene: ScenesEnumHandmade.MindPalace.toString(),
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],

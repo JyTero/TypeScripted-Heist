@@ -51,7 +51,6 @@ export abstract class SubWindow {
         this.IndividualOnPageOpen();
     }
     protected abstract IndividualOnPageOpen(): void;
-
     public AppendToRoot(pe:PageElement){
         this.appRoot.AppendChild(pe);
     }

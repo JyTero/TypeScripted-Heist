@@ -9,3 +9,6 @@ https://opengameart.org/content/street-girl
 
 Bob Visual
 https://opengameart.org/content/bald-man
+
+smallPixel
+https://opengameart.org/content/inventory-filter-icons

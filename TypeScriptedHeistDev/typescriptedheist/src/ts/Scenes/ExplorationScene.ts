@@ -1,4 +1,4 @@
-import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
+import { ExplorationMenuItemData } from "../DataTypes/MenuItemDataType";
 import { ExplorationSceneData } from "../DataTypes/SceneDataType";
 import { WriteMenuSelection } from "../IOMethods";
 import { FCE, IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
@@ -17,7 +17,7 @@ export class ExplorationScene extends SceneBase {
 
     }
 
-    private BuildMenuitems(menuItemDatas: ExplorationMenuItemDataType[]): MenuItemBase[] {
+    private BuildMenuitems(menuItemDatas: ExplorationMenuItemData[]): MenuItemBase[] {
         var menuItems: MenuItemBase[] = [];
         //Data menuItems
         for (var menuItemData of menuItemDatas) {
@@ -40,7 +40,7 @@ export class ExplorationScene extends SceneBase {
     }
 
     private AddSceneSpesificMenuItems(){
-        var menuDatas:ExplorationMenuItemDataType[] = SceneManagerInstance.GetSpesificMenuItems(this.SceneItems,this);
+        var menuDatas:ExplorationMenuItemData[] = SceneManagerInstance.GetSpesificMenuItems(this.SceneItems,this);
         if(menuDatas.length == 0)
             return;
         else{
@@ -79,7 +79,7 @@ export class ExplorationScene extends SceneBase {
                 this.AdjustFlags(chosenMenuItem);
 
             WriteMenuSelection(chosenMenuItem.MenuItemSelectionDescription);
-            FCE.RunFunctionalityComponents(chosenMenuItem, this)
+            FCE.RunFunctionalityComponents(chosenMenuItem.ItemSelectionFunctionalityComponents, this)
             SceneManagerInstance.HandleNextScene(this, chosenMenuItem.NextSceneDataReference); //Move to ScenMain / Move to its own class, guttin base class
         }
         else

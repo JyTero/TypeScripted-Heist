@@ -6,7 +6,7 @@ import { IsDebug, JsonHandlerInstance } from "../MainPageInitialisation";
 import { WeaponItem } from "../Items/WeaponItem/WeaponItem";
 import { ItemsEnumHandmade } from "../../Assets/ItemsEnumHandmade";
 import { ItemBase } from "../Items/ItemBase";
-import { FragileGlassItem, WallArtAltGramp, WallArtBayek } from "../Items/ItemData/ItemDatasHandmade";
+import { FragileGlassItem, MichellesPurseItem, WallArtAltGramp, WallArtBayek } from "../Items/ItemData/ItemDatasHandmade";
 import { PlayerCharacter } from "../PlayerCharacter";
 
 export function BuildWeapon(weaponEnum: WeaponEnum): WeaponItem {
@@ -46,6 +46,8 @@ export function BuildItemHandmade(itemEnum: ItemsEnumHandmade): ItemBase {
       return BuildCharacter(CharacterEnum.Character_Michelle);
     case ItemsEnumHandmade.Character_Bob:
       return BuildCharacter(CharacterEnum.Character_Bob);
+    case ItemsEnumHandmade.MichellesPurseItem:
+      return new ItemBase(MichellesPurseItem);
   }
 
 }

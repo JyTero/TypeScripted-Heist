@@ -5,5 +5,5 @@ export enum ItemsEnumHandmade{
     Character_Amalia = "Character_Amalia",
     Character_Michelle = "Character_Michelle",
     Character_Bob = "Character_Bob",
-    
+    MichellesPurseItem = "MichellesPurseItem",
 }

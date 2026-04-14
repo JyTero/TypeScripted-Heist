@@ -1,11 +1,11 @@
 import { ItemsEnumHandmade } from "../../Assets/ItemsEnumHandmade";
 import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
-import { FlagType } from "../flags";
+import { Flag } from "../flags";
 import { ItemBase } from "../Items/ItemBase";
 import { Color } from "../Tools/Color";
 import { BattleArenaDataType } from "./BattleArenaDataType";
 import { ItemBaseData } from "./ItemDataTypes";
-import { ExplorationMenuItemDataType } from "./MenuItemDataType";
+import { ExplorationMenuItemData } from "./MenuItemDataType";
 import { SpriteData, SpriteLocationDataType } from "./SpriteLocationDataType";
 
 export interface SceneBaseData {
@@ -13,22 +13,26 @@ export interface SceneBaseData {
     SceneType: string, //SceneTypesEnum
     SceneBackgroundColor: Color;
     SceneItems: ItemsEnumHandmade[],
-    SceneItemLocationDatas:SpriteLocationDataType[];
+    SceneItemLocationDatas: SpriteLocationDataType[];
 
 
 
 }
 export interface ExplorationSceneData extends SceneBaseData {
-    MenuItems: ExplorationMenuItemDataType[];
+    MenuItems: ExplorationMenuItemData[];
 
 }
 export interface CombatSceneData extends SceneBaseData {
     battleArenaData: BattleArenaDataType,
-    combatVictoryNextScene:ScenesEnumHandmade,
-    combatVictoryFlagsToChange:FlagType[],
-    combatLossNextScene:ScenesEnumHandmade,
-    combatLossFlagsToChange:FlagType[],
+    combatVictoryNextScene: ScenesEnumHandmade,
+    combatVictoryFlagsToChange: Flag[],
+    victoryFCs: string[];    //FunctionalityComponentEnum
+    vicotryFCData: string[][];
+    combatLossNextScene: ScenesEnumHandmade,
+    combatLossFlagsToChange: Flag[],
+    lossFCs: string[];
+    lossFCData: string[][];
 }
-export interface InteractionSceneData extends SceneBaseData{
+export interface InteractionSceneData extends SceneBaseData {
 
 }

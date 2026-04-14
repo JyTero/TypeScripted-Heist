@@ -3,7 +3,7 @@ import { MenuItemBase } from "../MenuItemBase";
 import { MenuObjectBase } from "../MenuObjectBase";
 import { FlagManager, IsDebug } from "../MainPageInitialisation";
 import { Sprite } from "../Canvas/Sprite";
-import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
+import { ExplorationMenuItemData } from "../DataTypes/MenuItemDataType";
 import { SceneBaseData } from "../DataTypes/SceneDataType";
 import { Color } from "../Tools/Color";
 import { ItemBase } from "../Items/ItemBase";
@@ -68,7 +68,7 @@ export abstract class SceneBase {
     }
 
 
-    public BuildMenuItem(MenuItemData: ExplorationMenuItemDataType): MenuItemBase {
+    public BuildMenuItem(MenuItemData: ExplorationMenuItemData): MenuItemBase {
         const newMenuItem: MenuItemBase = new MenuItemBase(MenuItemData);
         return newMenuItem;
 

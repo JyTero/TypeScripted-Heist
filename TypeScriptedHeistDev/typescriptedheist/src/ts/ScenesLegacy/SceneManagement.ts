@@ -1,12 +1,10 @@
 import { SceneBase } from "../Scenes/SceneBase";
-import { BattleArenaSceneOLD } from "../BattleArenaSceneBase";
 import { CanvasGraphicsInstance, FrameTimeMS } from "../MainPageInitialisation";
 import { CombatSceneData, ExplorationSceneData, SceneBaseData } from "../DataTypes/SceneDataType";
 import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
 import { MansionApproachSceneData } from "../SceneData/MansionApproachData";
 import { BackdoorSceneData } from "../SceneData/BackdoorData";
 import { FrontDoorSceneData } from "../SceneData/FrontDoorData";
-import { GroundLevelWindowSceneData } from "../SceneData/GroundLevelWindowData";
 import { BattleArenaTestSceneData, BobBattleSceneData } from "../BattleData/TestBattleData";
 import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 import { ExplorationScene } from "../Scenes/ExplorationScene";
@@ -14,7 +12,7 @@ import { CombatScene } from "../Scenes/CombatScene";
 import { placeholderScene } from "./Placeholders";
 import { MindPalaceScenData } from "../SceneData/MindPalaceData";
 import { Delay } from "../../Tools";
-import { ExplorationMenuItemDataType, SceneSpesificItemSceneMenuItemDataType } from "../DataTypes/MenuItemDataType";
+import { ExplorationMenuItemData, SceneSpesificItemSceneMenuItemDataType } from "../DataTypes/MenuItemDataType";
 import { BobMindPalaceNeighborSpesificMenuItem01, MichelleMindPalaceSpesificMenuItem01, MichelleMindPalaceSpesificMenuItem02, MichelleMindPalaceSpesificMenuItem03, MichelleMindPalaceSpesificMenuItem04 } from "../Items/ItemData/ItemDatasHandmade";
 import { ItemBase } from "../Items/ItemBase";
 import { MindPalaceNeighborData } from "../SceneData/MindPalaceNeighborData";
@@ -29,7 +27,6 @@ export class SceneManagement {
         this.allSceneDatas[ScenesEnumHandmade.First] = MansionApproachSceneData;
         this.allSceneDatas[ScenesEnumHandmade.Backdoor] = BackdoorSceneData;
         this.allSceneDatas[ScenesEnumHandmade.Frontdoor] = FrontDoorSceneData;
-        this.allSceneDatas[ScenesEnumHandmade.GroundWindow] = GroundLevelWindowSceneData;
         this.allSceneDatas[ScenesEnumHandmade.CombatTest] = BattleArenaTestSceneData;
         this.allSceneDatas[ScenesEnumHandmade.MindPalace] = MindPalaceScenData;
         this.allSceneDatas[ScenesEnumHandmade.MindPalaceNeighbor] = MindPalaceNeighborData;
@@ -142,8 +139,8 @@ export class SceneManagement {
         this.allSceneSpesificMenuItems.push(BobMindPalaceNeighborSpesificMenuItem01);
     }
 
-    public GetSpesificMenuItems(sceneItems: ItemBase[], scene: SceneBase):ExplorationMenuItemDataType[] {
-        var retList:ExplorationMenuItemDataType[] = [];
+    public GetSpesificMenuItems(sceneItems: ItemBase[], scene: SceneBase):ExplorationMenuItemData[] {
+        var retList:ExplorationMenuItemData[] = [];
         for (var SSMI of this.allSceneSpesificMenuItems) {
             if (SSMI.TargetScene == scene.SceneName) {
                 for (var sceneItem of sceneItems) {

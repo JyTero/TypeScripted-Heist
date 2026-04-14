@@ -1,5 +1,5 @@
 import { BattleMove } from "../BattleSystem/BattleMove";
-import { ExplorationMenuItemDataType } from "./MenuItemDataType";
+import { ExplorationMenuItemData } from "./MenuItemDataType";
 import { MetaData } from "./MetaData";
 import { SpriteData } from "./SpriteLocationDataType";
 
@@ -7,7 +7,7 @@ export interface ItemBaseData extends MetaData {
     ItemName: string;
     ItemMaxHP: number;
     ItemSpriteData:SpriteData,
-    ItemSceneMenuItems:ExplorationMenuItemDataType[],
+    ItemSceneMenuItems:ExplorationMenuItemData[],
 }
 
 export interface WeaponDatatype extends ItemBaseData {

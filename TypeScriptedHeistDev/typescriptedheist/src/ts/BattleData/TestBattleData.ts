@@ -6,6 +6,7 @@ import { placeholderScene } from "../ScenesLegacy/Placeholders";
 import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
 import { Color } from "../Tools/Color";
 import { ItemsEnumHandmade } from "../../Assets/ItemsEnumHandmade";
+import { FunctionalityComponentsHandmade } from "../../Assets/FunctionalityComponentsEnumHandmade";
 
 
 
@@ -26,6 +27,10 @@ export const BattleArenaTestSceneData: CombatSceneData = {
     combatVictoryFlagsToChange: [],
     combatLossNextScene: ScenesEnumHandmade.MindPalace,
     combatLossFlagsToChange: [],
+    victoryFCs: [],
+    vicotryFCData: [],
+    lossFCs: [],
+    lossFCData: []
 }
 
 export const BobBattleArenaData: BattleArenaDataType = {
@@ -35,13 +40,17 @@ export const BobBattleArenaData: BattleArenaDataType = {
 export const BobBattleSceneData: CombatSceneData = {
     battleArenaData: BobBattleArenaData,
     combatVictoryNextScene: ScenesEnumHandmade.MindPalaceNeighbor,
-    combatVictoryFlagsToChange: [{FlagToChange: "MindPalaceMichelleChat03", FlagValue: true}],
+    combatVictoryFlagsToChange: [{ FlagName: "MindPalaceItemReceived", FlagValue: true }],
     combatLossNextScene: ScenesEnumHandmade.MindPalace,
     combatLossFlagsToChange: [],
     SceneName: `${BobBattleArenaData.BattleName}Scene`,
     SceneType: SceneTypesEnumHandmade.CombatScene,
-    SceneBackgroundColor: new Color(7,39,101,1),
+    SceneBackgroundColor: new Color(7, 39, 101, 1),
     SceneItems: [],
     SceneItemLocationDatas: [],
+    victoryFCs: [FunctionalityComponentsHandmade.AddInventoryItem],
+    vicotryFCData: [[ItemsEnumHandmade.MichellesPurseItem]],
+    lossFCs: [],
+    lossFCData: []
 }
 

@@ -1,17 +1,17 @@
 #App{
-    background-color: yellow;
+    /*background-color: yellow;*/
 }
 #inventorySlotsParent{
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
-    background-color: purple;
+    /*background-color: purple;*/
 
 
 }
 .InventorySlot{
     height: 128px;
-    background-color: blue;
+   /* background-color: blue;*/
     width: 128px;
     border-style: solid;
     border-color: red;

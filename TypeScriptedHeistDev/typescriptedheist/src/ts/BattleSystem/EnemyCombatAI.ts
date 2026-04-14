@@ -141,7 +141,7 @@ export class BattleAction {
         return this.score;
     }
 
-    public ScoringHistory = new Map<number, string>();
+    public ScoringHistory = new Map<string, string>();
     public TargetIsAlly: boolean = false;
 
     constructor(actionOwner: CharacterBase, bm: BattleMove, target: CombatCharacter) {
@@ -170,10 +170,16 @@ export class BattleAction {
     public AdjustScore(adjustAmmount: number, changeReason: string) {
 
         this.score += adjustAmmount;
-        this.ScoringHistory.set(adjustAmmount, changeReason);
+        this.ScoringHistory.set(adjustAmmount.toString(), changeReason);
 
     }
 
+    public MultiplyScore(multiplier:number, changeReason: string) {
+
+        this.score *= multiplier;
+        this.ScoringHistory.set(multiplier.toString()+"X", changeReason);
+
+    }
     public ResetBA(){
         this.score = 0;
         this.ScoringHistory.clear();

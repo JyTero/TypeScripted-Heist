@@ -2,11 +2,15 @@ import { MenuItemBase } from "../MenuItemBase";
 import { SceneBase } from "../Scenes/SceneBase";
 import { SceneBaseData } from "../DataTypes/SceneDataType";
 import { Color } from "../Tools/Color";
-import { MansionApproachMenuItemData01, MansionApproachMenuItemData02, MansionApproachMenuItemData03, MansionApproachMenuItemData04 } from "../SceneData/MansionApproachData";
+import {  } from "../SceneData/MansionApproachData";
 import { AlertManager } from "../AlertManager";
 import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
+import { AlertManagerInstance } from "../MainPageInitialisation";
 
 export class MansionApproachScene extends SceneBase {
+   protected SceneSpesificExit(): void {
+       throw new Error("Method not implemented.");
+   }
     
    public SceneSpsificStartUp(): void {
         this.SceneName = MansionApproachSceneData.SceneName;
@@ -14,27 +18,18 @@ export class MansionApproachScene extends SceneBase {
     }
 
    public async SceneSpesificMain() {
-       await AlertManager.Instance.WriteAlertStorePrevious("The target is in sight");
+       await AlertManagerInstance.WriteAlertStorePrevious("The target is in sight",[]);
 
     }
 
-   public BuildMenuItems(): MenuItemBase[] {
-
-        const FenceMenuItem1 = this.BuildMenuItem(MansionApproachMenuItemData01);
-        const FenceMenuItem2 = this.BuildMenuItem(MansionApproachMenuItemData02);
-        const FenceMenuItem3 = this.BuildMenuItem(MansionApproachMenuItemData03);
-        const FenceMenuItem4 = this.BuildMenuItem(MansionApproachMenuItemData04);
-
-        return [FenceMenuItem1, FenceMenuItem2, FenceMenuItem3, FenceMenuItem4];
-
-    }
 }
 
 const MansionApproachSceneData:SceneBaseData ={
     SceneName: "Mansion approach",
     SceneType: SceneTypesEnumHandmade.ExplorationScene.toString(),
-    SceneBackgroundColor: new Color(255,0,16,1)
-
+    SceneBackgroundColor: new Color(255, 0, 16, 1),
+    SceneItems: [],
+    SceneItemLocationDatas: []
 }
 
 

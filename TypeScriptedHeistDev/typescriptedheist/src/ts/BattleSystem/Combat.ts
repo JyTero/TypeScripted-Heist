@@ -1,6 +1,6 @@
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { CharacterSheet } from "../Items/Character/CharacterSheet";
-import { IsDebug } from "../MainPageInitialisation";
+import { AlertManagerInstance, IsDebug } from "../MainPageInitialisation";
 import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
 import { AlertManager } from "../AlertManager";
 
@@ -21,7 +21,7 @@ export function BeginMeleeAttack(attackerChar: CharacterBase, defenderChar:Chara
         
         if(IsDebug)
             console.log(`${defenderChar.ItemName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`);
-        AlertManager.Instance.WriteAlertStorePrevious(`${defenderChar.ItemName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`); 
+        AlertManagerInstance.WriteAlertStorePrevious(`${defenderChar.ItemName} is hit for ${totalDamage}, but their amour reduces it to  ${reducedDamage}`,[]); 
 
         reducedDamage = -Math.abs(reducedDamage);
         //defenderSheet.ReceiveDamage(reducedDamage);

@@ -80,7 +80,7 @@ export class CharacterStat {
         if (AlertManagerInstance.DoesAlertGroupExist(AlertGroupType.CombatTurn))
             AlertManagerInstance.AddAlertToGroup(`${this.owner.ItemName} stat ${this.StatName} changes by ${adjustValue}`, AlertGroupType.CombatTurn);
         else
-            AlertManagerInstance.WriteAlertStorePrevious(`${this.owner.ItemName} stat ${this.StatName} changes by ${adjustValue}`);
+            AlertManagerInstance.WriteAlertStorePrevious(`${this.owner.ItemName} stat ${this.StatName} changes by ${adjustValue}`,[]);
     }
 
     SubscribeToOnValueChange(listener: StatChangedListener) {

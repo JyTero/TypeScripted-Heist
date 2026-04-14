@@ -1,4 +1,4 @@
-import { ExplorationMenuItemDataType } from "../DataTypes/MenuItemDataType";
+import { ExplorationMenuItemData } from "../DataTypes/MenuItemDataType";
 import { ExplorationSceneData } from "../DataTypes/SceneDataType";
 import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 import { placeholderScene } from "../ScenesLegacy/Placeholders";
@@ -17,7 +17,7 @@ export const BackdoorSceneData: ExplorationSceneData = {
             MenuItemSelectionDescription: "With some knowhow and smart applying of force, you manage to break the lock on the door. It's not prety, but the door is now open.",
             NextScene: ScenesEnumHandmade.Placeholder.toString(),
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
@@ -31,7 +31,7 @@ export const BackdoorSceneData: ExplorationSceneData = {
             MenuItemSelectionDescription: "After some tinkering in the darknes you hear the familiar and ever welcome sound of a lock clicking open",
             NextScene: "",
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
@@ -45,14 +45,14 @@ export const BackdoorSceneData: ExplorationSceneData = {
             MenuItemSelectionDescription: "Classics are classics for a reason: You find the key to the back door from under a flover pot next to the door.",
             NextScene: "",
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: [],
             MenuItemRequireAnyFlags: [],
             MenuItemForbiddenAllFlags: [],
             MenuItemForbiddenAnyFlags: ["HasPorchDoorKey"],
             MenuItemFlagsToChange: [
-                { FlagToChange: "HasPorchDoorKey", FlagValue: true }
+                { FlagName: "HasPorchDoorKey", FlagValue: true }
             ],
         },
         {
@@ -61,7 +61,7 @@ export const BackdoorSceneData: ExplorationSceneData = {
             MenuItemSelectionDescription: "You use the back door key to open the back door and enter.",
             NextScene: ScenesEnumHandmade.Placeholder.toString(),
             ItemSelectionEffects: [],
-            ItemSelectionFunctionalityComponents: [],
+            ItemSelectionFunctionalityComponentsEnum: [],
             ItemSelectionFunctionalityComponentDatas: [],
             MenuItemRequireAllFlags: ["HasPorchDoorKey"],
             MenuItemRequireAnyFlags: [],
@@ -70,7 +70,8 @@ export const BackdoorSceneData: ExplorationSceneData = {
             MenuItemFlagsToChange: [],
         },
     ],
-    SceneItems: []
+    SceneItems: [],
+    SceneItemLocationDatas: []
 }
 
 //LEGACY

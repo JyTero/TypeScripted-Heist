@@ -1,4 +1,4 @@
-import { AlertManagerInstance, CanvasGraphicsInstance, FlagManager, FrameTimeMS, IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
+import { AlertManagerInstance, CanvasGraphicsInstance, FCE, FlagManager, FrameTimeMS, IsDebug, SceneManagerInstance } from "../MainPageInitialisation";
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { Delay } from "../../Tools";
 import { CombatMenuObject } from "../CombatMenuObject";
@@ -18,7 +18,8 @@ import { SceneBase } from "../Scenes/SceneBase";
 import { CombatSceneData, SceneBaseData } from "../DataTypes/SceneDataType";
 import { CharcterStatTypeEnum } from "../../Assets/DataJsons/CharcterStatTypeEnum";
 import { DebugWindowInstance } from "../DebugPageInitialisation";
-import { FlagType } from "../flags";
+import { Flag } from "../flags";
+import { FunctionalityComponent } from "../FunctionalityComponentEngine";
 
 export async function BeginBattleEngine(sceneData: CombatSceneData, currentScene: CombatScene) {
     const battleStage: BattleEngine = new BattleEngine(sceneData, PlayerCharacter.instance.GetPlayerCharacter(), currentScene);
@@ -27,7 +28,7 @@ export async function BeginBattleEngine(sceneData: CombatSceneData, currentScene
     battleStage.OnBattleStartUp();
     //Begin Battle
     //await WriteAlertStorePrevious("Battle Begins!");
-    await AlertManagerInstance.WriteAlertStorePrevious("Battle Begins!");
+    await AlertManagerInstance.WriteAlertStorePrevious("Battle Begins!",[]);
     //Begin rounds
     await battleStage.BattleLoop();
 
@@ -48,9 +49,11 @@ class BattleEngine {
     private battleOver = false;
     private currentScene: CombatScene;
     private nextSceneVictory: ScenesEnumHandmade;
-    private flagsToChangeVictory: FlagType[];
+    private flagsToChangeVictory: Flag[];
+    private victoryFCs: FunctionalityComponent[];
     private nextSceneLoss: ScenesEnumHandmade;
-    private flagsToChangeLoss: FlagType[]
+    private flagsToChangeLoss: Flag[]
+    private lossFCs: FunctionalityComponent[];
     private previousScene: SceneBase;
 
     private xPos: number = 5;
@@ -65,7 +68,10 @@ class BattleEngine {
         this.nextSceneVictory = sceneData.combatVictoryNextScene;
         this.flagsToChangeVictory = sceneData.combatVictoryFlagsToChange;
         this.nextSceneLoss = sceneData.combatLossNextScene;
-        this.flagsToChangeLoss = sceneData.combatLossFlagsToChange
+        this.flagsToChangeLoss = sceneData.combatLossFlagsToChange;
+        this.victoryFCs = FCE.BuildFunctionalityComponents(`${this.currentScene.SceneName}battle`, sceneData.victoryFCs, sceneData.vicotryFCData);
+        this.lossFCs = FCE.BuildFunctionalityComponents(`${this.currentScene.SceneName}battle`, sceneData.lossFCs, sceneData.lossFCData);
+
     }
     public async OnEngineStartUp() {
         if (IsDebug)
@@ -253,7 +259,7 @@ class BattleEngine {
             hpString += `${combatCharacter.Character.ItemName} has ${combatCharacter.Character.Health.Value}hp\n`;
             hpString += "<br>";
         });
-        await AlertManagerInstance.WriteAlertStorePrevious(hpString);
+        await AlertManagerInstance.WriteAlertStorePrevious(hpString,[]);
     }
 
     private SetUpTurnOrder() {
@@ -337,25 +343,27 @@ class BattleEngine {
     private OnBattleEnd(playerWon: boolean) {
         this.battleOver = true;
         //this.nextScene.SceneMain();
-        this.OnEngineDestroy();
 
         if (playerWon) {
-            AlertManagerInstance.WriteAlertStorePrevious("Player won the battle ended");
-            this.AdjustFlags(this.flagsToChangeVictory)
+            AlertManagerInstance.WriteAlertStorePrevious("Player won the battle ended",[]);
+            this.AdjustFlags(this.flagsToChangeVictory);
+            FCE.RunFunctionalityComponents(this.victoryFCs, this.currentScene);
             SceneManagerInstance.HandleNextScene(this.currentScene, this.nextSceneVictory);
         }
         else {
-            AlertManagerInstance.WriteAlertStorePrevious("Player lost the battle ended");
-            this.AdjustFlags(this.flagsToChangeLoss)
+            AlertManagerInstance.WriteAlertStorePrevious("Player lost the battle ended",[]);
+            this.AdjustFlags(this.flagsToChangeLoss);
+            FCE.RunFunctionalityComponents(this.lossFCs, this.currentScene);
             SceneManagerInstance.HandleNextScene(this.currentScene, this.nextSceneLoss);
         }
+        this.OnEngineDestroy();
     }
 
-    private AdjustFlags(flags:FlagType[]) {
-        for(var fc of flags){
+    private AdjustFlags(flags: Flag[]) {
+        for (var fc of flags) {
             FlagManager.ChangeFlagValue(fc)
         }
-     }
+    }
     private async OnEngineDestroy() {
 
     }

@@ -1,7 +1,7 @@
 import { Delay, RemoveAllHTMLChildren } from "../../Tools";
 import { CombatCharacter } from "../BattleSystem/CombatCharacter";
 import { BattleAction } from "../BattleSystem/EnemyCombatAI";
-import { FrameTimeMS } from "../MainPageInitialisation";
+import { FrameTimeMS, InitialisationManager } from "../MainPageInitialisation";
 import { CharacterBase } from "../Items/Character/CharacterBase";
 import { Trait } from "../Items/Character/Trait";
 import { PageElement } from "../UI/PageElement";
@@ -69,6 +69,8 @@ export class DebugWindow extends SubWindow {
             this.sceneDebugHeaderPE = htmlElement;
         htmlElement = null;
 
+        InitialisationManager.UIReady(InitialisationManager.DebugWindowReady);
+        //InitialisationManager.DebugWindowReady = true;
     }
 
 

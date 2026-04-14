@@ -1,7 +1,8 @@
 import { Delay } from "../Tools";
+import { Alert } from "./AlertManager";
 
 import { Sprite } from "./Canvas/Sprite";
-import { CanvasGraphicsInstance, FrameTimeMS, IsDebug } from "./MainPageInitialisation";
+import { CanvasGraphicsInstance, FrameTimeMS, IsDebug, MainWindowPageDisplayManagerInstance } from "./MainPageInitialisation";
 import { DOMElementType, PageElement } from "./UI/PageElement";
 
 
@@ -15,7 +16,7 @@ export class PageDisplayManager {
         this.pageElements.push(pe);
         pe.DiscoverChildren(this);
     }
-    public RemovePageElement(pe:PageElement){
+    public RemovePageElement(pe: PageElement) {
         this.pageElements.splice(this.pageElements.indexOf(pe));
     }
 
@@ -31,7 +32,7 @@ export class PageDisplayManager {
     //     const rootPE = //Make new PageElement constructor to handle root but retain compatibility
     // }
 
-    //CREATE
+    //CREATE PEs
     public CreatePageElementFromRoot(html: string | HTMLElement, name: string): PageElement {
         const newpe = this.CreateNewPageElement(html, name);
         newpe.DiscoverChildren(this);
@@ -60,7 +61,7 @@ export class PageDisplayManager {
         }
     }
 
-    //FIND
+    //FIND PEs
     public FindHTMLElementByID(id: string): HTMLElement | undefined {
         var app = this.window.document.getElementById(id);
         if (app)
@@ -96,7 +97,7 @@ export class PageDisplayManager {
         return null;
     }
 
-    //
+
 
     public PrintAllElmentsDEBUG() {
         var i = 0;
@@ -105,6 +106,30 @@ export class PageDisplayManager {
             i++;
         });
     }
+    private historyCounter: number = 0;
+    private historyEntryClassName: string = "HistoryEntry";
+    private historyEntryPE: PageElement;
+    public async MoveCurrentToHistory(alert: Alert) {
+        const newEntry = MainWindowPageDisplayManagerInstance.CreateNewPageElement("div", "historyDiv" + this.historyCounter);
+        const p = MainWindowPageDisplayManagerInstance.CreateNewPageElement("p", "historyP" + this.historyCounter);
+
+        newEntry.Element.classList.add(this.historyEntryClassName);
+        alert.InsertTagsToElementClassList(newEntry.Element);
+
+        p.Element.textContent = alert.Content;
+        newEntry.AppendChild(p);
+
+        if (this.historyEntryPE == undefined) {
+            const c = MainWindowPageDisplayManagerInstance.FindPageElementByElementId("TextHistory");
+            if (c != undefined)
+                this.historyEntryPE = c
+        }
+        this.historyEntryPE.AppendChildFirst(newEntry);
+
+        this.historyCounter++;
+        await Delay(FrameTimeMS);
+    }
+
 }
 
 type pageElementDataType = {
@@ -118,19 +143,19 @@ const canvas = document.getElementById("GameCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d");
 
 
-export async function AddNewHistoryDiv(historyText: string) {
+// export async function AddNewHistoryDiv(historyText: string) {
 
-    const newEntry = document.createElement("div");
-    const p = document.createElement("p");
+//     const newEntry = document.createElement("div");
+//     const p = document.createElement("p");
 
-    newEntry.className = "HistoryEntry";
+//     newEntry.className = "HistoryEntry";
 
-    p.textContent = historyText;
-    newEntry.appendChild(p);
+//     p.textContent = historyText;
+//     newEntry.appendChild(p);
 
-    history?.insertBefore(newEntry, history.firstChild);
-    await Delay(FrameTimeMS);
-}
+//     history?.insertBefore(newEntry, history.firstChild);
+//     await Delay(FrameTimeMS);
+// }
 TestImage();
 function TestImage() {
     // Load image
