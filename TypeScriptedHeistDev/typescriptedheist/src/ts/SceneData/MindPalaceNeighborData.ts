@@ -1,5 +1,6 @@
 import { ItemsEnumHandmade } from "../../Assets/ItemsEnumHandmade";
 import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
+
 import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
 import { ExplorationMenuItemData } from "../DataTypes/MenuItemDataType";
 import { ExplorationSceneData } from "../DataTypes/SceneDataType";

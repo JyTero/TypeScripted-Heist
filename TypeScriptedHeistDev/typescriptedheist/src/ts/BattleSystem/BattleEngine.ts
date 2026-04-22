@@ -12,7 +12,7 @@ import { BattleAction, EnemyCombatAI } from "./EnemyCombatAI";
 import { PersoanlityAxisEnumH } from "../../Assets/PersonalityAxisEnumHandmade";
 import { PersonalityAxis } from "../Items/Character/PersonalityAxis";
 import { TraitsEnumH } from "../../Assets/TraitsEnumHandmade";
-import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
+import { ScenesEnumHandmade } from "../../Assets/OldScenesEnumHandMade";
 import { CombatScene } from "../Scenes/CombatScene";
 import { SceneBase } from "../Scenes/SceneBase";
 import { CombatSceneData, SceneBaseData } from "../DataTypes/SceneDataType";

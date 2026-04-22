@@ -1,11 +1,6 @@
-export enum ScenesEnumHandmade {
+export enum onloadScenesEnumHandmade {
     Placeholder = "Placeholder",
     First = "First",
-    HookingAlley = "HookingAlley",
-
-
-    //OLD THIGNS, HERE FOR FUTURE DEBUG NEEDS
-    OFirst = "OFirst",
     Backdoor = "Backdoor",
     Frontdoor = "Frontdoor",
     GroundWindow = "GroundWindow",

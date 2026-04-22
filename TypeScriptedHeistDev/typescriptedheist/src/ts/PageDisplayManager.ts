@@ -12,8 +12,9 @@ export class PageDisplayManager {
     public ThisPageName: string;
     private pageElements: PageElement[] = [];
 
-    public AddNewPageElement(pe: PageElement) {
+    public AddNewPageElement(pe: PageElement, children:boolean) {
         this.pageElements.push(pe);
+        if(children)
         pe.DiscoverChildren(this);
     }
     public RemovePageElement(pe: PageElement) {
@@ -43,6 +44,7 @@ export class PageDisplayManager {
         // if(!this.creatingPEs)
         //     this.PECreator();
         const newpe = new PageElement(html, name, this);
+        this.AddNewPageElement(newpe, false);
         return newpe;
     }
     // public CreatePageElementsOnPageLoad() {

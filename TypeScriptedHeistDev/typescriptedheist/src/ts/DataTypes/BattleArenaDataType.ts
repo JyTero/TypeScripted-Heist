@@ -1,7 +1,7 @@
 import { CharacterEnum } from "../../Assets/DataJsons/CharacterEnum";
 import { CharacterSheet } from "../Items/Character/CharacterSheet";
 import { SceneBase } from "../Scenes/SceneBase";
-import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
+import { ScenesEnumHandmade } from "../../Assets/OldScenesEnumHandMade";
 import { CharacterDataType } from "./CharacterData";
 
 export type BattleArenaDataType={

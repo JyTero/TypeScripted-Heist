@@ -6,9 +6,10 @@ import { Color } from "../Tools/Color";
 import { BattleArenaDataType } from "./BattleArenaDataType";
 import { ItemBaseData } from "./ItemDataTypes";
 import { ExplorationMenuItemData } from "./MenuItemDataType";
+import { MetaData } from "./MetaData";
 import { SpriteData, SpriteLocationDataType } from "./SpriteLocationDataType";
 
-export interface SceneBaseData {
+export interface SceneBaseData extends MetaData{
     SceneName: string,
     SceneType: string, //SceneTypesEnum
     SceneBackgroundColor: Color;

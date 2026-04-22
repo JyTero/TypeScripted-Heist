@@ -1,6 +1,6 @@
 import { Delay } from "../../Tools";
 import { FrameTimeMS, IsDebug } from "../MainPageInitialisation";
-import { PageDisplayManager } from "../PageDisplay";
+import { PageDisplayManager } from "../PageDisplayManager";
 import { GetHTMLElementChildren, IsHTMLElement as IsHTMLElement } from "../Tools/HTMLHelpers";
 
 export type DOMElementType = keyof HTMLElementTagNameMap;
@@ -73,6 +73,7 @@ export class PageElement {
 
         this.id = name;
         this.element.id = this.id;
+        
         await Delay(FrameTimeMS);
     }
 
@@ -173,7 +174,7 @@ export class PageElement {
             newName = this.ElementName + "child" + i;
 
             const c = pageManager.CreateNewPageElement(child, newName)
-            pageManager.AddNewPageElement(c);
+            pageManager.AddNewPageElement(c,true);
             this.childElements.push(c);
             c.AddParent(this);
         }

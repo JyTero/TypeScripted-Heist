@@ -48,6 +48,10 @@ export function BuildItemHandmade(itemEnum: ItemsEnumHandmade): ItemBase {
       return BuildCharacter(CharacterEnum.Character_Bob);
     case ItemsEnumHandmade.MichellesPurseItem:
       return new ItemBase(MichellesPurseItem);
+    case ItemsEnumHandmade.Character_MichelleHidden:
+      return BuildCharacter(CharacterEnum.Character_MichelleHidden);
+    case ItemsEnumHandmade.Character_LadyOfNight:
+      return BuildCharacter(CharacterEnum.Character_LadyOfNight);
   }
 
 }

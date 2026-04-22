@@ -1,7 +1,22 @@
-#app{
+:root {
+    --mainTextcolor: rgb(125, 250, 0);
+    --textGlow: 6px;
+}
+
+body {
+
+    background-color: rgb(20, 20, 20);
+    text-shadow: 0 0 var(--textGlow) rgb(125, 250, 0);
+    font-family: 'Courier New', monospace;
+    color: var(--mainTextcolor);
+    font-weight: 900;
+}
+
+#App {
     display: flex;
     flex-direction: column;
 }
+
 p {
     white-space: pre-line;
 }

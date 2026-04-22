@@ -4,7 +4,7 @@ import { CanvasGraphicEngine } from "./Canvas/CanvasGraphicEngine";
 import { JsonHandler } from "./JsonInput/JsonHandler";
 import { Delay } from "../Tools";
 import { DebugWindow } from "./Tools/DebugWindow";
-import { PageDisplayManager } from "./PageDisplay";
+import { PageDisplayManager } from "./PageDisplayManager";
 import { UIGeneralManager } from "./UI/UIGeneralManager";
 import { FunctionalityComponentEngine } from "./FunctionalityComponentEngine";
 import { AlertManager } from "./AlertManager";

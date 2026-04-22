@@ -1,3 +1,3 @@
-import { PageDisplayManager } from "../PageDisplay";
+import { PageDisplayManager } from "../PageDisplayManager";
 import { PageElement } from "./PageElement";
 

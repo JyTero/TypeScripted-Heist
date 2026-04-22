@@ -11,7 +11,10 @@ const flagss =
     MindPalaceGlassIsBroken: false,
     MindPalaceMichelleSpokenTo: false,   
     MindPalaceItemReceived: false,    
-    MindPalaceItemReturned: false,    
+    MindPalaceItemReturned: false,
+    
+    //DemoProto
+    VoiceMailListened: false,
 };
 //const flags: Flag[] = [];
 

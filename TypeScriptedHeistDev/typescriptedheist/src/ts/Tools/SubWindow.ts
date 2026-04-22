@@ -1,12 +1,12 @@
 import { Delay } from "../../Tools";
 import { FrameTimeMS, WindowManagerInstance } from "../MainPageInitialisation";
-import { PageDisplayManager } from "../PageDisplay";
+import { PageDisplayManager } from "../PageDisplayManager";
 import { PageElement } from "../UI/PageElement";
 
 export abstract class SubWindow {
+    public windowName: string;
     protected window: Window;
     protected PDM: PageDisplayManager;
-    protected windowName: string;
     protected htmlPageName: string;
     protected appRoot: PageElement;
 
@@ -51,7 +51,7 @@ export abstract class SubWindow {
         this.IndividualOnPageOpen();
     }
     protected abstract IndividualOnPageOpen(): void;
-    public AppendToRoot(pe:PageElement){
+    public AppendToRoot(pe: PageElement) {
         this.appRoot.AppendChild(pe);
     }
 }

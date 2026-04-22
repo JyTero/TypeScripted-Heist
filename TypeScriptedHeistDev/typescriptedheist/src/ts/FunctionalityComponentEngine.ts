@@ -111,7 +111,9 @@ export class FunctionalityComponentEngine {
         for (var sceneItem of scene.SceneItems) {
             if (sceneItem.ItemName != datas[0])
                 continue;
-            if (
+            if(datas.length == 1)
+                sceneItem.DestroySelf();
+            else if (
                 sceneItem.ItemSprite.SpritePosScaleData.positionX == +datas[1]
                 && sceneItem.ItemSprite.SpritePosScaleData.positionY == +datas[2]
                 && sceneItem.ItemSprite.SpritePosScaleData.scaleX == +datas[3]

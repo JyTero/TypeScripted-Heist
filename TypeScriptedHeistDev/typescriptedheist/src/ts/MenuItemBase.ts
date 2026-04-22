@@ -1,7 +1,7 @@
 import { CombatMoveMenuItemData, ExplorationMenuItemData, MenuItemData } from "./DataTypes/MenuItemDataType";
 import { FlagName, Flag } from "./flags";
 import { SceneBase } from "./Scenes/SceneBase";
-import { ScenesEnumHandmade } from "../Assets/ScenesEnumHandMade";
+import { ScenesEnumHandmade } from "../Assets/OldScenesEnumHandMade";
 import { FunctionalityComponentsHandmade } from "../Assets/FunctionalityComponentsEnumHandmade";
 import { FunctionalityComponent, FunctionalityComponentEngine } from "./FunctionalityComponentEngine";
 import { FCE } from "./MainPageInitialisation";

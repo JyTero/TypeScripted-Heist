@@ -3,7 +3,7 @@ import { BattleArenaDataType } from "./DataTypes/BattleArenaDataType";
 import { MenuItemBase } from "./MenuItemBase";
 import { SceneBase } from "./Scenes/SceneBase";
 import { placeholderScene } from "./ScenesLegacy/Placeholders";
-import { ScenesEnumHandmade } from "../Assets/ScenesEnumHandMade";
+import { ScenesEnumHandmade } from "../Assets/OldScenesEnumHandMade";
 
 // export class BattleArenaSceneOLD extends SceneBase {
 

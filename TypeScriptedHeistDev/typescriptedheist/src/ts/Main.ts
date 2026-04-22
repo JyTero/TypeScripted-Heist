@@ -2,7 +2,7 @@
 import { FrameTimeMS, InitialisationManager, SceneManagerInstance, UIManager, WindowManagerInstance } from "./MainPageInitialisation";
 import { PlayerCharacter } from "./PlayerCharacter";
 import { WeaponEnum } from "../Assets/DataJsons/WeaponEnum";
-import { PageDisplayManager } from "./PageDisplay";
+import { PageDisplayManager } from "./PageDisplayManager";
 import { DebugWindowInstance } from "./DebugPageInitialisation";
 import { Delay } from "../Tools";
 

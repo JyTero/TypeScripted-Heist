@@ -158,10 +158,10 @@ export class DebugWindow extends SubWindow {
             throw console.error(`Invalid HTML element given as a div for ${thisCombatCharacter.Character.ItemName} (HTML details: ${combatantPageElement.Element}|${(combatantPageElement.Element as HTMLElement).textContent})`);
         }
 
-        var BAParentPE: PageElement | null = this.PDM.FindPageElementByElementId(thisCombatCharacter.Character.ItemName + "BAParent")
+        var BAParentPE: PageElement | null = this.PDM.FindPageElementByElementId(thisCombatCharacter.Character.ItemName + this.BAParentPEIDSuffix)
 
         if (BAParentPE == null) {
-            BAParentPE = this.PDM.CreateNewPageElement("div", thisCombatCharacter.Character.ItemName + "BAParent");
+            BAParentPE = this.PDM.CreateNewPageElement("div", thisCombatCharacter.Character.ItemName + this.BAParentPEIDSuffix);
             BAParentPE.Element.className = this.BAParentDivClassName;
             combatantPageElement.AppendChild(BAParentPE);
 

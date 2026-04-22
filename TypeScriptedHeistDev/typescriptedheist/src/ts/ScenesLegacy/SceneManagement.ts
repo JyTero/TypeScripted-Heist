@@ -16,6 +16,9 @@ import { ExplorationMenuItemData, SceneSpesificItemSceneMenuItemDataType } from 
 import { BobMindPalaceNeighborSpesificMenuItem01, MichelleMindPalaceSpesificMenuItem01, MichelleMindPalaceSpesificMenuItem02, MichelleMindPalaceSpesificMenuItem03, MichelleMindPalaceSpesificMenuItem04 } from "../Items/ItemData/ItemDatasHandmade";
 import { ItemBase } from "../Items/ItemBase";
 import { MindPalaceNeighborData } from "../SceneData/MindPalaceNeighborData";
+import { DemoIntroSceneData } from "../SceneData/DemoProto/DemoIntroData";
+import { HookingAlleySceneData } from "../SceneData/DemoProto/HookingAlleyData";
+import { LadyOfNightMenuItem } from "../Items/ItemData/DemoProtoItemDatas";
 export class SceneManagement {
 
     private allSceneDatas: Partial<Record<ScenesEnumHandmade, SceneBaseData>> = {};
@@ -24,7 +27,11 @@ export class SceneManagement {
     private previousScene: SceneBase;
 
     constructor() {
-        this.allSceneDatas[ScenesEnumHandmade.First] = MansionApproachSceneData;
+        this.allSceneDatas[ScenesEnumHandmade.First] = DemoIntroSceneData;
+        this.allSceneDatas[ScenesEnumHandmade.HookingAlley] = HookingAlleySceneData;
+
+        //OLD
+        this.allSceneDatas[ScenesEnumHandmade.OFirst] = MansionApproachSceneData;
         this.allSceneDatas[ScenesEnumHandmade.Backdoor] = BackdoorSceneData;
         this.allSceneDatas[ScenesEnumHandmade.Frontdoor] = FrontDoorSceneData;
         this.allSceneDatas[ScenesEnumHandmade.CombatTest] = BattleArenaTestSceneData;
@@ -137,6 +144,7 @@ export class SceneManagement {
         this.allSceneSpesificMenuItems.push(MichelleMindPalaceSpesificMenuItem03);
         this.allSceneSpesificMenuItems.push(MichelleMindPalaceSpesificMenuItem04);
         this.allSceneSpesificMenuItems.push(BobMindPalaceNeighborSpesificMenuItem01);
+        this.allSceneSpesificMenuItems.push(LadyOfNightMenuItem);
     }
 
     public GetSpesificMenuItems(sceneItems: ItemBase[], scene: SceneBase):ExplorationMenuItemData[] {

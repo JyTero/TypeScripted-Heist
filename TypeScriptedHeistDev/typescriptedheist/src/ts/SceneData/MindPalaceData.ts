@@ -2,9 +2,7 @@ import { FunctionalityComponentsHandmade } from "../../Assets/FunctionalityCompo
 import { ItemsEnumHandmade } from "../../Assets/ItemsEnumHandmade";
 import { ScenesEnumHandmade } from "../../Assets/ScenesEnumHandMade";
 import { SceneTypesEnumHandmade } from "../../Assets/SceneTypesEnumHandmade";
-import { ExplorationSceneData, InteractionSceneData } from "../DataTypes/SceneDataType";
-import { ItemBase } from "../Items/ItemBase";
-import { FragileGlassItem, WallArtBayek, WallArtAltGramp } from "../Items/ItemData/ItemDatasHandmade";
+import { ExplorationSceneData } from "../DataTypes/SceneDataType";
 import { Color } from "../Tools/Color";
 
 export const MindPalaceScenData: ExplorationSceneData = {
@@ -93,8 +91,9 @@ export const MindPalaceScenData: ExplorationSceneData = {
             MenuItemRequireAnyFlags: [],
             MenuItemForbiddenAllFlags: [],
             MenuItemForbiddenAnyFlags: [],
-            MenuItemFlagsToChange: [{FlagName: "MindPalaceItemReceived", FlagValue: true}],
+            MenuItemFlagsToChange: [{ FlagName: "MindPalaceItemReceived", FlagValue: true }],
         },
     ],
-
+    DataDevName: "",
+    DataType: ""
 }
